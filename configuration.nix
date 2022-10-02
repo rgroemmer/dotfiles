@@ -118,6 +118,18 @@
             "zsh-autopair"
           ];
         };
+        plugins = with pkgs; [
+            {
+                name = "zsh-autopair";
+                src = fetchFromGitHub {
+                owner = "hlissner";
+                repo = "zsh-autopair";
+                rev = "34a8bca0c18fcf3ab1561caef9790abffc1d3d49";
+                sha256 = "1h0vm2dgrmb8i2pvsgis3lshc5b0ad846836m62y8h3rdb3zmpy1";
+                };
+                file = "autopair.zsh";
+            }            
+        ]
 	};
 
 	# Enable Steam.
