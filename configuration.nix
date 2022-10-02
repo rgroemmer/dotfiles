@@ -161,6 +161,12 @@
         exa
         kubectl
         podman
+        vault
+        bind
+        go
+        jq
+        borgbackup
+
 
         # TUI programs
         k9s
@@ -170,11 +176,16 @@
         vivaldi
         flameshot
         alacritty
+        nextcloud-client
+        keepassxc
+        spotify
+        postman
 
         # Chat
         discord
         rocketchat-desktop
         mumble
+        slack
     ];
 
   # Enable the OpenSSH daemon.

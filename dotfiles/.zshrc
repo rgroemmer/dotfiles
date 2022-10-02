@@ -19,6 +19,12 @@ POWERLEVEL9K_VCS_COMMIT_ICON=$s
 source ~/.p10k.zsh
 source ~/.zsh_additions
 
+#fzf
+if [ -n "${commands[fzf-share]}" ]; then
+  source "$(fzf-share)/key-bindings.zsh"
+  source "$(fzf-share)/completion.zsh"
+fi
+
 # additional envs
 borgUser=borg
 borgServer=192.168.55.200
