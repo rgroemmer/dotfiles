@@ -117,7 +117,6 @@
             "kubectl"
             "zsh-autopair"
           ];
-          theme = "robbyrussell";
         };
 	};
 
@@ -176,6 +175,8 @@
         go
         jq
         borgbackup
+        autojump
+        thefuck
 
 
         # TUI programs
