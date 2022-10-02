@@ -105,10 +105,6 @@
 		enable = true;
 		autosuggestions.enable = true;
 		syntaxHighlighting.enable = true;
-		promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-		interactiveShellInit = ''
-			source ${pkgs.zsh-autopair}/share/zsh/zsh-autopair/autopair.zsh
-		'';
 	};
 
 	# Enable Steam.
