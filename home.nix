@@ -55,11 +55,6 @@
     };
   };
 
-  programs.zsh.ohMyZsh = {
-      enable = true;
-      plugins = [ "git" "kubectl" "autojump" ];
-  };
-
     programs.fzf = {
     enable = true;
     enableZshIntegration = true;

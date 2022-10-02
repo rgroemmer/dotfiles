@@ -110,6 +110,11 @@
 		promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
 	};
 
+    programs.zsh.ohMyZsh = {
+        enable = true;
+        plugins = [ "git" "kubectl" "autojump" ];
+    };
+
 	# Enable Steam.
 	programs.steam = {
 		enable = true;
