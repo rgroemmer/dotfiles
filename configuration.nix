@@ -129,7 +129,7 @@
                 };
                 file = "autopair.zsh";
             }            
-        ]
+        ];
 	};
 
 	# Enable Steam.
