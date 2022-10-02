@@ -113,7 +113,7 @@
           plugins = [ 
             "git"
             "thefuck"
-            "autojump"
+            "autojump-zsh"
             "kubectl"
             "zsh-autopair"
           ];
@@ -175,8 +175,8 @@
         go
         jq
         borgbackup
-        autojump
         thefuck
+        zsh-autopair
 
 
         # TUI programs
