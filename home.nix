@@ -27,8 +27,7 @@
     enable = true;
     settings = { 
       font.normal.family = "CaskaydiaCove Nerd Font";
-      font.size = 10;
-      font.offset.y = 5;
+      font.size = 11;
 
       window.dimensions.columns = 170;
       window.dimensions.lines = 60;
