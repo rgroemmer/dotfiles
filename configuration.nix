@@ -20,10 +20,9 @@
 		'';
 	};
 
-    # Use the GRUB 2 boot loader.
-    boot.loader.grub.enable = true;
-    boot.loader.grub.version = 2;
-    boot.loader.grub.device = "/dev/sda";
+  # Use the systemd-boot EFI boot loader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
     # Networking
     networking.hostName = "rapos";
@@ -47,7 +46,7 @@
     #     useXkbConfig = true; # use xkbOptions in tty.
     # };
 
-    # Desktop Enviroment
+    # Desktop Environment
     environment.pathsToLink = [ "/libexec" ]; # links /libexec from derivations to /run/current-system/sw
     services.xserver = {
         enable = true;
@@ -112,7 +111,7 @@
 
     programs.zsh.ohMyZsh = {
         enable = true;
-        plugins = [ "git" "kubectl" "autojump" ];
+        plugins = [ "git" "kubectl" "zsh-autojump" ];
     };
 
 	# Enable Steam.
@@ -131,23 +130,6 @@
         shell = pkgs.zsh;
         extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
         packages = with pkgs; [
-        neovim
-        ];
-    };
-
-	# Allow unfree packages.
-	nixpkgs.config = {
-		allowUnfree = true;
-		allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-			"steam"
-			"steam-original"
-			"steam-runtime"
-		];
-	};
-
-    # List packages installed in system profile. To search, run:
-	# $ nix search wget
-    environment.systemPackages = with pkgs; [
         # CLI programs
         neovim
         xclip
@@ -192,6 +174,25 @@
         rocketchat-desktop
         mumble
         slack
+        ];
+    };
+
+	# Allow unfree packages.
+	nixpkgs.config = {
+		allowUnfree = true;
+		allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+			"steam"
+			"steam-original"
+			"steam-runtime"
+		];
+	};
+
+    # List packages installed in system profile. To search, run:
+	# $ nix search wget
+    environment.systemPackages = with pkgs; [
+        vim
+        neovim
+        git
     ];
 
   # Enable the OpenSSH daemon.
@@ -204,4 +205,5 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.05"; # Did you read the comment?
+
 }
