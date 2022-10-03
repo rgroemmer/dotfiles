@@ -46,6 +46,12 @@
     #     useXkbConfig = true; # use xkbOptions in tty.
     # };
 
+    # NVIDIA drivers are unfree.
+    nixpkgs.config.allowUnfree = true;
+
+    services.xserver.videoDrivers = [ "nvidia" ];
+    hardware.opengl.enable = true;
+
     # Desktop Environment
     environment.pathsToLink = [ "/libexec" ]; # links /libexec from derivations to /run/current-system/sw
     services.xserver = {
