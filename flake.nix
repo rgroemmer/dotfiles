@@ -10,7 +10,7 @@
 		};
 	};
 
-	outputs = { nixpkgs, home-manager, discord, ... }@inputs:
+	outputs = { nixpkgs, home-manager, ... }@inputs:
     let
         nixpkgsConfig = {
             allowUnfree = true;
