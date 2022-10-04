@@ -27,7 +27,7 @@
         };
 	in {
         nixosConfigurations = {
-            rapos = lib.nixosSystem {
+            rapos = nixpkgs.nixosSystem {
 					inherit system pkgs;
 					modules = [
 						./configuration.nix
