@@ -20,9 +20,10 @@
 		'';
 	};
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+    # Use the systemd-boot EFI boot loader.
+    boot.loader.systemd-boot.enable = true;
+    boot.loader.efi.canTouchEfiVariables = true;
+    boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
     # Networking
     networking.hostName = "rapos";
@@ -45,6 +46,18 @@
     #     keyMap = "de";
     #     useXkbConfig = true; # use xkbOptions in tty.
     # };
+
+    i18n.extraLocaleSettings = {
+        LC_ADDRESS = "de_DE.utf8";
+        LC_IDENTIFICATION = "de_DE.utf8";
+        LC_MEASUREMENT = "de_DE.utf8";
+        LC_MONETARY = "de_DE.utf8";
+        LC_NAME = "de_DE.utf8";
+        LC_NUMERIC = "de_DE.utf8";
+        LC_PAPER = "de_DE.utf8";
+        LC_TELEPHONE = "de_DE.utf8";
+        LC_TIME = "de_DE.utf8";
+    };
 
     # NVIDIA driver.
     services.xserver.videoDrivers = [ "nvidia" ];
@@ -112,6 +125,10 @@
 
 		promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
 	};
+
+    # Enable automatic login for the user.
+    services.xserver.displayManager.autoLogin.enable = true;
+    services.xserver.displayManager.autoLogin.user = "rap";
 
     programs.zsh.ohMyZsh = {
         enable = true;
