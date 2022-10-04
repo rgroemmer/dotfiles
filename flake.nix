@@ -24,33 +24,23 @@
 			user = "rap";
 
 
-			# system = "x86_64-linux";
-			# pkgs = import nixpkgs {
-			# 	inherit system discord;
-			# 	config.allowUnfree = true;
-			# 	overlays = [
-			# 		(final: prev: {
-			# 			nix-direnv = prev.nix-direnv.override { enableFlakes = true; };
-			# 			discord = prev.discord.overrideAttrs (
-			# 				_: { src = inputs.discord; }
-			# 			);
-			# 		})
-			# 	];
-			# };
-			# 
+			system = "x86_64-linux";
+			pkgs = import nixpkgs {
+				inherit system discord;
+				config.allowUnfree = true;
+				overlays = [
+					(final: prev: {
+						nix-direnv = prev.nix-direnv.override { enableFlakes = true; };
+						discord = prev.discord.overrideAttrs (
+							_: { src = inputs.discord; }
+						);
+					})
+				];
+			};
 		in 
 		{
-			nixosConfigurations = 
-        		let
-					system = "x86_64-linux";
-					# modifies pkgs to allow unfree packages
-					pkgs = import nixpkgs {
-						inherit system;
-						config = nixpkgsConfig;
-					};
-					lib = nixpkgs.lib;
-		  	in
-			lib.nixosSystem {
+			nixosConfigurations = {
+			rapos = lib.nixosSystem {
 					inherit system pkgs;
 					modules = [
 						./configuration.nix
@@ -62,5 +52,6 @@
 						}
 					];
 				};
+            }
 		};
 }
