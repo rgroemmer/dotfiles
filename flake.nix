@@ -20,6 +20,7 @@
         user = "rap";
 
         system = "x86_64-linux";
+        lib = nixpkgs.lib;
         pkgs = import nixpkgs {
             inherit system;
             config.allowUnfree = true;
@@ -27,7 +28,7 @@
         };
 	in {
         nixosConfigurations = {
-            rapos = nixpkgs.nixosSystem {
+            rapos = lib.nixosSystem {
 					inherit system pkgs;
 					modules = [
 						./configuration.nix
