@@ -46,9 +46,7 @@
     #     useXkbConfig = true; # use xkbOptions in tty.
     # };
 
-    # NVIDIA drivers are unfree.
-    nixpkgs.config.allowUnfree = true;
-
+    # NVIDIA driver.
     services.xserver.videoDrivers = [ "nvidia" ];
     hardware.opengl.enable = true;
 
