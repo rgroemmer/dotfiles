@@ -31,7 +31,7 @@
   # TODO make by label
   fileSystems = {
     "/" = {
-      device = "/dev/disk/by-uuid/b4cb94e3-d8d7-4f71-9cc5-f08c5bb62537";
+      device = "/dev/disk/by-partlabel/root";
       fsType = "ext4";
     };
     "/nix/store" = { 
@@ -40,7 +40,7 @@
       options = [ "bind" ];
     };
     "/boot/efi" = { 
-      device = "/dev/disk/by-uuid/434C-CA63";
+      device = "/dev/disk/by-partlabel/boot";
       fsType = "vfat";
     };
   };
