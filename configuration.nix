@@ -20,10 +20,10 @@
 		'';
 	};
 
-    # Use the GRUB 2 boot loader.
-    boot.loader.grub.enable = true;
-    boot.loader.grub.version = 2;
-    boot.loader.grub.device = "/dev/sda";
+    # Use the systemd-boot EFI boot loader.
+    boot.loader.systemd-boot.enable = true;
+    boot.loader.efi.canTouchEfiVariables = true;
+    boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
     # Networking
     networking.hostName = "rapos";
@@ -47,7 +47,23 @@
     #     useXkbConfig = true; # use xkbOptions in tty.
     # };
 
-    # Desktop Enviroment
+    i18n.extraLocaleSettings = {
+        LC_ADDRESS = "de_DE.utf8";
+        LC_IDENTIFICATION = "de_DE.utf8";
+        LC_MEASUREMENT = "de_DE.utf8";
+        LC_MONETARY = "de_DE.utf8";
+        LC_NAME = "de_DE.utf8";
+        LC_NUMERIC = "de_DE.utf8";
+        LC_PAPER = "de_DE.utf8";
+        LC_TELEPHONE = "de_DE.utf8";
+        LC_TIME = "de_DE.utf8";
+    };
+
+    # NVIDIA driver.
+    services.xserver.videoDrivers = [ "nvidia" ];
+    hardware.opengl.enable = true;
+
+    # Desktop Environment
     environment.pathsToLink = [ "/libexec" ]; # links /libexec from derivations to /run/current-system/sw
     services.xserver = {
         enable = true;
@@ -105,11 +121,19 @@
 		enable = true;
 		autosuggestions.enable = true;
 		syntaxHighlighting.enable = true;
+        enableCompletion = false;
+
 		promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-		interactiveShellInit = ''
-			source ${pkgs.zsh-autopair}/share/zsh/zsh-autopair/autopair.zsh
-		'';
 	};
+
+    # Enable automatic login for the user.
+    services.xserver.displayManager.autoLogin.enable = true;
+    services.xserver.displayManager.autoLogin.user = "rap";
+
+    programs.zsh.ohMyZsh = {
+        enable = true;
+        plugins = [ "git" "kubectl" "zsh-autojump" ];
+    };
 
 	# Enable Steam.
 	programs.steam = {
@@ -127,23 +151,6 @@
         shell = pkgs.zsh;
         extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
         packages = with pkgs; [
-        neovim
-        ];
-    };
-
-	# Allow unfree packages.
-	nixpkgs.config = {
-		allowUnfree = true;
-		allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-			"steam"
-			"steam-original"
-			"steam-runtime"
-		];
-	};
-
-    # List packages installed in system profile. To search, run:
-	# $ nix search wget
-    environment.systemPackages = with pkgs; [
         # CLI programs
         neovim
         xclip
@@ -161,6 +168,14 @@
         exa
         kubectl
         podman
+        vault
+        bind
+        go
+        jq
+        borgbackup
+        thefuck
+        zsh-autopair
+
 
         # TUI programs
         k9s
@@ -170,11 +185,35 @@
         vivaldi
         flameshot
         alacritty
+        nextcloud-client
+        keepassxc
+        spotify
+        postman
 
         # Chat
         discord
         rocketchat-desktop
         mumble
+        slack
+        ];
+    };
+
+	# Allow unfree packages.
+	nixpkgs.config = {
+		allowUnfree = true;
+		allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+			"steam"
+			"steam-original"
+			"steam-runtime"
+		];
+	};
+
+    # List packages installed in system profile. To search, run:
+	# $ nix search wget
+    environment.systemPackages = with pkgs; [
+        vim
+        neovim
+        git
     ];
 
   # Enable the OpenSSH daemon.
@@ -187,4 +226,5 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.05"; # Did you read the comment?
+
 }

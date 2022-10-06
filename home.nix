@@ -28,14 +28,13 @@
     settings = { 
       font.normal.family = "CaskaydiaCove Nerd Font";
       font.size = 11;
-      font.offset.y = 5;
 
       window.dimensions.columns = 170;
       window.dimensions.lines = 60;
       colors.primary.foreground = "#D0D0D0";
       colors.primary.background = "#202225";
 
-      colors.normal.black   = "#20232a";
+      colors.normal.black   = "#3A3E45";
       colors.normal.red     = "#d41919";
       colors.normal.green   = "#33d17a";
       colors.normal.yellow  = "#ffbe6f";
