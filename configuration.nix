@@ -192,6 +192,7 @@
         vim
         neovim
         git
+        gparted
     ];
 
   # Enable the OpenSSH daemon.
