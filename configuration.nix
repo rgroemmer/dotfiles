@@ -1,14 +1,6 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, lib, pkgs, callPackage, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
 
 	# Add Flake support
 	nix = {
@@ -19,16 +11,6 @@
 			keep-derivations = true
 		'';
 	};
-
-    # Use the systemd-boot EFI boot loader.
-    boot.loader.systemd-boot.enable = true;
-    boot.loader.efi.canTouchEfiVariables = true;
-    boot.loader.efi.efiSysMountPoint = "/boot/efi";
-    
-    # Networking
-    networking.hostName = "rapos";
-    networking.wireless.enable = false;
-    networking.networkmanager.enable = true;
 
     time.timeZone = "Europe/Berlin";
 
@@ -125,10 +107,6 @@
 
 		promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
 	};
-
-    # Enable automatic login for the user.
-    services.xserver.displayManager.autoLogin.enable = true;
-    services.xserver.displayManager.autoLogin.user = "rap";
 
     programs.zsh.ohMyZsh = {
         enable = true;
