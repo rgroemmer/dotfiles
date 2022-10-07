@@ -52,11 +52,4 @@
     opengl.enable = true;
     cpu.amd.updateMicrocode = config.hardware.enableRedistributableFirmware;
   };
-
-  # Network configuration
-  networking = {
-    useDHCP = lib.mkDefault true;
-    hostName = "nixos-rap";
-    networkmanager.enable = true;
-  };
 }
