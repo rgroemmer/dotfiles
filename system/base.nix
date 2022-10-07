@@ -113,5 +113,5 @@
     git
   ];
   services.openssh.enable = false;
-
+  system.stateVersion = "22.05";
 }
