@@ -27,19 +27,17 @@
         overlays = [];
       };
 	in {
-    nixosConfigurations.rapos = {
-      lib.nixosSystem {
-        inherit system pkgs;
-        modules = [
-          ./machines/linux.nix
-          ./system
-          home-manager.nixosModules.home-manager {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = false;
-            home-manager.users.rap = import ./home.nix;
-          }
-        ];
-      };
+    nixosConfigurations.rapos = lib.nixosSystem {
+      inherit system pkgs;
+      modules = [
+        ./machines/linux.nix
+        ./system
+        home-manager.nixosModules.home-manager {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = false;
+          home-manager.users.rap = import ./home.nix;
+        }
+      ];
     };
   };
 }
