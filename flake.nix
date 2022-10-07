@@ -16,7 +16,7 @@
         allowUnfree = true;
         allowUnsupportedSystem = false;
       };
-      stateVersion = "21.11";
+      stateVersion = "22.05";
       user = "rap";
 
       system = "x86_64-linux";
@@ -32,6 +32,7 @@
       modules = [
         ./machines/linux.nix
         ./system
+        system.stateVersion = stateVersion;
         home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = false;
