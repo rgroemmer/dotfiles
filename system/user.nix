@@ -1,4 +1,4 @@
-{}: {
+{ pkgs, ... }: {
   	# Enable Zsh.
 	programs.zsh = {
 		enable = true;

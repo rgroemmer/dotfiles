@@ -1,4 +1,4 @@
-{}: {
+{ pkgs, lib, ... }: {
   # TODO remove outcommeted if not needed
 	nix = {
     # package = pkgs.nixVersions.stable;
