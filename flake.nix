@@ -32,7 +32,7 @@
       modules = [
         ./machines/linux.nix
         ./system
-        home-manager.nixosModules.home-manager {
+        home-manager.nixosModule {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = false;
           home-manager.users.rap = import ./home.nix;
