@@ -1,24 +1,16 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  imports = [ 
-    (modulesPath + "/installer/scan/not-detected.nix")
-  ];
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   # Hardware configuration
 
   boot = {
     initrd = {
-      availableKernelModules = [
-        "nvme"
-        "ahci"
-        "xhci_pci"
-        "usbhid"
-        "sd_mod"
-      ];
+      availableKernelModules = [ "nvme" "ahci" "xhci_pci" "usbhid" "sd_mod" ];
       kernelModules = [ ];
     };
-    
+
     kernelModules = [ "kvm-amd" ];
 
     loader = {
@@ -34,12 +26,12 @@
       device = "/dev/disk/by-partlabel/root";
       fsType = "ext4";
     };
-    "/nix/store" = { 
+    "/nix/store" = {
       device = "/nix/store";
       fsType = "none";
       options = [ "bind" ];
     };
-    "/boot/efi" = { 
+    "/boot/efi" = {
       device = "/dev/disk/by-partlabel/boot";
       fsType = "vfat";
     };

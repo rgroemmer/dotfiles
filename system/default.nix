@@ -1,6 +1,1 @@
-{ pkgs, lib, ... }: {
-  imports = [
-    ./base.nix
-    ./user.nix
-  ];
-}
+{ pkgs, lib, ... }: { imports = [ ./base.nix ./user.nix ]; }
