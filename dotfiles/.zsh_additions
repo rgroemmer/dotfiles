@@ -58,7 +58,6 @@ qmkflash() {
 nos() {
     pushd /etc/nixos
     sudo git pull
-    sudo nix --experimental-features "nix-command flakes" build ".#nixosConfigurations.config.system.build.toplevel"
-    sudo ./result/bin/switch-to-configuration switch
+    sudo nix --experimental-features "nix-command flakes" rebuild switch --flake ".#rapos"
     popd
 }

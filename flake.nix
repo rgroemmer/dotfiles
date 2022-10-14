@@ -16,10 +16,11 @@
         allowUnfree = true;
         allowUnsupportedSystem = false;
       };
+      
+      system = "x86_64-linux";
       stateVersion = "22.05";
       user = "rap";
 
-      system = "x86_64-linux";
       lib = nixpkgs.lib;
       pkgs = import nixpkgs {
         inherit system;
@@ -28,15 +29,16 @@
       };
     in {
       nixosConfigurations.rapos = lib.nixosSystem {
-        inherit system pkgs;
+        inherit pkgs;
         modules = [
           ./machines/linux.nix
           ./system
           home-manager.nixosModule
           {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = false;
-            home-manager.users.rap = import ./home.nix;
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+            };
           }
         ];
       };

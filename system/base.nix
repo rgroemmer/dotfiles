@@ -1,18 +1,11 @@
 { pkgs, lib, ... }: {
-  # TODO remove outcommeted if not needed
   nix = {
-    # package = pkgs.nixVersions.stable;
     settings.auto-optimise-store = true;
     gc = {
       automatic = true;
       dates = "weekly";
       options = "--delete-older-than 7d";
     };
-    extraOptions = ''
-          experimental-features = nix-command flakes
-          keep-outputs = true
-          keep-derivations = true
-      	  '';
   };
 
   # Network configuration
@@ -48,13 +41,32 @@
 
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.opengl.enable = true;
+  
+  # environment.pathsToLink = [ "/libexec" ]; # links /libexec from derivations to /run/current-system/sw
+  
+  environment = {
+    systemPackages = with pkgs; [
+      htop
+      curl
+      git
+      neovim
+      nvtop # gpu monitor
+    ];
+
+    variables = {
+      EDITOR = "nvim";
+      VISUAL = "nvim";
+    };
+  };
 
   # Desktop Environment
-  environment.pathsToLink =
-    [ "/libexec" ]; # links /libexec from derivations to /run/current-system/sw
   services.xserver = {
     enable = true;
     layout = "de";
+
+    # keyboard repeat time
+    autoRepeatInterval = 35;
+    autoRepeatDelay = 320;
 
     desktopManager = {
       xterm.enable = false;
@@ -73,34 +85,37 @@
     };
   };
 
+  # enables realtime processing
+  security.rtkit.enable = true;
+  
+  sound.enable = true;
+  services = {
+    printing.enable = true;
+
+    # enable pipewire
+    pipewire = {
+        enable = true;
+        alsa.enable = true;
+        alsa.support32Bit = true;
+        audio.enable = true;
+        pulse.enable = true;
+        jack.enable = true;
+        config = {
+          pipewire = {
+            default.clock.rate = 48000;
+            resample.quality = 10;
+          };
+        };
+        wireplumber.enable = true;
+      };
+  };
+
   # Enable printer
   services.printing.enable = true;
-
-  # Enable PipeWire
-  sound.enable = false;
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    audio.enable = true;
-    pulse.enable = true;
-    jack.enable = true;
-    config = {
-      pipewire = {
-        default.clock.rate = 48000;
-        resample.quality = 10;
-      };
-    };
-    wireplumber.enable = true;
-  };
 
   # Install nerdfont
   fonts.fonts = with pkgs;
     [ (nerdfonts.override { fonts = [ "CascadiaCode" ]; }) ];
 
-  environment.systemPackages = with pkgs; [ vim neovim git ];
   services.openssh.enable = false;
-  system.stateVersion = "22.05";
 }
