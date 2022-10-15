@@ -1,19 +1,19 @@
 { config, pkgs, lib, ... }: {
   home.file.polybar = {
     executable = true;
-    target = ".config/polybar.sh";
+    target = ".config/polybar/start.sh";
     text = ''
-      #!/bin/env sh
-
+      #!/run/current-system/sw/bin/bash
+      # terminate already running bar instances
       pkill polybar
-
-      sleep 1;
-
-      polybar i3wmthemer_bar &
+      # start polybar on all monitors
+      for m in $(polybar --list-monitors | cut -d":" -f1); do
+          MONITOR=$m polybar i3wmthemer_bar &
+      done
     '';
   };
 
-  programs.polybar = {
+  services.polybar = {
     enable = true;
     package = pkgs.polybar.override {
       i3GapsSupport = true;
