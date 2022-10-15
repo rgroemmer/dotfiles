@@ -1,66 +1,73 @@
 {
-	description = "Rap's system configuration";
+  description = "Rap's system configuration";
 
-	inputs = {
-		nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-		home-manager = {
-			url = "github:nix-community/home-manager";
-			inputs.nixpkgs.follows = "nixpkgs";
-		};
-		discord = {
-			type = "tarball";
-			url = "https://discord.com/api/download/stable?platform=linux&format=tar.gz";
-			flake = false;
-		};
-	};
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-	outputs = { self, nixpkgs, home-manager, discord, ... }@inputs:
-		let
-			nixpkgsConfig = {
-				allowUnfree = true;
-				allowUnsupportedSystem = false;
-			};
-			stateVersion = "21.11";
-			user = "rap";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
 
+  outputs = { nixpkgs, home-manager, ... }@inputs:
+    let
+      nixpkgsConfig = {
+        allowUnfree = true;
+        allowUnsupportedSystem = false;
+      };
 
-			# system = "x86_64-linux";
-			# pkgs = import nixpkgs {
-			# 	inherit system discord;
-			# 	config.allowUnfree = true;
-			# 	overlays = [
-			# 		(final: prev: {
-			# 			nix-direnv = prev.nix-direnv.override { enableFlakes = true; };
-			# 			discord = prev.discord.overrideAttrs (
-			# 				_: { src = inputs.discord; }
-			# 			);
-			# 		})
-			# 	];
-			# };
-			# 
-		in 
-		{
-			nixosConfigurations = 
-        		let
-					system = "x86_64-linux";
-					# modifies pkgs to allow unfree packages
-					pkgs = import nixpkgs {
-						inherit system;
-						config = nixpkgsConfig;
-					};
-					lib = nixpkgs.lib;
-		  	in
-			lib.nixosSystem {
-					inherit system pkgs;
-					modules = [
-						./configuration.nix
-						home-manager.nixosModules.home-manager
-						{
-							home-manager.useGlobalPkgs = true;
-							home-manager.useUserPackages = false;
-							home-manager.users.rap = import ./home.nix;
-						}
-					];
-				};
-		};
+      system = "x86_64-linux";
+      stateVersion = "22.05";
+      user = "rap";
+
+      lib = nixpkgs.lib;
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+        overlays = [ ];
+      };
+    in {
+      nixosConfigurations.rapos = lib.nixosSystem {
+        inherit system;
+
+        # specialArgs is an argument which nix will inject in every import / module, thats why "{ ..., } is needed.
+        # to make user available in all imports
+        specialArgs = { inherit user; };
+
+        modules = [
+          ./machines/linux.nix
+          ./system
+
+          # like a module import but inline use "()" because only "{}" is not valid syntax
+          ({ pkgs, ... }: {
+
+            system.stateVersion = stateVersion;
+            nixpkgs.config = nixpkgsConfig;
+
+            users.users.${user} = {
+              home = "/home/${user}";
+              shell = pkgs.zsh;
+              isNormalUser = true;
+            };
+
+            nix.settings.experimental-features = [ "nix-command" "flakes" ];
+          })
+
+          home-manager.nixosModule
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              extraSpecialArgs = { inherit inputs; };
+              users.${user} = { ... }: {
+                imports = [ ./home ];
+                home.stateVersion = stateVersion;
+              };
+            };
+          }
+        ];
+
+      };
+    };
 }
