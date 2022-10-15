@@ -3,10 +3,12 @@
 
   programs = { zsh.enable = true; };
 
-  podman = {
-    enable = true;
-    dockerCompat = true;
-    dockerSocket.enable = true;
+  virtualisation = {
+    podman = {
+      enable = true;
+      dockerCompat = true;
+      dockerSocket.enable = true;
+    };
   };
 
   users.users.${user} = {

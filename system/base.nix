@@ -39,11 +39,9 @@
     };
   };
 
-  services.xserver.videoDrivers = [ "nvidia" ];
   hardware.opengl.enable = true;
-  
   # environment.pathsToLink = [ "/libexec" ]; # links /libexec from derivations to /run/current-system/sw
-  
+
   environment = {
     systemPackages = with pkgs; [
       htop
@@ -59,63 +57,67 @@
     };
   };
 
-  # Desktop Environment
-  services.xserver = {
-    enable = true;
-    layout = "de";
-
-    # keyboard repeat time
-    autoRepeatInterval = 35;
-    autoRepeatDelay = 320;
-
-    desktopManager = {
-      xterm.enable = false;
-      xfce = {
-        enable = true;
-        noDesktop = true;
-        enableXfwm = false;
-      };
-    };
-
-    displayManager = { defaultSession = "none+i3"; };
-
-    windowManager.i3 = {
-      enable = true;
-      extraPackages = with pkgs; [ dmenu i3status i3lock i3blocks ];
-    };
-  };
-
   # enables realtime processing
   security.rtkit.enable = true;
-  
+
   sound.enable = true;
   services = {
     printing.enable = true;
 
+    xserver = {
+      enable = true;
+      videoDrivers = [ "nvidia" ];
+      layout = "de";
+
+      # keyboard repeat time
+      autoRepeatInterval = 35;
+      autoRepeatDelay = 320;
+
+      # home-manager handles xsession
+      desktopManager = {
+        xterm.enable = false;
+        # get default xfce tools
+        xfce = {
+          enable = true;
+          noDesktop = true;
+          enableXfwm = false;
+        };
+        # wallpaper at ~./background-image will be used
+        wallpaper.mode = "fill";
+        session = [{
+          name = "xsession";
+          start = ''
+            ${pkgs.runtimeShell} $HOME/.xsession &
+            waitPID=$!
+          '';
+        }];
+      };
+
+      displayManager = { defaultSession = "xsession"; };
+    };
+
     # enable pipewire
     pipewire = {
-        enable = true;
-        alsa.enable = true;
-        alsa.support32Bit = true;
-        audio.enable = true;
-        pulse.enable = true;
-        jack.enable = true;
-        config = {
-          pipewire = {
-            default.clock.rate = 48000;
-            resample.quality = 10;
-          };
-        };
-        wireplumber.enable = true;
-      };
-  };
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      audio.enable = true;
+      pulse.enable = true;
+      jack.enable = true;
+      config = {
 
-  # Enable printer
-  services.printing.enable = true;
+        pipewire = {
+          default.clock.rate = 48000;
+          resample.quality = 10;
+        };
+      };
+      wireplumber.enable = true;
+    };
+
+    openssh.enable = false;
+  };
 
   # Install nerdfont
   fonts.fonts = with pkgs;
     [ (nerdfonts.override { fonts = [ "CascadiaCode" ]; }) ];
-
-  services.openssh.enable = false;
 }
