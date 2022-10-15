@@ -1,8 +1,8 @@
-{ pkgs, ... }: { 
-  imports = [ ./user.nix ./alacritty.nix ./zsh.nix ./i3.nix ]; 
+{ pkgs, ... }: {
+  imports = [ ./user.nix ./alacritty.nix ./zsh.nix ./i3.nix ];
 
   programs = {
-        git = {
+    git = {
       enable = true;
       userName = "Raphael Groemmer";
       userEmail = "r.groemmer@yahoo.de";
@@ -12,6 +12,6 @@
       #   signByDefault = true;
       # };
     };
-  }
+  };
 
 }
