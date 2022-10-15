@@ -12,6 +12,20 @@
       #   signByDefault = true;
       # };
     };
+    rofi = {
+      enable = true;
+      cycle = true;
+      font = "FuraMono Nerd Font Mono 12";
+
+      # TODO generate theme
+      theme = ../config/rofi.config;
+      extraConfig = {
+        kb-remove-to-eol = "";
+        kb-accept-entry = "Return";
+        kb-row-up = "Control+k";
+        kb-row-down = "Control+j";
+      };
+    };
   };
 
 }

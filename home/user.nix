@@ -20,8 +20,9 @@
       yq
       vault
 
-      # programming runtimes
+      # lang
       python38
+      go
 
       # kubernetes tools
       kubectl
