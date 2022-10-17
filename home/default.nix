@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  imports = [ ./user.nix ./alacritty.nix ./zsh.nix ./i3.nix ./polybar.nix ./picom.nix ];
+  imports = [ ./user.nix ./alacritty.nix ./zsh.nix ./i3.nix ./polybar.nix ./picom.nix ./rofi.nix ];
 
   programs = {
     git = {
@@ -11,20 +11,6 @@
       #   key = "937F956B9008A22F";
       #   signByDefault = true;
       # };
-    };
-    rofi = {
-      enable = true;
-      cycle = true;
-      font = "Source Sans Pro 10";
-
-      # TODO generate theme
-      theme = ../config/rofi.config;
-      extraConfig = {
-        kb-remove-to-eol = "";
-        kb-accept-entry = "Return";
-        kb-row-up = "Control+k";
-        kb-row-down = "Control+j";
-      };
     };
   };
 
