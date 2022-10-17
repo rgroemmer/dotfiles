@@ -125,5 +125,6 @@
 
   # Install nerdfont
   fonts.fonts = with pkgs;
-    [ (nerdfonts.override { fonts = [ "CascadiaCode Monofur" ]; }) ];
+    [ (nerdfonts.override { fonts = [ "CascadiaCode" ]; }) ];
+    # Monofur
 }

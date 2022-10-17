@@ -19,6 +19,8 @@
       jq
       yq
       vault
+      wget
+      unzip
 
       # lang
       python38
