@@ -20,7 +20,7 @@
 
       font = {
         family = "CaskaydiaCove Nerd Font";
-        size = 11;
+        size = 10;
       };
 
       colors = {

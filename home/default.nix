@@ -15,7 +15,7 @@
     rofi = {
       enable = true;
       cycle = true;
-      font = "FuraMono Nerd Font Mono 12";
+      font = "Source Sans Pro 10";
 
       # TODO generate theme
       theme = ../config/rofi.config;
@@ -25,6 +25,21 @@
         kb-row-up = "Control+k";
         kb-row-down = "Control+j";
       };
+    };
+  };
+
+  gtk = {
+    enable = true;
+    font.name = "";
+
+    theme = {
+      name = "Sweet-Dark";
+      package = pkgs.sweet;
+    };
+
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
     };
   };
 

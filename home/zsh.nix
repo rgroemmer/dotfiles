@@ -52,12 +52,16 @@
           qmk json2c -o keymap-rap.c rapsn_neo.json
           qmk flash -kb sofle_choc -km rap
       }
+
+      # nixos rebuil
+      nos() {
+        sudo nixos-rebuild switch --flake '/home/rap/Projects/Rapsn/upstream/nixos#rapos'
+        i3-msg reload
+        bash ~/.config/polybar/start.sh &>/dev/null
+      }
     '';
 
     shellAliases = {
-      # nixos
-      nos =
-        "sudo nixos-rebuild switch --flake '/home/rap/Projects/Rapsn/upstream/nixos#rapos'";
       # Overwrites
       cat = "bat";
       ls = "exa --icons";
