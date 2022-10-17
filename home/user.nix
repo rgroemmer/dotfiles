@@ -47,12 +47,10 @@
       vscode
       spotify
       gparted
-      lxappearance
       xcolor
       
       # libraries and helper
       vivaldi-ffmpeg-codecs
-
     ];
   };
 }

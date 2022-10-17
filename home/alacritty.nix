@@ -18,10 +18,14 @@
         };
       };
 
-      font = {
-        family = "CaskaydiaCove Nerd Font";
-        size = 10;
-      };
+      font = let fontname = "Caskaydia Cove Nerd Font"; in
+        {
+          normal = { family = fontname; style = "Medium"; };
+          bold = { family = fontname; style = "Bold"; };
+          italic = { family = fontname; style = "Light"; };
+          size = 11;
+          apple_font_smoothing = true;
+        };
 
       colors = {
         primary = {
