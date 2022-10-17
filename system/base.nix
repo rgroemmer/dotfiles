@@ -40,7 +40,7 @@
   };
 
   hardware.opengl.enable = true;
-  # environment.pathsToLink = [ "/libexec" ]; # links /libexec from derivations to /run/current-system/sw
+  environment.pathsToLink = [ "/libexec" ]; # links /libexec from derivations to /run/current-system/sw
 
   environment = {
     systemPackages = with pkgs; [

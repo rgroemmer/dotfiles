@@ -47,6 +47,7 @@
       vscode
       spotify
       gparted
+      lxappearance
 
       # libraries and helper
       vivaldi-ffmpeg-codecs
