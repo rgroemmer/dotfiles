@@ -11,7 +11,7 @@
   # Network configuration
   networking = {
     useDHCP = lib.mkDefault true;
-    hostName = "nixos-rap";
+    hostName = "nixos";
     networkmanager.enable = true;
   };
 
@@ -119,8 +119,12 @@
       };
       wireplumber.enable = true;
     };
+  };
 
-    openssh.enable = false;
+  # Enable ssh-agent
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
   };
 
   # Install nerdfont

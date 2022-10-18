@@ -30,6 +30,9 @@
       POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
       source ~/.config/zsh/plugins/p10k.zsh
 
+      # add ske-tools to path
+      PATH=$PATH:/home/rap/Projects/SKE/azure/ske-bash-utils
+
       # kubernetes functions
       seld() {
           BASE_PATH=~/Downloads
@@ -51,6 +54,11 @@
           mv ~/Downloads/sofle_rev1_layout_mine.json rapsn_neo.json
           qmk json2c -o keymap-rap.c rapsn_neo.json
           qmk flash -kb sofle_choc -km rap
+      }
+
+      # proxy
+      proxmox() {
+        ssh -N babo -D 1337 
       }
 
       # nixos rebuil

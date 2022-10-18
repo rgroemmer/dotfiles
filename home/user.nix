@@ -50,6 +50,8 @@
       spotify
       gparted
       xcolor
+      pavucontrol
+      discord
       
       # libraries and helper
       vivaldi-ffmpeg-codecs
