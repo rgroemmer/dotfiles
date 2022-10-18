@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  imports = [ ./user.nix ./alacritty.nix ./zsh.nix ./i3.nix ./polybar.nix ./picom.nix ./rofi.nix ];
+  imports = [ ./user.nix ./alacritty.nix ./zsh.nix ./i3.nix ./polybar.nix ./picom.nix ./rofi.nix ./work.nix ];
 
   programs = {
     git = {
