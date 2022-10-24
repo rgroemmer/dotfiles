@@ -21,10 +21,12 @@
       vault
       wget
       unzip
+      terraform
 
       # lang
       python38
       go
+      gcc
 
       # kubernetes tools
       kubectl
@@ -36,6 +38,7 @@
       mumble
       slack
       rocketchat-desktop
+      tmux
 
       # gui tools
       nitrogen # wallpaper manager
@@ -52,9 +55,18 @@
       xcolor
       pavucontrol
       discord
+      drawio
+      jetbrains.goland
+
+      i3altlayout
+
+      ranger
       
       # libraries and helper
       vivaldi-ffmpeg-codecs
+
+      #TODO switch to krewfile
+      krew
     ];
   };
 }

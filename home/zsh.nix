@@ -31,8 +31,9 @@
       source ~/.config/zsh/plugins/p10k.zsh
 
       # Path config
-      PATH=$PATH:~/bin
-      PATH=$PATH:/home/rap/Projects/SKE/azure/ske-bash-utils
+      export PATH=$PATH:~/bin
+      export PATH=$PATH:/home/rap/Projects/SKE/azure/ske-bash-utils
+      export PATH="$PATH:$HOME/.krew/bin"
 
       # gardenctl config
       [ -n "$GCTL_SESSION_ID" ] || [ -n "$TERM_SESSION_ID" ] || export GCTL_SESSION_ID=$(uuidgen)
@@ -63,6 +64,10 @@
       # proxy
       proxmox() {
         ssh -N babo -D 1337 
+      }
+
+      boobs() {
+        firefox  --safe-mode --new-window "https://screen.internal.ske.eu01.stackit.cloud/?room=boobs" 
       }
 
       # nixos rebuil
