@@ -19,9 +19,14 @@
       jq
       yq
       vault
+      wget
+      unzip
+      terraform
 
-      # programming runtimes
+      # lang
       python38
+      go
+      gcc
 
       # kubernetes tools
       kubectl
@@ -33,6 +38,7 @@
       mumble
       slack
       rocketchat-desktop
+      tmux
 
       # gui tools
       nitrogen # wallpaper manager
@@ -46,9 +52,21 @@
       vscode
       spotify
       gparted
+      xcolor
+      pavucontrol
+      discord
+      drawio
+      jetbrains.goland
 
+      i3altlayout
+
+      ranger
+      
       # libraries and helper
       vivaldi-ffmpeg-codecs
+
+      #TODO switch to krewfile
+      krew
     ];
   };
 }

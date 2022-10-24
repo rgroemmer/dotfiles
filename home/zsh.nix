@@ -30,6 +30,14 @@
       POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
       source ~/.config/zsh/plugins/p10k.zsh
 
+      # Path config
+      export PATH=$PATH:~/bin
+      export PATH=$PATH:/home/rap/Projects/SKE/azure/ske-bash-utils
+      export PATH="$PATH:$HOME/.krew/bin"
+
+      # gardenctl config
+      [ -n "$GCTL_SESSION_ID" ] || [ -n "$TERM_SESSION_ID" ] || export GCTL_SESSION_ID=$(uuidgen)
+
       # kubernetes functions
       seld() {
           BASE_PATH=~/Downloads
@@ -52,12 +60,25 @@
           qmk json2c -o keymap-rap.c rapsn_neo.json
           qmk flash -kb sofle_choc -km rap
       }
+
+      # proxy
+      proxmox() {
+        ssh -N babo -D 1337 
+      }
+
+      boobs() {
+        firefox  --safe-mode --new-window "https://screen.internal.ske.eu01.stackit.cloud/?room=boobs" 
+      }
+
+      # nixos rebuil
+      nos() {
+        sudo nixos-rebuild switch --flake '/home/rap/Projects/Rapsn/upstream/nixos#rapos'
+        i3-msg reload
+        bash ~/.config/polybar/start.sh &>/dev/null
+      }
     '';
 
     shellAliases = {
-      # nixos
-      nos =
-        "sudo nixos-rebuild switch --flake '/home/rap/Projects/Rapsn/upstream/nixos#rapos'";
       # Overwrites
       cat = "bat";
       ls = "exa --icons";
@@ -73,6 +94,7 @@
       ct = "cortextool";
       tf = "terraform";
       g = "gardenctl";
+      g2 = "gardenctlv2";
       k = "kubectl";
       kns = "kubens";
       kctx = "kubectx";
@@ -89,9 +111,24 @@
 
     plugins = with pkgs; [
       {
-        name = "fast-syntax-highlighting";
-        file = "fast-syntax-highlighting.plugin.zsh";
-        src = "${zsh-fast-syntax-highlighting}/share/zsh/site-functions";
+        name = "zsh-syntax-highlighting";
+        src = fetchFromGitHub {
+          owner = "zsh-users";
+          repo = "zsh-syntax-highlighting";
+          rev = "0.6.0";
+          sha256 = "0zmq66dzasmr5pwribyh4kbkk23jxbpdw4rjxx0i7dx8jjp2lzl4";
+        };
+        file = "zsh-syntax-highlighting.zsh";
+      }
+      {
+        name = "zsh-autopair";
+        src = fetchFromGitHub {
+          owner = "hlissner";
+          repo = "zsh-autopair";
+          rev = "34a8bca0c18fcf3ab1561caef9790abffc1d3d49";
+          sha256 = "1h0vm2dgrmb8i2pvsgis3lshc5b0ad846836m62y8h3rdb3zmpy1";
+        };
+        file = "autopair.zsh";
       }
       {
         name = "zsh-nix-shell";

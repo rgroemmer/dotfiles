@@ -11,7 +11,7 @@
   # Network configuration
   networking = {
     useDHCP = lib.mkDefault true;
-    hostName = "nixos-rap";
+    hostName = "nixos";
     networkmanager.enable = true;
   };
 
@@ -40,7 +40,7 @@
   };
 
   hardware.opengl.enable = true;
-  # environment.pathsToLink = [ "/libexec" ]; # links /libexec from derivations to /run/current-system/sw
+  environment.pathsToLink = [ "/libexec" ]; # links /libexec from derivations to /run/current-system/sw
 
   environment = {
     systemPackages = with pkgs; [
@@ -93,7 +93,12 @@
         }];
       };
 
-      displayManager = { defaultSession = "xsession"; };
+      displayManager = { 
+        defaultSession = "xsession";
+        sessionCommands = ''
+          ${lib.getBin pkgs.xorg.xrandr}/bin/xrandr --output DP-4 --mode 1920x1080 --rate 144.00 --right-of DP-2 --output DP-2 --mode 2560x1440 --rate 240 --auto --primary --output DP-0 --mode 1920x1080 --rate 144.00 --left-of DP-2
+        '';
+      };
     };
 
     # enable pipewire
@@ -113,11 +118,12 @@
       };
       wireplumber.enable = true;
     };
-
-    openssh.enable = false;
   };
+  
+  programs.ssh.startAgent = true;
 
   # Install nerdfont
   fonts.fonts = with pkgs;
     [ (nerdfonts.override { fonts = [ "CascadiaCode" ]; }) ];
+    # Monofur
 }
