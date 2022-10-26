@@ -13,6 +13,10 @@
     useDHCP = lib.mkDefault true;
     hostName = "nixos";
     networkmanager.enable = true;
+    extraHosts = ''
+      127.0.0.1 api.local.local.external.local.gardener.cloud
+      127.0.0.1 api.local.local.internal.local.gardener.cloud
+    '';
   };
 
   time.timeZone = "Europe/Berlin";
