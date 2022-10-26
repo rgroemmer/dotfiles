@@ -83,7 +83,6 @@
       cat = "bat";
       ls = "exa --icons";
       ll = "exa --icons -la";
-      docker = "podman";
       vim = "nvim";
       j = "z";
 
