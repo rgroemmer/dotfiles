@@ -75,5 +75,10 @@
       '';
       plugins = with pkgs; [ tmuxPlugins.onedark-theme ];
     };
+
+    gpg = {
+      enable = true;
+    };
   };
+  services.gpg-agent.enable = true;
 }

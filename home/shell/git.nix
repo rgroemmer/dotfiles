@@ -4,6 +4,11 @@
     userEmail = "mail@rapsn.me";
     userName = "Raphael Groemmer";
 
+    signing = {
+      key = "5AAB7E380D3AC3D3";
+      signByDefault = true;
+    };
+
     delta.enable = true;
     ignores = [
       ".idea" ".vs" ".vsc" ".vscode" # ide
