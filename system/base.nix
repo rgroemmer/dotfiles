@@ -47,7 +47,7 @@
       htop
       curl
       git
-      neovim
+      vim
       nvtop # gpu monitor
     ];
 

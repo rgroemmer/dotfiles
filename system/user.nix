@@ -6,7 +6,6 @@
   virtualisation = {
     podman = {
       enable = true;
-      dockerCompat = true;
       dockerSocket.enable = true;
     };
   };
@@ -16,6 +15,7 @@
       "wheel" # sudo
       "networkmanager"
       "podman" # allows connection to docker socket
+      "dialout" # /dev/ttyUSB access
     ];
   };
 }

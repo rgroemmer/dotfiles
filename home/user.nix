@@ -22,7 +22,10 @@
       wget
       unzip
       terraform
+      gnumake
+      docker
 
+      gotop
       # lang
       python38
       go
@@ -38,7 +41,7 @@
       mumble
       slack
       rocketchat-desktop
-      tmux
+
 
       # gui tools
       nitrogen # wallpaper manager
@@ -57,6 +60,10 @@
       discord
       drawio
       jetbrains.goland
+
+      kubeswitch
+
+      redshift # blue light filter
 
       i3altlayout
 

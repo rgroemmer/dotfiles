@@ -1,0 +1,90 @@
+grey: &grey "#20232A"
+grey2: &grey2 "#323232"
+lightred: &red "#ff5555"
+lightorange: &lightorange "#FEA44C"
+niceblue: &niceblue "#357AF0"
+green: &green "#50fa7b"
+babyblue: &babyblue "#4CA2FF"
+lightgrey: &lightgrey "#4F4F4F"
+font: &font "#E7E7E7"
+current_line: &current_line "#44475a"
+
+k9s:
+  body:
+    fgColor: *lightgrey
+    bgColor: *grey2
+    logoColor: *red
+  info:
+    fgColor: *font
+    sectionColor: *niceblue
+  dialog:
+    fgColor: *niceblue
+    bgColor: *grey
+    buttonFgColor: *font
+    buttonBgColor: *font
+    buttonFocusFgColor: *font
+    buttonFocusBgColor: *niceblue
+    labelFgColor: *niceblue
+    fieldFgColor: *font
+  frame:
+    border:
+      fgColor: *lightgrey
+      focusColor: *niceblue
+    menu:
+      fgColor: *font
+      keyColor: *niceblue
+      numKeyColor: *lightorange
+    crumbs:
+      fgColor: *font
+      bgColor: *grey
+      activeColor: *green
+    status:
+      newColor: *babyblue
+      modifyColor: *green
+      addColor: *green
+      errorColor: *red
+      highlightcolor: "#f3f99d"
+      killColor: mediumpurple
+      completedColor: gray
+    title:
+      fgColor: *niceblue
+      bgColor: *grey
+      highlightColor: *lightorange
+      counterColor: *font
+      filterColor: *niceblue
+  views:
+    # Charts skins...
+    charts:
+      bgColor: default
+      defaultDialColors:
+        - *niceblue
+        - *red
+      defaultChartColors:
+        - *niceblue
+        - *red
+    table:
+      fgColor: *lightorange
+      bgColor: *grey2
+      cursorFgColor: black
+      cursorBgColor: black
+      markColor: *lightorange
+      header:
+        fgColor: *font
+        bgColor: *grey
+        sorterColor: *lightorange
+    xray:
+      fgColor: black
+      bgColor: black
+      cursorColor: "#5af78e"
+      graphicColor: darkgoldenrod
+      showIcons: false
+    yaml:
+      keyColor: *red
+      colonColor: white
+      valueColor: *font
+    logs:
+      fgColor: *font
+      bgColor: *grey
+      indicator:
+        fgColor: white
+        bgColor: "#282a36"

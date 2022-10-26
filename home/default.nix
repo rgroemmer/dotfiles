@@ -12,6 +12,20 @@
       #   signByDefault = true;
       # };
     };
+
+    zoxide.enable = true;
+
+    tmux = {
+      enable = true;
+      extraConfig = ''
+        set-option -g prefix C-a
+        set -g base-index 1
+        setw -g aggressive-resize on
+      '';
+      plugins = with pkgs; [
+        tmuxPlugins.onedark-theme
+      ];
+    };
   };
 
   gtk = {
