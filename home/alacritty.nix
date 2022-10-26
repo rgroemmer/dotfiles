@@ -34,7 +34,7 @@
         };
         normal = {
           black = "#3A3E45";
-          red = "#d41919";
+          red="#e06c75";
           green = "#33d17a";
           yellow = "#ffbe6f";
           blue = "#357af0";
@@ -44,7 +44,7 @@
         };
         bright = {
           black = "#828282";
-          red = "#ff0000";
+          red="#e06c75";
           green = "#47d4b9";
           yellow = "#ff7e00";
           blue = "#005eff";

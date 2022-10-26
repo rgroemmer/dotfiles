@@ -16,6 +16,7 @@
       "wheel" # sudo
       "networkmanager"
       "podman" # allows connection to docker socket
+      "dialout" # /dev/ttyUSB access
     ];
   };
 }

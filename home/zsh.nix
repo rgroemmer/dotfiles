@@ -85,19 +85,20 @@
       ll = "exa --icons -la";
       docker = "podman";
       vim = "nvim";
-      j = "jump";
+      j = "z";
 
       # Shortcuts
       clr = "clear";
       pbcopy = "xclip -selection clipboard";
       pbpaste = "xclip -selection clipboard -o";
-      ct = "cortextool";
+
       tf = "terraform";
       g = "gardenctl";
       g2 = "gardenctlv2";
+
       k = "kubectl";
-      kns = "kubens";
-      kctx = "kubectx";
+      kns = "switch ns";
+      
       pui = "pulumi";
       o = "openstack";
       selg = ". selg";
@@ -109,6 +110,13 @@
       esp-monitor = "idf.py -p /dev/ttyUSB0 -b 115200 monitor";
     };
 
+    oh-my-zsh = {
+      enable = true;
+      plugins = [
+        "git"
+        "kubectl"
+      ];
+    };
     plugins = with pkgs; [
       {
         name = "zsh-syntax-highlighting";
