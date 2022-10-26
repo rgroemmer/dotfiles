@@ -102,6 +102,8 @@
       o = "openstack";
       selg = ". selg";
 
+      clean = "nix-collect-garbage -d && nix-store --gc && nix-store --verify --check-contents --repair";
+
       # esp-suite
       esp-export = "source ~/esp/esp-idf/export.sh";
       esp-build = "idf.py -p /dev/ttyUSB0 -b 115200 build";
