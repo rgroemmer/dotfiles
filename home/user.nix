@@ -23,6 +23,7 @@
       unzip
       terraform
       gnumake
+      docker
 
       gotop
       # lang

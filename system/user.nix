@@ -3,6 +3,13 @@
 
   programs = { zsh.enable = true; };
 
+  virtualisation = {
+    podman = {
+      enable = true;
+      dockerSocket.enable = true;
+    };
+  };
+
   users.users.${user} = {
     extraGroups = [
       "wheel" # sudo
