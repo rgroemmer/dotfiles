@@ -23,7 +23,6 @@
       unzip
       terraform
       gnumake
-      docker
 
       gotop
       # lang
@@ -34,6 +33,9 @@
       # kubernetes tools
       kubectl
       k9s
+      kind
+      docker
+      kubernetes-helm
 
       # chat tools
       zoom-us

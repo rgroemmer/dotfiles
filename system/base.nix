@@ -92,15 +92,7 @@
           '';
         }];
       };
-
-      displayManager = { 
-        defaultSession = "xsession";
-        sessionCommands = ''
-          ${lib.getBin pkgs.xorg.xrandr}/bin/xrandr --output DP-4 --mode 1920x1080 --rate 144.00 --right-of DP-2 --output DP-2 --mode 2560x1440 --rate 240 --auto --primary --output DP-0 --mode 1920x1080 --rate 144.00 --left-of DP-2
-        '';
-      };
     };
-
     # enable pipewire
     pipewire = {
       enable = true;
