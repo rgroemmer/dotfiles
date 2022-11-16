@@ -16,16 +16,24 @@
       #----- cli default tools  -----#
       ripgrep
       xclip
+      file
+      bc
       bat
       exa
       gh
       bind
       jq
-      yq
       wget
       unzip
       gnumake
       gotop
+      ranger
+      yq-go
+      envsubst
+      glow # pretty markdown viewer
+      #TODO: get neovim flake configurated
+      neovim
+      openssl
 
       #----- cli tools -----#
       terraform

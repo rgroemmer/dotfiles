@@ -13,7 +13,10 @@
     kernelModules = [ "kvm-amd" ];
 
     loader = {
-      systemd-boot.enable = true;
+      systemd-boot = {
+      	enable = true;
+	configurationLimit = 100;
+      };
       efi.canTouchEfiVariables = true;
       efi.efiSysMountPoint = "/boot/efi";
     };
