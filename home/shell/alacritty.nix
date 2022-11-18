@@ -11,7 +11,7 @@
         decorations = "full";
         dimensions = {
           lines = 50;
-          columns = 200;
+          columns = 100;
         };
         padding = {
           x = 5;

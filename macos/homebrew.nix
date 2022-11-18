@@ -9,6 +9,8 @@
     brews = [
       "helm"
       "yabai"
+      "skhd"
+      "sketchybar"
     ];
     casks = [
       "docker" # docker desktop
@@ -39,6 +41,8 @@
       "homebrew/services"
       # custom
       "koekeishiya/formulae" # yabai
+      "FelixKratz/formulae" # sketchybar
+      "cmacrae/formulae" # spacebar
     ];
   };
 }

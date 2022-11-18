@@ -35,6 +35,11 @@
       export PATH=$PATH:~/Projects/SKE/azure/ske-bash-utils
       export PATH="$PATH:$HOME/.krew/bin"
 
+      # macos only
+      if [ "$(uname)" = "Darwin" ]; then
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+      fi
+
       # gardenctl config
       [ -n "$GCTL_SESSION_ID" ] || [ -n "$TERM_SESSION_ID" ] || export GCTL_SESSION_ID=$(uuidgen)
 

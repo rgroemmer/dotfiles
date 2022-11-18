@@ -62,6 +62,7 @@
               users."groemmer" = { ... }: {
                 imports = [
                   ./home/shell
+                  ./macos/yabai.nix
                 ];
                 home.stateVersion = stateVersion;
               };

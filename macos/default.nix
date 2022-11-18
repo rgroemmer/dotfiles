@@ -1,2 +1,2 @@
-{ pkgs, ... }: { imports = [ ./homebrew.nix ./yabai.nix ]; }
+{ pkgs, ... }: { imports = [ ./homebrew.nix ]; }
 
