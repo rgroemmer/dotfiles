@@ -19,7 +19,7 @@
       bat
       exa
       gh
-      bind
+      # bind
       jq
       yq
       wget
@@ -80,5 +80,4 @@
       enable = true;
     };
   };
-  services.gpg-agent.enable = true;
 }

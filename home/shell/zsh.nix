@@ -32,7 +32,7 @@
 
       # Path config
       export PATH=$PATH:~/bin
-      export PATH=$PATH:/home/rap/Projects/SKE/azure/ske-bash-utils
+      export PATH=$PATH:~/Projects/SKE/azure/ske-bash-utils
       export PATH="$PATH:$HOME/.krew/bin"
 
       # gardenctl config
@@ -47,7 +47,7 @@
       }
 
       selc() {
-          BASE_PATH=~/configs/kubeconfigs
+          BASE_PATH=~/.configs/kubeconfigs
           YAMLS=$(ls --no-icons $BASE_PATH/*yaml | awk -F/ '{ print $NF }')
           KUBECONFIG=$(echo $YAMLS | fzf)
           export KUBECONFIG=$BASE_PATH/$KUBECONFIG
@@ -55,7 +55,7 @@
 
       # keyboard flash
       qmkflash() {
-          cd ~/Projects/RAPSN/upstream/qmk_firmware/keyboards/sofle_choc/keymaps/rap
+          cd ~/Projects/RAPSN/github/qmk_firmware/keyboards/sofle_choc/keymaps/rap
           mv ~/Downloads/sofle_rev1_layout_mine.json rapsn_neo.json
           qmk json2c -o keymap-rap.c rapsn_neo.json
           qmk flash -kb sofle_choc -km rap
@@ -70,11 +70,17 @@
         firefox  --safe-mode --new-window "https://screen.internal.ske.eu01.stackit.cloud/?room=boobs" 
       }
 
-      # nixos rebuil
+      # nixos rebuild
       nos() {
-        sudo nixos-rebuild switch --flake '/home/rap/Projects/Rapsn/upstream/nixos#rapos'
+        sudo nixos-rebuild switch --flake '/home/rap/Projects/RAPSN/github/dotfiles#rapos'
         i3-msg reload
         bash ~/.config/polybar/start.sh &>/dev/null
+      }
+
+      # macos rebuild
+      mos() {
+        nix --experimental-features "nix-command flakes" build "/Users/groemmer/Projects/RAPSN/github/dotfiles#darwinConfigurations.SIT-SMBP-91HWJ1.system"
+        /Users/groemmer/Projects/RAPSN/github/dotfiles/result/sw/bin/darwin-rebuild switch --flake /Users/groemmer/Projects/RAPSN/github/dotfiles
       }
     '';
 

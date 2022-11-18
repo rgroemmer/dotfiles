@@ -8,9 +8,14 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    darwin = {
+      url = "github:lnl7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { nixpkgs, home-manager, ... }@inputs:
+  outputs = { nixpkgs, home-manager, darwin, ... }@inputs:
     let
       nixpkgsConfig = {
         allowUnfree = true;
@@ -28,6 +33,43 @@
         overlays = [ ];
       };
     in {
+
+      # nix-darwin with home-manager for macOS
+      darwinConfigurations."SIT-SMBP-91HWJ1" = darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        # makes all inputs availble in imported files
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./macos
+          ({ pkgs, ... }: {
+            nixpkgs.config = nixpkgsConfig;
+            nix.useDaemon = true;
+            system.stateVersion = 4;
+
+            users.users."groemmer" = {
+              home = "/Users/groemmer";
+              shell = pkgs.zsh;
+            };
+          })
+
+          home-manager.darwinModule
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              # makes all inputs available in imported files for hm
+              extraSpecialArgs = { inherit inputs; };
+              users."groemmer" = { ... }: {
+                imports = [
+                  ./home/shell
+                ];
+                home.stateVersion = stateVersion;
+              };
+            };
+          }
+        ];
+      };
+
       nixosConfigurations.rapos = lib.nixosSystem {
         inherit system;
 
