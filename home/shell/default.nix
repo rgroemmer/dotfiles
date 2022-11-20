@@ -34,6 +34,7 @@
       #TODO: get neovim flake configurated
       neovim
       openssl
+      lm_sensors
 
       #----- cli tools -----#
       terraform
