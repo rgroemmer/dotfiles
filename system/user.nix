@@ -10,6 +10,8 @@
     };
   };
 
+  services.greenclip.enable = true;
+
   users.users.${user} = {
     extraGroups = [
       "wheel" # sudo

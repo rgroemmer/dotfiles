@@ -65,6 +65,7 @@
   security.rtkit.enable = true;
 
   sound.enable = true;
+
   services = {
     printing.enable = true;
 
