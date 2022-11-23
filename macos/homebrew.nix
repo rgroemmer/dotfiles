@@ -11,10 +11,12 @@
       "yabai"
       "skhd"
       "sketchybar"
+      "neovim"
     ];
     casks = [
       "docker" # docker desktop
 
+      "bartender"
       # communication
       "zoom"
       "slack"
@@ -26,6 +28,7 @@
       "iterm2"
       "firefox-developer-edition"
       "font-caskaydia-cove-nerd-font"
+      "font-fontawesome"
 
       "nextcloud"
     ];
