@@ -3,12 +3,15 @@
     executable = true;
     target = ".config/polybar/start.sh";
     text = ''
-      #!/run/current-system/sw/bin/bash
-      # terminate already running bar instances
+      # Terminate already running bar instances
       pkill polybar
-      # start polybar on all monitors
+
+      # Wait until the processes have been shut down
+      while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
+
+      # Launch the bar
       for m in $(polybar --list-monitors | cut -d":" -f1); do
-          MONITOR=$m polybar i3wmthemer_bar &
+        MONITOR=$m polybar &
       done
     '';
   };
@@ -19,7 +22,7 @@
       i3GapsSupport = true;
       alsaSupport = true;
     };
-    config = ../config/polybar.config;
+    config = ../config/polybar.ini;
 
     # i3 handles launching polybar
     # at the time nix launches polybar

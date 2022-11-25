@@ -65,6 +65,7 @@
   security.rtkit.enable = true;
 
   sound.enable = true;
+
   services = {
     printing.enable = true;
 
@@ -116,10 +117,8 @@
     };
   };
   
-  programs.ssh.startAgent = true;
-
-  # Install nerdfont
-  fonts.fonts = with pkgs;
-    [ (nerdfonts.override { fonts = [ "CascadiaCode" ]; }) ];
-    # Monofur
+  programs = {
+   ssh.startAgent = true;
+   gnupg.agent.enable = true;
+  };
 }

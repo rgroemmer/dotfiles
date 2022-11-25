@@ -1,27 +1,32 @@
-{ pkgs, ... }: 
-let 
-  destPath = ".config/rofi";
-in {
-  home.file."${destPath}/launcher.rasi" = {
-    source = ../config/rofi/launcher.rasi;
-  };
+{ pkgs, lib, ... }: {
+  home.file = let 
+    destination = ".config/rofi";
+  in {
+    "${destination}/launcher.rasi" = {
+      source = ../config/rofi/launcher.rasi;
+    };
+  
+    "${destination}/confirm.rasi" = {
+      source = ../config/rofi/confirm.rasi;
+    };
+  
+    "${destination}/powermenu.rasi" = {
+      source = ../config/rofi/powermenu.rasi;
+    };
 
-  home.file."${destPath}/image.png" = {
-    source = ../config/rofi/image.png;
-  };
+    "${destination}/message.rasi" = {
+      source = ../config/rofi/message.rasi;
+    };
 
-  home.file."${destPath}/powermenu.rasi" = {
-    source = ../config/rofi/powermenu.rasi;
-  };
+    "${destination}/colors.rasi" = {
+      source = ../config/rofi/colors.rasi;
+    };
 
-  home.file."${destPath}/powermenu.sh" = {
-    source = ../config/rofi/powermenu.sh;
-  };
-
-  home.file.".local/share/fonts/Icomoon-Feather.ttf" = {
-    source = ../config/rofi/Icomoon-Feather.ttf;
-  };
-
+    "${destination}/styles.rasi" = {
+      source = ../config/rofi/styles.rasi;
+    };
+ };
+ 
   programs.rofi = {
     enable = true;
     cycle = true;

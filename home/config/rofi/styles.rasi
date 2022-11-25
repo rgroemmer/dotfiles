@@ -8,7 +8,7 @@
  */
 
 configuration {
-	font:							"Ubuntu Nerd Font 12";
+	font:							"Iosevka Nerd Font 10";
     show-icons:                     true;
 	icon-theme: 					"Papirus";
     display-drun: 					"";
@@ -28,7 +28,7 @@ window {
 	border:							0px;
 	border-color:					@ac;
     border-radius:                  12px;
-	width:							350px;
+	width:							300px;
     location:                       center;
     x-offset:                       0;
     y-offset:                       0;
@@ -42,14 +42,23 @@ prompt {
 	font:							"Iosevka Nerd Font 10";
 }
 
+textbox-prompt-colon {
+	padding: 						10px 15px 10px 15px;
+	font:							"Iosevka Nerd Font 10";
+	background-color: 				@bg1;
+	text-color: 					#FFFFFF;
+	expand: false;
+	str: "";
+}
+
 entry {
     background-color:               @bg2;
     text-color:                     #FFFFFF;
     placeholder-color:              #FFFFFF;
     expand:                         true;
     horizontal-align:               0;
-    placeholder:                    "Search...";
-    padding:                        10px;
+    placeholder:                    "find...";
+	padding: 						10px;
     border-radius:                  0px 12px 12px 0px;
     blink:                          true;
 }
@@ -69,7 +78,7 @@ listview {
     background-color:               @al;
     padding:                        10px 10px 10px 10px;
     columns:                        1;
-    lines:                          10;
+    lines:                          6;
     spacing:                        5px;
     cycle:                          true;
     dynamic:                        true;
@@ -91,7 +100,7 @@ element {
     text-color:                     @fg;
     orientation:                    horizontal;
     border-radius:                  0px;
-    padding:                        6px;
+    padding:                        6px 6px 6px -20px;
 }
 
 element-icon {
