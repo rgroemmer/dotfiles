@@ -25,7 +25,6 @@
       unzip
       gnumake
       gotop
-      dig
 
       #----- cli tools -----#
       terraform
@@ -41,6 +40,8 @@
 
   programs = {
     home-manager.enable = true;
+
+    command-not-found.enable = true;
 
     zoxide.enable = true;
     jq.enable = true;
