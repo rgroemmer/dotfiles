@@ -20,6 +20,7 @@
       xcolor
       drawio
       jetbrains.goland
+      gimp
 
       #----- browsers -----#
       firefox

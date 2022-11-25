@@ -16,16 +16,27 @@
       #----- cli default tools  -----#
       ripgrep
       xclip
+      file
+      bc
       bat
       exa
       gh
       bind
       jq
-      yq
       wget
       unzip
       gnumake
       gotop
+      ranger
+      yq-go
+      envsubst
+      glow # pretty markdown viewer
+      #TODO: get neovim flake configurated
+      neovim
+      openssl
+      lm_sensors
+      nerdfonts
+      openstackclient
 
       #----- cli tools -----#
       terraform
@@ -80,5 +91,9 @@
       enable = true;
     };
   };
-  services.gpg-agent.enable = true;
+  services.gpg-agent = {
+    enable = true;
+    defaultCacheTtl = 34560000;
+    maxCacheTtl = 34560000;
+  };
 }
