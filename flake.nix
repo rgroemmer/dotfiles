@@ -20,6 +20,7 @@
       nixpkgsConfig = {
         allowUnfree = true;
         allowUnsupportedSystem = false;
+        allowBroken = true;
       };
 
       system = "x86_64-linux";
