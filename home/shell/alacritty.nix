@@ -3,14 +3,15 @@
   programs.alacritty = {
     enable = true;
     settings = {
+      env.TERM = "xterm-256color";
       window = {
         opacity = 1;
         dynamic_title = true;
         dynamic_padding = true;
         decorations = "full";
         dimensions = {
-          lines = 170;
-          columns = 60;
+          lines = 50;
+          columns = 100;
         };
         padding = {
           x = 5;
@@ -18,12 +19,12 @@
         };
       };
 
-      font = let fontname = "Caskaydia Cove Nerd Font"; in
+      font = let fontname = "CaskaydiaCove Nerd Font Mono"; in
         {
-          normal = { family = fontname; style = "Medium"; };
-          bold = { family = fontname; style = "Bold"; };
+          normal = { family = fontname; style = "Regular"; };
+          bold = { family = fontname; style = "SemiBold"; };
           italic = { family = fontname; style = "Light"; };
-          size = 11;
+          size = 14;
           apple_font_smoothing = true;
         };
 

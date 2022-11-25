@@ -1,0 +1,2 @@
+{ pkgs, ... }: { imports = [ ./homebrew.nix ]; }
+

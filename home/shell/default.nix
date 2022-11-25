@@ -21,7 +21,6 @@
       bat
       exa
       gh
-      bind
       jq
       wget
       unzip
@@ -34,7 +33,6 @@
       #TODO: get neovim flake configurated
       neovim
       openssl
-      lm_sensors
       nerdfonts
       openstackclient
 
@@ -47,12 +45,13 @@
 
       #----- compilers -----#
       gcc
-
     ];
   };
 
   programs = {
     home-manager.enable = true;
+
+    command-not-found.enable = true;
 
     zoxide.enable = true;
     jq.enable = true;
@@ -90,10 +89,5 @@
     gpg = {
       enable = true;
     };
-  };
-  services.gpg-agent = {
-    enable = true;
-    defaultCacheTtl = 34560000;
-    maxCacheTtl = 34560000;
   };
 }
