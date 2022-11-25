@@ -19,13 +19,13 @@
       bat
       exa
       gh
-      # bind
       jq
       yq
       wget
       unzip
       gnumake
       gotop
+      dig
 
       #----- cli tools -----#
       terraform
@@ -36,7 +36,6 @@
 
       #----- compilers -----#
       gcc
-
     ];
   };
 
