@@ -8,7 +8,10 @@
       - name: prd
         kubeConfig: ~/.garden/kubeconfigs/prd.yaml
       - name: tst
-        kubeConfig: ~/.garden/kubeconfigs/tst.yam
+        kubeConfig: ~/.garden/kubeconfigs/tst.yaml
     '';
   };
 }
+
+
+

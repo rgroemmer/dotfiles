@@ -63,7 +63,7 @@
 
       # proxy
       proxmox() {
-        ssh -N babo -D 1337 
+        ssh -N babo -D 1337 -i ~/.ssh/devops 
       }
 
       boobs() {
