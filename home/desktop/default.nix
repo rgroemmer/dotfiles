@@ -9,6 +9,7 @@
       redshift # blue light filter
       flameshot
       i3altlayout
+      i3status
 
       #----- programs -----#
       nextcloud-client
@@ -21,9 +22,11 @@
       drawio
       jetbrains.goland
       gimp
+      joplin-desktop
 
       #----- browsers -----#
       firefox
+      vivaldi
 
       #----- audio tools -----#
       spotify

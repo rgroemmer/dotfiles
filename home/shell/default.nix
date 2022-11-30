@@ -28,17 +28,16 @@
       gotop
       ranger
       yq-go
-      envsubst
       glow # pretty markdown viewer
+      gettext
       #TODO: get neovim flake configurated
-      neovim
       openssl
       nerdfonts
-      openstackclient
 
       #----- cli tools -----#
       terraform
       vault
+      openstackclient
 
       #----- languages -----#
       python38

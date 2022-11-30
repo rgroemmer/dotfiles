@@ -24,7 +24,7 @@
           normal = { family = fontname; style = "Regular"; };
           bold = { family = fontname; style = "SemiBold"; };
           italic = { family = fontname; style = "Light"; };
-          size = 14;
+          size = 10.5;
           apple_font_smoothing = true;
         };
 
