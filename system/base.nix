@@ -119,6 +119,9 @@
   
   programs = {
    ssh.startAgent = true;
-   gnupg.agent.enable = true;
+   gnupg.agent = {
+    enable = true;
+    pinentryFlavor = "gtk2";
+   };
   };
 }

@@ -28,6 +28,11 @@
       };
       ".garden/kubeconfigs/.keep".text = "keep";
       ".config/kubeconfigs/.keep".text = "keep";
+
+      ".gnupg/gpg-agent.conf".text = ''
+        default-cache-ttl 18000
+        max-cache-ttl 22000
+      '';
   };
 }
 
