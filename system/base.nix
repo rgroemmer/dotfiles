@@ -67,8 +67,6 @@
   sound.enable = true;
 
   services = {
-    printing.enable = true;
-
     xserver = {
       enable = true;
       videoDrivers = [ "nvidia" ];
@@ -98,6 +96,10 @@
         }];
       };
     };
+
+    printing.enable = true;
+    gnome.gnome-keyring.enable = true;
+
     # enable pipewire
     pipewire = {
       enable = true;
