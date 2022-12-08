@@ -39,6 +39,13 @@
       mumble
       slack
       rocketchat-desktop
+
+      gnome.gnome-disk-utility
+
+      #----- network/forensics -----#
+      wireshark
+      nmap
+
     ];
   };
 
