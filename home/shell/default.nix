@@ -34,6 +34,7 @@
       gettext
       openssl
       nerdfonts
+      neovim
 
       #----- cli tools -----#
       terraform
