@@ -24,6 +24,8 @@
             kubeConfig: ~/.garden/kubeconfigs/prd.yaml
           - name: tst
             kubeConfig: ~/.garden/kubeconfigs/tst.yam
+          - name: rebase27 
+            kubeConfig: ~/.garden/kubeconfigs/garden-rebase27.yaml
         '';
       };
       ".garden/kubeconfigs/.keep".text = "keep";

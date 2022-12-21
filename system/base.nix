@@ -125,5 +125,8 @@
     enable = true;
     pinentryFlavor = "gtk2";
    };
+   noisetorch = {
+    enable = true;
+   };
   };
 }

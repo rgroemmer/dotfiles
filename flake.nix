@@ -3,16 +3,16 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     darwin = {
       url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # custom flakes
+    neovim.url = "github:rgroemmer/neovim";
   };
 
   outputs = { nixpkgs, home-manager, darwin, ... }@inputs:
@@ -33,6 +33,10 @@
         config.allowUnfree = true;
         overlays = [ ];
       };
+
+      overlays = with inputs; [
+        neovim.overlay
+      ];
     in {
 
       # nix-darwin with home-manager for macOS
@@ -88,6 +92,8 @@
 
             system.stateVersion = stateVersion;
             nixpkgs.config = nixpkgsConfig;
+
+            nixpkgs.overlays = overlays;
 
             users.users.${user} = {
               home = "/home/${user}";

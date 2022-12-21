@@ -52,7 +52,7 @@
       }
 
       selc() {
-          BASE_PATH=~/.configs/kubeconfigs
+          BASE_PATH=~/.config/kubeconfig
           YAMLS=$(ls --no-icons $BASE_PATH/*yaml | awk -F/ '{ print $NF }')
           KUBECONFIG=$(echo $YAMLS | fzf)
           export KUBECONFIG=$BASE_PATH/$KUBECONFIG
@@ -77,7 +77,10 @@
 
       # nixos rebuild
       nos() {
-        sudo nixos-rebuild switch --flake '/home/rap/Projects/RAPSN/github/dotfiles#rapos'
+        if [[  $1 == "--upgrade" ]]; then
+          nix flake update '/home/rap/Projects/RAPSN/github/dotfiles'
+        fi
+        sudo nixos-rebuild switch --flake '/home/rap/Projects/RAPSN/github/dotfiles#rapos' --upgrade
         i3-msg reload
         bash ~/.config/polybar/start.sh &>/dev/null
       }
