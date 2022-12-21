@@ -13,6 +13,9 @@
       kubernetes-helm
       kubeswitch
 
+      #----- cloud tools -----#
+      s3cmd
+
       #----- cli default tools  -----#
       ripgrep
       xclip
@@ -30,7 +33,7 @@
       yq-go
       glow # pretty markdown viewer
       gettext
-      #TODO: get neovim flake configurated
+      neovim
       openssl
       nerdfonts
 
@@ -41,6 +44,7 @@
 
       #----- languages -----#
       python38
+      nixfmt
 
       #----- compilers -----#
       gcc

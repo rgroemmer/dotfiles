@@ -31,7 +31,7 @@
       colors = {
         primary = {
           foreground = "#D0D0D0";
-          background = "#202225";
+          background = "#23272e";
         };
         normal = {
           black = "#3A3E45";
