@@ -28,12 +28,10 @@
       wget
       unzip
       gnumake
-      gotop
       ranger
       yq-go
       glow # pretty markdown viewer
       gettext
-      neovim
       openssl
       nerdfonts
 
