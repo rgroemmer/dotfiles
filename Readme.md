@@ -28,5 +28,5 @@ Holds all home-manager related configuration.
 
 ## Thanks
 
-This repo is based on the awsome https://github.com/breuerfelix/feovim
+This repo is based on the awsome https://github.com/breuerfelix/dotfiles
 Special thanks to @breuerfelix!
