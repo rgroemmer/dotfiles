@@ -93,7 +93,7 @@
             system.stateVersion = stateVersion;
             nixpkgs.config = nixpkgsConfig;
 
-            nixpkgs.overlays = overlays;
+#            nixpkgs.overlays = overlays;
 
             users.users.${user} = {
               home = "/home/${user}";

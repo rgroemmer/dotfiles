@@ -26,3 +26,7 @@ Holds all home-manager related configuration.
 - User software
 - dotfiles
 
+## Thanks
+
+This repo is based on the awsome https://github.com/breuerfelix/feovim
+Special thanks to @breuerfelix!

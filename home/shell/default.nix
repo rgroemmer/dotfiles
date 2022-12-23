@@ -35,6 +35,7 @@
       openssl
       nerdfonts
       neovim
+      qmk
 
       #----- cli tools -----#
       terraform

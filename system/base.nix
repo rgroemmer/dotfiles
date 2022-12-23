@@ -70,7 +70,7 @@
     xserver = {
       enable = true;
       videoDrivers = [ "nvidia" ];
-      layout = "de";
+      layout = "eu";
 
       # keyboard repeat time
       autoRepeatInterval = 35;
@@ -117,6 +117,10 @@
       };
       wireplumber.enable = true;
     };
+
+    udev.packages = with pkgs; [
+      qmk-udev-rules
+    ];
   };
   
   programs = {

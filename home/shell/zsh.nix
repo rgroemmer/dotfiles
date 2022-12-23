@@ -58,14 +58,6 @@
           export KUBECONFIG=$BASE_PATH/$KUBECONFIG
       }
 
-      # keyboard flash
-      qmkflash() {
-          cd ~/Projects/RAPSN/github/qmk_firmware/keyboards/sofle_choc/keymaps/rap
-          mv ~/Downloads/sofle_rev1_layout_mine.json rapsn_neo.json
-          qmk json2c -o keymap-rap.c rapsn_neo.json
-          qmk flash -kb sofle_choc -km rap
-      }
-
       # proxy
       proxmox() {
         ssh -N babo -D 1337 -i ~/.ssh/devops 
