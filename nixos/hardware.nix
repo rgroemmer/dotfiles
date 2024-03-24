@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
   hardware.bluetooth.enable = true;
 
   powerManagement.enable = false;

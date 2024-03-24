@@ -1,7 +1,14 @@
-{ inputs, outputs, pkgs, lib, config, ... }: {
+{
+  outputs,
+  pkgs,
+  lib,
+  config,
+  ...
+}:
+{
   /*
     This is the entrypoint for home-manager
-    Config is the attrs to configure all modules for HM
+    config is the attrs to configure all modules for HM
   */
   imports = [ ../../home-manager ];
 
@@ -11,7 +18,5 @@
       homeDirectory = lib.mkDefault "/home/${config.home.username}";
       stateVersion = outputs.stateVersion;
     };
-    colorscheme = inputs.nix-colors.colorSchemes.catppuccin-mocha;
   };
 }
-
