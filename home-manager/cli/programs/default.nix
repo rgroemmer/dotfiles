@@ -19,8 +19,6 @@
     moreutils
     dnsutils
     gnumake
-    
-    neovim
 
     xdg-utils
     wl-clipboard # pbcopy like

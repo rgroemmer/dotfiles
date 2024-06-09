@@ -23,6 +23,10 @@
     };
     catppuccin.url = "github:catppuccin/nix";
 
+    neonix = {
+      url = "github:rgroemmer/neonix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # TODO:
     # nwg-displays.url = "github:nwg-piotr/nwg-displays/master";
     # nix attic

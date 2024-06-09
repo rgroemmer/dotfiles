@@ -7,6 +7,7 @@
 {
   imports = [
     inputs.catppuccin.homeManagerModules.catppuccin
+    inputs.neonix.homeManagerModules.neonix
 
     ./desktop/hyprland
     ./desktop/addons
@@ -18,6 +19,7 @@
 
   programs = {
     home-manager.enable = true;
+    neonix.enable = true;
   };
 
   nixpkgs = {
