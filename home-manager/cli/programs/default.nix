@@ -27,15 +27,19 @@
     nvtopPackages.amd
     unzip
     sops
+    gh
 
     xorg.xhost
-
-    neovim
   ];
 
   programs = {
     eza.enable = true;
     zoxide.enable = true;
     gpg.enable = true;
+
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
   };
 }

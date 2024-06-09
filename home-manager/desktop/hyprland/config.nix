@@ -7,16 +7,16 @@
 let
   displays = {
     left = {
-      output = "HDMI-A-2";
-      settings = "1920x1080@144, 0x180,1";
+      output = "HDMI-A-1";
+      settings = "1920x1080@144, 0x180, 1";
     };
     primary = {
       output = "DP-2";
-      settings = "2560x1440@240, 1920x0, 1";
+      settings = "2560x1440@240, 1920x0, 1.066667";
     };
     right = {
-      output = "HDMI-A-1";
-      settings = "2560x1440@240, 4480x180, 1";
+      output = "DP-1";
+      settings = "1920x1080@144, 4320x180, 1";
     };
   };
 in
