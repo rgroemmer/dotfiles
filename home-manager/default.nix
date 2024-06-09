@@ -1,7 +1,5 @@
 {
-  outputs,
   inputs,
-  chonfig,
   lib,
   pkgs,
   ...
@@ -23,7 +21,6 @@
   };
 
   nixpkgs = {
-    overlays = [ inputs.neovim.overlay ];
     config = {
       allowUnfree = true;
       allowUnfreePredicate = _: true;

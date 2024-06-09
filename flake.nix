@@ -9,7 +9,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    neovim.url = "github:rgroemmer/neovim";
     darwin.url = "github:lnl7/nix-darwin";
     grub-theme = {
       url = "github:catppuccin/grub";
@@ -40,7 +39,6 @@
     let
       inherit (self) outputs;
       lib = nixpkgs.lib // home-manager.lib // darwin.lib;
-      packages = (pkgs: import ./pkgs { inherit pkgs; });
     in
     {
       inherit lib;
