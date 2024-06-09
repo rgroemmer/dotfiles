@@ -72,7 +72,25 @@
       clean = "nix-collect-garbage -d && nix-store --gc && nix-store --verify --check-contents --repair";
     };
 
+    oh-my-zsh = {
+      enable = true;
+      plugins = [
+        "git"
+        "kubectl"
+      ];
+    };
+
     plugins = with pkgs; [
+      {
+        name = "zsh-direnv";
+        src = fetchFromGitHub {
+          owner = "ptavares";
+          repo = "zsh-direnv";
+          rev = "0.1.3";
+          sha256 = "sha256-V/x424mUyzJeA/t6QVQ3eS51S8zlk3vaestKybJOSIo=";
+        };
+        file = "zsh-direnv.plugin.zsh";
+      }
       {
         name = "zsh-autopair";
         src = fetchFromGitHub {
