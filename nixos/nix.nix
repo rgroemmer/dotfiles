@@ -1,6 +1,10 @@
 { inputs, lib, ... }:
 {
   nix = {
+    extraOptions = ''
+      # TODO: use sops to load token 
+      access-tokens = blahblahblah
+    '';
     settings = {
       trusted-users = [
         "root"
