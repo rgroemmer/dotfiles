@@ -23,11 +23,18 @@
     xdg-utils
     wl-clipboard # pbcopy like
 
+    ## TODO: look into it
+    yazi
+    timewarrior
+    taskwarrior
+    ## TODO end
+
     nixfmt-rfc-style
     nvtopPackages.amd
     unzip
     sops
     gh
+    kubectl
 
     xorg.xhost
   ];
