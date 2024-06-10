@@ -33,10 +33,6 @@
         rebase = true;
       };
       push.autoSetupRemote = true;
-      url = {
-        "git@github.com:" = { insteadOf = "https://github.com/"; };
-        "git@ssh.dev.azure.com:v3" = { insteadOf = "https://dev.azure.com"; };
-      };
       delta = { line-numbers = true; };
     };
 

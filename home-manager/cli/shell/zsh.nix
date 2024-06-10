@@ -8,6 +8,13 @@
     autocd = true;
     dotDir = ".config/zsh";
 
+    antidote = {
+      enable = true;
+      plugins = [
+        "romkatv/powerlevel10k"
+      ];
+    };
+
     sessionVariables = {
       EDITOR = "vim";
       VISUAL = "vim";
@@ -28,6 +35,10 @@
     };
 
     initExtra = ''
+      # p10k
+      POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
+      source ~/.config/zsh/.p10k.zsh
+
       # gardenctl config
       if command -v gardenctl &> /dev/null
       then
