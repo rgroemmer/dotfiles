@@ -28,18 +28,13 @@
     };
 
     initExtra = ''
-      source ~/.config/zsh/plugins/p10k.zsh
-
-      # additional path config
-      export PATH=$PATH:~/bin
-      export PATH="$PATH:$HOME/.krew/bin"
-      export PATH="$PATH:~/.docker/bin"
-
+      # gardenctl config
       if command -v gardenctl &> /dev/null
       then
         source <(gardenctl rc zsh -p gctl)
       fi
 
+      # helper functions
       selc() {
         BASE_PATH=~/.config/kubeconfig
         YAMLS=$(find $BASE_PATH -name '*.yaml' | awk -F/ '{ print $NF }')
