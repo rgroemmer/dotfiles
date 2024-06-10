@@ -4,6 +4,7 @@
     enable = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
+    syntaxHighlighting.catppuccin.enable = true;
     enableCompletion = true;
     autocd = true;
     dotDir = ".config/zsh";
@@ -12,6 +13,8 @@
       enable = true;
       plugins = [
         "romkatv/powerlevel10k"
+        "hlissner/zsh-autopair"
+        "Aloxaf/fzf-tab"
       ];
     };
 
@@ -76,4 +79,5 @@
       clean = "nix-collect-garbage -d && nix-store --gc && nix-store --verify --check-contents --repair";
     };
   };
+  home.file.".config/zsh/.p10k.zsh".source = ./p10k.config;
 }
