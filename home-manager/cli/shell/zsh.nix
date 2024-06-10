@@ -14,6 +14,9 @@
         "romkatv/powerlevel10k"
         "hlissner/zsh-autopair"
         "Aloxaf/fzf-tab"
+        "ohmyzsh/ohmyzsh path:plugins/git"
+        "ohmyzsh/ohmyzsh path:plugins/history-substring-search"
+        "ohmyzsh/ohmyzsh path:plugins/kubectl"
       ];
     };
 
@@ -25,6 +28,9 @@
       GPG_TTY = "$(tty)";
       # gardenctl session-id
       GCTL_SESSION_ID = "$(uuidgen)";
+
+      # disable highlight of history-substring-search
+      HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND = "";
     };
 
     history = {
