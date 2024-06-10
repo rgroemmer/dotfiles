@@ -14,9 +14,7 @@
 
       # pinentry for sign commits with gpg
       GPG_TTY = "$(tty)";
-
-      POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD = "true";
-
+      # gardenctl session-id
       GCTL_SESSION_ID = "$(uuidgen)";
     };
 
@@ -71,33 +69,5 @@
       kk = "k9s";
       clean = "nix-collect-garbage -d && nix-store --gc && nix-store --verify --check-contents --repair";
     };
-
-    plugins = with pkgs; [
-      {
-        name = "zsh-autopair";
-        src = fetchFromGitHub {
-          owner = "hlissner";
-          repo = "zsh-autopair";
-          rev = "v1.0";
-          sha256 = "1h0vm2dgrmb8i2pvsgis3lshc5b0ad846836m62y8h3rdb3zmpy1";
-        };
-        file = "autopair.zsh";
-      }
-      {
-        name = "zsh-nix-shell";
-        file = "nix-shell.plugin.zsh";
-        src = "${zsh-nix-shell}/share/zsh-nix-shell";
-      }
-      {
-        name = "powerlevel10k";
-        file = "powerlevel10k.zsh-theme";
-        src = "${zsh-powerlevel10k}/share/zsh-powerlevel10k";
-      }
-      {
-        name = "p10k.zsh";
-        file = "p10k.zsh";
-        src = ./p10k.config;
-      }
-    ];
   };
 }
