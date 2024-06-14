@@ -27,6 +27,11 @@
       url = "github:rgroemmer/neonix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    krewfile = {
+      url = "github:brumhard/krewfile";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # TODO:
     # nwg-displays.url = "github:nwg-piotr/nwg-displays/master";
     # nix attic
@@ -63,9 +68,9 @@
             inherit inputs outputs;
           };
         };
-        devbox = lib.homeManagerConfiguration {
-          modules = [ ./hosts/devbox/home.nix ];
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        SIT-SMBP-91HWJ1 = lib.homeManagerConfiguration {
+          modules = [ ./hosts/macbook/home.nix ];
+          pkgs = nixpkgs.legacyPackages.aarch64-darwin;
           extraSpecialArgs = {
             inherit inputs outputs;
           };
@@ -73,9 +78,10 @@
       };
 
       # Macbook
-      darwinConfigurations.macbook = lib.darwinSystem {
+      darwinConfigurations.SIT-SMBP-91HWJ1 = darwin.lib.darwinSystem {
+        system = "aarch64-dawin";
         modules = [ ./hosts/macbook/home.nix ];
-        extraSpecialArgs = {
+        specialArgs = {
           inherit inputs outputs;
         };
       };
