@@ -3,6 +3,7 @@
   imports = [
     # import home-manager function
     inputs.home-manager.darwinModules.home-manager
+    ./darwin.nix
   ];
 
   # entrypoint for home-manager
