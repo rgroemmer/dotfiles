@@ -87,8 +87,15 @@
       systems = [
         "x86_64-linux"
         "aarch64-darwin"
+        "aarch64-linux"
       ];
 
-      perSystem = { config, ... }: { };
+      perSystem = { config, pkgs, ... }: {
+        devShells.default = pkgs.mkShell {
+          builtInputs = with pkgs; [
+            nixfmt-rfc-style
+          ];
+        };
+      };
     };
 }
