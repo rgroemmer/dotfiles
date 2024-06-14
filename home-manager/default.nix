@@ -9,19 +9,11 @@
     inputs.catppuccin.homeManagerModules.catppuccin
     inputs.neonix.homeManagerModules.neonix
     inputs.krewfile.homeManagerModules.krewfile
-
-    #./desktop/hyprland
-    #./desktop/addons
-    #./desktop/programs
-
-    #./cli/programs
-    #./cli/shell
   ];
 
   programs = {
     home-manager.enable = true;
     neonix.enable = true;
-
 
     krewfile = {
       enable = true;

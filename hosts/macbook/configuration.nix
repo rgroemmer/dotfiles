@@ -1,9 +1,11 @@
 { pkgs, outputs, inputs, ... }:
 {
   imports = [
+    # import home-manager function
     inputs.home-manager.darwinModules.home-manager
   ];
 
+  # entrypoint for home-manager
   home-manager.users.groemmer = import ./home.nix;
   home-manager.extraSpecialArgs = {
     inherit inputs outputs;
@@ -15,6 +17,7 @@
   };
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.useDaemon = true;
 
   system.stateVersion = 4;
 }
