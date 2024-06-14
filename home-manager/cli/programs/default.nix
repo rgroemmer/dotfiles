@@ -9,8 +9,6 @@
     ./git.nix
   ];
 
-
-
   # Default CLI programs
   home.packages = with pkgs; [
     # core utilities
