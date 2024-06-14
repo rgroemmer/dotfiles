@@ -36,7 +36,7 @@
       "postman"
       "slack"
       "mumble"
-      "firefox-developer-edition"
+      "firefox@developer-edition"
 
       #----- mac tooling -----#
       "alfred"
