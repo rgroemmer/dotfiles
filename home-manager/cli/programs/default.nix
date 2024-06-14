@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}:
+{ pkgs, ... }:
 {
   imports = [
     ./alacritty.nix
@@ -11,8 +8,6 @@
     ./bat.nix
     ./git.nix
   ];
-
-
 
   # Default CLI programs
   home.packages = with pkgs; [
@@ -53,9 +48,11 @@
       package = pkgs.go;
       goPath = "go";
       goBin = "go/bin";
-      goPrivate = [ "github.com/stackitcloud" "dev.azure.com/*" ];
+      goPrivate = [
+        "github.com/stackitcloud"
+        "dev.azure.com/*"
+      ];
     };
-
 
     eza.enable = true;
     zoxide.enable = true;

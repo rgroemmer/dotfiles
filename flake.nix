@@ -35,6 +35,8 @@
     # TODO:
     # nwg-displays.url = "github:nwg-piotr/nwg-displays/master";
     # nix attic
+
+    flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
   outputs =
@@ -43,40 +45,48 @@
       nixpkgs,
       home-manager,
       nix-darwin,
+      flake-parts,
       ...
     }@inputs:
-    let
-      inherit (self) outputs;
-      lib = nixpkgs.lib // home-manager.lib // nix-darwin.lib;
-    in
-    {
-      inherit lib;
-      stateVersion = "22.05";
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      flake =
+        let
+          lib = nixpkgs.lib // home-manager.lib // nix-darwin.lib;
+          inherit (self) outputs;
+        in
+        {
+          stateVersion = "22.05";
+          nixosConfigurations.zion = lib.nixosSystem {
+            modules = [ ./hosts/zion/configuration.nix ];
+            specialArgs = {
+              inherit inputs outputs;
+            };
+          };
 
-      nixosConfigurations.zion = lib.nixosSystem {
-        modules = [ ./hosts/zion/configuration.nix ];
-        specialArgs = {
-          inherit inputs outputs;
-        };
-      };
-
-      homeConfigurations = {
-        zion = lib.homeManagerConfiguration {
-          modules = [ ./hosts/zion/home.nix ];
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = {
-            inherit inputs outputs;
+          homeConfigurations = {
+            zion = lib.homeManagerConfiguration {
+              modules = [ ./hosts/zion/home.nix ];
+              pkgs = nixpkgs.legacyPackages.x86_64-linux;
+              extraSpecialArgs = {
+                inherit inputs outputs;
+              };
+            };
+          };
+          # Macbook
+          darwinConfigurations."SIT-SMBP-91HWJ1" = lib.darwinSystem {
+            modules = [ ./hosts/macbook/configuration.nix ];
+            pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+            specialArgs = {
+              inherit inputs outputs;
+            };
           };
         };
-      };
 
-      # Macbook
-      darwinConfigurations."macbook" = lib.darwinSystem {
-        modules = [ ./hosts/macbook/configuration.nix ];
-        pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-        specialArgs = {
-          inherit inputs outputs;
-        };
-      };
+      systems = [
+        "x86_64-linux"
+        "aarch64-darwin"
+      ];
+
+      perSystem = { config, ... }: { };
     };
 }

@@ -1,4 +1,9 @@
-{ pkgs, outputs, inputs, ... }:
+{
+  pkgs,
+  outputs,
+  inputs,
+  ...
+}:
 {
   imports = [
     # import home-manager function
@@ -17,9 +22,11 @@
     shell = pkgs.zsh;
   };
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   nix.useDaemon = true;
 
   system.stateVersion = 4;
 }
-
