@@ -68,17 +68,10 @@
             inherit inputs outputs;
           };
         };
-        SIT-SMBP-91HWJ1 = lib.homeManagerConfiguration {
-          modules = [ ./hosts/macbook/home.nix ];
-          pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-          extraSpecialArgs = {
-            inherit inputs outputs;
-          };
-        };
       };
 
       # Macbook
-      darwinConfigurations.SIT-SMBP-91HWJ1 = lib.darwinSystem {
+      darwinConfigurations."macbook" = lib.darwinSystem {
         modules = [ ./hosts/macbook/configuration.nix ];
         pkgs = nixpkgs.legacyPackages.aarch64-darwin;
         specialArgs = {
