@@ -9,7 +9,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    darwin.url = "github:lnl7/nix-darwin";
+    nix-darwin.url = "github:lnl7/nix-darwin";
     grub-theme = {
       url = "github:catppuccin/grub";
       flake = false;
@@ -42,12 +42,12 @@
       self,
       nixpkgs,
       home-manager,
-      darwin,
+      nix-darwin,
       ...
     }@inputs:
     let
       inherit (self) outputs;
-      lib = nixpkgs.lib // home-manager.lib // darwin.lib;
+      lib = nixpkgs.lib // home-manager.lib // nix-darwin.lib;
     in
     {
       inherit lib;
@@ -78,9 +78,9 @@
       };
 
       # Macbook
-      darwinConfigurations.SIT-SMBP-91HWJ1 = darwin.lib.darwinSystem {
-        system = "aarch64-dawin";
-        modules = [ ./hosts/macbook/home.nix ];
+      darwinConfigurations.SIT-SMBP-91HWJ1 = lib.darwinSystem {
+        modules = [ ./hosts/macbook/configuration.nix ];
+        pkgs = nixpkgs.legacyPackages.aarch64-darwin;
         specialArgs = {
           inherit inputs outputs;
         };
