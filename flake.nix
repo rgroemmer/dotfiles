@@ -49,6 +49,7 @@
       ...
     }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {
+
       flake =
         let
           lib = nixpkgs.lib // home-manager.lib // nix-darwin.lib;
@@ -56,8 +57,17 @@
         in
         {
           stateVersion = "22.05";
+
           nixosConfigurations.zion = lib.nixosSystem {
             modules = [ ./hosts/zion/configuration.nix ];
+            specialArgs = {
+              inherit inputs outputs;
+            };
+          };
+
+          darwinConfigurations."SIT-SMBP-91HWJ1" = lib.darwinSystem {
+            modules = [ ./hosts/macbook/configuration.nix ];
+            pkgs = nixpkgs.legacyPackages.aarch64-darwin;
             specialArgs = {
               inherit inputs outputs;
             };
@@ -70,14 +80,6 @@
               extraSpecialArgs = {
                 inherit inputs outputs;
               };
-            };
-          };
-          # Macbook
-          darwinConfigurations."SIT-SMBP-91HWJ1" = lib.darwinSystem {
-            modules = [ ./hosts/macbook/configuration.nix ];
-            pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-            specialArgs = {
-              inherit inputs outputs;
             };
           };
         };
