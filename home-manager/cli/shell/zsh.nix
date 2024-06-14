@@ -14,7 +14,7 @@
         "romkatv/powerlevel10k"
         "hlissner/zsh-autopair"
         "Aloxaf/fzf-tab"
-        "ohmyzsh/ohmyzsh path:plugins/git"
+        #"ohmyzsh/ohmyzsh path:plugins/git"
         "ohmyzsh/ohmyzsh path:plugins/history-substring-search"
         "ohmyzsh/ohmyzsh path:plugins/kubectl"
       ];

@@ -37,6 +37,11 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    krewfile = {
+      url = "github:brumhard/krewfile";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # TODO:
     # nwg-displays.url = "github:nwg-piotr/nwg-displays/master";
     # nix attic
