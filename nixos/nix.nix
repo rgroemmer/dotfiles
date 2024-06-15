@@ -11,6 +11,7 @@
         "@wheel"
       ];
       auto-optimise-store = lib.mkDefault true;
+
       use-xdg-base-directories = true;
       experimental-features = [
         "nix-command"

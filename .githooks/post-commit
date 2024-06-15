@@ -1,0 +1,7 @@
+#!/usr/bin/env nix
+# shellcheck shell=bash
+#! nix develop --command bash
+
+# change target
+HOSTNAME=$(hostname)
+sed -i "s/apple-m1/$HOSTNAME/g" flake.nix

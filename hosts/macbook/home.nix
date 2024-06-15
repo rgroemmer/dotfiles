@@ -12,13 +12,12 @@
   imports = [
     ../../home-manager
     ../../home-manager/cli
-    ../../home-manager/desktop
   ];
 
   config = {
     home = {
-      username = "rap";
-      homeDirectory = lib.mkDefault "/home/${config.home.username}";
+      username = "groemmer";
+      homeDirectory = lib.mkDefault "/Users/${config.home.username}";
       stateVersion = outputs.stateVersion;
     };
   };

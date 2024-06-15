@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}:
+{ pkgs, ... }:
 {
   imports = [
     ./alacritty.nix
@@ -19,6 +16,11 @@
     moreutils
     dnsutils
     gnumake
+    yabai
+    (nerdfonts.override { fonts = [ "CascadiaCode" ]; })
+
+    iterm2
+    keepassxc
 
     xdg-utils
     wl-clipboard # pbcopy like
@@ -30,7 +32,7 @@
     ## TODO end
 
     nixfmt-rfc-style
-    nvtopPackages.amd
+    #nvtopPackages.amd
     unzip
     sops
     gh
@@ -40,6 +42,18 @@
   ];
 
   programs = {
+
+    go = {
+      enable = true;
+      package = pkgs.go;
+      goPath = "go";
+      goBin = "go/bin";
+      goPrivate = [
+        "github.com/stackitcloud"
+        "dev.azure.com/*"
+      ];
+    };
+
     eza.enable = true;
     zoxide.enable = true;
     gpg.enable = true;

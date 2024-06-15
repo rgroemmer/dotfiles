@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   programs.git = {
     enable = true;
     userEmail = "mail@rapsn.me";
@@ -25,20 +26,36 @@
     ];
 
     extraConfig = {
-      commit = { gpgsign = false; };
-      init = { defaultBranch = "main"; };
+      commit = {
+        gpgsign = false;
+      };
+      init = {
+        defaultBranch = "main";
+      };
       pull = {
         ff = false;
         commit = false;
         rebase = true;
       };
       push.autoSetupRemote = true;
-      delta = { line-numbers = true; };
+      url = {
+        "git@github.com:" = {
+          insteadOf = "https://github.com/";
+        };
+        #  "git@ssh.dev.azure.com:v3" = { insteadOf = "https://dev.azure.com"; };
+      };
+      delta = {
+        line-numbers = true;
+      };
     };
 
-    includes = [{
-      condition = "gitdir:~/Projects/ske/**";
-      contents = { user.email = "raphael.groemmer@stackit.de"; };
-    }];
+    includes = [
+      {
+        condition = "gitdir:~/Projects/ske/**";
+        contents = {
+          user.email = "raphael.groemmer@stackit.de";
+        };
+      }
+    ];
   };
 }

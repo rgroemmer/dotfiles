@@ -8,18 +8,26 @@
   imports = [
     inputs.catppuccin.homeManagerModules.catppuccin
     inputs.neonix.homeManagerModules.neonix
-
-    ./desktop/hyprland
-    ./desktop/addons
-    ./desktop/programs
-
-    ./cli/programs
-    ./cli/shell
+    inputs.krewfile.homeManagerModules.krewfile
   ];
 
   programs = {
     home-manager.enable = true;
     neonix.enable = true;
+
+    krewfile = {
+      enable = true;
+
+      plugins = [
+        "explore"
+        "modify-secret"
+        "neat"
+        "oidc-login"
+        "pv-migrate"
+        "stern"
+        "node-shell"
+      ];
+    };
   };
 
   nixpkgs = {
