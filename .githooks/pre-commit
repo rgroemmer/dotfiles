@@ -4,7 +4,7 @@
 
 # change target
 HOSTNAME=$(hostname)
-sed -i s/"$HOSTNAME"/apple-m1/g flake.nix
+sed -i "s/$HOSTNAME/apple-m1/g" flake.nix
 
 if git diff --cached --quiet; then
   echo "No changes staged (probably because of --amend). Skipping formatting..."
