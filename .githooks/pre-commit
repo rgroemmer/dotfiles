@@ -1,0 +1,32 @@
+#!/usr/bin/env nix
+# shellcheck shell=bash
+#! nix develop --command bash
+
+# change target
+HOSTNAME=$(hostname)
+sed -i "s/$HOSTNAME/apple-m1/g" flake.nix
+
+if git diff --cached --quiet; then
+  echo "No changes staged (probably because of --amend). Skipping formatting..."
+  exit 0
+fi
+
+git diff --quiet
+workDirHasChanges=$?
+
+if [ $workDirHasChanges -eq 1 ] ; then
+  # Stash all staged changes
+  git stash push -q --staged -m pre-commit-staged
+  # Stash the rest (all unstaged changes)
+  git stash push -q -m pre-commit-rest
+  # Restore previously staged changes
+  git stash pop -q "stash@{1}"
+fi
+
+# Run formatter
+make fmt
+
+if [ $workDirHasChanges -eq 1 ]; then
+  # Restore previously stashed changes
+  git stash pop -q
+fi
