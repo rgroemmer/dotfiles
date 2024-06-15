@@ -1,0 +1,3 @@
+# change target
+HOSTNAME=$(hostname)
+sed -i s/apple-m1/"$HOSTNAME"/g flake.nix

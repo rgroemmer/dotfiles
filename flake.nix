@@ -65,7 +65,7 @@
             };
           };
 
-          darwinConfigurations."SIT-SMBP-91HWJ1" = lib.darwinSystem {
+          darwinConfigurations."apple-m1" = lib.darwinSystem {
             modules = [ ./hosts/macbook/configuration.nix ];
             pkgs = nixpkgs.legacyPackages.aarch64-darwin;
             specialArgs = {
@@ -90,12 +90,10 @@
         "aarch64-linux"
       ];
 
-      perSystem = { config, pkgs, ... }: {
-        devShells.default = pkgs.mkShell {
-          builtInputs = with pkgs; [
-            nixfmt-rfc-style
-          ];
+      perSystem =
+        { config, pkgs, ... }:
+        {
+          devShells.default = pkgs.mkShell { builtInputs = with pkgs; [ nixfmt-rfc-style ]; };
         };
-      };
     };
 }
