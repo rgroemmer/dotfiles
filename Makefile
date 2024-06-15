@@ -8,4 +8,4 @@ up:
 
 .PHONY: fmt
 fmt:
-	@nixfmt .
+	@find . -name '*.nix' -not -path './.direnv/*' -exec nixfmt {} \;
