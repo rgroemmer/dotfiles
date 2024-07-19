@@ -1,4 +1,8 @@
+{ pkgs, ... }:
 {
+
+  home.packages = [ pkgs.zsh-completions ];
+
   programs.zsh = {
     enable = true;
     autosuggestion.enable = true;
@@ -7,18 +11,6 @@
     enableCompletion = true;
     autocd = true;
     dotDir = ".config/zsh";
-
-    antidote = {
-      enable = true;
-      plugins = [
-        "romkatv/powerlevel10k"
-        "hlissner/zsh-autopair"
-        "Aloxaf/fzf-tab"
-        "ohmyzsh/ohmyzsh path:plugins/git"
-        "ohmyzsh/ohmyzsh path:plugins/history-substring-search"
-        "ohmyzsh/ohmyzsh path:plugins/kubectl"
-      ];
-    };
 
     sessionVariables = {
       EDITOR = "vim";
@@ -45,7 +37,12 @@
     initExtra = ''
       # p10k
       POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
-      source ~/.config/zsh/.p10k.zsh
+      source ~/.config/zsh/plugins/p10k.zsh
+
+      #make sure brew is on the path for M1 
+      if [[ $(uname -m) == 'arm64' ]]; then
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+      fi
 
       # gardenctl config
       if command -v gardenctl &> /dev/null
@@ -84,6 +81,41 @@
       kk = "k9s";
       clean = "nix-collect-garbage -d && nix-store --gc && nix-store --verify --check-contents --repair";
     };
+
+    oh-my-zsh = {
+      enable = true;
+      plugins = [
+        "git"
+        "kubectl"
+      ];
+    };
+
+    plugins = with pkgs; [
+      {
+        name = "zsh-autopair";
+        src = fetchFromGitHub {
+          owner = "hlissner";
+          repo = "zsh-autopair";
+          rev = "34a8bca0c18fcf3ab1561caef9790abffc1d3d49";
+          sha256 = "1h0vm2dgrmb8i2pvsgis3lshc5b0ad846836m62y8h3rdb3zmpy1";
+        };
+        file = "autopair.zsh";
+      }
+      {
+        name = "zsh-nix-shell";
+        file = "nix-shell.plugin.zsh";
+        src = "${zsh-nix-shell}/share/zsh-nix-shell";
+      }
+      {
+        name = "powerlevel10k";
+        file = "powerlevel10k.zsh-theme";
+        src = "${zsh-powerlevel10k}/share/zsh-powerlevel10k";
+      }
+      {
+        name = "p10k.zsh";
+        file = "p10k.zsh";
+        src = ./p10k.config;
+      }
+    ];
   };
-  home.file.".config/zsh/.p10k.zsh".source = ./p10k.config;
 }

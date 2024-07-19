@@ -20,10 +20,18 @@
 
     libfido2
 
+    terraform
+
+    jq
+    kubernetes-helm
+    fluxcd
     keepassxc
+    stackit-cli
 
     xdg-utils
     wl-clipboard # pbcopy like
+
+    vault-bin
 
     ## TODO: look into it
     yazi

@@ -9,31 +9,27 @@
       #----- k8s tooling + gardener -----#
       "gardenctl-v2"
       "gardenlogin"
-      "iproute2mac"
-      "parallel"
 
       #----- core for work -----#
       "openstackclient"
       "terraform"
-      "earthly"
       "vault-cli"
-      "sonobuoy"
-
-      #----- i3ish tiling desktop -----#
-      "koekeishiya/formulae/yabai"
-      "koekeishiya/formulae/skhd"
     ];
     casks = [
       # dirty workaround to have it through spotlight search
       "alacritty"
       "iterm2"
+      "linearmouse"
+      "docker"
 
       #----- clis for work -----#
       "fly"
 
+      #----- i3ish tiling desktop -----#
+      "nikitabobko/tap/aerospace"
+
       #----- uis for work -----#
       "rocket-chat"
-      "postman"
       "slack"
       "mumble"
       "firefox@developer-edition"
@@ -45,7 +41,6 @@
       #----- default tools -----#
       "keepassxc"
       "spotify"
-      "postman"
 
     ];
 
@@ -54,8 +49,9 @@
       "gardener/tap"
       "homebrew/bundle"
       "homebrew/services"
+      "gardener/tap"
       # custom
-      "koekeishiya/formulae" # yabai
+      "nikitabobko/tap"
     ];
   };
 }
