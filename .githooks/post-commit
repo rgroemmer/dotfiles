@@ -6,3 +6,6 @@ if git stash list | grep "stash@{0}" | grep pre-commit-rest; then
   # Restore previously stashed changes
   git stash pop
 fi
+
+
+sed -i "s/apple-m1/$(hostname)/g" flake.nix
