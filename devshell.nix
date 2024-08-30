@@ -1,8 +1,8 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 let
   switchCMDs = {
     "x86_64-linux" = "sudo nixos-rebuild switch --flake '.#zion'";
-    "aarch64-darwin" = "nix run nix-darwin -- switch --flake .\#$(hostname)";
+    "aarch64-darwin" = "nix run nix-darwin -- switch --flake .\#macbook";
   };
   switch = builtins.getAttr pkgs.system switchCMDs;
 in
@@ -30,5 +30,8 @@ in
         "$@"
       '')
     ];
+    shellHook = ''
+      hostname > .hostname
+    '';
   };
 }

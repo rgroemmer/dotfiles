@@ -76,7 +76,7 @@
             };
           };
 
-          darwinConfigurations."apple-m1" = lib.darwinSystem {
+          darwinConfigurations.macbook = lib.darwinSystem {
             modules = [ ./hosts/macbook/configuration.nix ];
             pkgs = nixpkgs.legacyPackages.aarch64-darwin;
             specialArgs = {

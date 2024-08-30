@@ -15,8 +15,6 @@ if ! git diff --quiet; then
 fi
 
 if [ $workDirHasChanges -eq 1 ]; then
-  # Replace hostname
-  sed -i "s/$(hostname)/apple-m1/g" flake.nix
   # Stash all staged changes
   git stash push -q --staged -m pre-commit-staged
   # Stash the rest (all unstaged changes + untracked/new files)
