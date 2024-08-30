@@ -30,8 +30,5 @@ in
         "$@"
       '')
     ];
-    shellHook = ''
-      hostname > .hostname
-    '';
   };
 }
