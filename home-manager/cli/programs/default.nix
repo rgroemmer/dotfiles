@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   imports = [
     ./alacritty.nix
@@ -11,6 +11,7 @@
 
   # Default CLI programs
   home.packages = with pkgs; [
+    inputs.nixpkgs-master.legacyPackages.aarch64-darwin.openstackclient
     # core utilities
     coreutils
     moreutils

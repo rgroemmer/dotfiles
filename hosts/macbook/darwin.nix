@@ -10,8 +10,6 @@
       "gardenctl-v2"
       "gardenlogin"
 
-      #----- core for work -----#
-      "vault-cli"
     ];
     casks = [
       # dirty workaround to have it through spotlight search

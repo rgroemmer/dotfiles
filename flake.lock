@@ -643,6 +643,22 @@
         "url": "https://github.com/NixOS/nixpkgs/archive/5daf0514482af3f97abaefc78a6606365c9108e2.tar.gz"
       }
     },
+    "nixpkgs-master": {
+      "locked": {
+        "lastModified": 1725017936,
+        "narHash": "sha256-r6ssT6pIAoGz+H6MYI0Pd8b1pkYKIAIrFlpUhxHMkNU=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "5ba5b4cafba758770e4350cb2063b0b48ba7010e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "master",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-stable": {
       "locked": {
         "lastModified": 1725762081,
@@ -780,6 +796,7 @@
         "neonix": "neonix",
         "nix-darwin": "nix-darwin_2",
         "nixpkgs": "nixpkgs_4",
+        "nixpkgs-master": "nixpkgs-master",
         "sops-nix": "sops-nix"
       }
     },
