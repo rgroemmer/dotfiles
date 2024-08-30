@@ -44,6 +44,7 @@
     };
     # TODO:
     # nwg-displays.url = "github:nwg-piotr/nwg-displays/master";
+    # testing
     # nix attic
 
     flake-parts.url = "github:hercules-ci/flake-parts";
