@@ -1,0 +1,11 @@
+[global]
+excludes = ["*/hardware-configuration.nix"]
+includes = ["*.nix", "*.yaml"]
+
+[formatter.nix]
+command = "nixfmt"
+includes = ["*.nix"]
+
+[formatter.yaml]
+command = "yamlfmt"
+includes = ["*.yaml"]
