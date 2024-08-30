@@ -11,8 +11,6 @@
       "gardenlogin"
 
       #----- core for work -----#
-      "openstackclient"
-      "terraform"
       "vault-cli"
     ];
     casks = [

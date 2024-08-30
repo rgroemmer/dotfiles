@@ -35,6 +35,9 @@
       allowUnfree = true;
       allowUnfreePredicate = _: true;
     };
+    #overlays = [
+    #  inputs.rockwolf-dotfiles.overlays.python-openstackclient
+    #];
   };
 
   xdg.enable = true;

@@ -35,8 +35,6 @@
 
     ## TODO: look into it
     yazi
-    timewarrior
-    taskwarrior
     ## TODO end
 
     nixfmt-rfc-style
