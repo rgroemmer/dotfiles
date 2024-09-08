@@ -1,13 +1,15 @@
 {
-  config,
   pkgs,
-  inputs,
   ...
 }:
 {
   gtk = {
     enable = true;
-    catppuccin.enable = true;
+
+      theme = {
+        name = "adw-gtk3-dark";
+        package = pkgs.adw-gtk3;
+      };
 
     iconTheme = {
       package = pkgs.catppuccin-papirus-folders.override {
@@ -47,7 +49,7 @@
     };
   };
 
-  home.sessionVariables.GTK_THEME = "Adwaita-dark";
+  home.sessionVariables.GTK_THEME = "Tokyonight-Storm-B";
   home.pointerCursor = {
     name = "Bibata-Modern-Classic";
     package = pkgs.bibata-cursors;
