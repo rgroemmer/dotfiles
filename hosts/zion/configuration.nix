@@ -8,6 +8,7 @@
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.supportedFilesystems = [ "ntfs" ];
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
   boot.loader = {
     efi = {
       canTouchEfiVariables = true;

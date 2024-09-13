@@ -67,6 +67,7 @@
       cat = "bat";
       ls = "exa --icons";
       ll = "exa --icons -la";
+      cd = "z";
       j = "z";
       n = "nix-shell -p";
 
