@@ -4,7 +4,6 @@
 {
   config,
   lib,
-  pkgs,
   modulesPath,
   ...
 }:
@@ -24,17 +23,12 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/931140f8-d6ba-4128-9bac-ded73c7f76d7";
+    device = "/dev/disk/by-label/NIXOS";
     fsType = "ext4";
   };
 
-  fileSystems."/media/rap/windows" = {
-    device = "/dev/disk/by-uuid/D452EBF552EBD9EE";
-    fsType = "ntfs";
-  };
-
   fileSystems."/boot/efi" = {
-    device = "/dev/disk/by-uuid/3F52-42EA";
+    device = "/dev/disk/by-label/BOOT";
     fsType = "vfat";
   };
 
