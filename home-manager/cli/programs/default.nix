@@ -22,6 +22,7 @@
     libfido2
 
     terraform
+    rclone
 
     jq
     kubernetes-helm

@@ -8,7 +8,7 @@ up:
 
 .PHONY: mac
 mac:
-	@nix run nix-darwin -- switch --flake .\#$(hostname)
+	@nix run nix-darwin -- switch --flake .\#macbook
 
 .PHONY: fmt
 fmt:
