@@ -35,6 +35,7 @@
       allowUnfree = true;
       allowUnfreePredicate = _: true;
     };
+    # TODO: remove or use
     #overlays = [
     #  inputs.rockwolf-dotfiles.overlays.python-openstackclient
     #];
