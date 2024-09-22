@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   imports = [
     ./alacritty.nix
@@ -11,6 +11,7 @@
 
   # Default CLI programs
   home.packages = with pkgs; [
+    inputs.nixpkgs-master.legacyPackages.aarch64-darwin.openstackclient
     # core utilities
     coreutils
     moreutils
@@ -20,15 +21,22 @@
 
     libfido2
 
+    terraform
+    rclone
+
+    jq
+    kubernetes-helm
+    fluxcd
     keepassxc
+    stackit-cli
 
     xdg-utils
     wl-clipboard # pbcopy like
 
+    vault-bin
+
     ## TODO: look into it
     yazi
-    timewarrior
-    taskwarrior
     ## TODO end
 
     nixfmt-rfc-style
