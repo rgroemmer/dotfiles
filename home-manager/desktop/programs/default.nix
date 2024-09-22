@@ -20,7 +20,7 @@
 
     # TODO: fix upstream, cant download 403 seems to be redirect issue with curl (wget works with user agent) 
     # exodus
-    gnome.gnome-disk-utility
+    gnome-disk-utility
 
     #TODO: check out
     pkgs.xdg-desktop-portal-hyprland

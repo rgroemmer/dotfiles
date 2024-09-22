@@ -24,12 +24,17 @@
     catppuccin.url = "github:catppuccin/nix";
 
     neonix = {
-      url = "github:rgroemmer/neonix";
+      url = "github:rgroemmer/neonix/the-little-things";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     krewfile = {
       url = "github:brumhard/krewfile";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    firefox-addons = {
+      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # TODO:
@@ -90,10 +95,17 @@
         "aarch64-linux"
       ];
 
-      perSystem =
+      perSystem = let
+          flakeDir = builtins.toString (builtins.toString self);
+      in
         { config, pkgs, ... }:
         {
-          devShells.default = pkgs.mkShell { builtInputs = with pkgs; [ nixfmt-rfc-style ]; };
+          devShells.default = pkgs.mkShell {
+            builtInputs = with pkgs; [ nixfmt-rfc-style ];
+            shellHook = ''
+              echo " asdölfkjasdölfj ${flakeDir}"
+            '';
+          };
         };
     };
 }

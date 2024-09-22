@@ -7,6 +7,7 @@
     packages = with pkgs; [
       (nerdfonts.override { fonts = [ "CascadiaCode" ]; })
       fontconfig
+      noto-fonts-emoji
     ];
 
     fontconfig = {
