@@ -1,148 +1,248 @@
-{ config, pkgs, ... }:
+{ pkgs, inputs, lib, ...}:
+let
+  ryceeAddons = with inputs.firefox-addons.packages.${pkgs.system};
+  [
+    ublock-origin
+    sponsorblock
+    return-youtube-dislikes
+    indie-wiki-buddy
+
+    modrinthify
+    refined-github
+    movie-web
+
+    # bypass-paywalls-clean (can't use, was creating popups)
+    consent-o-matic
+    terms-of-service-didnt-read
+
+    auto-tab-discard
+    clearurls
+    link-cleaner
+
+    redirector # For nixos wiki
+    darkreader
+  ];
+  customAddons =
+  [
+
+  ];
+in
 {
-	programs.firefox = {
-    enable = true;
-		package = pkgs.firefox-devedition; # Higher version needed for github-refined
 
-		# Refer to https://mozilla.github.io/policy-templates or `about:policies#documentation` in firefox
-		policies = {
-			AppAutoUpdate = false; # Disable automatic application update
-			BackgroundAppUpdate = false; # Disable automatic application update in the background, when the application is not running.
-			BlockAboutAddons = false;
-			BlockAboutConfig = true;
-			BlockAboutProfiles = true;
-			BlockAboutSupport = true;
-			CaptivePortal = false;
-			DisableAppUpdate = true;
-			DisableFeedbackCommands = true;
-			DisableBuiltinPDFViewer = true; # Considered a security liability
-			DisableFirefoxStudies = true;
-			DisableFirefoxAccounts = true; # Disable Firefox Sync
-			DisableFirefoxScreenshots = true; # No screenshots?
-			DisableForgetButton = true; # Thing that can wipe history for X time, handled differently
-			DisableMasterPasswordCreation = true; # To be determined how to handle master password
-			DisableProfileImport = true; # Purity enforcement: Only allow nix-defined profiles
-			DisableProfileRefresh = true; # Disable the Refresh Firefox button on about:support and support.mozilla.org
-			DisableSetDesktopBackground = true; # Remove the “Set As Desktop Background…” menuitem when right clicking on an image, because Nix is the only thing that can manage the backgroud
-			DisableSystemAddonUpdate = true; # Do not allow addon updates
-			DisplayMenuBar = "default-off"; # Whether to show the menu bar
-			DisablePocket = true;
-			DisableTelemetry = true;
-			DisableFormHistory = true;
-			DisablePasswordReveal = true;
-			DontCheckDefaultBrowser = true; # Stop being attention whore
-			HardwareAcceleration = false; # Disabled as it's exposes points for fingerprinting
-			OfferToSaveLogins = false; # Managed by KeepAss instead
-			EnableTrackingProtection = {
-				Value = true;
-				Locked = true;
-				Cryptomining = true;
-				Fingerprinting = true;
-				EmailTracking = true;
-				# Exceptions = ["https://example.com"]
-			};
-			EncryptedMediaExtensions = {
-				Enabled = true;
-				Locked = true;
-			};
-			ExtensionUpdate = false; # Purity Enforcement: Do not update extensions
+  programs.firefox.enable = true;
 
-			FirefoxHome = {
-				Search = false;
-				TopSites = true;
-				SponsoredTopSites = false; # Fuck you
-				Highlights = true;
-				Pocket = false;
-				SponsoredPocket = false; # Fuck you
-				Snippets = false;
-				Locked = true;
-			};
-			FirefoxSuggest = {
-				WebSuggestions = false;
-				SponsoredSuggestions = false; # Fuck you
-				ImproveSuggest = false;
-				Locked = true;
-			};
-			NoDefaultBookmarks = true; # Do not set default bookmarks
-			PasswordManagerEnabled = false; # Managed by KeepAss
-			PDFjs = {
-				Enabled = false; # Fuck No, HELL NO
-				EnablePermissions = false;
-			};
-			PictureInPicture = {
-				Enabled = true;
-				Locked = true;
-			};
-			PromptForDownloadLocation = true;
-			SanitizeOnShutdown = {
-				Cache = true;
-				Cookies = false;
-				Downloads = true;
-				FormData = true;
-				History = false;
-				Sessions = false;
-				SiteSettings = false;
-				OfflineApps = true;
-				Locked = true;
-			};
-			SearchBar = "separate";
-			SearchEngines = {
-				PreventInstalls = true;
-				Remove = [
-					"Amazon.com" # Fuck you
-					"Bing" # Fuck you
-					"Google" # FUCK YOUU
-				];
-				Default = "DuckDuckGo";
-			};
-			SearchSuggestEnabled = false;
-			ShowHomeButton = true;
+  programs.firefox.package = pkgs.firefox-devedition;
 
-			StartDownloadsInTempDirectory = true; # For speed? May fuck up the system on low ram
-			UserMessaging = {
-				ExtensionRecommendations = false; # Don’t recommend extensions while the user is visiting web pages
-				FeatureRecommendations = false; # Don’t recommend browser features
-				Locked = true; # Prevent the user from changing user messaging preferences
-				MoreFromMozilla = false; # Don’t show the “More from Mozilla” section in Preferences
-				SkipOnboarding = true; # Don’t show onboarding messages on the new tab page
-				UrlbarInterventions = false; # Don’t offer suggestions in the URL bar
-				WhatsNew = false; # Remove the “What’s New” icon and menuitem
-			};
-			UseSystemPrintDialog = true;
-		};
+  programs.firefox.policies =
+  {
+    DontCheckDefaultBrowser = true;
+    DisableTelemetry = true;
+    DisableFirefoxStudies = true;
+    DisablePocket = true;
+    DisableFirefoxScreenshots = true;
 
-		profiles.Default = {
-			settings = {
-			# Enable letterboxing
-			"privacy.resistFingerprinting.letterboxing" = true;
+    DisplayBookmarksToolbar = "never";
+    DisplayMenuBar = "never"; # Previously appeared when pressing alt
 
-			# WebGL
-			"webgl.disabled" = true;
+    OverrideFirstRunPage = "";
+    PictureInPicture.Enabled = false;
+    PromptForDownloadLocation = false;
 
-			"browser.preferences.defaultPerformanceSettings.enabled" = false;
-			"layers.acceleration.disabled" = true;
-			"privacy.globalprivacycontrol.enabled" = true;
+    HardwareAcceleration = true;
+    TranslateEnabled = true;
 
-			"browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
+    Homepage.StartPage = "previous-session";
 
-			# "network.trr.mode" = 3;
+    UserMessaging =
+    {
+      UrlbarInterventions = false;
+      SkipOnboarding = true;
+    };
 
-			# "network.dns.disableIPv6" = false;
+    FirefoxSuggest =
+    {
+      WebSuggestions = false;
+      SponsoredSuggestions = false;
+      ImproveSuggest = false;
+    };
 
-			"privacy.donottrackheader.enabled" = true;
+    EnableTrackingProtection =
+    {
+      Value = true;
+      Cryptomining = true;
+      Fingerprinting = true;
+    };
 
-			# "privacy.clearOnShutdown.history" = true;
-			# "privacy.clearOnShutdown.downloads" = true;
-			# "browser.sessionstore.resume_from_crash" = true;
+    FirefoxHome = # Make new tab only show search
+    {
+      Search = true;
+      TopSites = false;
+      SponsoredTopSites = false;
+      Highlights = false;
+      Pocket = false;
+      SponsoredPocket = false;
+      Snippets = false;
+    };
 
-			# See https://librewolf.net/docs/faq/#how-do-i-fully-prevent-autoplay for options
-			"media.autoplay.blocking_policy" = 2;
+    Handlers.schemes.vscode =
+    {
+      action = "useSystemDefault"; # Open VSCode app
+      ask = false;
+    };
 
-			"privacy.resistFingerprinting" = true;
+    Handlers.schemes.element =
+    {
+      action = "useSystemDefault"; # Open Element app
+      ask = false;
+    };
+  };
 
-			"signon.management.page.breach-alerts.enabled" = false; # Disable firefox password checking against a breach database
-			};
-		};
-	};
+  programs.firefox.profiles.dev-edition-default =
+  {
+    isDefault = true;
+    extensions = ryceeAddons ++ customAddons;
+    search =
+    {
+      force = true;
+      default = "DuckDuckGo";
+    };
+    settings = # Settings that aren't allowed to be set in policies
+    {
+      # Normal firefox settings that happen to be blocked
+      "mousewheel.system_scroll_override" = true; # Normal system scrolling
+      "services.sync.declinedEngines" = "";
+    };
+  };
+
+  programs.firefox.profiles.dev-edition-default.search.engines =
+  {
+    # Disable all the stupid "This time, search with" icons
+    "Google".metaData.hidden = true;
+    "Bing".metaData.hidden = true;
+    "eBay".metaData.hidden = true;
+    "Amazon.com".metaData.hidden = true;
+    "Wikipedia (en)".metaData.hidden = true;
+
+    "Github Nix Code" =
+    {
+      urls = lib.singleton
+      {
+        template = "https://github.com/search";
+        params = lib.attrsToList # Thanks to xunuwu on github for being a reference to use of these functions
+        {
+          "type" = "code";
+          "q" = "lang:nix NOT is:fork {searchTerms}";
+        };
+      };
+
+      iconUpdateURL = "https://github.com/favicon.ico";
+      definedAliases = [ "@ghn" ];
+    };
+
+    "MyNixOS" =
+    {
+      urls = lib.singleton
+      {
+        template = "https://mynixos.com/search";
+        params = lib.attrsToList
+        {
+          "q" = "{searchTerms}";
+        };
+      };
+      definedAliases = [ "@mn" ];
+    };
+
+    "Noogle" =
+    {
+      urls = lib.singleton
+      {
+        template =  "https://noogle.dev/q?term={searchTerms}";
+      };
+      definedAliases = [ "@nog" ];
+    };
+
+    "Nixpkgs" =
+    {
+      urls = lib.singleton
+      {
+        template = "https://github.com/search";
+        params = lib.attrsToList # Thanks to xunuwu on github for being a reference to use of these functions
+        {
+          "type" = "code";
+          "q" = "repo:NixOS/nixpkgs lang:nix {searchTerms}";
+        };
+      };
+      definedAliases = [ "@npkgs" ];
+    };
+
+  };
+
+
+
+  programs.firefox.policies.Preferences =
+  {
+    "browser.urlbar.suggest.searches" = true; # Need this for basic search suggestions
+    "browser.urlbar.shortcuts.bookmarks" = false;
+    "browser.urlbar.shortcuts.history" = false;
+    "browser.urlbar.shortcuts.tabs" = false;
+
+    "browser.tabs.tabMinWidth" = 75; # Make tabs able to be smaller to prevent scrolling
+
+    "browser.urlbar.placeholderName" = "DuckDuckGo";
+    "browser.urlbar.placeholderName.private" = "DuckDuckGo";
+
+    "browser.aboutConfig.showWarning" = false; # No warning when going to config
+    "browser.warnOnQuitShortcut" = false;
+
+    "browser.tabs.loadInBackground" = true; # Load tabs automatically
+    "media.ffmpeg.vaapi.enabled" = true; # Enable hardware acceleration
+
+    "browser.in-content.dark-mode" = true; # Use dark mode
+    "ui.systemUsesDarkTheme" = true;
+
+    "extensions.autoDisableScopes" = 0; # Automatically enable extensions
+    "extensions.update.enabled" = false;
+
+    "widget.use-xdg-desktop-portal.file-picker" = 1; # Use new gtk file picker instead of legacy one
+  };
+
+  programs.firefox.policies.Preferences."browser.uiCustomization.state" = builtins.toJSON
+  {
+    placements =
+    {
+      widget-overflow-fixed-list = [];
+      toolbar-menubar = [ "menubar-items" ];
+      PersonalToolbar = [ "personal-bookmarks" ];
+      nav-bar =
+      [
+        "back-button"
+        "forward-button"
+        "urlbar-container"
+        "downloads-button"
+        "unified-extensions-button"
+      ];
+      TabsToolbar =
+      [
+        "firefox-view-button"
+        "tabbrowser-tabs"
+        "new-tab-button"
+      ];
+      unified-extensions-area =
+      [
+        "sponsorblocker_ajay_app-browser-action"
+        "ublock0_raymondhill_net-browser-action"
+        "gdpr_cavi_au_dk-browser-action"
+        "redirector_einaregilsson_com-browser-action"
+        "_5183707f-8a46-4092-8c1f-e4515bcebbad_-browser-action"
+        "_b0a674f9-f848-9cfd-0feb-583d211308b0_-browser-action"
+        "jid0-3guet1r69sqnsrca5p8kx9ezc3u_jetpack-browser-action"
+        "_74145f27-f039-47ce-a470-a662b129930a_-browser-action"
+        "_762f9885-5a13-4abd-9c77-433dcd38b8fd_-browser-action"
+        "_c2c003ee-bd69-42a2-b0e9-6f34222cb046_-browser-action"
+        "_cb31ec5d-c49a-4e5a-b240-16c767444f62_-browser-action"
+      ];
+    };
+    currentVersion = 20;
+    newElementCount = 3;
+  };
 }
-
