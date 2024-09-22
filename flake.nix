@@ -39,10 +39,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    krewfile = {
-      url = "github:brumhard/krewfile";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     # TODO:
     # nwg-displays.url = "github:nwg-piotr/nwg-displays/master";
     # testing
@@ -102,9 +98,10 @@
         "aarch64-linux"
       ];
 
-      perSystem = let
+      perSystem =
+        let
           flakeDir = builtins.toString (builtins.toString self);
-      in
+        in
         { config, pkgs, ... }:
         {
           devShells.default = pkgs.mkShell {
