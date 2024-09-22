@@ -16,10 +16,10 @@
     moreutils
     dnsutils
     gnumake
-    yabai
     (nerdfonts.override { fonts = [ "CascadiaCode" ]; })
 
-    iterm2
+    libfido2
+
     keepassxc
 
     xdg-utils

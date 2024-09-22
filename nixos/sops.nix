@@ -22,7 +22,8 @@
 
   #TODO: make use of it
   sops.age.keyFile = "/home/rap/.config/sops/age/keys.txt";
-  sops.secrets.password = {
+  sops.secrets.fuck = {
+    path = "/home/rap/.moinsen";
     owner = "rap";
   };
 }
