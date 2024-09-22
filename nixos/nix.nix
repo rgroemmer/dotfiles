@@ -9,6 +9,8 @@
       trusted-users = [
         "root"
         "@wheel"
+        "@admin"
+        "groemmer"
       ];
       auto-optimise-store = lib.mkDefault true;
 

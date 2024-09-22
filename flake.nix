@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-master.url = "github:nixos/nixpkgs/master";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -37,8 +38,10 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     # TODO:
     # nwg-displays.url = "github:nwg-piotr/nwg-displays/master";
+    # testing
     # nix attic
 
     flake-parts.url = "github:hercules-ci/flake-parts";
@@ -70,7 +73,7 @@
             };
           };
 
-          darwinConfigurations."apple-m1" = lib.darwinSystem {
+          darwinConfigurations.macbook = lib.darwinSystem {
             modules = [ ./hosts/macbook/configuration.nix ];
             pkgs = nixpkgs.legacyPackages.aarch64-darwin;
             specialArgs = {
@@ -95,9 +98,10 @@
         "aarch64-linux"
       ];
 
-      perSystem = let
+      perSystem =
+        let
           flakeDir = builtins.toString (builtins.toString self);
-      in
+        in
         { config, pkgs, ... }:
         {
           devShells.default = pkgs.mkShell {
