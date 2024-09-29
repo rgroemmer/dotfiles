@@ -73,6 +73,14 @@
             };
           };
 
+          homeConfigurations.zion = lib.homeManagerConfiguration {
+            modules = [ ./hosts/zion/home.nix ];
+            pkgs = nixpkgs.legacyPackages.x86_64-linux;
+            extraSpecialArgs = {
+              inherit inputs outputs;
+            };
+          };
+
           darwinConfigurations.macbook = lib.darwinSystem {
             modules = [ ./hosts/macbook/configuration.nix ];
             pkgs = nixpkgs.legacyPackages.aarch64-darwin;
@@ -81,15 +89,14 @@
             };
           };
 
-          homeConfigurations = {
-            zion = lib.homeManagerConfiguration {
-              modules = [ ./hosts/zion/home.nix ];
-              pkgs = nixpkgs.legacyPackages.x86_64-linux;
-              extraSpecialArgs = {
-                inherit inputs outputs;
-              };
-            };
+          nixosConfigurations.kube-node-iso = lib.nixosSystem {
+            modules = [
+              "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"
+              "${nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
+              ./isos/nixvm/configuration.nix
+            ];
           };
+
         };
 
       systems = [
