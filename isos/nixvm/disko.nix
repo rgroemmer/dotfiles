@@ -9,7 +9,7 @@
           partitions = {
             ESP = {
               name = "ESP";
-              size = "512";
+              size = "512M";
               type = "EF00";
               content = {
                 type = "filesystem";
