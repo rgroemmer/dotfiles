@@ -17,23 +17,13 @@
     fsType = "ext4";
   };
 
-  fileSystems."/boot/efi" = {
+  fileSystems."/boot" = {
     device = "/dev/disk/by-label/BOOT";
     fsType = "vfat";
   };
 
-  boot.loader = {
-    efi = {
-      canTouchEfiVariables = true;
-      efiSysMountPoint = "/boot/efi";
-    };
-    grub = {
-      enable = true;
-      useOSProber = true;
-      efiSupport = true;
-      device = "nodev";
-    };
-  };
+  boot.loader.canTouchEfiVariables = true;
+  boot.loader.systemd-boot.enable = true;
 
   #networking.useDHCP = lib.mkDefault true;
 
