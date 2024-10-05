@@ -44,6 +44,12 @@
     # testing
     # nix attic
 
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+
     flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
@@ -54,6 +60,7 @@
       home-manager,
       nix-darwin,
       flake-parts,
+      disko,
       ...
     }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {
@@ -89,17 +96,19 @@
             };
           };
 
-          nixosConfigurations.kube-node-iso = lib.nixosSystem {
+          nixosConfigurations.iso = lib.nixosSystem {
             modules = [
-              "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"
+              "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-base.nix"
+              "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-gnome.nix"
               "${nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
-              ./isos/nixvm/configuration.nix
+              ./iso/configuration.nix
             ];
           };
 
           nixosConfigurations.kube-node = lib.nixosSystem {
             modules = [
               ./hosts/kube-node/configuration.nix
+              disko.nixosModules.disko
             ];
           };
 

@@ -8,6 +8,7 @@
           type = "gpt";
           partitions = {
             ESP = {
+              label = "boot";
               name = "ESP";
               size = "512M";
               type = "EF00";
@@ -18,17 +19,16 @@
                 mountOptions = [
                   "defaults"
                 ];
-                extraArgs = ["-nBOOT"];
               };
             };
             root = {
               size = "100%";
-              name = "root";
+              label = "root";
               content = {
                 type = "filesystem";
                 format = "ext4";
                 mountpoint = "/";
-                extraArgs = ["-LROOT"];
+                extraArgs = ["-L" "ROOT" "-f"];
               };
             };
           };
