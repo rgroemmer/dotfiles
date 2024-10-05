@@ -1,8 +1,0 @@
-#!/usr/bin/env nix
-# shellcheck shell=bash
-#! nix develop --command bash
-
-if git stash list | grep "stash@{0}" | grep pre-commit-rest; then
-  # Restore previously stashed changes
-  git stash pop
-fi
