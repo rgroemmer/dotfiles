@@ -1,9 +1,12 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, ... }@args:
+let
+  k8sRole = args.k8sRole or "node";
+  nodeName = args.nodeName;
+in
 {
   imports = [
     ./hardware-configuration.nix
     ./disko.nix
-    ./services.nix
   ];
 
   boot = {
@@ -28,8 +31,26 @@
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGqKYXW07z0llbDKRIakLD1PjHe3HxK9iu6czXs+ZU7v iso@rapsn"
   ];
 
-  networking.hostName = "node01";
+  networking.hostName = nodeName;
   environment.systemPackages = with pkgs; [ git curl neovim kubectl ];
 
   system.stateVersion = "24.11";
+
+  networking.firewall.allowedTCPPorts = [
+    6443 # k3s: required so that pods can reach the API server (running on port 6443 by default)
+    2379 # k3s, etcd clients: required if using a "High Availability Embedded etcd" configuration
+    2380 # k3s, etcd peers: required if using a "High Availability Embedded etcd" configuration
+  ];
+  networking.firewall.allowedUDPPorts = [
+    8472 # k3s, flannel: required if using multi-node for inter-node networking
+  ];
+
+  # Service area
+  services.k3s = {
+    enable = true;
+    role = "server";
+    token = "1234";
+    clusterInit = if k8sRole == "server" then true else false;
+    serverAddr = if k8sRole == "server" then "" else "https://192.168.42.54:6443";
+  };
 }

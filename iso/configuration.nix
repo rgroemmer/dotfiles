@@ -16,7 +16,6 @@ let
   );
 in
 {
-
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
     devSize = "16G";

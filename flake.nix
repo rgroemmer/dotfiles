@@ -104,9 +104,16 @@
             ];
           };
 
-          nixosConfigurations.kube-node = lib.nixosSystem {
+          nixosConfigurations.master = lib.nixosSystem {
             modules = [
-              ./hosts/kube-node/configuration.nix
+              ./hosts/kube-node/configuration.nix { k8sRole = "server"; }
+              disko.nixosModules.disko
+            ];
+          };
+
+          nixosConfigurations.secondary = lib.nixosSystem {
+            modules = [
+              ./hosts/kube-node/configuration.nix { k8sRole = "server"; }
               disko.nixosModules.disko
             ];
           };
