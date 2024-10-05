@@ -97,6 +97,12 @@
             ];
           };
 
+          nixosConfigurations.kube-node = lib.nixosSystem {
+            modules = [
+              ./hosts/kube-node/configuration.nix
+            ];
+          };
+
         };
 
       systems = [

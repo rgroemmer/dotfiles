@@ -46,40 +46,8 @@
     ];
   };
 
-  networking.hostName = "iso";
-  environment.systemPackages = with pkgs; [ git curl ];
-
-  systemd.services.nixos-install =
-    {
-      enable = true;
-      description = "Bootstrap kube-node";
-      unitConfig.Type = "simple";
-
-      wants = ["network-online.target"];
-      after = ["network-online.target"];
-
-      script = ''
-        #!/usr/bin/env bash
-        set -euo pipefail
-
-        sleep 5
-        cd /tmp
-        ${pkgs.git}/bin/git clone https://github.com/rgroemmer/dotfiles.git
-        ${pkgs.git}/bin/git checkout iso
-        sudo nixos-rebuild switch /tmp/dotfiles#.k8s-node
-      '';
-
-      serviceConfig = {
-        StandartOutput = "journal+console";
-        TTYPath = "/dev/tty1";
-
-        Restart = "on-failure";
-        StartLimitInterval = "30s";
-        StartLimitBurst = "2";
-      };
-
-      wantedBy = [ "multi-user.target" ];
-    };
+  networking.hostName = "node01";
+  environment.systemPackages = with pkgs; [ git curl neovim kubectl ];
 
   system.stateVersion = "24.11";
 }
