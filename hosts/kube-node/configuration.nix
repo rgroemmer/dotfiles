@@ -22,7 +22,7 @@
     fsType = "vfat";
   };
 
-  boot.loader.canTouchEfiVariables = true;
+  boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.enable = true;
 
   #networking.useDHCP = lib.mkDefault true;
