@@ -1,7 +1,6 @@
 { pkgs, lib, ... }@args:
 let
-  k8sRole = args.k8sRole or "node";
-  nodeName = args.nodeName;
+  k8sRole = args.k8sRole or "server";
 in
 {
   imports = [
@@ -31,7 +30,7 @@ in
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGqKYXW07z0llbDKRIakLD1PjHe3HxK9iu6czXs+ZU7v iso@rapsn"
   ];
 
-  networking.hostName = nodeName;
+  networking.hostName = "node-${k8sRole}";
   environment.systemPackages = with pkgs; [ git curl neovim kubectl ];
 
   system.stateVersion = "24.11";
@@ -50,7 +49,7 @@ in
     enable = true;
     role = "server";
     token = "1234";
-    clusterInit = if k8sRole == "server" then true else false;
-    serverAddr = if k8sRole == "server" then "" else "https://192.168.42.54:6443";
+    clusterInit = if k8sRole == "master" then true else false;
+    serverAddr = if k8sRole == "server" then "https://192.168.42.54:6443" else null;
   };
 }

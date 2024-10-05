@@ -113,7 +113,7 @@
 
           nixosConfigurations.secondary = lib.nixosSystem {
             modules = [
-              ./hosts/kube-node/configuration.nix { k8sRole = "server"; }
+              ./hosts/kube-node/configuration.nix
               disko.nixosModules.disko
             ];
           };
