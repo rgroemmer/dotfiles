@@ -14,6 +14,11 @@
 
   #networking.useDHCP = lib.mkDefault true;
 
+  swapDevices = [{
+    device = "/run/swapfile";
+    size = 16*1024;
+  }];
+
   nixpkgs = {
     hostPlatform = lib.mkDefault "x86_64-linux";
     config.allowUnfree = true;
@@ -35,7 +40,7 @@
 
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
-    runSize = "5000m";
+    runSize = "30G";
     supportedFilesystems = lib.mkForce [
       "btrfs"
       "reiserfs"
