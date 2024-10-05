@@ -15,6 +15,7 @@ in
 
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
+    devSize = "16G";
     supportedFilesystems = lib.mkForce [
       "vfat"
       "ntfs"
@@ -23,9 +24,11 @@ in
 
   networking.hostName = "iso";
 
+  # try to save RAM
+  zramSwap.enable = true;
   swapDevices = [
     {
-      device = "/swapfile";
+      device = "/dev/swapfile";
       size = 8192;
     }
   ];
@@ -54,6 +57,7 @@ in
     git
     curl
     gnumake
+    bootstrap-k8s
   ];
 
   system.stateVersion = "24.11";

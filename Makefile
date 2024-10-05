@@ -16,4 +16,5 @@ fmt:
 
 .PHONY: install-k8s
 install-k8s:
-	@sudo nix run 'github:nix-community/disko#disko-install' -- --flake .#kube-node --disk local /dev/sda
+	nix run github:nix-community/disko --no-write-lock-file -- --mode zap_create_mount ./hosts/kube-node/disko.nix
+	nixos-install --flake .#kube-node
