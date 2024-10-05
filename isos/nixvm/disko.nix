@@ -18,7 +18,7 @@
                 mountOptions = [
                   "defaults"
                 ];
-                extraArgs = "-nBOOT";
+                extraArgs = ["-nBOOT"];
               };
             };
             root = {
@@ -28,7 +28,7 @@
                 type = "filesystem";
                 format = "ext4";
                 mountpoint = "/";
-                extraArgs = "-LROOT";
+                extraArgs = ["-LROOT"];
               };
             };
           };
