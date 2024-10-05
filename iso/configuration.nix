@@ -3,11 +3,15 @@ let
   bootstrap-k8s = (
     pkgs.writeShellScriptBin "run" ''
       #!/usr/bin/env bash
+
+      sleep 10
+      set -euo pipefail
       git clone https://github.com/rgroemmer/dotfiles
       cd dotfiles
 
       git checkout iso
       make install-k8s
+      reboot
     ''
   );
 in
@@ -22,16 +26,17 @@ in
     ];
   };
 
+  services.cron = {
+    enable = true;
+    systemCronJobs = [
+      "@reboot root ${bootstrap-k8s}/bin/run &>/tmp/k8s_bootstrap.log"
+    ];
+  };
+
   networking.hostName = "iso";
 
   # try to save RAM
   zramSwap.enable = true;
-  swapDevices = [
-    {
-      device = "/dev/swapfile";
-      size = 8192;
-    }
-  ];
 
   nixpkgs = {
     hostPlatform = lib.mkDefault "x86_64-linux";
@@ -47,6 +52,7 @@ in
   };
 
   services.openssh.enable = true;
+  services.getty.autologinUser = lib.mkForce "root";
   users.users.root.hashedPassword = "$y$j9T$EMO/EfdbflSVB//fPjqSi/$3jrcxQr/AEXtJZSXtc0ISAZbnqum.TW9vIi8bgMA2F1";
   users.users.root.initialHashedPassword = lib.mkForce null;
   users.users.root.openssh.authorizedKeys.keys = [
