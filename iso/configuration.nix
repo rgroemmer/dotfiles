@@ -26,10 +26,11 @@ in
     ];
   };
 
+  # autoinstall nixos
   services.cron = {
     enable = true;
     systemCronJobs = [
-      "@reboot root ${bootstrap-k8s}/bin/run &>/tmp/k8s_bootstrap.log"
+      "@reboot root ${bootstrap-k8s}/bin/run &>/tmp/nix_install.log"
     ];
   };
 
