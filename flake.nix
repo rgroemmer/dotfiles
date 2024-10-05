@@ -98,8 +98,7 @@
 
           nixosConfigurations.iso = lib.nixosSystem {
             modules = [
-              "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-base.nix"
-              "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-gnome.nix"
+              "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"
               "${nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
               ./iso/configuration.nix
             ];

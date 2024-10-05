@@ -28,7 +28,7 @@
                 type = "filesystem";
                 format = "ext4";
                 mountpoint = "/";
-                extraArgs = ["-L" "ROOT" "-f"];
+                extraArgs = ["-L" "NIXOS"];
               };
             };
           };
