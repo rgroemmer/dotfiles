@@ -106,7 +106,7 @@
 
           nixosConfigurations.master = lib.nixosSystem {
             modules = [
-              ./hosts/kube-node/configuration.nix { k8sRole = "server"; }
+              ./hosts/kube-node/configuration.nix { k8sRole = "master"; }
               disko.nixosModules.disko
             ];
           };
