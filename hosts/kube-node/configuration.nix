@@ -17,7 +17,7 @@
     fsType = "ext4";
   };
 
-  fileSystems."/boot" = {
+  fileSystems."/boot/efi" = {
     device = "/dev/disk/by-label/BOOT";
     fsType = "vfat";
   };
@@ -25,12 +25,13 @@
   boot.loader = {
     efi = {
       canTouchEfiVariables = true;
-      efiSysMountPoint = "/boot"; # ← use the same mount point here.
+      efiSysMountPoint = "/boot/efi";
     };
     grub = {
-       efiSupport = true;
-       #efiInstallAsRemovable = true; # in case canTouchEfiVariables doesn't work for your system
-       device = "nodev";
+      enable = true;
+      useOSProber = true;
+      efiSupport = true;
+      device = "nodev";
     };
   };
 
