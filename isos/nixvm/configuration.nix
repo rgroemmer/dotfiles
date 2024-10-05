@@ -35,6 +35,7 @@
 
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
+    runSize = "5000m";
     supportedFilesystems = lib.mkForce [
       "btrfs"
       "reiserfs"
