@@ -63,7 +63,6 @@
         set -euo pipefail
 
         sleep 5
-        cd /tmp
         ${pkgs.git}/bin/git clone https://github.com/rgroemmer/dotfiles.git
         ${pkgs.git}/bin/git checkout iso
         sudo nixos-rebuild switch /tmp/dotfiles#.k8s-node
