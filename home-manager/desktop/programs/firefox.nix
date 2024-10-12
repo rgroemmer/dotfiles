@@ -3,22 +3,18 @@
   pkgs,
   ...
 }:
-let
-  firefox-addons = with inputs.firefox-addons.packages.${pkgs.system}; [
-    ublock-origin
-    sponsorblock
-    consent-o-matic
-    terms-of-service-didnt-read
+  #  ublock-origin
+  #  sponsorblock
+  #  consent-o-matic
+  #  terms-of-service-didnt-read
 
-    refined-github
+  #  refined-github
 
-    auto-tab-discard
-    clearurls
-    link-cleaner
+  #  auto-tab-discard
+  #  clearurls
+  #  link-cleaner
 
-    bitwarden
-  ];
-in
+  #  bitwarden
 {
   programs.firefox = {
     enable = true;
@@ -101,8 +97,6 @@ in
 
     profiles.dev-edition-default = {
       isDefault = true;
-
-      extensions = firefox-addons;
 
       search = {
         force = true;

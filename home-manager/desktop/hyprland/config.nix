@@ -30,7 +30,7 @@ in
     };
 
     input = {
-      kb_layout = "de";
+      kb_layout = "eu";
       repeat_rate = 35;
       repeat_delay = 250;
       accel_profile = "flat";
