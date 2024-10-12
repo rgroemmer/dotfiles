@@ -3,18 +3,6 @@
   pkgs,
   ...
 }:
-  #  ublock-origin
-  #  sponsorblock
-  #  consent-o-matic
-  #  terms-of-service-didnt-read
-
-  #  refined-github
-
-  #  auto-tab-discard
-  #  clearurls
-  #  link-cleaner
-
-  #  bitwarden
 {
   programs.firefox = {
     enable = true;
