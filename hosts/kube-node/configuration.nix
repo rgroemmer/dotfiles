@@ -1,6 +1,11 @@
-{ pkgs, lib, ... }@args:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 let
-  k8sRole = args.k8sRole or "server";
+  role = config._module.specialArgs.role or "server";
 in
 {
   imports = [
@@ -24,32 +29,42 @@ in
   };
 
   services.openssh.enable = true;
-  users.users.root.hashedPassword = "$y$j9T$EMO/EfdbflSVB//fPjqSi/$3jrcxQr/AEXtJZSXtc0ISAZbnqum.TW9vIi8bgMA2F1";
-  users.users.root.initialHashedPassword = lib.mkForce null;
-  users.users.root.openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGqKYXW07z0llbDKRIakLD1PjHe3HxK9iu6czXs+ZU7v iso@rapsn"
-  ];
 
-  networking.hostName = "node-${k8sRole}";
-  environment.systemPackages = with pkgs; [ git curl neovim kubectl ];
+  users.users.root = {
+    hashedPassword = "$y$j9T$EMO/EfdbflSVB//fPjqSi/$3jrcxQr/AEXtJZSXtc0ISAZbnqum.TW9vIi8bgMA2F1";
+    initialHashedPassword = lib.mkForce null;
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGqKYXW07z0llbDKRIakLD1PjHe3HxK9iu6czXs+ZU7v iso@rapsn"
+    ];
+  };
+
+  networking = {
+    hostName = "node-${role}";
+    firewall.allowedTCPPorts = [
+      6443 # k3s: required so that pods can reach the API server (running on port 6443 by default)
+      2379 # k3s, etcd clients: required if using a "High Availability Embedded etcd" configuration
+      2380 # k3s, etcd peers: required if using a "High Availability Embedded etcd" configuration
+    ];
+    firewall.allowedUDPPorts = [
+      8472 # k3s, flannel: required if using multi-node for inter-node networking
+    ];
+  };
+
+  environment.systemPackages = with pkgs; [
+    git
+    curl
+    neovim
+    kubectl
+  ];
 
   system.stateVersion = "24.11";
-
-  networking.firewall.allowedTCPPorts = [
-    6443 # k3s: required so that pods can reach the API server (running on port 6443 by default)
-    2379 # k3s, etcd clients: required if using a "High Availability Embedded etcd" configuration
-    2380 # k3s, etcd peers: required if using a "High Availability Embedded etcd" configuration
-  ];
-  networking.firewall.allowedUDPPorts = [
-    8472 # k3s, flannel: required if using multi-node for inter-node networking
-  ];
 
   # Service area
   services.k3s = {
     enable = true;
     role = "server";
     token = "1234";
-    clusterInit = if k8sRole == "master" then true else false;
-    serverAddr = if k8sRole == "server" then "https://192.168.42.54:6443" else null;
+    clusterInit = if role == "master" then true else false;
+    serverAddr = if role == "server" then "https://192.168.42.54:6443" else "";
   };
 }

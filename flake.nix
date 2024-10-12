@@ -104,14 +104,17 @@
             ];
           };
 
-          nixosConfigurations.master = lib.nixosSystem {
+          nixosConfigurations.k3s-master = lib.nixosSystem {
             modules = [
-              ./hosts/kube-node/configuration.nix { k8sRole = "master"; }
+              ./hosts/kube-node/configuration.nix
               disko.nixosModules.disko
             ];
+            specialArgs = {
+              role = "master";
+            };
           };
 
-          nixosConfigurations.secondary = lib.nixosSystem {
+          nixosConfigurations.k3s-node = lib.nixosSystem {
             modules = [
               ./hosts/kube-node/configuration.nix
               disko.nixosModules.disko
@@ -135,7 +138,7 @@
           devShells.default = pkgs.mkShell {
             builtInputs = with pkgs; [ nixfmt-rfc-style ];
             shellHook = ''
-              echo " asdölfkjasdölfj ${flakeDir}"
+              echo "just a test: ${flakeDir}"
             '';
           };
         };
