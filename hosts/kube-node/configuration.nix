@@ -39,6 +39,7 @@ in
   };
 
   networking = {
+    #TODO: check this
     hostName = "node-${role}";
     firewall.allowedTCPPorts = [
       6443 # k3s: required so that pods can reach the API server (running on port 6443 by default)
@@ -65,6 +66,7 @@ in
     role = "server";
     token = "1234";
     clusterInit = if role == "master" then true else false;
+    #TODO: make dns
     serverAddr = if role == "server" then "https://192.168.42.54:6443" else "";
   };
 }
