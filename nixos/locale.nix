@@ -16,10 +16,5 @@
   };
   time.timeZone = "Europe/Berlin";
 
-  services.xserver = {
-    xkb.layout = "de";
-    xkb.variant = "";
-  };
-
-  console.keyMap = "de";
+  console.keyMap = "us";
 }
