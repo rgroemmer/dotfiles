@@ -1,4 +1,13 @@
 { pkgs, ... }:
+let
+  screenshoot = (
+    pkgs.writeShellScriptBin "screenshoot" ''
+      #!/usr/bin/env bash
+
+      grimblast save area
+    ''
+  );
+in
 {
   imports = [
     ./audio.nix
@@ -13,6 +22,7 @@
     grimblast
     slurp
     sway-contrib.grimshot
+    screenshoot
 
     keepassxc
     vlc

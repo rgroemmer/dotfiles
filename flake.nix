@@ -3,29 +3,29 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-master.url = "github:nixos/nixpkgs/master";
 
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-darwin.url = "github:lnl7/nix-darwin";
-    grub-theme = {
-      url = "github:catppuccin/grub";
-      flake = false;
-    };
-
-    hyprland-git.url = "github:hyprwm/hyprland";
-
-    sops-nix = {
-      url = "github:mic92/sops-nix";
+    nix-darwin = {
+      url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    catppuccin.url = "github:catppuccin/nix";
+
+    hyprland-git = {
+      url = "github:hyprwm/hyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     neonix = {
       url = "github:rgroemmer/neonix/the-little-things";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    sops-nix = {
+      url = "github:mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -34,17 +34,23 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    firefox-addons = {
-      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+    disko = {
+      url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    grub-theme = {
+      url = "github:catppuccin/grub";
+      flake = false;
+    };
+
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    catppuccin.url = "github:catppuccin/nix";
 
     # TODO:
     # nwg-displays.url = "github:nwg-piotr/nwg-displays/master";
     # testing
     # nix attic
-
-    flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
   outputs =
@@ -54,6 +60,7 @@
       home-manager,
       nix-darwin,
       flake-parts,
+      disko,
       ...
     }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {
@@ -73,6 +80,39 @@
             };
           };
 
+          nixosConfigurations.iso = lib.nixosSystem {
+            modules = [
+              "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"
+              "${nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
+              ./iso/configuration.nix
+            ];
+          };
+
+          nixosConfigurations.k3s-master = lib.nixosSystem {
+            modules = [
+              ./hosts/kube-node/configuration.nix
+              disko.nixosModules.disko
+            ];
+            specialArgs = {
+              role = "master";
+            };
+          };
+
+          nixosConfigurations.k3s-node = lib.nixosSystem {
+            modules = [
+              ./hosts/kube-node/configuration.nix
+              disko.nixosModules.disko
+            ];
+          };
+
+          homeConfigurations.zion = lib.homeManagerConfiguration {
+            modules = [ ./hosts/zion/home.nix ];
+            pkgs = nixpkgs.legacyPackages.x86_64-linux;
+            extraSpecialArgs = {
+              inherit inputs outputs;
+            };
+          };
+
           darwinConfigurations.macbook = lib.darwinSystem {
             modules = [ ./hosts/macbook/configuration.nix ];
             pkgs = nixpkgs.legacyPackages.aarch64-darwin;
@@ -80,34 +120,28 @@
               inherit inputs outputs;
             };
           };
-
-          homeConfigurations = {
-            zion = lib.homeManagerConfiguration {
-              modules = [ ./hosts/zion/home.nix ];
-              pkgs = nixpkgs.legacyPackages.x86_64-linux;
-              extraSpecialArgs = {
-                inherit inputs outputs;
-              };
-            };
-          };
         };
 
       systems = [
         "x86_64-linux"
         "aarch64-darwin"
-        "aarch64-linux"
       ];
 
       perSystem =
-        let
-          flakeDir = builtins.toString (builtins.toString self);
-        in
         { config, pkgs, ... }:
         {
           devShells.default = pkgs.mkShell {
-            builtInputs = with pkgs; [ nixfmt-rfc-style ];
+            packages = with pkgs; [
+              git
+              nixfmt-rfc-style
+              treefmt
+              yamlfmt
+              nh
+            ];
             shellHook = ''
-              echo " asdölfkjasdölfj ${flakeDir}"
+              export FLAKE="$PWD"
+              alias fmt="treefmt --tree-root=."
+              treefmt --tree-root=.
             '';
           };
         };

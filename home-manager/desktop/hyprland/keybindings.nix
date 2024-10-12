@@ -23,7 +23,7 @@
     bind = SUPER,R, togglesplit,
     bind = SUPER,RETURN, exec, alacritty
     bind = SUPER,S, movetoworkspace, 2
-    bind = SUPER,SPACE, exec, ${pkgs.tofi}/bin/tofi-drun | xargs hyprctl dispatch exec --
+    bind = SUPER,SPACE, exec, ${pkgs.tofi}/bin/tofi-run | xargs hyprctl dispatch exec --
     bind = SUPER,p, exec, ${pkgs.wlogout}/bin/wlogout
     bind = SUPER,T, togglefloating,
     bind = SUPER,h, movefocus, l
