@@ -1,39 +1,35 @@
 { pkgs, lib, ... }:
 let
-  bootstrap-k8s = (
-    pkgs.writeShellScriptBin "run" ''
+  installer = (
+    pkgs.writeShellScriptBin "installer" ''
       #!/usr/bin/env bash
-
-      sleep 10
       set -euo pipefail
-      git clone https://github.com/rgroemmer/dotfiles
-      cd dotfiles
 
-      git checkout iso
-      make install-k8s
-      reboot
+      gum style --border normal --margin "1" --padding "1 2" --border-foreground 218 "Hello, there! Welcome my $(gum style --foreground 218 'NixOS Installer')."
+      gum spin -s line --title "Cloning the Nixify repository..." -- git clone https://github.com/rgroemmer/dotfiles
+
+      HOST=$(gum choose $(find dotfiles/hosts -mindepth 1 -type d -exec basename {} \;))
+      HOST_PATH="./dotfiles/hosts/$HOST"
+
+	    nix run github:nix-community/disko --no-write-lock-file -- --mode zap_create_mount $HOST_PATH/disko.nix
+	    nixos-install --flake ./dotfiles#$HOST
+
+      echo "SUCCESS! Finished installation :3, want to..."
+      CHOICE=$(gum choose --item.foreground 218 "Reboot!" "Do nuffin...")
+      [[ "$CHOICE" == "Reboot!" ]] && reboot || gum spin -s lint --title "Doing nuffin..." -- sleep 2
     ''
   );
 in
 {
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
-    devSize = "16G";
     supportedFilesystems = lib.mkForce [
       "vfat"
       "ntfs"
     ];
   };
 
-  # autoinstall nixos
-  services.cron = {
-    enable = true;
-    systemCronJobs = [
-      "@reboot root ${bootstrap-k8s}/bin/run &>/tmp/nix_install.log"
-    ];
-  };
-
-  networking.hostName = "iso";
+  networking.hostName = "rapsn-iso-nix-installer";
 
   # try to save RAM
   zramSwap.enable = true;
@@ -63,7 +59,8 @@ in
     git
     curl
     gnumake
-    bootstrap-k8s
+    gum
+    installer
   ];
 
   system.stateVersion = "24.11";
