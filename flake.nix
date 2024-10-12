@@ -79,22 +79,6 @@
             };
           };
 
-          homeConfigurations.zion = lib.homeManagerConfiguration {
-            modules = [ ./hosts/zion/home.nix ];
-            pkgs = nixpkgs.legacyPackages.x86_64-linux;
-            extraSpecialArgs = {
-              inherit inputs outputs;
-            };
-          };
-
-          darwinConfigurations.macbook = lib.darwinSystem {
-            modules = [ ./hosts/macbook/configuration.nix ];
-            pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-            specialArgs = {
-              inherit inputs outputs;
-            };
-          };
-
           nixosConfigurations.iso = lib.nixosSystem {
             modules = [
               "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"
@@ -120,6 +104,21 @@
             ];
           };
 
+          homeConfigurations.zion = lib.homeManagerConfiguration {
+            modules = [ ./hosts/zion/home.nix ];
+            pkgs = nixpkgs.legacyPackages.x86_64-linux;
+            extraSpecialArgs = {
+              inherit inputs outputs;
+            };
+          };
+
+          darwinConfigurations.macbook = lib.darwinSystem {
+            modules = [ ./hosts/macbook/configuration.nix ];
+            pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+            specialArgs = {
+              inherit inputs outputs;
+            };
+          };
         };
 
       systems = [
@@ -137,6 +136,9 @@
               treefmt
               nh
             ];
+            shellHook = ''
+              export FLAKE="$PWD"
+            '';
           };
         };
     };
