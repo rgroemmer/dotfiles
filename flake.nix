@@ -134,10 +134,12 @@
               git
               nixfmt-rfc-style
               treefmt
+              yamlfmt
               nh
             ];
             shellHook = ''
               export FLAKE="$PWD"
+              treefmt --tree-root=.
             '';
           };
         };
