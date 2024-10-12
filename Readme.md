@@ -32,4 +32,7 @@ nix build .#nixosConfigurations.iso.config.system.build.isoImage
 
 # Update flake
 nix flake update
+
+# Format
+treefmt --tree-root=.
 ```

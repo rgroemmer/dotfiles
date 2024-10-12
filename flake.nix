@@ -3,29 +3,29 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-master.url = "github:nixos/nixpkgs/master";
 
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-darwin.url = "github:lnl7/nix-darwin";
-    grub-theme = {
-      url = "github:catppuccin/grub";
-      flake = false;
-    };
-
-    hyprland-git.url = "github:hyprwm/hyprland";
-
-    sops-nix = {
-      url = "github:mic92/sops-nix";
+    nix-darwin = {
+      url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    catppuccin.url = "github:catppuccin/nix";
+
+    hyprland-git = {
+      url = "github:hyprwm/hyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     neonix = {
       url = "github:rgroemmer/neonix/the-little-things";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    sops-nix = {
+      url = "github:mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -34,22 +34,23 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    firefox-addons = {
-      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # TODO:
-    # nwg-displays.url = "github:nwg-piotr/nwg-displays/master";
-    # testing
-    # nix attic
-
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    grub-theme = {
+      url = "github:catppuccin/grub";
+      flake = false;
+    };
+
     flake-parts.url = "github:hercules-ci/flake-parts";
+    catppuccin.url = "github:catppuccin/nix";
+
+    # TODO:
+    # nwg-displays.url = "github:nwg-piotr/nwg-displays/master";
+    # testing
+    # nix attic
   };
 
   outputs =
@@ -139,6 +140,7 @@
             ];
             shellHook = ''
               export FLAKE="$PWD"
+              alias fmt="treefmt --tree-root=."
               treefmt --tree-root=.
             '';
           };
