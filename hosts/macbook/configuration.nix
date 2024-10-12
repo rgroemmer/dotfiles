@@ -9,6 +9,7 @@
     # import home-manager function
     inputs.home-manager.darwinModules.home-manager
     ./darwin.nix
+    ../../nix.nix
   ];
 
   # entrypoint for home-manager
@@ -22,10 +23,6 @@
     shell = pkgs.zsh;
   };
 
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
   nix.useDaemon = true;
 
   system.stateVersion = 4;

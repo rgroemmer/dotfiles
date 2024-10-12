@@ -1,1 +1,6 @@
-{ imports = [ ./zsh.nix ]; }
+{
+  imports = [
+    ./zsh.nix
+    ./shell-scripts.nix
+  ];
+}

@@ -15,19 +15,14 @@
     ./greetd.nix
     ./hardware.nix
     ./locale.nix
-    ./nix.nix
     ./opengl.nix
     ./sound.nix
     ./user.nix
     ./sops.nix
     ./thunar.nix
-  ];
 
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-    };
-  };
+    ../nix.nix
+  ];
 
   services = {
     pcscd.enable = true;
@@ -42,6 +37,12 @@
       qmk-udev-rules
       android-udev-rules
     ];
+  };
+
+  gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 2d";
   };
 
   programs.hyprland.enable = true;
