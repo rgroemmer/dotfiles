@@ -23,6 +23,7 @@
 
     terraform
     rclone
+    openssh
 
     jq
     kubernetes-helm
