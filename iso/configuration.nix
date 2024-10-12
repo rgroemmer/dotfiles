@@ -2,21 +2,21 @@
 let
   installer = (
     pkgs.writeShellScriptBin "installer" ''
-      #!/usr/bin/env bash
-      set -euo pipefail
+            #!/usr/bin/env bash
+            set -euo pipefail
 
-      gum style --border normal --margin "1" --padding "1 2" --border-foreground 218 "Hello, there! Welcome my $(gum style --foreground 218 'NixOS Installer')."
-      gum spin -s line --title "Cloning the Nixify repository..." -- git clone https://github.com/rgroemmer/dotfiles
+            gum style --border normal --margin "1" --padding "1 2" --border-foreground 218 "Hello, there! Welcome my $(gum style --foreground 218 'NixOS Installer')."
+            gum spin -s line --title "Cloning the Nixify repository..." -- git clone https://github.com/rgroemmer/dotfiles
 
-      HOST=$(gum choose $(find dotfiles/hosts -mindepth 1 -type d -exec basename {} \;))
-      HOST_PATH="./dotfiles/hosts/$HOST"
+            HOST=$(gum choose $(find dotfiles/hosts -mindepth 1 -type d -exec basename {} \;))
+            HOST_PATH="./dotfiles/hosts/$HOST"
 
-	    nix run github:nix-community/disko --no-write-lock-file -- --mode zap_create_mount $HOST_PATH/disko.nix
-	    nixos-install --flake ./dotfiles#$HOST
+      	    nix run github:nix-community/disko --no-write-lock-file -- --mode zap_create_mount $HOST_PATH/disko.nix
+      	    nixos-install --flake ./dotfiles#$HOST
 
-      echo "SUCCESS! Finished installation :3, want to..."
-      CHOICE=$(gum choose --item.foreground 218 "Reboot!" "Do nuffin...")
-      [[ "$CHOICE" == "Reboot!" ]] && reboot || gum spin -s lint --title "Doing nuffin..." -- sleep 2
+            echo "SUCCESS! Finished installation :3, want to..."
+            CHOICE=$(gum choose --item.foreground 218 "Reboot!" "Do nuffin...")
+            [[ "$CHOICE" == "Reboot!" ]] && reboot || gum spin -s lint --title "Doing nuffin..." -- sleep 2
     ''
   );
 in

@@ -49,7 +49,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-
     flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
@@ -126,20 +125,18 @@
       systems = [
         "x86_64-linux"
         "aarch64-darwin"
-        "aarch64-linux"
       ];
 
       perSystem =
-        let
-          flakeDir = builtins.toString (builtins.toString self);
-        in
         { config, pkgs, ... }:
         {
           devShells.default = pkgs.mkShell {
-            builtInputs = with pkgs; [ nixfmt-rfc-style ];
-            shellHook = ''
-              echo "just a test: ${flakeDir}"
-            '';
+            packages = with pkgs; [
+              git
+              nixfmt-rfc-style
+              treefmt
+              nh
+            ];
           };
         };
     };
