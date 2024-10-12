@@ -21,6 +21,15 @@ It follows a structure to keep related configurations together, but not too much
 ```bash
 nix develop
 
-# NixOS & Darwin rebuilds (use hostname if not autodetected)
+# NixOS rebuilds (hostname is autodetected)
 nh os switch
+
+# HomeManager rebuilds (hostname & username is autodetected)
+nh home switch
+
+# Build nixos-installer iso
+nix build .#nixosConfigurations.iso.config.system.build.isoImage
+
+# Update flake
+nix flake update
 ```
