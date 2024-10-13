@@ -39,3 +39,18 @@ nix flake update
 # Format
 treefmt --tree-root=.
 ```
+
+<details>
+    <summary>💽 Disko</summay>
+
+Disko is used to provision disks, it creates automatically the `filsystems` configuration.
+
+```bash
+# Run disko from an installer
+sudo nix run github:nix-community/disko --no-write-lock-file -- --mode zap_create_mount ./hosts/zion/disko.nix
+
+# After this nixos can be installed
+sudo nixos-install --flake .#zion
+```
+
+</details>
