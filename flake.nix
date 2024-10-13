@@ -88,21 +88,43 @@
             ];
           };
 
-          nixosConfigurations.k3s-master = lib.nixosSystem {
+          nixosConfigurations.k3s-m0 = lib.nixosSystem {
             modules = [
-              ./hosts/kube-node/configuration.nix
+              ./hosts/k3s-m0/configuration.nix
+              disko.nixosModules.disko
+            ];
+          };
+
+          nixosConfigurations.k3s-m1 = lib.nixosSystem {
+            modules = [
+              ./hosts/k3s-m1/configuration.nix
               disko.nixosModules.disko
             ];
             specialArgs = {
-              role = "master";
+              role = "server";
+              addresses = [
+                {
+                  address = "192.168.55.30";
+                  prefixLength = 24;
+                }
+              ];
             };
           };
 
-          nixosConfigurations.k3s-node = lib.nixosSystem {
+          nixosConfigurations.k3s-m2 = lib.nixosSystem {
             modules = [
-              ./hosts/kube-node/configuration.nix
+              ./hosts/k3s-m2/configuration.nix
               disko.nixosModules.disko
             ];
+            specialArgs = {
+              role = "server";
+              addresses = [
+                {
+                  address = "192.168.55.31";
+                  prefixLength = 24;
+                }
+              ];
+            };
           };
 
           homeConfigurations.zion = lib.homeManagerConfiguration {
