@@ -13,7 +13,7 @@ let
       HOST=$(gum choose $(nix flake show ./dotfiles --json | jq -r '.nixosConfigurations | keys[]' | grep -v iso))
 
       if [[ "$HOST" == *"k3s"* ]] then
-        DISKO_CONFIG="./dotfiles/hosts/kube-m0/disko.nix"
+        DISKO_CONFIG="./dotfiles/hosts/k3s-m0/disko.nix"
       else
         DISKO_CONFIG="./dotfiles/hosts/$HOST/disko.nix"
       fi
