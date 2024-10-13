@@ -39,13 +39,18 @@ in
   networking = {
     hostName = "rapsn-iso-nix-installer";
     interfaces.ens18.ipv4 = {
-      addresses = [{
-        address = "192.168.55.253";
-        prefixLength = 24;
-      }];
+      addresses = [
+        {
+          address = "192.168.55.253";
+          prefixLength = 24;
+        }
+      ];
     };
     defaultGateway = "192.168.55.1";
-    nameservers = [ "1.1.1.1" "8.8.8.8"];
+    nameservers = [
+      "1.1.1.1"
+      "8.8.8.8"
+    ];
   };
 
   # try to save RAM

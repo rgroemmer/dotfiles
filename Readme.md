@@ -27,6 +27,9 @@ nh os switch
 # HomeManager rebuilds (hostname & username is autodetected)
 nh home switch
 
+# Build with hostname set
+nh os build --hostname k3s-m0
+
 # Build nixos-installer iso
 nix build .#nixosConfigurations.iso.config.system.build.isoImage
 

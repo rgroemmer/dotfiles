@@ -6,7 +6,13 @@
 }:
 let
   role = config._module.specialArgs.role or "master";
-  addresses = config._module.specialArgs.addresses or [{ address = "192.168.55.25"; prefix = 24; }];
+  addresses =
+    config._module.specialArgs.addresses or [
+      {
+        address = "192.168.55.25";
+        prefixLength = 24;
+      }
+    ];
 in
 {
   imports = [
@@ -42,7 +48,10 @@ in
   networking = {
     interfaces.ens18.ipv4.addresses = addresses;
     defaultGateway = "192.168.55.1";
-    nameservers = [ "1.1.1.1" "8.8.8.8"];
+    nameservers = [
+      "1.1.1.1"
+      "8.8.8.8"
+    ];
 
     #TODO: check this
     hostName = "node-${role}";
