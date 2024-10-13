@@ -42,7 +42,7 @@ treefmt --tree-root=.
 
 <details>
     <summary>💽 Disko</summary>
----
+<br>
 
 Disko is used to provision disks, it creates automatically the `filsystems` configuration.
 
