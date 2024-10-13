@@ -40,8 +40,11 @@ nix flake update
 treefmt --tree-root=.
 ```
 
+---
+
 <details>
-    <summary>💽 Disko</summary>
+    <summary>💽 Disko</summary>   
+
 
 Disko is used to provision disks, it creates automatically the `filsystems` configuration.
 
