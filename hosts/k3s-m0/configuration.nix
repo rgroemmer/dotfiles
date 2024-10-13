@@ -5,7 +5,8 @@
   ...
 }:
 let
-  role = config._module.specialArgs.role or "server";
+  role = config._module.specialArgs.role or "master";
+  addresses = config._module.specialArgs.addresses or [{ address = "192.168.55.25"; prefix = 24; }];
 in
 {
   imports = [
@@ -39,6 +40,10 @@ in
   };
 
   networking = {
+    interfaces.ens18.ipv4.addresses = addresses;
+    defaultGateway = "192.168.55.1";
+    nameservers = [ "1.1.1.1" "8.8.8.8"];
+
     #TODO: check this
     hostName = "node-${role}";
     firewall.allowedTCPPorts = [
@@ -66,7 +71,6 @@ in
     role = "server";
     token = "1234";
     clusterInit = if role == "master" then true else false;
-    #TODO: make dns
-    serverAddr = if role == "server" then "https://192.168.42.54:6443" else "";
+    serverAddr = if role == "master" then "" else "https://192.168.55.25:6443";
   };
 }
