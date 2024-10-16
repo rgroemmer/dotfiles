@@ -72,7 +72,9 @@
                 ./systems/x86_64-linux/k3s/configuration.nix
                 disko.nixosModules.disko
               ];
-              inherit (name address) specialArgs;
+              specialArgs = {
+                inherit name address;
+              };
             };
 
           inherit (self) outputs;
@@ -103,6 +105,7 @@
             };
 
             installer-iso = lib.nixosSystem {
+              system = "x86_64-linux";
               modules = [
                 "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"
                 "${nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
@@ -163,6 +166,7 @@
               with pkgs;
               mkShell {
                 inherit (self'.checks.pre-commit-check) shellHook;
+
                 packages = [ nh ];
               };
           };

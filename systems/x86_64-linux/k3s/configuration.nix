@@ -37,7 +37,6 @@ in
 
   networking = {
     inherit hostName;
-
     interfaces.ens18.ipv4.addresses = addresses;
     defaultGateway = "192.168.55.1";
     nameservers = [

@@ -24,13 +24,13 @@ It follows a structure to keep related configurations together, but not too much
 nix develop
 
 # NixOS rebuilds (hostname is autodetected)
-nh os switch
+nh os switch .
 
 # HomeManager rebuilds (hostname & username is autodetected)
-nh home switch
+nh home switch .
 
 # Build with hostname set
-nh os build --hostname k3s-m0
+nh os build --hostname k3s-m0 .
 
 nh home switch -c macbook
 
