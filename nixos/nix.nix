@@ -6,19 +6,12 @@
       access-tokens = blahblahblah
     '';
     settings = {
-      trusted-users = [
-        "root"
-        "@wheel"
-        "@admin"
-        "groemmer"
-      ];
       auto-optimise-store = lib.mkDefault true;
 
       use-xdg-base-directories = true;
       experimental-features = [
         "nix-command"
         "flakes"
-        "repl-flake"
       ];
       warn-dirty = false;
     };
