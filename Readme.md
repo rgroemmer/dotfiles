@@ -18,6 +18,8 @@ It follows a structure to keep related configurations together, but not too much
 
 ## 🚀 Usage
 
+### Bootstrap
+
 ```bash
 nix develop
 
@@ -30,14 +32,10 @@ nh home switch
 # Build with hostname set
 nh os build --hostname k3s-m0
 
+nh home switch -c macbook
+
 # Build nixos-installer iso
 nix build .#nixosConfigurations.iso.config.system.build.isoImage
-
-# Update flake
-nix flake update
-
-# Format
-treefmt --tree-root=.
 ```
 
 <details>
