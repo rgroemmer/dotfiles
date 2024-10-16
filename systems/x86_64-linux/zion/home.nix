@@ -19,7 +19,7 @@
     home = {
       username = "rap";
       homeDirectory = lib.mkDefault "/home/${config.home.username}";
-      stateVersion = outputs.stateVersion;
+      inherit (outputs) stateVersion;
     };
   };
 }

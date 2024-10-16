@@ -1,4 +1,9 @@
-{ inputs, lib, pkgs, ... }:
+{
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
 {
   nixpkgs = {
     config = {
@@ -12,7 +17,7 @@
 
     settings = {
 
-      auto-optimise-store = lib.mkDefault true;
+      #auto-optimise-store = lib.mkDefault true;
       experimental-features = [
         "nix-command"
         "flakes"
