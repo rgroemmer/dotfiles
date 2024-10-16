@@ -73,73 +73,79 @@
         {
           stateVersion = "22.05";
 
-          nixosConfigurations.zion = lib.nixosSystem {
-            modules = [ ./hosts/zion/configuration.nix ];
-            specialArgs = {
-              inherit inputs outputs;
+          nixosConfigurations = {
+
+            zion = lib.nixosSystem {
+              modules = [ ./hosts/zion/configuration.nix ];
+              specialArgs = {
+                inherit inputs outputs;
+              };
             };
-          };
 
-          nixosConfigurations.iso = lib.nixosSystem {
-            modules = [
-              "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"
-              "${nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
-              ./iso/configuration.nix
-            ];
-          };
+            k3s-m0 = lib.nixosSystem {
+              modules = [
+                ./hosts/k3s-m0/configuration.nix
+                disko.nixosModules.disko
+              ];
+            };
 
-          nixosConfigurations.k3s-m0 = lib.nixosSystem {
-            modules = [
-              ./hosts/k3s-m0/configuration.nix
-              disko.nixosModules.disko
-            ];
-          };
+            k3s-m1 = lib.nixosSystem {
+              modules = [
+                ./hosts/k3s-m1/configuration.nix
+                disko.nixosModules.disko
+              ];
+              specialArgs = {
+                role = "server";
+                addresses = [
+                  {
+                    address = "192.168.55.30";
+                    prefixLength = 24;
+                  }
+                ];
+              };
+            };
 
-          nixosConfigurations.k3s-m1 = lib.nixosSystem {
-            modules = [
-              ./hosts/k3s-m1/configuration.nix
-              disko.nixosModules.disko
-            ];
-            specialArgs = {
-              role = "server";
-              addresses = [
-                {
-                  address = "192.168.55.30";
-                  prefixLength = 24;
-                }
+            k3s-m2 = lib.nixosSystem {
+              modules = [
+                ./hosts/k3s-m2/configuration.nix
+                disko.nixosModules.disko
+              ];
+              specialArgs = {
+                role = "server";
+                addresses = [
+                  {
+                    address = "192.168.55.31";
+                    prefixLength = 24;
+                  }
+                ];
+              };
+            };
+
+            iso = lib.nixosSystem {
+              modules = [
+                "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"
+                "${nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
+                ./iso/configuration.nix
               ];
             };
           };
 
-          nixosConfigurations.k3s-m2 = lib.nixosSystem {
-            modules = [
-              ./hosts/k3s-m2/configuration.nix
-              disko.nixosModules.disko
-            ];
-            specialArgs = {
-              role = "server";
-              addresses = [
-                {
-                  address = "192.168.55.31";
-                  prefixLength = 24;
-                }
-              ];
-            };
-          };
+          homeConfigurations = {
 
-          homeConfigurations.zion = lib.homeManagerConfiguration {
-            modules = [ ./hosts/zion/home.nix ];
-            pkgs = nixpkgs.legacyPackages.x86_64-linux;
-            extraSpecialArgs = {
-              inherit inputs outputs;
+            zion = lib.homeManagerConfiguration {
+              modules = [ ./hosts/zion/home.nix ];
+              pkgs = nixpkgs.legacyPackages.x86_64-linux;
+              extraSpecialArgs = {
+                inherit inputs outputs;
+              };
             };
-          };
 
-          darwinConfigurations.macbook = lib.darwinSystem {
-            modules = [ ./hosts/macbook/configuration.nix ];
-            pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-            specialArgs = {
-              inherit inputs outputs;
+            macbook = lib.homeManagerConfiguration {
+              modules = [ ./hosts/macbook/home.nix ];
+              pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+              extraSpecialArgs = {
+                inherit inputs outputs;
+              };
             };
           };
         };

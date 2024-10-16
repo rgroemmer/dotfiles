@@ -1,4 +1,6 @@
 {
+  # TODO: Make this somehow available via home-manager
+  # This is not used anymore
   homebrew = {
     enable = true;
     onActivation = {
