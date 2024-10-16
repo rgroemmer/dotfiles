@@ -1,12 +1,11 @@
 {
   inputs,
   lib,
-  pkgs,
   ...
 }:
 {
   imports = [
-    ../systems/common
+    ../systems/common/nix.nix
 
     inputs.catppuccin.homeManagerModules.catppuccin
     inputs.neonix.homeManagerModules.neonix

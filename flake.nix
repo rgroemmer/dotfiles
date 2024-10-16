@@ -63,7 +63,18 @@
 
       flake =
         let
-          lib = nixpkgs.lib // home-manager.lib // nix-darwin.lib;
+          lib = nix-darwin.lib // home-manager.lib // nixpkgs.lib;
+
+          mkNode =
+            { name, address }:
+            lib.nixosSystem {
+              modules = [
+                ./systems/x86_64-linux/k3s/configuration.nix
+                disko.nixosModules.disko
+              ];
+              inherit (name address) specialArgs;
+            };
+
           inherit (self) outputs;
         in
         {
@@ -72,64 +83,39 @@
           nixosConfigurations = {
 
             zion = lib.nixosSystem {
-              modules = [ ./hosts/zion/configuration.nix ];
+              modules = [ ./systems/x86_64-linux/zion ];
               specialArgs = {
                 inherit inputs outputs;
               };
             };
 
-            k3s-m0 = lib.nixosSystem {
-              modules = [
-                ./hosts/k3s-m0/configuration.nix
-                disko.nixosModules.disko
-              ];
+            k3s-m0 = mkNode {
+              name = "k3s-m0";
+              address = "192.168.55.20";
+            };
+            k3s-m1 = mkNode {
+              name = "k3s-m1";
+              address = "192.168.55.30";
+            };
+            k3s-m2 = mkNode {
+              name = "k3s-m2";
+              address = "192.168.55.40";
             };
 
-            k3s-m1 = lib.nixosSystem {
-              modules = [
-                ./hosts/k3s-m1/configuration.nix
-                disko.nixosModules.disko
-              ];
-              specialArgs = {
-                role = "server";
-                addresses = [
-                  {
-                    address = "192.168.55.30";
-                    prefixLength = 24;
-                  }
-                ];
-              };
-            };
-
-            k3s-m2 = lib.nixosSystem {
-              modules = [
-                ./hosts/k3s-m2/configuration.nix
-                disko.nixosModules.disko
-              ];
-              specialArgs = {
-                role = "server";
-                addresses = [
-                  {
-                    address = "192.168.55.31";
-                    prefixLength = 24;
-                  }
-                ];
-              };
-            };
-
-            iso = lib.nixosSystem {
+            installer-iso = lib.nixosSystem {
               modules = [
                 "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"
                 "${nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
-                ./iso/configuration.nix
+                ./systems/x86_64-linux-isos/installer/installer.nix
               ];
             };
+
           };
 
           homeConfigurations = {
 
             zion = lib.homeManagerConfiguration {
-              modules = [ ./hosts/zion/home.nix ];
+              modules = [ ./systems/x86_64-linux/zion/home.nix ];
               pkgs = nixpkgs.legacyPackages.x86_64-linux;
               extraSpecialArgs = {
                 inherit inputs outputs;

@@ -5,14 +5,14 @@
   ...
 }:
 let
-  role = config._module.specialArgs.role or "master";
-  addresses =
-    config._module.specialArgs.addresses or [
-      {
-        address = "192.168.55.25";
-        prefixLength = 24;
-      }
-    ];
+  clusterDNS = "api.k3s.rapsn.me";
+  hostName = config._module.specialArgs.name;
+  addresses = [
+    {
+      inherit (config._module.specialArgs) address;
+      prefixLength = 24;
+    }
+  ];
 in
 {
   imports = [
@@ -24,6 +24,7 @@ in
     loader.efi.canTouchEfiVariables = true;
     loader.systemd-boot.enable = true;
   };
+
   services.openssh.enable = true;
 
   users.users.root = {
@@ -35,6 +36,8 @@ in
   };
 
   networking = {
+    inherit hostName;
+
     interfaces.ens18.ipv4.addresses = addresses;
     defaultGateway = "192.168.55.1";
     nameservers = [
@@ -42,8 +45,6 @@ in
       "8.8.8.8"
     ];
 
-    #TODO: check this
-    hostName = "node-${role}";
     firewall.allowedTCPPorts = [
       6443 # k3s: required so that pods can reach the API server (running on port 6443 by default)
       2379 # k3s, etcd clients: required if using a "High Availability Embedded etcd" configuration
@@ -67,8 +68,9 @@ in
   services.k3s = {
     enable = true;
     role = "server";
+    # todo: encrypt
     token = "1234";
-    clusterInit = if role == "master" then true else false;
-    serverAddr = if role == "master" then "" else "https://192.168.55.25:6443";
+    clusterInit = if hostName == "k3s-m0" then true else false;
+    serverAddr = if hostName == "k3s-m0" then "" else clusterDNS;
   };
 }
