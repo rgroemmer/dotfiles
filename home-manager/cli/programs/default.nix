@@ -44,6 +44,7 @@
     sops
     gh
     kubectl
+    openssh
 
     xorg.xhost
   ];

@@ -1,10 +1,5 @@
-{ pkgs, config, ... }:
+{ pkgs, ... }:
 {
-
-  # import entrypoint of home-manager
-  home-manager.users.rap = import ../hosts/zion/home.nix;
-  home-manager.verbose = true;
-
   users.users.rap = {
     isNormalUser = true;
     shell = pkgs.zsh;

@@ -1,5 +1,5 @@
 <div align="center">
-    <img width="128" src="./img/snowflake.png"></img>
+    <img width="128" src="./static/img/snowflake.png"></img>
 
 ![NixOS](https://img.shields.io/badge/os-nixos-%2389dceb?style=for-the-badge&logo=nixos&logoColor=white)
 ![Hyprland](https://img.shields.io/badge/window_manager-hyprland-%23ffb29d?style=for-the-badge&logo=wayland&logoColor=white)
@@ -18,6 +18,8 @@ It follows a structure to keep related configurations together, but not too much
 
 ## 🚀 Usage
 
+### Bootstrap
+
 ```bash
 nix develop
 
@@ -30,14 +32,10 @@ nh home switch
 # Build with hostname set
 nh os build --hostname k3s-m0
 
+nh home switch -c macbook
+
 # Build nixos-installer iso
 nix build .#nixosConfigurations.iso.config.system.build.isoImage
-
-# Update flake
-nix flake update
-
-# Format
-treefmt --tree-root=.
 ```
 
 <details>

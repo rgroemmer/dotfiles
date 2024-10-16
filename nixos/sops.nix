@@ -1,8 +1,5 @@
 {
-  pkgs,
   inputs,
-  config,
-  lib,
   ...
 }:
 {
@@ -16,14 +13,16 @@
   */
 
   imports = [ inputs.sops-nix.nixosModules.sops ];
+  sops = {
 
-  sops.defaultSopsFile = ../secrets/secrets.yaml;
-  sops.defaultSopsFormat = "yaml";
+    defaultSopsFile = ../secrets/secrets.yaml;
+    defaultSopsFormat = "yaml";
 
-  #TODO: make use of it
-  sops.age.keyFile = "/home/rap/.config/sops/age/keys.txt";
-  sops.secrets.fuck = {
-    path = "/home/rap/.moinsen";
-    owner = "rap";
+    #TODO: make use of it
+    age.keyFile = "/home/rap/.config/sops/age/keys.txt";
+    secrets.fuck = {
+      path = "/home/rap/.moinsen";
+      owner = "rap";
+    };
   };
 }

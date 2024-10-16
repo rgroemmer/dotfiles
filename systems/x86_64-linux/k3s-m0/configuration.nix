@@ -24,17 +24,6 @@ in
     loader.efi.canTouchEfiVariables = true;
     loader.systemd-boot.enable = true;
   };
-
-  nixpkgs.config.allowUnfree = true;
-
-  nix = {
-    settings.experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
-    extraOptions = "experimental-features = nix-command flakes";
-  };
-
   services.openssh.enable = true;
 
   users.users.root = {

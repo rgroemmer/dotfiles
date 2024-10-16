@@ -3,13 +3,15 @@
 
   imports = [
     ./hardware-configuration.nix
-    ../../nixos
+    ../../../nixos
   ];
+boot = {
+  kernelPackages = pkgs.linuxPackages_latest;
+  supportedFilesystems = [ "ntfs" ];
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.supportedFilesystems = [ "ntfs" ];
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
-  boot.loader = {
+  binfmt.emulatedSystems = [ "aarch64-linux" ];
+
+  loader = {
     efi = {
       canTouchEfiVariables = true;
       efiSysMountPoint = "/boot/efi";
@@ -30,6 +32,7 @@
       device = "nodev";
     };
   };
+};
 
   security = {
     polkit.enable = true;

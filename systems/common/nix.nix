@@ -1,30 +1,32 @@
-{ inputs, lib, ... }:
 {
-  nix = {
-    extraOptions = ''
-      # TODO: use sops to load token 
-      access-tokens = blahblahblah
-    '';
-    settings = {
-      trusted-users = [
-        "root"
-        "@wheel"
-        "@admin"
-        "groemmer"
-      ];
-      auto-optimise-store = lib.mkDefault true;
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
+{
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+      allowUnfreePredicate = _: true;
+    };
+  };
 
-      use-xdg-base-directories = true;
+  nix = {
+    package = lib.mkDefault pkgs.nix;
+
+    settings = {
+
+      #auto-optimise-store = lib.mkDefault true;
       experimental-features = [
         "nix-command"
         "flakes"
-        "repl-flake"
       ];
       warn-dirty = false;
     };
+
     gc = {
       automatic = true;
-      dates = "weekly";
       options = "--delete-older-than 2d";
     };
 

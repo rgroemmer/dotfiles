@@ -1,12 +1,10 @@
 { pkgs, ... }:
 let
-  screenshoot = (
-    pkgs.writeShellScriptBin "screenshoot" ''
-      #!/usr/bin/env bash
+  screenshoot = pkgs.writeShellScriptBin "screenshoot" ''
+    #!/usr/bin/env bash
 
-      grimblast save area
-    ''
-  );
+    grimblast save area
+  '';
 in
 {
   imports = [
