@@ -3,31 +3,32 @@
 
   imports = [
     ./hardware-configuration.nix
-    ../../nixos
+    ../../../nixos
   ];
-
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.supportedFilesystems = [ "ntfs" ];
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
-  boot.loader = {
-    efi = {
-      canTouchEfiVariables = true;
-      efiSysMountPoint = "/boot/efi";
-    };
-    grub = {
-      enable = true;
-      theme = "${
-        (pkgs.fetchFromGitHub {
-          owner = "catppuccin";
-          repo = "grub";
-          rev = "v1.0.0";
-          hash = "sha256-/bSolCta8GCZ4lP0u5NVqYQ9Y3ZooYCNdTwORNvR7M0=";
-        })
-      }/src/catppuccin-mocha-grub-theme/";
-      useOSProber = true;
-      configurationLimit = 15;
-      efiSupport = true;
-      device = "nodev";
+  boot = {
+    kernelPackages = pkgs.linuxPackages_latest;
+    supportedFilesystems = [ "ntfs" ];
+    binfmt.emulatedSystems = [ "aarch64-linux" ];
+    loader = {
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot/efi";
+      };
+      grub = {
+        enable = true;
+        theme = "${
+          (pkgs.fetchFromGitHub {
+            owner = "catppuccin";
+            repo = "grub";
+            rev = "v1.0.0";
+            hash = "sha256-/bSolCta8GCZ4lP0u5NVqYQ9Y3ZooYCNdTwORNvR7M0=";
+          })
+        }/src/catppuccin-mocha-grub-theme/";
+        useOSProber = true;
+        configurationLimit = 15;
+        efiSupport = true;
+        device = "nodev";
+      };
     };
   };
 

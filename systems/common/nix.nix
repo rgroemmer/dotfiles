@@ -1,20 +1,26 @@
-{ inputs, lib, ... }:
+{ inputs, lib, pkgs, ... }:
 {
-  nix = {
-    extraOptions = ''
-      # TODO: use sops to load token 
-      access-tokens = blahblahblah
-    '';
-    settings = {
-      auto-optimise-store = lib.mkDefault true;
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+      allowUnfreePredicate = _: true;
+    };
+  };
 
-      use-xdg-base-directories = true;
+  nix = {
+    package = lib.mkDefault pkgs.nix;
+
+    settings = {
+
+      auto-optimise-store = lib.mkDefault true;
       experimental-features = [
         "nix-command"
         "flakes"
       ];
+      extraOptions = "experimental-features = nix-command flakes";
       warn-dirty = false;
     };
+
     gc = {
       automatic = true;
       dates = "weekly";

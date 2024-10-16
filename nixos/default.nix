@@ -15,7 +15,6 @@
     ./greetd.nix
     ./hardware.nix
     ./locale.nix
-    ./nix.nix
     ./opengl.nix
     ./sound.nix
     ./user.nix
