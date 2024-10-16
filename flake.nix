@@ -140,8 +140,8 @@
               };
             };
 
-            macbook = lib.homeManagerConfiguration {
-              modules = [ ./hosts/macbook/home.nix ];
+            workintosh = lib.homeManagerConfiguration {
+              modules = [ ./systems/aarch64-darwin/workintosh/home.nix ];
               pkgs = nixpkgs.legacyPackages.aarch64-darwin;
               extraSpecialArgs = {
                 inherit inputs outputs;

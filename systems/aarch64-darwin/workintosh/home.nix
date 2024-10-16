@@ -10,15 +10,15 @@
     config is the attrs to configure all modules for HM
   */
   imports = [
-    ../../home-manager
-    ../../home-manager/cli
+    ../../../home-manager
+    ../../../home-manager/cli
   ];
 
   config = {
     home = {
       username = "groemmer";
       homeDirectory = lib.mkDefault "/Users/${config.home.username}";
-      stateVersion = outputs.stateVersion;
+      inherit (outputs) stateVersion;
     };
   };
 }

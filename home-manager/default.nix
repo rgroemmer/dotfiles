@@ -6,6 +6,8 @@
 }:
 {
   imports = [
+    ../systems/common
+
     inputs.catppuccin.homeManagerModules.catppuccin
     inputs.neonix.homeManagerModules.neonix
     inputs.krewfile.homeManagerModules.krewfile
