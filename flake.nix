@@ -85,7 +85,7 @@
           nixosConfigurations = {
 
             zion = lib.nixosSystem {
-              modules = [ ./systems/x86_64-linux/zion ];
+              modules = [ ./systems/x86_64-linux/zion/configuration.nix ];
               specialArgs = {
                 inherit inputs outputs;
               };
