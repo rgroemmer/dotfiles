@@ -10,9 +10,9 @@
     config is the attrs to configure all modules for HM
   */
   imports = [
-    ../../home-manager
-    ../../home-manager/cli
-    ../../home-manager/desktop
+    ../../../modules/home-manager
+    ../../../modules/home-manager/cli
+    ../../../modules/home-manager/desktop
   ];
 
   config = {

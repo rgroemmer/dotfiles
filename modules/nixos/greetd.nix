@@ -1,4 +1,3 @@
-{ config, lib, ... }:
 {
   services.greetd = {
     enable = true;

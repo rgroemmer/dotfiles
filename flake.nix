@@ -117,7 +117,7 @@
 
           homeConfigurations = {
 
-            zion = lib.homeManagerConfiguration {
+            "rap@zion" = lib.homeManagerConfiguration {
               modules = [ ./systems/x86_64-linux/zion/home.nix ];
               pkgs = nixpkgs.legacyPackages.x86_64-linux;
               extraSpecialArgs = {
@@ -167,7 +167,11 @@
               mkShell {
                 inherit (self'.checks.pre-commit-check) shellHook;
 
-                packages = [ nh ];
+                packages = [
+                  nh
+                  statix
+                  deadnix
+                ];
               };
           };
 

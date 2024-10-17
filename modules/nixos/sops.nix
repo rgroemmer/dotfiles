@@ -15,7 +15,7 @@
   imports = [ inputs.sops-nix.nixosModules.sops ];
   sops = {
 
-    defaultSopsFile = ../static/secrets.yaml;
+    defaultSopsFile = ../../static/secrets.yaml;
     defaultSopsFormat = "yaml";
 
     #TODO: make use of it

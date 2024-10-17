@@ -5,7 +5,7 @@
 }:
 {
   imports = [
-    ../systems/common/nix.nix
+    ../common
 
     inputs.catppuccin.homeManagerModules.catppuccin
     inputs.neonix.homeManagerModules.neonix

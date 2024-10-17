@@ -2,12 +2,13 @@
   pkgs,
   inputs,
   outputs,
-  lib,
   ...
 }:
 {
   imports = [
     inputs.home-manager.nixosModules.home-manager
+
+    ../common
 
     ./auto-upgrade.nix
     ./docker.nix
