@@ -6,8 +6,6 @@
 }:
 {
   imports = [
-    inputs.home-manager.nixosModules.home-manager
-
     ../common
 
     ./auto-upgrade.nix
@@ -22,12 +20,6 @@
     ./sops.nix
     ./thunar.nix
   ];
-
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-    };
-  };
 
   services = {
     pcscd.enable = true;
@@ -45,9 +37,5 @@
   };
 
   programs.hyprland.enable = true;
-  home-manager.extraSpecialArgs = {
-    inherit inputs outputs;
-  };
-
   system.stateVersion = outputs.stateVersion;
 }
