@@ -67,18 +67,6 @@
 
           lib = nix-darwin.lib // home-manager.lib // nixpkgs.lib // mylib { inherit (nixpkgs) lib; };
 
-          mkNode =
-            { name, address }:
-            lib.nixosSystem {
-              modules = [
-                ./systems/x86_64-linux/k3s/configuration.nix
-                disko.nixosModules.disko
-              ];
-              specialArgs = {
-                inherit name address;
-              };
-            };
-
           inherit (self) outputs;
         in
         {
@@ -91,18 +79,14 @@
               };
             };
 
-            k3s-m0 = mkNode {
-              name = "k3s-m0";
-              address = "192.168.55.20";
-            };
-            k3s-m1 = mkNode {
-              name = "k3s-m1";
-              address = "192.168.55.30";
-            };
-            k3s-m2 = mkNode {
-              name = "k3s-m2";
-              address = "192.168.55.40";
-            };
+            k3s-m0 = lib.nixosSystem {
+                modules = [
+                  ./systems/x86_64-linux/k3s
+                  ./modules/nixos/common
+                  ./modules/nixos/k3s
+                  disko.nixosModules.disko
+                ];
+              };
 
             installer-iso = lib.nixosSystem {
               system = "x86_64-linux";

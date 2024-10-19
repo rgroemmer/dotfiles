@@ -8,7 +8,7 @@
       htop
       curl
       git
-      vim
+      neovim
       gparted
     ];
   };
