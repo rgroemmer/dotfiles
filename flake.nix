@@ -63,7 +63,9 @@
 
       flake =
         let
-          lib = nix-darwin.lib // home-manager.lib // nixpkgs.lib;
+          mylib = import ./lib.nix;
+
+          lib = nix-darwin.lib // home-manager.lib // nixpkgs.lib // mylib { inherit (nixpkgs) lib; };
 
           mkNode =
             { name, address }:
@@ -80,8 +82,6 @@
           inherit (self) outputs;
         in
         {
-          stateVersion = "22.05";
-
           nixosConfigurations = {
 
             zion = lib.nixosSystem {
