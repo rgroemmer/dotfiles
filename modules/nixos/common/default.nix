@@ -4,6 +4,6 @@
     ./user.nix
     ./locale.nix
     ./environment.nix
-    ./sops.nix
+    #    ./sops.nix
   ];
 }

@@ -4,7 +4,7 @@ let
 in
 with lib;
 {
-  options.apps.k3s.network = {
+  options.stack.k3s.network = {
     hostName = mkOpt types.str null "Host name of k3s node";
     address = mkOpt types.str null "IP address of k3s node";
   };
