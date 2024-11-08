@@ -7,10 +7,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-darwin = {
-      url = "github:lnl7/nix-darwin";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     hyprland-git = {
       url = "github:hyprwm/hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -39,7 +35,6 @@
       url = "github:cachix/pre-commit-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    flake-parts.url = "github:hercules-ci/flake-parts";
     catppuccin.url = "github:catppuccin/nix";
 
     # TODO:
@@ -49,116 +44,102 @@
   };
 
   outputs =
+    inputs@ # alias for the entire input attrs
     {
       self,
       nixpkgs,
       home-manager,
-      nix-darwin,
-      flake-parts,
       pre-commit-hooks,
       disko,
       ...
-    }@inputs:
-    flake-parts.lib.mkFlake { inherit inputs; } {
-
-      flake =
-        let
-          mylib = import ./lib.nix;
-
-          lib = nix-darwin.lib // home-manager.lib // nixpkgs.lib // mylib { inherit (nixpkgs) lib; };
-
-          inherit (self) outputs;
-        in
-        {
-          nixosConfigurations = {
-
-            zion = lib.nixosSystem {
-              modules = [ ./systems/x86_64-linux/zion ];
-              specialArgs = {
-                inherit inputs outputs;
-              };
-            };
-
-            k3s-m0 = lib.nixosSystem {
-                modules = [
-                  ./systems/x86_64-linux/k3s
-                  ./modules/nixos/common
-                  ./modules/nixos/k3s
-                  disko.nixosModules.disko
-                ];
-              };
-
-            installer-iso = lib.nixosSystem {
-              system = "x86_64-linux";
-              modules = [
-                "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"
-                "${nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
-                ./systems/x86_64-linux-isos/installer/installer.nix
-              ];
-            };
-
-          };
-
-          homeConfigurations = {
-
-            "rap@zion" = lib.homeManagerConfiguration {
-              modules = [ ./systems/x86_64-linux/zion/home.nix ];
-              pkgs = nixpkgs.legacyPackages.x86_64-linux;
-              extraSpecialArgs = {
-                inherit inputs outputs;
-              };
-            };
-
-            workintosh = lib.homeManagerConfiguration {
-              modules = [ ./systems/aarch64-darwin/workintosh/home.nix ];
-              pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-              extraSpecialArgs = {
-                inherit inputs outputs;
-              };
-            };
-          };
-        };
+    }:
+    let
+      inherit (self) outputs;
+      lib = nixpkgs.lib // home-manager.lib;
 
       systems = [
-        "x86_64-linux"
         "aarch64-darwin"
+        "x86_64-linux"
       ];
+      pkgsFor = system: import nixpkgs { inherit system; };
+      forAllSystems = f: lib.genAttrs systems (system: f (pkgsFor system));
+    in
+    #mylib = import ./lib.nix;
+    #lib = nix-darwin.lib // home-manager.lib // nixpkgs.lib // mylib { inherit (nixpkgs) lib; };
+    {
+      inherit lib;
 
-      perSystem =
-        {
-          pkgs,
-          system,
-          self',
-          ...
-        }:
-        {
-          checks = {
-            pre-commit-check = pre-commit-hooks.lib.${system}.run {
-              src = ./.;
-              hooks = {
-                statix.enable = true;
-                nixfmt-rfc-style.enable = true;
-                deadnix.enable = true;
-              };
-            };
+      nixosConfigurations = {
+        zion = lib.nixosSystem {
+          modules = [ ./systems/x86_64-linux/zion ];
+          specialArgs = {
+            inherit inputs outputs;
           };
-
-          formatter = pkgs.nixfmt-rfc-style;
-
-          devShells = {
-            default =
-              with pkgs;
-              mkShell {
-                inherit (self'.checks.pre-commit-check) shellHook;
-
-                packages = [
-                  nh
-                  statix
-                  deadnix
-                ];
-              };
-          };
-
         };
+
+        k3s-m0 = lib.nixosSystem {
+          modules = [
+            ./systems/x86_64-linux/k3s
+            ./modules/nixos/common
+            ./modules/nixos/k3s
+            disko.nixosModules.disko
+          ];
+        };
+
+        installer-iso = lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"
+            "${nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
+            ./systems/x86_64-linux-isos/installer/installer.nix
+          ];
+        };
+      };
+
+      homeConfigurations = {
+        "rap@zion" = lib.homeManagerConfiguration {
+          modules = [ ./systems/x86_64-linux/zion/home.nix ];
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = {
+            inherit inputs outputs;
+          };
+        };
+
+        workintosh = lib.homeManagerConfiguration {
+          modules = [ ./systems/aarch64-darwin/workintosh/home.nix ];
+          pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+          extraSpecialArgs = {
+            inherit inputs outputs;
+          };
+        };
+      };
+
+      checks = forAllSystems (pkgs: {
+        pre-commit-check = pre-commit-hooks.lib.${pkgs.system}.run {
+          src = ./.;
+          hooks = {
+            statix.enable = true;
+            nixfmt-rfc-style.enable = true;
+            deadnix.enable = true;
+          };
+        };
+      });
+
+      formatter = forAllSystems (pkgs: pkgs.nixfmt-rfc-style);
+
+      devShells = forAllSystems (pkgs: {
+        default =
+          with pkgs;
+          mkShell {
+            inherit (self.checks.${pkgs.system}.pre-commit-check) shellHook;
+
+            packages = [
+              nh
+              statix
+              deadnix
+              nix-inspect
+            ];
+          };
+      });
     };
 }
