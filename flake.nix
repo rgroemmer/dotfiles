@@ -59,7 +59,7 @@
     nixosConfigurations = {
       # Main workstation
       zion = lib.nixosSystem {
-        modules = [./systems/x86_64-linux/zion];
+        modules = [./hosts/zion];
         specialArgs = {inherit inputs outputs;};
       };
       # K3S home-lab

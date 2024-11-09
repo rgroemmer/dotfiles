@@ -1,20 +1,14 @@
 {
   pkgs,
-  lib,
   ...
-}: let
-  catppuccin = pkgs.fetchFromGitHub {
-    owner = "catppuccin";
-    repo = "grub";
-    rev = "v1.0.0";
-    hash = "sha256-/bSolCta8GCZ4lP0u5NVqYQ9Y3ZooYCNdTwORNvR7M0=";
-  };
-in {
+}: {
   imports = [
     ./hardware-configuration.nix
-  ];
 
-  # components
+    # nixos modules
+    ../../nixos/common
+    ../../nixos/desktop
+  ];
 
   # host specific configuration
   boot = {
@@ -26,8 +20,15 @@ in {
         canTouchEfiVariables = true;
         efiSysMountPoint = "/boot/efi";
       };
-      systemd-boot = lib.mkForce false;
-      grub = {
+      systemd-boot.enable = false;
+      grub = let
+        catppuccin = pkgs.fetchFromGitHub {
+          owner = "catppuccin";
+          repo = "grub";
+          rev = "v1.0.0";
+          hash = "sha256-/bSolCta8GCZ4lP0u5NVqYQ9Y3ZooYCNdTwORNvR7M0=";
+        };
+      in {
         enable = true;
         theme = "${catppuccin}/src/catppuccin-mocha-grub-theme/";
         useOSProber = true;
@@ -63,6 +64,4 @@ in {
     qmk-udev-rules
     android-udev-rules
   ];
-
-  system.stateVersion = "22.05";
 }
