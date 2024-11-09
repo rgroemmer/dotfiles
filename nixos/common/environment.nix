@@ -1,5 +1,4 @@
 {pkgs, ...}: {
-
   environment = {
     pathsToLink = ["/share/zsh"]; # autocompletion
     systemPackages = with pkgs; [
@@ -14,5 +13,5 @@
       VISUAL = "vim";
     };
   };
-
+  system.stateVersion = "24.11";
 }

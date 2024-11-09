@@ -3,19 +3,21 @@
     ./hardware-configuration.nix
     ./disko.nix
 
-    # import nixos configuration
-
+    # nixos modules
+    ../../nixos/common
+    ../../nixos/k3s
   ];
 
-  base = {
-    systemd.enable = true;
-  };
+  # Roles
 
-  stack = {
-    k3s = {
-      serverAddr = "kubie.rapsn.me";
-      tokenFile = "useSOPShere";
-      clusterInit = true;
-    };
+  # Host specific configuration
+  networking = {
+    hostName = "k3s-m0";
+    interfaces.ens18.ipv4.addresses = [
+      {
+        address = "192.168.55.20";
+        prefixLength = 24;
+      }
+    ];
   };
 }
