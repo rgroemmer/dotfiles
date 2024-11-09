@@ -1,7 +1,12 @@
 {
   imports = [
-    ../common
+    ./hardware-configuration.nix
+    ./disko.nix
+
+    # import nixos configuration
+
   ];
+
   base = {
     systemd.enable = true;
   };
