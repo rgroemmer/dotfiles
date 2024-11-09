@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-let
+{pkgs, ...}: let
   installer = pkgs.writeShellScriptBin "installer" ''
     #!/usr/bin/env bash
     set -euo pipefail
@@ -24,9 +23,7 @@ let
     CHOICE=$(gum choose --item.foreground 218 "Reboot!" "Do nuffin...")
     [[ "$CHOICE" == "Reboot!" ]] && reboot || gum spin -s lint --title "Doing nuffin..." -- sleep 2
   '';
-in
-{
-
+in {
   environment.systemPackages = with pkgs; [
     git
     curl
@@ -35,5 +32,4 @@ in
     jq
     installer
   ];
-
 }

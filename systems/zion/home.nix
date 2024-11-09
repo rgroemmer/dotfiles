@@ -2,8 +2,7 @@
   lib,
   config,
   ...
-}:
-{
+}: {
   # modulization
 
   # host specific configuration

@@ -1,9 +1,18 @@
-{ pkgs, lib, ... }:
 {
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: {
   imports = [
-    ../../common
-    ../installer.nix
+    ../../../modules/common
+    ./installer.nix
+
+    "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"
+    "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
   ];
+
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
@@ -25,7 +34,7 @@
 
   users.users.root = {
     hashedPassword = "$y$j9T$EMO/EfdbflSVB//fPjqSi/$3jrcxQr/AEXtJZSXtc0ISAZbnqum.TW9vIi8bgMA2F1";
-    initialHashedPassword = "$y$j9T$EMO/EfdbflSVB//fPjqSi/$3jrcxQr/AEXtJZSXtc0ISAZbnqum.TW9vIi8bgMA2F1";
+    initialHashedPassword = lib.mkForce null;
     initialPassword = lib.mkForce null;
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGqKYXW07z0llbDKRIakLD1PjHe3HxK9iu6czXs+ZU7v iso@rapsn"

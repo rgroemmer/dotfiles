@@ -1,9 +1,11 @@
 {
   imports = [
-    ./boot.nix
     ./user.nix
     ./locale.nix
     ./environment.nix
-    #    ./sops.nix
+    ./systemd.nix
+    ./grub.nix
+    # TODO: configure & enable + docs
+    #./sops.nix
   ];
 }

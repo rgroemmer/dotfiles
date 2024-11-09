@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   imports = [
     ./hardware-configuration.nix
   ];
@@ -7,7 +6,7 @@
   # components
 
   # host specific configuration
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+  boot.binfmt.emulatedSystems = ["aarch64-linux"];
 
   security = {
     polkit.enable = true;
@@ -22,7 +21,7 @@
   };
 
   environment = {
-    systemPackages = with pkgs; [ qt6.qtwayland ];
+    systemPackages = with pkgs; [qt6.qtwayland];
 
     sessionVariables = {
       WLR_NO_HARDWARE_CURSORS = "1";

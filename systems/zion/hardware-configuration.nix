@@ -6,11 +6,9 @@
   lib,
   modulesPath,
   ...
-}:
-{
-  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
+}: {
+  imports = [(modulesPath + "/installer/scan/not-detected.nix")];
   boot = {
-
     initrd.availableKernelModules = [
       "nvme"
       "xhci_pci"
@@ -19,9 +17,9 @@
       "usbhid"
       "sd_mod"
     ];
-    initrd.kernelModules = [ "amdgpu" ];
-    kernelModules = [ "kvm-amd" ];
-    extraModulePackages = [ ];
+    initrd.kernelModules = ["amdgpu"];
+    kernelModules = ["kvm-amd"];
+    extraModulePackages = [];
   };
 
   fileSystems."/" = {

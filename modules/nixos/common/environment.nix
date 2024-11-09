@@ -1,9 +1,7 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   programs.zsh.enable = true;
-
   environment = {
-    pathsToLink = [ "/share/zsh" ]; # autocompletion
+    pathsToLink = ["/share/zsh"]; # autocompletion
     systemPackages = with pkgs; [
       htop
       curl
@@ -11,10 +9,9 @@
       neovim
       gparted
     ];
-  };
-
-  variables = {
-    EDITOR = "vim";
-    VISUAL = "vim";
+    variables = {
+      EDITOR = "vim";
+      VISUAL = "vim";
+    };
   };
 }

@@ -11,7 +11,6 @@
       #----- k8s tooling + gardener -----#
       "gardenctl-v2"
       "gardenlogin"
-
     ];
     casks = [
       # dirty workaround to have it through spotlight search
@@ -39,7 +38,6 @@
       #----- default tools -----#
       "keepassxc"
       "spotify"
-
     ];
 
     taps = [

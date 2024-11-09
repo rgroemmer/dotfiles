@@ -2,13 +2,11 @@
   lib,
   modulesPath,
   ...
-}:
-{
+}: {
   imports = [
     (modulesPath + "/profiles/qemu-guest.nix")
   ];
   boot = {
-
     initrd.availableKernelModules = [
       "ata_piix"
       "uhci_hcd"
@@ -17,9 +15,9 @@
       "sd_mod"
       "sr_mod"
     ];
-    initrd.kernelModules = [ ];
-    kernelModules = [ ];
-    extraModulePackages = [ ];
+    initrd.kernelModules = [];
+    kernelModules = [];
+    extraModulePackages = [];
   };
 
   networking.useDHCP = lib.mkDefault true;
