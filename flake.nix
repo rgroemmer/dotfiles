@@ -51,8 +51,8 @@
     inherit (self) outputs;
     lib = nixpkgs.lib // home-manager.lib;
     systems = ["aarch64-darwin" "x86_64-linux"];
-    pkgsFor = system: import nixpkgs {inherit system;};
-    forAllSystems = f: lib.genAttrs systems (system: f (pkgsFor system));
+    pkgsFor = lib.genAttrs systems (system: import nixpkgs {inherit system;});
+    forAllSystems = f: lib.genAttrs systems (system: f pkgsFor.${system});
   in {
     inherit lib;
 
@@ -85,12 +85,14 @@
     homeConfigurations = {
       # Main workstation
       "rap@zion" = lib.homeManagerConfiguration {
-        modules = [./systems/x86_64-linux/zion/home.nix];
+        modules = [./hosts/zion/home.nix];
+        pkgs = pkgsFor.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
       };
       # Macbook 4 work
       workintosh = lib.homeManagerConfiguration {
         modules = [./systems/aarch64-darwin/workintosh/home.nix];
+        pkgs = pkgsFor.aarch64-darwin;
         extraSpecialArgs = {inherit inputs outputs;};
       };
     };
