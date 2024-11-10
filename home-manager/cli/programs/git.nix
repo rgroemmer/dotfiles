@@ -1,9 +1,9 @@
 {pkgs, ...}: {
-  programs = {
-    home.packages = with pkgs; [
-      gh
-    ];
+  home.packages = with pkgs; [
+    gh
+  ];
 
+  programs = {
     git = {
       enable = true;
       userEmail = "mail@rapsn.me";

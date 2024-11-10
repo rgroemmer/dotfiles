@@ -112,7 +112,7 @@
       {
         name = "p10k.zsh";
         file = "p10k.zsh";
-        src = ./p10k.config;
+        src = ./p10k.conf;
       }
     ];
   };

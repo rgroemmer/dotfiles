@@ -7,6 +7,7 @@ in {
   imports = [
     ./alacritty.nix
     ./git.nix
+    ./nvim.nix
   ];
 
   programs = {

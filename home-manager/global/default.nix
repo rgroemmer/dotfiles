@@ -7,6 +7,11 @@
     inputs.catppuccin.homeManagerModules.catppuccin
     inputs.neonix.homeManagerModules.neonix
     inputs.krewfile.homeManagerModules.krewfile
+
+    ../cli
+    ../desktop
+
+    ../../nixos/common/nix.nix
   ];
 
   programs.home-manager.enable = true;

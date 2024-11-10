@@ -3,6 +3,9 @@
   config,
   ...
 }: {
+  imports = [
+    ./global
+  ];
   # host specific configuration
   config = {
     home = {

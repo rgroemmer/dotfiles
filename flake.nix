@@ -45,7 +45,6 @@
     nixpkgs,
     home-manager,
     pre-commit-hooks,
-    disko,
     ...
   }: let
     inherit (self) outputs;
@@ -85,7 +84,7 @@
     homeConfigurations = {
       # Main workstation
       "rap@zion" = lib.homeManagerConfiguration {
-        modules = [./hosts/zion/home.nix];
+        modules = [./home-manager/zion.nix];
         pkgs = pkgsFor.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
       };
