@@ -23,18 +23,19 @@ It follows a structure to keep related configurations together, but not too much
 ```bash
 nix develop
 
-# NixOS rebuilds (hostname is autodetected)
+# NixOS rebuilds (hostname autodetection)
 nh os switch .
 
-# HomeManager rebuilds (hostname & username is autodetected)
+# HomeManager rebuilds (hostname & username autodetection)
 nh home switch .
 
-# Build with hostname set
+# NixOs build with custom hostname
 nh os build --hostname k3s-m0 .
 
+# HomeManager build with custom hostname
 nh home switch -c macbook
 
-# Build nixos-installer iso
+# NixOS build installer iso image
 nix build .#nixosConfigurations.iso.config.system.build.isoImage
 ```
 
@@ -53,3 +54,31 @@ sudo nixos-install --flake .#zion
 ```
 
 </details>
+
+## 📝 Structure / Style rules
+
+- `flake.nix` Entrypoint for all:
+    - `NixOS` configurations.
+    - `HomeManager` configurations.
+    - `Checks` to enforce linting & formatter as `pre-commit-hook`.
+    - `devShells` to provide `nix develop` enironment.
+- `hosts/` All physical machines managed with `NixOS`.
+    - ⚖️ Every `host` entrypoint is a `default.nix` which:
+      - Imports all `NixOS` configuration for this `host`.
+      - Defines **host specific configuration**
+    - ⚖️ Every `host` has a `hardware-configuration.nix`.
+    - ⚖️ Eventually the `host` has a `disko.nix`.
+- `nixos/` Module configuration for `NixOS` splitted up in:
+    - `common/` contains configuration **defaults** valid for all `hosts`.
+    - `*/` contains `NixOS` modules, optional to import.
+- `home-manager` Entrypoint for all `home-configurations` per `host`.
+    - ⚖️ Every `host` has its own entrypoint at toplevel.
+    - ⚖️ Every `host` entrypoint is a file with the host name which:
+      - Imports all `Home` configuration for this `host`.
+      - Defines **host specific configuration**
+    - `common/` contains configuration defaults valid for all `home-configurations`.
+    - `*/` contains `NixOS` modules, optional to import.
+- `isos/` Configuration for all `NixOS` configurations which build images.
+- `static/` Static files mostly not used for nix.
+- `nix.nix` Nix & nixpkgs configuration for `NixOS` & `HomeManager`.
+
