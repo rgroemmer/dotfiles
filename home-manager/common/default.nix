@@ -4,12 +4,10 @@
   ...
 }: {
   imports = [
+    # module inputs
     inputs.catppuccin.homeManagerModules.catppuccin
     inputs.neonix.homeManagerModules.neonix
     inputs.krewfile.homeManagerModules.krewfile
-
-    ../cli
-    ../desktop
 
     # global nix & nixpkgs settings
     ../../nix.nix

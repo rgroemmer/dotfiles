@@ -4,10 +4,17 @@
   ...
 }: {
   imports = [
-    ./global
+    ./common
+
+    ./cli
+    ./desktop
   ];
-  # host specific configuration
+
   config = {
+    # my own hm-modules config
+    roles = {
+    };
+    # hm config
     home = {
       username = "rap";
       homeDirectory = lib.mkDefault "/home/${config.home.username}";

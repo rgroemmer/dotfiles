@@ -1,5 +1,5 @@
 let
-  withCatppuccin = {
+  enableWithCatppuccin = {
     enable = true;
     catppuccin.enable = true;
   };
@@ -17,14 +17,8 @@ in {
 
   programs = {
     eza.enable = true;
-    bat = withCatppuccin;
-    fzf = {
-      enable = true;
-      catppuccin.enable = true;
-    };
-    lazygit = {
-      enable = true;
-      catppuccin.enable = true;
-    };
+    bat = enableWithCatppuccin;
+    fzf = enableWithCatppuccin;
+    lazygit = enableWithCatppuccin;
   };
 }
