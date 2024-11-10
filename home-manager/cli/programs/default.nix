@@ -1,14 +1,17 @@
-{
+let
+  withCatppuccin = {
+    enable = true;
+    catppuccin.enable = true;
+  };
+in {
   imports = [
     ./alacritty.nix
     ./git.nix
   ];
 
   programs = {
-    bat = {
-      enable = true;
-      catppuccin.enable = true;
-    };
+    eza.enable = true;
+    bat = withCatppuccin;
     fzf = {
       enable = true;
       catppuccin.enable = true;

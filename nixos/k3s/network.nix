@@ -1,6 +1,4 @@
 {
-  ...
-}: {
   networking = {
     defaultGateway = "192.168.55.1";
     nameservers = [
