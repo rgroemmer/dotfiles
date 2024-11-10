@@ -11,7 +11,8 @@
     ../cli
     ../desktop
 
-    ../../nixos/common/nix.nix
+    # global nix & nixpkgs settings
+    ../../nix.nix
   ];
 
   programs.home-manager.enable = true;
@@ -23,6 +24,4 @@
     json = lib.mkForce {};
     entries = lib.mkForce [];
   };
-
-  # TODO: nix config here
 }
