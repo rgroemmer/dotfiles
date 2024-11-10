@@ -1,7 +1,5 @@
-{ pkgs, ... }:
-{
-
-  home.packages = [ pkgs.zsh-completions ];
+{pkgs, ...}: {
+  home.packages = [pkgs.zsh-completions];
 
   programs.zsh = {
     enable = true;
@@ -39,7 +37,7 @@
       POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
       source ~/.config/zsh/plugins/p10k.zsh
 
-      #make sure brew is on the path for M1 
+      #make sure brew is on the path for M1
       if [[ $(uname -m) == 'arm64' ]]; then
         eval "$(/opt/homebrew/bin/brew shellenv)"
       fi
