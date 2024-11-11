@@ -3,6 +3,7 @@
     enable = true;
 
     plugins = [
+      "krew"
       "explore"
       "modify-secret"
       "neat"

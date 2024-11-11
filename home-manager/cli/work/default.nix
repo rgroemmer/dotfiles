@@ -4,7 +4,10 @@
   config,
   ...
 }: {
-  #options.roles.work.enable = mkEnableOption "work";
+  imports = [
+    ./k9s.nix
+  ];
+
   config = lib.mkIf config.roles.work {
     home.packages = with pkgs; [
       # CLI
