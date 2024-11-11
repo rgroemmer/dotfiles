@@ -13,11 +13,13 @@ in
 
     config = mkIf cfg.enable {
       home.packages = with pkgs; [
-        # CLIs
+        # CLI
         stackit-cli
-        terraform
+        openstackclient
 
         # Tools
+        terraform
+        ansible
         vault-bin
       ];
     };

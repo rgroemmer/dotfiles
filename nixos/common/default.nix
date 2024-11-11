@@ -4,7 +4,7 @@
     ./boot.nix
     ./user.nix
     ./locale.nix
-    ./environment.nix
+    ./packages.nix
     #./sops.nix
   ];
 }

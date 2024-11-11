@@ -9,11 +9,33 @@
     moreutils # parallel, pee, etc.
     dnsutils # dig, nslookup, etc.
     gnumake
+    gnutar
+    gnused
+    gnugrep
     unzip
+
+    # Inspection
+    htop
+
+    # Network tools
+    inetutils
+    curl
+    wget
+
+    # Network inspetion
+    termshark
+    nmap
+    netcat
+    tcpdump
 
     # Text processing
     jq
     yq
+    gawk
+
+    # Find utils
+    fd
+    ripgrep
 
     # Copy tools
     rclone
