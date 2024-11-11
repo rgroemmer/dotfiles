@@ -9,6 +9,9 @@
     inputs.neonix.homeManagerModules.neonix
     inputs.krewfile.homeManagerModules.krewfile
 
+    # custom role definition
+    ./roles.nix
+
     # global nix & nixpkgs settings
     ../../nix.nix
   ];

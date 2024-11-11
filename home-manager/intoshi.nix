@@ -7,12 +7,13 @@
     ./common
 
     ./cli
-    ./desktop
   ];
 
   config = {
     # my hm-modules config
-    roles = {};
+    roles = {
+      work = true;
+    };
     # hm config
     home = {
       username = "rap";

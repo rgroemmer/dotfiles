@@ -1,8 +1,4 @@
 {pkgs, ...}: {
-  imports = [
-    ./work.nix
-  ];
-
   home.packages = with pkgs; [
     # Core utility
     coreutils # cp, mv, etc.

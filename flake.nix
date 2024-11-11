@@ -68,16 +68,16 @@
       };
       k3s-m1 = lib.nixosSystem {
         modules = [./hosts/k3s-m1];
-        specialArgs = {inherit inputs outputs lib;};
+        specialArgs = {inherit inputs outputs;};
       };
       k3s-m2 = lib.nixosSystem {
         modules = [./hosts/k3s-m2];
-        specialArgs = {inherit inputs outputs lib;};
+        specialArgs = {inherit inputs outputs;};
       };
       # Iso installer
       installer = lib.nixosSystem {
-        modules = [./systems/isos/installer];
-        specialArgs = {inherit inputs outputs lib;};
+        modules = [./isos/installer];
+        specialArgs = {inherit inputs outputs;};
       };
     };
 
@@ -88,9 +88,9 @@
         pkgs = pkgsFor.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
       };
-      # Macbook 4 work
-      workintosh = lib.homeManagerConfiguration {
-        modules = [./systems/aarch64-darwin/workintosh/home.nix];
+      # Apple macbook work-device
+      intoshi = lib.homeManagerConfiguration {
+        modules = [./home-manager/intoshi.nix];
         pkgs = pkgsFor.aarch64-darwin;
         extraSpecialArgs = {inherit inputs outputs;};
       };
