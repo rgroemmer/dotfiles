@@ -89,7 +89,7 @@
         extraSpecialArgs = {inherit inputs outputs;};
       };
       # Apple macbook work-device
-      intoshi = lib.homeManagerConfiguration {
+      "groemmer@intoshi" = lib.homeManagerConfiguration {
         modules = [./home-manager/intoshi.nix];
         pkgs = pkgsFor.aarch64-darwin;
         extraSpecialArgs = {inherit inputs outputs;};

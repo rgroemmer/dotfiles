@@ -16,8 +16,8 @@
     };
     # hm config
     home = {
-      username = "rap";
-      homeDirectory = lib.mkDefault "/home/${config.home.username}";
+      username = "groemmer";
+      homeDirectory = lib.mkDefault "/Users/${config.home.username}";
       stateVersion = lib.mkDefault "22.05";
     };
   };
