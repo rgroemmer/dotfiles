@@ -631,16 +631,15 @@
         "yaml-companion": "yaml-companion"
       },
       "locked": {
-        "lastModified": 1731378231,
-        "narHash": "sha256-SK5KJRcyT9kiboCUH8hE99hw7H/vhsC1wzX1kPSZp48=",
+        "lastModified": 1731380799,
+        "narHash": "sha256-no/FiAKDyCzaohMF6gCPD22ueNdaTQUrfc3JSonR5k4=",
         "owner": "rgroemmer",
         "repo": "neonix",
-        "rev": "5f43c79e02f05651c7af866c567cf4caf6b75931",
+        "rev": "e61e1fc6a82ae7054abe519ad48dbc8a4421c916",
         "type": "github"
       },
       "original": {
         "owner": "rgroemmer",
-        "ref": "the-little-things",
         "repo": "neonix",
         "type": "github"
       }

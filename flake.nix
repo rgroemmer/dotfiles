@@ -18,7 +18,7 @@
     };
     catppuccin.url = "github:catppuccin/nix";
     neonix = {
-      url = "github:rgroemmer/neonix/the-little-things";
+      url = "github:rgroemmer/neonix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     krewfile = {
