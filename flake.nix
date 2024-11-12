@@ -3,24 +3,26 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    nix-darwin = {
-      url = "github:lnl7/nix-darwin";
-      inputs.nixpkgs.follows = "nixpkgs";
+    grub-theme = {
+      url = "github:catppuccin/grub";
+      flake = false;
     };
 
     hyprland-git = {
       url = "github:hyprwm/hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
+    catppuccin.url = "github:catppuccin/nix";
     neonix = {
-      url = "github:rgroemmer/neonix/the-little-things";
+      url = "github:rgroemmer/neonix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    krewfile = {
+      url = "github:brumhard/krewfile";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -28,144 +30,99 @@
       url = "github:mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    krewfile = {
-      url = "github:brumhard/krewfile";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    grub-theme = {
-      url = "github:catppuccin/grub";
-      flake = false;
+    pre-commit-hooks = {
+      url = "github:cachix/pre-commit-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    flake-parts.url = "github:hercules-ci/flake-parts";
-    catppuccin.url = "github:catppuccin/nix";
-
-    # TODO:
-    # nwg-displays.url = "github:nwg-piotr/nwg-displays/master";
-    # testing
-    # nix attic
   };
 
-  outputs =
-    {
-      self,
-      nixpkgs,
-      home-manager,
-      nix-darwin,
-      flake-parts,
-      disko,
-      ...
-    }@inputs:
-    flake-parts.lib.mkFlake { inherit inputs; } {
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    home-manager,
+    pre-commit-hooks,
+    ...
+  }: let
+    inherit (self) outputs;
+    lib = nixpkgs.lib // home-manager.lib;
+    systems = ["aarch64-darwin" "x86_64-linux"];
+    pkgsFor = lib.genAttrs systems (system: import nixpkgs {inherit system;});
+    forAllSystems = f: lib.genAttrs systems (system: f pkgsFor.${system});
+  in {
+    inherit lib;
 
-      flake =
-        let
-          lib = nixpkgs.lib // home-manager.lib // nix-darwin.lib;
-          inherit (self) outputs;
-        in
-        {
-          stateVersion = "22.05";
-
-          nixosConfigurations.zion = lib.nixosSystem {
-            modules = [ ./hosts/zion/configuration.nix ];
-            specialArgs = {
-              inherit inputs outputs;
-            };
-          };
-
-          nixosConfigurations.iso = lib.nixosSystem {
-            modules = [
-              "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"
-              "${nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
-              ./iso/configuration.nix
-            ];
-          };
-
-          nixosConfigurations.k3s-m0 = lib.nixosSystem {
-            modules = [
-              ./hosts/k3s-m0/configuration.nix
-              disko.nixosModules.disko
-            ];
-          };
-
-          nixosConfigurations.k3s-m1 = lib.nixosSystem {
-            modules = [
-              ./hosts/k3s-m1/configuration.nix
-              disko.nixosModules.disko
-            ];
-            specialArgs = {
-              role = "server";
-              addresses = [
-                {
-                  address = "192.168.55.30";
-                  prefixLength = 24;
-                }
-              ];
-            };
-          };
-
-          nixosConfigurations.k3s-m2 = lib.nixosSystem {
-            modules = [
-              ./hosts/k3s-m2/configuration.nix
-              disko.nixosModules.disko
-            ];
-            specialArgs = {
-              role = "server";
-              addresses = [
-                {
-                  address = "192.168.55.31";
-                  prefixLength = 24;
-                }
-              ];
-            };
-          };
-
-          homeConfigurations.zion = lib.homeManagerConfiguration {
-            modules = [ ./hosts/zion/home.nix ];
-            pkgs = nixpkgs.legacyPackages.x86_64-linux;
-            extraSpecialArgs = {
-              inherit inputs outputs;
-            };
-          };
-
-          darwinConfigurations.macbook = lib.darwinSystem {
-            modules = [ ./hosts/macbook/configuration.nix ];
-            pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-            specialArgs = {
-              inherit inputs outputs;
-            };
-          };
-        };
-
-      systems = [
-        "x86_64-linux"
-        "aarch64-darwin"
-      ];
-
-      perSystem =
-        { config, pkgs, ... }:
-        {
-          devShells.default = pkgs.mkShell {
-            packages = with pkgs; [
-              git
-              nixfmt-rfc-style
-              treefmt
-              yamlfmt
-              nh
-            ];
-            shellHook = ''
-              export FLAKE="$PWD"
-              alias fmt="treefmt --tree-root=."
-              treefmt --tree-root=.
-            '';
-          };
-        };
+    nixosConfigurations = {
+      # Main workstation
+      zion = lib.nixosSystem {
+        modules = [./hosts/zion];
+        specialArgs = {inherit inputs outputs;};
+      };
+      # K3S home-lab
+      k3s-m0 = lib.nixosSystem {
+        modules = [./hosts/k3s-m0];
+        specialArgs = {inherit inputs outputs;};
+      };
+      k3s-m1 = lib.nixosSystem {
+        modules = [./hosts/k3s-m1];
+        specialArgs = {inherit inputs outputs;};
+      };
+      k3s-m2 = lib.nixosSystem {
+        modules = [./hosts/k3s-m2];
+        specialArgs = {inherit inputs outputs;};
+      };
+      # Iso installer
+      installer = lib.nixosSystem {
+        modules = [./isos/installer];
+        specialArgs = {inherit inputs outputs;};
+      };
     };
+
+    homeConfigurations = {
+      # Main workstation
+      "rap@zion" = lib.homeManagerConfiguration {
+        modules = [./home-manager/zion.nix];
+        pkgs = pkgsFor.x86_64-linux;
+        extraSpecialArgs = {inherit inputs outputs;};
+      };
+      # Apple macbook work-device
+      "groemmer@intoshi" = lib.homeManagerConfiguration {
+        modules = [./home-manager/intoshi.nix];
+        pkgs = pkgsFor.aarch64-darwin;
+        extraSpecialArgs = {inherit inputs outputs;};
+      };
+    };
+
+    formatter = forAllSystems (pkgs: pkgs.alejandra);
+
+    # TODO: use import and move to file
+    checks = forAllSystems (pkgs: {
+      pre-commit-check = pre-commit-hooks.lib.${pkgs.system}.run {
+        src = ./.;
+        hooks = {
+          statix.enable = true;
+          alejandra.enable = true;
+          deadnix.enable = true;
+        };
+      };
+    });
+
+    devShells = forAllSystems (pkgs: {
+      default = with pkgs;
+        mkShell {
+          inherit (self.checks.${pkgs.system}.pre-commit-check) shellHook;
+
+          packages = [
+            nh
+            statix
+            deadnix
+            alejandra
+            nix-inspect
+          ];
+        };
+    });
+  };
 }

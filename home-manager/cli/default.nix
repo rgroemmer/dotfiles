@@ -1,6 +1,9 @@
 {
   imports = [
-    ./programs
     ./shell
+    ./k8s
+    ./programs
+    ./packages
+    ./work
   ];
 }
