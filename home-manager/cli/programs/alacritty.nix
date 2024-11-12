@@ -1,8 +1,6 @@
-{ pkgs, config, ... }:
 {
   programs.alacritty = {
     enable = true;
-
     catppuccin.enable = true;
 
     settings = {
@@ -19,26 +17,24 @@
         };
       };
 
-      font =
-        let
-          fontname = "CaskaydiaCove Nerd Font";
-        in
-        {
-          normal = {
-            family = fontname;
-            style = "Regular";
-          };
-          bold = {
-            family = fontname;
-            style = "SemiBold";
-          };
-          italic = {
-            family = fontname;
-            style = "Italic";
-          };
-          size = 12;
-          offset.y = 3;
+      font = let
+        fontname = "CaskaydiaCove Nerd Font";
+      in {
+        normal = {
+          family = fontname;
+          style = "Regular";
         };
+        bold = {
+          family = fontname;
+          style = "SemiBold";
+        };
+        italic = {
+          family = fontname;
+          style = "Italic";
+        };
+        size = 12;
+        offset.y = 3;
+      };
 
       mouse.bindings = [
         {
