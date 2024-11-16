@@ -4,7 +4,7 @@
     catppuccin.enable = true;
 
     settings = {
-      shell.program = "zsh";
+      terminal.shell.program = "zsh";
       env.TERM = "xterm-256color";
 
       selection = {
