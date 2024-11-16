@@ -49,6 +49,7 @@
   }: let
     inherit (self) outputs;
     lib = nixpkgs.lib // home-manager.lib;
+
     systems = ["aarch64-darwin" "x86_64-linux"];
     pkgsFor = lib.genAttrs systems (system: import nixpkgs {inherit system;});
     forAllSystems = f: lib.genAttrs systems (system: f pkgsFor.${system});
