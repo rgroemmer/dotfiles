@@ -16,9 +16,11 @@ in {
   ];
 
   programs = {
-    eza.enable = true;
+    eza.enable = true; # ls with icons
     bat = enableWithCatppuccin;
     fzf = enableWithCatppuccin;
     lazygit = enableWithCatppuccin;
+    btop = enableWithCatppuccin; # better htop
+    yazi = enableWithCatppuccin; # term explorer
   };
 }
