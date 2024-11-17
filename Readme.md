@@ -1,4 +1,4 @@
-<div align="center">
+<a:qdiv align="center">
     <img width="128" src="./static/img/snowflake.png"></img>
 
 ![NixOS](https://img.shields.io/badge/os-nixos-%2389dceb?style=for-the-badge&logo=nixos&logoColor=white)
@@ -78,13 +78,13 @@ sudo nixos-install --flake .#zion
 
 ## 📜 Style guide & rules
 
-- **`Host`**:
+- **`Host`**
   - ⚖️ Every `hosts` entrypoint is a `default.nix`.
     - ⚖️ It imports all `NixOS` modules as `path`.
     - ⚖️ Define *host specific configuration*
     - ⚖️ Imports `hardware-configuration.nix`
   - May has a `disko.nix` configuration to configure `filsystems`.
-- **`home-manager`**
+- **`Home-manager`**
   - ⚖️ Every `host` has its own entrypoint at toplevel.
   - ⚖️ Every `host` entrypoint is a file with the host name which:
     - Imports all `Home` configuration for this `host`.
