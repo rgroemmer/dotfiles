@@ -1,4 +1,4 @@
-<a:qdiv align="center">
+<div align="center">
     <img width="128" src="./static/img/snowflake.png"></img>
 
 ![NixOS](https://img.shields.io/badge/os-nixos-%2389dceb?style=for-the-badge&logo=nixos&logoColor=white)
@@ -9,6 +9,8 @@
 ![Love](https://img.shields.io/static/v1?logoColor=d8dee9&label=Built%20With&message=Love%20%E2%9D%A4%EF%B8%8F&color=cba6f7&style=for-the-badge)
 
 <img width="512" src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/palette/macchiato.png"></img>
+
+<img alt="dotfiles-mascott" width="420" src="https://pusheen.com/wp-content/uploads/2017/09/tumblr_owad86l5us1qhy6c9o1_540.gif"></img>
 
 This is my ever-evolving dotfiles repository, used to manage my desktop workstation, a MacBook Pro, and any Linux devbox capable of running Nix.
 This repository is constantly improved or changed in some way.
