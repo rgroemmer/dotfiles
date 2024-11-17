@@ -55,30 +55,37 @@ sudo nixos-install --flake .#zion
 
 </details>
 
-## 📝 Structure / Style rules
+## 🏛️ Structure
 
-- `flake.nix` Entrypoint for all:
+- **`flake.nix`** Entrypoint to all:
     - `NixOS` configurations.
     - `HomeManager` configurations.
-    - `Checks` to enforce linting & formatter as `pre-commit-hook`.
-    - `devShells` to provide `nix develop` enironment.
-- `hosts/` All physical machines managed with `NixOS`.
-    - ⚖️ Every `host` entrypoint is a `default.nix` which:
-      - Imports all `NixOS` configuration for this `host`.
-      - Defines **host specific configuration**
-    - ⚖️ Every `host` has a `hardware-configuration.nix`.
-    - ⚖️ Eventually the `host` has a `disko.nix`.
-- `nixos/` Module configuration for `NixOS` splitted up in:
-    - `common/` contains configuration **defaults** valid for all `hosts`.
-    - `*/` contains `NixOS` modules, optional to import.
-- `home-manager` Entrypoint for all `home-configurations` per `host`.
-    - ⚖️ Every `host` has its own entrypoint at toplevel.
-    - ⚖️ Every `host` entrypoint is a file with the host name which:
-      - Imports all `Home` configuration for this `host`.
-      - Defines **host specific configuration**
+    - `devShells` to provide `nix develop` environment. (see `shell.nix`)
+    - `formatter`.
+- **`shell.nix`** Shell config for `nix develop` environment.
+    - Leverage git-commit-hooks with enforce of lint, fmt & code checking.
+    - Shell environment with all tools needed to switch, build & run the `flake`.
+- **`hosts/`** All physical machines managed by `NixOS`.
+- **`nixos`** Modules for `NixOS` separated into:
+    - `common/` **default** configurations for all `hosts`.
+    - `*` optional to import.
+- **`home-manager`** Entrypoint for all `home-configurations` per `host`.
     - `common/` contains configuration defaults valid for all `home-configurations`.
     - `*/` contains `NixOS` modules, optional to import.
 - `isos/` Configuration for all `NixOS` configurations which build images.
 - `static/` Static files mostly not used for nix.
 - `nix.nix` Nix & nixpkgs configuration for `NixOS` & `HomeManager`.
 
+## 📜 Style guide & rules
+
+- **`Host`**:
+  - ⚖️ Every `hosts` entrypoint is a `default.nix`.
+    - ⚖️ It imports all `NixOS` modules as `path`.
+    - ⚖️ Define *host specific configuration*
+    - ⚖️ Imports `hardware-configuration.nix`
+  - May has a `disko.nix` configuration to configure `filsystems`.
+- **`home-manager`**
+  - ⚖️ Every `host` has its own entrypoint at toplevel.
+  - ⚖️ Every `host` entrypoint is a file with the host name which:
+    - Imports all `Home` configuration for this `host`.
+    - Defines **host specific configuration**

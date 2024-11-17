@@ -49,11 +49,15 @@
   }: let
     inherit (self) outputs;
     lib = nixpkgs.lib // home-manager.lib;
+
     systems = ["aarch64-darwin" "x86_64-linux"];
     pkgsFor = lib.genAttrs systems (system: import nixpkgs {inherit system;});
     forAllSystems = f: lib.genAttrs systems (system: f pkgsFor.${system});
   in {
     inherit lib;
+
+    formatter = forAllSystems (pkgs: pkgs.alejandra);
+    devShells = forAllSystems (pkgs: import ./shell.nix {inherit pkgs pre-commit-hooks;});
 
     nixosConfigurations = {
       # Main workstation
@@ -95,34 +99,5 @@
         extraSpecialArgs = {inherit inputs outputs;};
       };
     };
-
-    formatter = forAllSystems (pkgs: pkgs.alejandra);
-
-    # TODO: use import and move to file
-    checks = forAllSystems (pkgs: {
-      pre-commit-check = pre-commit-hooks.lib.${pkgs.system}.run {
-        src = ./.;
-        hooks = {
-          statix.enable = true;
-          alejandra.enable = true;
-          deadnix.enable = true;
-        };
-      };
-    });
-
-    devShells = forAllSystems (pkgs: {
-      default = with pkgs;
-        mkShell {
-          inherit (self.checks.${pkgs.system}.pre-commit-check) shellHook;
-
-          packages = [
-            nh
-            statix
-            deadnix
-            alejandra
-            nix-inspect
-          ];
-        };
-    });
   };
 }
