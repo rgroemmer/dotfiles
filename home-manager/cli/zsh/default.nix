@@ -1,4 +1,8 @@
 {pkgs, ...}: {
+  imports = [
+    ./binaries.nix
+  ];
+
   home.packages = [pkgs.zsh-completions];
 
   programs.zsh = {

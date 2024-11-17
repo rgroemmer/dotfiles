@@ -1,17 +1,16 @@
-{ pkgs, ... }:
-let
+{pkgs, ...}: let
   screenshoot = pkgs.writeShellScriptBin "screenshoot" ''
     #!/usr/bin/env bash
 
     grimblast save area
   '';
-in
-{
+in {
   imports = [
     ./audio.nix
     ./vscode.nix
     ./firefox.nix
     ./chromium.nix
+    ./binaries.nix
   ];
 
   # Default desktop programs
@@ -26,7 +25,7 @@ in
     vlc
     gparted
 
-    # TODO: fix upstream, cant download 403 seems to be redirect issue with curl (wget works with user agent) 
+    # TODO: fix upstream, cant download 403 seems to be redirect issue with curl (wget works with user agent)
     # exodus
     gnome-disk-utility
 
