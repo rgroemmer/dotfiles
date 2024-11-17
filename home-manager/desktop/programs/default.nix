@@ -11,6 +11,7 @@ in {
     ./firefox.nix
     ./chromium.nix
     ./binaries.nix
+    ./zen-browser.nix
   ];
 
   # Default desktop programs

@@ -38,6 +38,12 @@
       url = "github:cachix/pre-commit-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # NOTE: Try a new browser (firefox based 🧋)
+    zen-browser = {
+      url = "github:marcecoll/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
