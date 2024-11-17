@@ -10,8 +10,6 @@
 
 <img width="512" src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/palette/macchiato.png"></img>
 
-<img alt="dotfiles-mascott" width="420" src="https://pusheen.com/wp-content/uploads/2017/09/tumblr_owad86l5us1qhy6c9o1_540.gif"></img>
-
 This is my ever-evolving dotfiles repository, used to manage my desktop workstation, a MacBook Pro, and any Linux devbox capable of running Nix.
 This repository is constantly improved or changed in some way.
 It follows a structure to keep related configurations together, but not too much to reduce complexity.
@@ -91,3 +89,13 @@ sudo nixos-install --flake .#zion
   - ⚖️ Every `host` entrypoint is a file with the host name which:
     - Imports all `Home` configuration for this `host`.
     - Defines **host specific configuration**
+
+## Licenses
+
+The NixOS logo used in this repository is based on the original design available at [NixOS Artwork Repository](https://github.com/NixOS/nixos-artwork/blob/master/logo/nix-snowflake-colours.svg).  
+The original NixOS logo is licensed under the [Creative Commons Attribution-Share Alike 4.0 International License (CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/).  
+This version of the logo has been modified, including changes to the colors, for use in this project.
+
+As required by the CC BY-SA 4.0 license:
+- Proper attribution must be given for the original logo design.
+- Any further use, modification, or distribution of this logo (including the modified version) must comply with the terms of the CC BY-SA 4.0 license, including sharing derivative works under the same license.
