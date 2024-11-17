@@ -1,10 +1,9 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   home.packages = with pkgs; [
     libsForQt5.qtstyleplugin-kvantum
     (catppuccin-kvantum.override {
-      accent = "Mauve";
-      variant = "Mocha";
+      accent = "mauve";
+      variant = "mocha";
     })
   ];
   home.sessionVariables = {
@@ -12,6 +11,6 @@
   };
 
   xdg.configFile."Kvantum/kvantum.kvconfig".source =
-    (pkgs.formats.ini { }).generate "kvantum.kvconfig"
-      { General.theme = "Catppuccin-Mocha-Mauve"; };
+    (pkgs.formats.ini {}).generate "kvantum.kvconfig"
+    {General.theme = "Catppuccin-Mocha-Mauve";};
 }
