@@ -22,7 +22,6 @@ in {
     sway-contrib.grimshot
     screenshoot
 
-    keepassxc
     vlc
     gparted
 

@@ -102,7 +102,7 @@
       "groemmer@intoshi" = lib.homeManagerConfiguration {
         modules = [./home-manager/intoshi.nix];
         pkgs = pkgsFor.aarch64-darwin;
-        extraSpecialArgs = {inherit inputs outputs;};
+        extraSpecialArgs = {inherit self inputs outputs;};
       };
     };
   };

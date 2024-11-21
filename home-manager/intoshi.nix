@@ -7,6 +7,7 @@
     ./common
 
     ./cli
+    ./work
   ];
 
   config = {
