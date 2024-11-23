@@ -5,7 +5,7 @@
   ...
 }: {
   imports = [
-    ../../../modules/common
+    ../../nixos/common
     ./installer.nix
 
     "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"
