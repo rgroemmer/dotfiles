@@ -33,7 +33,7 @@
   };
 
   users.users.root = {
-    hashedPassword = "$y$j9T$EMO/EfdbflSVB//fPjqSi/$3jrcxQr/AEXtJZSXtc0ISAZbnqum.TW9vIi8bgMA2F1";
+    hashedPassword = "$y$j9T$DZQaaK3xGqarN8KE8qnw..$dvgiS7dso5LboGRRf0dcyct/LQUFp4J0LUo2ZRRdTr8";
     initialHashedPassword = lib.mkForce null;
     initialPassword = lib.mkForce null;
     openssh.authorizedKeys.keys = [
