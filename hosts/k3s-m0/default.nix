@@ -1,4 +1,4 @@
-{ inputs, ... }: {
+{inputs, ...}: {
   imports = [
     ./hardware-configuration.nix
 
@@ -17,7 +17,7 @@
     hostName = "k3s-m0";
     interfaces.ens18.ipv4.addresses = [
       {
-        address = "192.168.55.20";
+        address = "192.168.55.50";
         prefixLength = 24;
       }
     ];

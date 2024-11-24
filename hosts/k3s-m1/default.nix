@@ -15,7 +15,7 @@
     hostName = "k3s-m1";
     interfaces.ens18.ipv4.addresses = [
       {
-        address = "192.168.55.21";
+        address = "192.168.55.51";
         prefixLength = 24;
       }
     ];
