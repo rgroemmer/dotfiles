@@ -4,9 +4,14 @@
   ...
 }: {
   environment.systemPackages = with pkgs; [
+    nfs-utils
     kubectl
-    zfs # zfs-utils for csi-storage
   ];
+
+  fileSystems."/mnt/k3s_openebs_main" = {
+    device = "192.168.55.10:/main_pool_z2/k3s_openebs_main";
+    fsType = "nfs";
+  };
 
   services.k3s = {
     enable = true;
