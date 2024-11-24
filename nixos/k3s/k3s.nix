@@ -1,12 +1,15 @@
 {
   pkgs,
   config,
+  lib,
   ...
 }: {
   environment.systemPackages = with pkgs; [
     nfs-utils
     kubectl
   ];
+
+  boot.supportedFilesystems = lib.mkForce ["zfs"];
 
   fileSystems."/mnt/k3s_openebs_main" = {
     device = "192.168.55.10:/main_pool_z2/k3s_openebs_main";
