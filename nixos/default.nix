@@ -6,6 +6,7 @@
     ./system/user.nix
     ./system/locale.nix
     ./system/packages.nix
+    ./system/auto-upgrade.nix
 
     # services
     ./services/sound.nix
