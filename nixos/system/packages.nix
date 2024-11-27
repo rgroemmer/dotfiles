@@ -1,8 +1,7 @@
 {pkgs, ...}: {
   environment = {
-    pathsToLink = ["/share/zsh"]; # autocompletion
     systemPackages = with pkgs; [
-      # Core utility
+      # Global common packages available for all hosts / isos
       coreutils # cp, mv, etc.
       moreutils # parallel, pee, etc.
       dnsutils # dig, nslookup, etc.
@@ -12,19 +11,14 @@
       gnugrep
       unzip
 
-      # cpu & networking tools
+      # Cpu & Networking tools
       htop
       curl
 
-      # programs
+      # Programs
       git
       neovim
       gparted
     ];
-    variables = {
-      EDITOR = "vim";
-      VISUAL = "vim";
-    };
   };
-  system.stateVersion = "24.11";
 }

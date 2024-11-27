@@ -4,15 +4,35 @@
     ./hardware-configuration.nix
   ];
 
+  # Host specific configuration
   system = {
     boot = {
       grub = true;
       armSupport = true;
       supportedFilesystems = ["ntfs"];
     };
+    user = {
+      name = "rap";
+      extraGroups = [
+        "networkmanager"
+        "docker"
+        "wireshark"
+      ];
+      extraOptions = {
+        hashedPassword = "$y$j9T$DZQaaK3xGqarN8KE8qnw..$dvgiS7dso5LboGRRf0dcyct/LQUFp4J0LUo2ZRRdTr8";
+      };
+    };
+    services = {
+      printing = true;
+      sound = true;
+      bluetooth = true;
+      opengl = true;
+    };
+    modules = {
+      desktop = true;
+    };
   };
 
-  # host specific configuration
   security = {
     polkit.enable = true;
     rtkit.enable = true; # realtime-kit

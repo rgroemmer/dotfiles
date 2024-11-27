@@ -1,21 +1,46 @@
-{pkgs, ...}: {
-  users.users.rap = {
-    isNormalUser = true;
-    shell = pkgs.zsh;
-    packages = [pkgs.home-manager];
-    hashedPassword = "$y$j9T$DZQaaK3xGqarN8KE8qnw..$dvgiS7dso5LboGRRf0dcyct/LQUFp4J0LUo2ZRRdTr8";
-    extraGroups = [
-      "wheel"
-      "video"
-      "audio"
-      "networkmanager"
-      "docker"
-      "wireshark"
-    ];
-    openssh.authorizedKeys.keys = [
-      "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIPpUm00z/9wyWNPzuvjtVYYo5H+ZeKDahNK4YqvoNE5CAAAABHNzaDo= swiss_zi0n_north"
-    ];
-  };
-  programs.zsh.enable = true;
-  services.openssh.enable = true;
-}
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}: let
+  cfg = config.system.user;
+in
+  with lib; {
+    options.system.user = with types; {
+      name = mkOption {type = str;};
+      extraGroups = mkOption {
+        type = listOf str;
+        default = [];
+        description = "Additional groups for the user.";
+      };
+      extraOptions = mkOption {
+        type = attrs;
+        description = "Additional options for the user.";
+      };
+    };
+
+    config = {
+      users.users.${cfg.name} =
+        {
+          isNormalUser = true;
+          shell = pkgs.zsh;
+          extraGroups =
+            [
+              "wheel"
+              "video"
+              "audio"
+            ]
+            ++ cfg.extraGroups;
+          openssh.authorizedKeys.keys = [
+            "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIPpUm00z/9wyWNPzuvjtVYYo5H+ZeKDahNK4YqvoNE5CAAAABHNzaDo= swiss_zi0n_north"
+          ];
+        }
+        // cfg.extraOptions;
+
+      # User config
+      programs.zsh.enable = true;
+      environment.pathsToLink = ["/share/zsh"]; # autocompletion
+      services.openssh.enable = true;
+    };
+  }
