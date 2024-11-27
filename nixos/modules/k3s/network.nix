@@ -2,8 +2,10 @@
   config,
   lib,
   ...
-}: {
-  config = lib.mkIf config.modules.k3s.enable {
+}: let
+  cfg = config.system.modules.k3s.enable;
+in with lib; {
+  config = mkIf cfg {
     networking = {
       defaultGateway = "192.168.55.1";
       nameservers = [
