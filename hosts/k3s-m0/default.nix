@@ -1,18 +1,34 @@
 {inputs, ...}: {
   imports = [
-    ./hardware-configuration.nix
-
     inputs.disko.nixosModules.disko
-    ./disko.nix
 
-    # nixos modules
-    ../../nixos/common
-    ../../nixos/k3s
+    ./hardware-configuration.nix
+    ./disko.nix
+    ../../nixos
   ];
 
-  # Roles
-
   # Host specific configuration
+  system = {
+    boot = {
+      systemd = true;
+      supportedFilesystems = ["zfs"];
+    };
+    user = {
+      name = "rap";
+      extraGroups = [];
+      extraOptions = {
+        hashedPassword = "$y$j9T$8uQSJbY6w9kjXnj74JKjA1$pWYgNf.gb497suX//oIw6aggEPoD2Xv1kvMKZfDTOU/";
+      };
+    };
+    services = {};
+    modules = {
+      k3s = {
+        enable = true;
+        clusterInit = true;
+      };
+    };
+  };
+
   networking = {
     hostName = "k3s-m0";
     hostId = "5851308f";

@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   imports = [
-    ../../nixos
     ./hardware-configuration.nix
+    ../../nixos
   ];
 
   # Host specific configuration
