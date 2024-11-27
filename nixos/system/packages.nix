@@ -5,6 +5,7 @@
       coreutils # cp, mv, etc.
       moreutils # parallel, pee, etc.
       dnsutils # dig, nslookup, etc.
+      inetutils # ping, traceroute, etc.
       gnumake
       gnutar
       gnused
