@@ -84,9 +84,9 @@
         modules = [./hosts/k3s-m2];
         specialArgs = {inherit inputs outputs;};
       };
-      # Iso installer
-      installer = lib.nixosSystem {
-        modules = [./isos/installer];
+      # Iso's
+      installer-iso = lib.nixosSystem {
+        modules = [./hosts/installer-iso];
         specialArgs = {inherit inputs outputs;};
       };
     };
