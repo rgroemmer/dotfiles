@@ -13,6 +13,7 @@
     ./services/bluetooth.nix
     ./services/printer.nix
     ./services/opengl.nix
+    ./services/nh.nix
 
     # security
     # TODO: enable sops asap!!!

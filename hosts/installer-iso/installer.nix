@@ -30,11 +30,15 @@
     gum spin --show-error -s line --title "Installing NixOS configuration for $HOST" -- \
       nixos-install --flake .#$HOST
 
+    # Create common directory and copy dotfiles to host
+    mkdir -p /mnt/home/rap/Projects/rgroemmer
+    mv ../dotfiles !$
+
     gum style --border normal --margin "1" --padding "1 2" --border-foreground 218 \
       "SUCCESS! Finished installation :3, want to..."
 
     CHOICE=$(gum choose --item.foreground 218 "Reboot!" "Do nuffin...")
-    [[ "$CHOICE" == "Reboot!" ]] && reboot || gum spin -s spint --title "Boring..." -- sleep 2
+    [[ "$CHOICE" == "Reboot!" ]] && reboot || gum spin -s minidot --title "Boring..." -- sleep 2
   '';
 in {
   environment.systemPackages = with pkgs; [
