@@ -32,7 +32,7 @@
 
     # Create common directory and copy dotfiles to host
     mkdir -p /mnt/home/rap/Projects/rgroemmer
-    mv ../dotfiles !$
+    mv ../dotfiles /mnt/home/rap/Projects/rgroemmer
 
     gum style --border normal --margin "1" --padding "1 2" --border-foreground 218 \
       "SUCCESS! Finished installation :3, want to..."

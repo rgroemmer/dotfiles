@@ -33,10 +33,10 @@ in {
 
         efi = {
           canTouchEfiVariables = true;
-          efiSysMountPoint =
-            if cfg.grub
-            then "/boot/efi" # Important when using grub to actually boot into grub-menu.
-            else "/boot";
+          #efiSysMountPoint =
+          #  if cfg.grub
+          #  then "/boot/efi" # Important when using grub to actually boot into grub-menu.
+          #  else "/boot";
         };
 
         grub = mkIf cfg.grub {
