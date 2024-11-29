@@ -2,22 +2,22 @@
   lib,
   config,
   ...
-}: let
+}:
+with lib; let
   cfg = config.system.services.printing;
-in
-  with lib; {
-    options.system.services.printing = mkEnableOption "Enable printing service.";
+in {
+  options.system.services.printing = mkEnableOption "Enable printing service.";
 
-    config = mkIf cfg {
-      services = {
-        printing.enable = true;
+  config = mkIf cfg {
+    services = {
+      printing.enable = true;
 
-        avahi = {
-          enable = true;
-          nssmdns4 = true;
+      avahi = {
+        enable = true;
+        nssmdns4 = true;
 
-          openFirewall = true;
-        };
+        openFirewall = true;
       };
     };
-  }
+  };
+}

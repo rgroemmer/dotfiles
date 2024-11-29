@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   wayland.windowManager.hyprland.extraConfig = ''
     bind = SUPER SHIFT,O, movetoworkspace, special
     bind = SUPER+SHIFT,F, fullscreen
