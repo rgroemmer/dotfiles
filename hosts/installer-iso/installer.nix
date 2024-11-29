@@ -11,8 +11,9 @@
       "Welcome to my $(gum style --foreground 218 'NixOS Installer'). (҂◡_◡)"
 
     gum spin --show-error -s line --title "Cloning the Nixify repository..." -- \
-      git clone https://github.com/rgroemmer/dotfiles &&
-      cd dotfiles
+      git clone https://github.com/rgroemmer/dotfiles
+
+    cd dotfiles
 
     # Branch selection (for development)
     BRANCH=$(git branch -r | grep -v "\->" | awk -F'/' '{print $2}' | gum choose)

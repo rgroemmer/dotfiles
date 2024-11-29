@@ -15,11 +15,16 @@
     ./services/opengl.nix
 
     # security
-    ./security/sops.nix
+    # TODO: enable sops asap!!!
+    #./security/sops.nix
 
     # modules
     ./modules/k3s
     ./modules/desktop
+    ./modules/gaming
+
+    # global nix config
+    ../nix.nix
   ];
 
   system.stateVersion = "24.11";

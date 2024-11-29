@@ -30,6 +30,7 @@
     };
     modules = {
       desktop = true;
+      gaming = true;
     };
   };
 
