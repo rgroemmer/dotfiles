@@ -11,7 +11,6 @@
   system = {
     boot = {
       systemd = true;
-      supportedFilesystems = ["zfs"];
     };
     user = {
       name = "rap";

@@ -11,14 +11,12 @@
   system = {
     boot = {
       systemd = true;
-      supportedFilesystems = ["zfs"];
     };
     user = {
       name = "rap";
+      initialHashedPassword = "$y$j9T$bPx.oxwth.D4a4cjRa30u1$z8KEAOTdDGl.YHrsRsZVOlaikPlmoFDxrVFJl7AcHF7";
       extraGroups = [];
-      extraOptions = {
-        initialHashedPassword = "$y$j9T$bPx.oxwth.D4a4cjRa30u1$z8KEAOTdDGl.YHrsRsZVOlaikPlmoFDxrVFJl7AcHF7";
-      };
+      extraOptions = {};
     };
     services = {};
     modules = {
