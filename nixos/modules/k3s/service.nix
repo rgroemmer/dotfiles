@@ -48,8 +48,6 @@ in {
     };
 
     environment.systemPackages = with pkgs; [
-      nfs-utils
-      zfs
       kubectl
     ];
   };

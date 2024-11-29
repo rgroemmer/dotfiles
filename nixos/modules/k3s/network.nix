@@ -10,8 +10,7 @@ in {
     networking = {
       defaultGateway = "192.168.55.1";
       nameservers = [
-        "1.1.1.1"
-        "8.8.8.8"
+        "192.168.55.1"
       ];
 
       firewall.allowedTCPPorts = [
