@@ -18,7 +18,7 @@
       supportedFilesystems = ["ntfs"];
     };
     user = {
-      name = "rap";
+      name = "root";
       extraGroups = [];
       extraOptions = {
         hashedPassword = "$y$j9T$EBF4XbDjYpcGfgk0M5iNU0$XBaBsfh93W0iA2L.XtNBUi8BRfWsd9NMNzL99FNs4y/";
@@ -34,7 +34,7 @@
   zramSwap.enable = true; # save RAM for VMs & small hosts
 
   services = {
-    getty.autologinUser = lib.mkForce "rap";
+    getty.autologinUser = lib.mkForce "root";
   };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
