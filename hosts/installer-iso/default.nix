@@ -19,10 +19,9 @@
     };
     user = {
       name = "root";
+      initialHashedPassword = "$y$j9T$EBF4XbDjYpcGfgk0M5iNU0$XBaBsfh93W0iA2L.XtNBUi8BRfWsd9NMNzL99FNs4y/";
+      extraOptions = {};
       extraGroups = [];
-      extraOptions = {
-        hashedPassword = "$y$j9T$EBF4XbDjYpcGfgk0M5iNU0$XBaBsfh93W0iA2L.XtNBUi8BRfWsd9NMNzL99FNs4y/";
-      };
     };
     services = {};
     modules = {

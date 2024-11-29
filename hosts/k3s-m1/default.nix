@@ -17,7 +17,7 @@
       name = "rap";
       extraGroups = [];
       extraOptions = {
-        hashedPassword = "$y$j9T$bPx.oxwth.D4a4cjRa30u1$z8KEAOTdDGl.YHrsRsZVOlaikPlmoFDxrVFJl7AcHF7";
+        initialHashedPassword = "$y$j9T$bPx.oxwth.D4a4cjRa30u1$z8KEAOTdDGl.YHrsRsZVOlaikPlmoFDxrVFJl7AcHF7";
       };
     };
     services = {};
