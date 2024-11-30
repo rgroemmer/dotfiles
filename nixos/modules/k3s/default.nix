@@ -15,6 +15,9 @@ with lib; {
   };
 
   environment = {
+    shellAliases = {
+      k = "kubectl";
+    };
     variables = {
       KUBECONFIG = "/etc/rancher/k3s/k3s.yaml";
     };
