@@ -18,10 +18,7 @@ in {
 
       inherit (cfg) clusterInit;
 
-      serverAddr =
-        if cfg.clusterInit
-        then ""
-        else "https://api.k3s.rapsn.me:6443";
+      serverAddr = "https://api.k3s.rapsn.me:6443";
 
       # Configuration
       configPath = builtins.toFile "config.yaml" ''
