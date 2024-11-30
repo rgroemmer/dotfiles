@@ -14,15 +14,17 @@ with lib; {
     clusterInit = mkEnableOption "Configure first master";
   };
 
-  environment = {
-    shellAliases = {
-      k = "kubectl";
+  config = mkIf cfg.enable {
+    environment = {
+      shellAliases = {
+        k = "kubectl";
+      };
+      variables = {
+        KUBECONFIG = "/etc/rancher/k3s/k3s.yaml";
+      };
+      systemPackages = with pkgs; [
+        kubectl
+      ];
     };
-    variables = {
-      KUBECONFIG = "/etc/rancher/k3s/k3s.yaml";
-    };
-    systemPackages = with pkgs; [
-      kubectl
-    ];
   };
 }
