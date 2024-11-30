@@ -28,5 +28,6 @@
     ../nix.nix
   ];
 
+  nix.optimise.automatic = true;
   system.stateVersion = "24.11";
 }
