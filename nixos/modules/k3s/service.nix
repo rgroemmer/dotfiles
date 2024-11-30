@@ -5,9 +5,9 @@
   ...
 }:
 with lib; let
-  cfg = config.system.modules.k3s.enable;
+  cfg = config.system.modules.k3s;
 in {
-  config = mkIf cfg {
+  config = mkIf cfg.enable {
     services.k3s = {
       enable = true;
       role = "server";
@@ -16,11 +16,12 @@ in {
       # TODO: Use sops!
       token = "changeme!";
 
-      clusterInit =
-        if config.networking.hostName == "k3s-m0"
-        then true
-        else false;
-      serverAddr = "https://api.k3s.rapsn.me";
+      inherit (cfg) clusterInit;
+
+      serverAddr =
+        if cfg.clusterInit
+        then ""
+        else "https://api.k3s.rapsn.me:6443";
 
       # Configuration
       configPath = builtins.toFile "config.yaml" ''

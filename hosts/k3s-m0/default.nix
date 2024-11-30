@@ -20,7 +20,10 @@
     };
     services = {};
     modules = {
-      k3s.enable = true;
+      k3s = {
+        enable = true;
+        clusterInit = true;
+      };
     };
   };
 
