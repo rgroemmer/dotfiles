@@ -38,8 +38,8 @@ in {
           - "metrics-bind-address=0.0.0.0"
 
         # critical config values (required on all nodes) https://docs.k3s.io/cli/server#critical-configuration-values
-        cluster-cidr: 10.42.0.0/16,fd42::/56
-        service-cidr: 10.43.0.0/16,fd43::/112
+        cluster-cidr: 10.42.0.0/16
+        service-cidr: 10.43.0.0/16
         disable-helm-controller: true
         disable:
           - servicelb
