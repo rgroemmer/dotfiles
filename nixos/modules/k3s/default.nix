@@ -1,9 +1,12 @@
 {
   lib,
   pkgs,
+  config,
   ...
 }:
-with lib; {
+with lib; let
+  cfg = config.system.modules.k3s.enable;
+in {
   imports = [
     ./service.nix
     ./network.nix
@@ -14,7 +17,7 @@ with lib; {
     clusterInit = mkEnableOption "Configure first master";
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg {
     environment = {
       shellAliases = {
         k = "kubectl";
