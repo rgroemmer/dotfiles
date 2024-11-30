@@ -37,9 +37,6 @@
     # Copy tools
     rclone
 
-    # Nerdfont
-    nerd-fonts.caskaydia-cove
-
     # SSH / Security
     openssh
     libfido2

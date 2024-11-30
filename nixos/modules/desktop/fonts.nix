@@ -13,7 +13,7 @@ in {
       enableDefaultPackages = false;
       fontDir.enable = true;
       packages = with pkgs; [
-        (nerdfonts.override {fonts = ["CascadiaCode"];})
+        nerd-fonts.caskaydia-cove
         fontconfig
         noto-fonts-emoji
       ];
