@@ -35,7 +35,7 @@
     DOTPATH="/mnt/home/rap/Projects/rgroemmer"
     mkdir -p $DOTPATH
     mv ../dotfiles $DOTPATH
-    chown -R rap:user /mnt/home/rap/Projects
+    chown -R rap:users /mnt/home/rap/Projects
 
     gum style --border normal --margin "1" --padding "1 2" --border-foreground 218 \
       "SUCCESS! Finished installation :3, want to..."
