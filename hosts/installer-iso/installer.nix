@@ -24,8 +24,9 @@
     HOST=$(gum choose $ALL_CONFIGS)
 
     # Installation
+    # FIXME: remove hardcoded disko path
     gum spin --show-error -s line --title "Preparing disks for $HOST" -- \
-      nix run github:nix-community/disko --no-write-lock-file -- --mode zap_create_mount ./hosts/$HOST/disko.nix
+      nix run github:nix-community/disko --no-write-lock-file -- --mode zap_create_mount ./hosts/k3s/common/disko.nix
 
     gum spin --show-error -s line --title "Installing NixOS configuration for $HOST" -- \
       nixos-install --flake .#$HOST
