@@ -13,6 +13,7 @@ in {
     ./zoxide.nix
     ./git.nix
     ./nvim.nix
+    ./rust.nix
   ];
 
   programs = {

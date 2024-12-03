@@ -22,12 +22,20 @@
     # Choose
     ALL_CONFIGS=$(nix flake show 2>/dev/null --json | jq -r '.nixosConfigurations | keys[]' | grep -v installer)
     HOST=$(gum choose $ALL_CONFIGS)
+    DISKO_CONFIG="./hosts/$HOST/disko.nix"
+
+    if [[ $HOST == "k3s-m"* ]]; then
+      # K3S bootstrap differes from default
+      DISKO_CONFIG="./hosts/k3s/common/disko.nix"
+      [[ $HOST == "k3s-m0" ]] && CLUSTER_INIT=$(gum choose "Yes" "No")
+    fi
 
     # Installation
-    # FIXME: remove hardcoded disko path
+    # Disko
     gum spin --show-error -s line --title "Preparing disks for $HOST" -- \
-      nix run github:nix-community/disko --no-write-lock-file -- --mode zap_create_mount ./hosts/k3s/common/disko.nix
+      nix run github:nix-community/disko --no-write-lock-file -- --mode zap_create_mount "$DISKO_CONFIG"
 
+    # NixOS
     gum spin --show-error -s line --title "Installing NixOS configuration for $HOST" -- \
       nixos-install --flake .#$HOST
 
@@ -36,7 +44,7 @@
     mkdir -p $DOTPATH
     mv ../dotfiles $DOTPATH
     chown -R rap:users /mnt/home/rap/Projects
-    reboot
+    #reboot
   '';
 in {
   environment.systemPackages = with pkgs; [
