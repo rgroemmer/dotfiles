@@ -36,12 +36,7 @@
     mkdir -p $DOTPATH
     mv ../dotfiles $DOTPATH
     chown -R rap:users /mnt/home/rap/Projects
-
-    gum style --border normal --margin "1" --padding "1 2" --border-foreground 218 \
-      "SUCCESS! Finished installation :3, want to..."
-
-    CHOICE=$(gum choose --item.foreground 218 "Reboot!" "Do nuffin...")
-    [[ "$CHOICE" == "Reboot!" ]] && reboot || gum spin -s minidot --title "Boring..." -- sleep 2
+    reboot
   '';
 in {
   environment.systemPackages = with pkgs; [
