@@ -12,10 +12,7 @@ in {
     ./network.nix
   ];
 
-  options.system.modules.k3s = {
-    enable = mkEnableOption "Enable k3s cluster configuration.";
-    clusterInit = mkEnableOption "Configure first master";
-  };
+  options.system.modules.k3s.enable = mkEnableOption "Enable k3s cluster configuration.";
 
   config = mkIf cfg {
     environment = {

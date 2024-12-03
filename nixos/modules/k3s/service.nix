@@ -16,8 +16,6 @@ in {
       # TODO: Use sops!
       token = "changeme!";
 
-      inherit (cfg) clusterInit;
-
       serverAddr = "https://api.k3s.rapsn.me:6443";
 
       # Configuration
