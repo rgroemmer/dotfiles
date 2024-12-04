@@ -24,11 +24,7 @@
     HOST=$(gum choose $ALL_CONFIGS)
     DISKO_CONFIG="./hosts/$HOST/disko.nix"
 
-    if [[ $HOST == "k3s-m"* ]]; then
-      # K3S bootstrap differes from default
-      DISKO_CONFIG="./hosts/k3s/common/disko.nix"
-      [[ $HOST == "k3s-m0" ]] && CLUSTER_INIT=$(gum choose "Yes" "No")
-    fi
+    [[ $HOST == "k3s-m"* ]] && DISKO_CONFIG="./hosts/k3s/common/disko.nix"
 
     # Installation
     # Disko
@@ -39,12 +35,7 @@
     gum spin --show-error -s line --title "Installing NixOS configuration for $HOST" -- \
       nixos-install --flake .#$HOST
 
-    # Create common directory and copy dotfiles to host
-    DOTPATH="/mnt/home/rap/Projects/rgroemmer"
-    mkdir -p $DOTPATH
-    mv ../dotfiles $DOTPATH
-    chown -R rap:users /mnt/home/rap/Projects
-    #reboot
+    reboot
   '';
 in {
   environment.systemPackages = with pkgs; [
