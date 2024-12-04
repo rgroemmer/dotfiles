@@ -14,6 +14,7 @@ in {
     ./git.nix
     ./nvim.nix
     ./rust.nix
+    ./atuin.nix
   ];
 
   programs = {

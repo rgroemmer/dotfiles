@@ -7,6 +7,7 @@
 }: {
   imports = [
     ./k9s.nix
+    ./aerospace.nix
   ];
 
   config = lib.mkIf config.roles.work {
