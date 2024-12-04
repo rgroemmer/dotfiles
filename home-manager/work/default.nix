@@ -20,6 +20,7 @@
       terraform
       ansible
       vault-bin
+      nerd-fonts.caskaydia-cove
 
       # Tiling-manager
       aerospace
