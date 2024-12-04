@@ -11,7 +11,6 @@ in {
     ./firefox.nix
     ./chromium.nix
     ./binaries.nix
-    ./zen-browser.nix
   ];
 
   # Default desktop programs
@@ -25,8 +24,6 @@ in {
     vlc
     gparted
 
-    # TODO: fix upstream, cant download 403 seems to be redirect issue with curl (wget works with user agent)
-    # exodus
     gnome-disk-utility
 
     #TODO: check out
