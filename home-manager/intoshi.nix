@@ -7,7 +7,7 @@
     ./common
 
     ./cli
-    ./work
+    ./macos
   ];
 
   config = {

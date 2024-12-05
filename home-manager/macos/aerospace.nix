@@ -11,7 +11,7 @@
 
       ## Bindings
       [mode.main.binding]
-      ctrl-enter = 'exec-and-forget /bin/bash -c /Users/groemmer/.nix-profile/bin/alacritty'
+      ctrl-enter = 'exec-and-forget /Users/groemmer/.nix-profile/bin/alacritty msg create-window || open -n ~/Applications/Home\ Manager\ Apps/Alacritty.app'
 
       # Movement
       ctrl-f = 'fullscreen'
@@ -20,16 +20,15 @@
       ctrl-k = 'focus up'
       ctrl-l = 'focus right'
 
+      # Window placement
       ctrl-shift-h = 'move left'
       ctrl-shift-j = 'move down'
       ctrl-shift-k = 'move up'
       ctrl-shift-l = 'move right'
 
-      # layout
-      ctrl-shift-o = 'layout floating tiling' # 'floating toggle' in i3
-      ctrl-t = 'layout tiles horizontal vertical' # toggle window layout
+      ctrl-shift-z = 'join-with left'
 
-      # Workspace movement
+      # Workspace selection
       ctrl-1 = 'workspace 1'
       ctrl-2 = 'workspace 2'
       ctrl-3 = 'workspace 3'
@@ -40,16 +39,6 @@
       ctrl-8 = 'workspace 8'
       ctrl-9 = 'workspace 9'
       ctrl-0 = 'workspace 10'
-
-      # Resize
-      ctrl-shift-r = 'mode resize'
-      [mode.resize.binding]
-      h = 'resize width -50'
-      j = 'resize height +50'
-      k = 'resize height -50'
-      l = 'resize width +50'
-      enter = 'mode main'
-      esc = 'mode main'
 
       # Monitor sequence number from left to right. 1-based indexing
       [workspace-to-monitor-force-assignment]
@@ -63,12 +52,27 @@
       8 = 3
       9 = 3
 
-      # floating window
+      # Layout
+      ctrl-shift-o = 'layout floating tiling' # 'floating toggle' in i3
+
+      # Resize
+      ctrl-shift-r = 'mode resize'
+      [mode.resize.binding]
+      h = 'resize width -50'
+      j = 'resize height +50'
+      k = 'resize height -50'
+      l = 'resize width +50'
+      enter = 'mode main'
+      esc = 'mode main'
+
+      ##-- Window rules / pinning
+
+      # Floating
       [[on-window-detected]]
       if.app-id = 'com.googlecode.iterm2'
       run = ['layout floating']
 
-      # main display
+      # Main display
       [[on-window-detected]]
       if.app-id = 'org.alacritty'
       run = ['move-node-to-workspace 1']
@@ -77,7 +81,7 @@
       if.app-id = 'com.microsoft.VSCode'
       run = ['move-node-to-workspace 1']
 
-      # left display
+      # Left display
       [[on-window-detected]]
       if.app-id = 'org.mozilla.firefoxdeveloperedition'
       run = ['move-node-to-workspace 4']
@@ -90,7 +94,7 @@
       if.app-id = 'com.microsoft.Outlook'
       run = ['move-node-to-workspace 5']
 
-      # right display
+      # Right display
       [[on-window-detected]]
       if.app-id = 'chat.rocket'
       run = ['move-node-to-workspace 6']
