@@ -18,7 +18,7 @@
     };
     catppuccin.url = "github:catppuccin/nix";
     neonix = {
-      url = "github:rgroemmer/neonix/pre-release-0.1.0";
+      url = "github:rgroemmer/neonix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     krewfile = {
