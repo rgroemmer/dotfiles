@@ -6,7 +6,6 @@
   ...
 }: {
   imports = [
-    ./k9s.nix
     ./aerospace.nix
   ];
 
