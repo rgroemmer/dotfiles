@@ -12,8 +12,6 @@
       style = "compact";
       inline_height = 20;
       show_tabs = false;
-
-      # sync_address = "https://atuin.lab.rockwolf.eu";
     };
   };
 }
