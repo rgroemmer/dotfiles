@@ -18,7 +18,7 @@
     };
     catppuccin.url = "github:catppuccin/nix";
     neonix = {
-      url = "github:rgroemmer/neonix";
+      url = "github:rgroemmer/neonix/pre-release-0.1.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     krewfile = {
@@ -67,20 +67,20 @@
       };
       # K3S home-lab
       k3s-m0 = lib.nixosSystem {
-        modules = [./hosts/k3s-m0];
+        modules = [./hosts/k3s/k3s-m0];
         specialArgs = {inherit inputs outputs;};
       };
       k3s-m1 = lib.nixosSystem {
-        modules = [./hosts/k3s-m1];
+        modules = [./hosts/k3s/k3s-m1];
         specialArgs = {inherit inputs outputs;};
       };
       k3s-m2 = lib.nixosSystem {
-        modules = [./hosts/k3s-m2];
+        modules = [./hosts/k3s/k3s-m2];
         specialArgs = {inherit inputs outputs;};
       };
-      # Iso installer
-      installer = lib.nixosSystem {
-        modules = [./isos/installer];
+      # Iso's
+      installer-iso = lib.nixosSystem {
+        modules = [./hosts/installer-iso];
         specialArgs = {inherit inputs outputs;};
       };
     };
@@ -96,7 +96,7 @@
       "groemmer@intoshi" = lib.homeManagerConfiguration {
         modules = [./home-manager/intoshi.nix];
         pkgs = pkgsFor.aarch64-darwin;
-        extraSpecialArgs = {inherit inputs outputs;};
+        extraSpecialArgs = {inherit self inputs outputs;};
       };
     };
   };

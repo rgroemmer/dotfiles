@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   imports = [
     ./k9s.nix
+    ./k9s-plugins.nix
     ./krewfile.nix
   ];
 

@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   home.packages = with pkgs; [
     gh
   ];
@@ -6,7 +10,10 @@
   programs = {
     git = {
       enable = true;
-      userEmail = "mail@rapsn.me";
+      userEmail =
+        if config.roles.work
+        then "raphael.groemmer@stackit.de"
+        else "mail@rapsn.me";
       userName = "Raphael Groemmer";
 
       delta.enable = true;
@@ -44,9 +51,9 @@
 
       includes = [
         {
-          condition = "gitdir:~/Projects/ske/**";
+          condition = "gitdir:~/Projects/rgroemmer/**";
           contents = {
-            user.email = "raphael.groemmer@stackit.de";
+            user.email = "mail@rapsn.me";
           };
         }
       ];

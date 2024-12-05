@@ -1,41 +1,36 @@
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ./hardware-configuration.nix
-
-    # nixos modules
-    ../../nixos/common
-    ../../nixos/desktop
+    ../../nixos
   ];
 
-  # host specific configuration
-  boot = {
-    binfmt.emulatedSystems = ["aarch64-linux"];
-    kernelPackages = pkgs.linuxPackages_latest;
-    supportedFilesystems = ["ntfs"];
-    loader = {
-      efi = {
-        canTouchEfiVariables = true;
-        efiSysMountPoint = "/boot/efi";
+  # Host specific configuration
+  system = {
+    boot = {
+      grub = true;
+      armSupport = true;
+      supportedFilesystems = ["ntfs"];
+    };
+    user = {
+      name = "rap";
+      extraGroups = [
+        "networkmanager"
+        "docker"
+        "wireshark"
+      ];
+      extraOptions = {
+        initialHashedPassword = "$y$j9T$DZQaaK3xGqarN8KE8qnw..$dvgiS7dso5LboGRRf0dcyct/LQUFp4J0LUo2ZRRdTr8";
       };
-      systemd-boot.enable = false;
-      grub = let
-        catppuccin = pkgs.fetchFromGitHub {
-          owner = "catppuccin";
-          repo = "grub";
-          rev = "v1.0.0";
-          hash = "sha256-/bSolCta8GCZ4lP0u5NVqYQ9Y3ZooYCNdTwORNvR7M0=";
-        };
-      in {
-        enable = true;
-        theme = "${catppuccin}/src/catppuccin-mocha-grub-theme/";
-        useOSProber = true;
-        configurationLimit = 15;
-        efiSupport = true;
-        device = "nodev";
-      };
+    };
+    services = {
+      printing = true;
+      sound = true;
+      bluetooth = true;
+      opengl = true;
+    };
+    modules = {
+      desktop = true;
+      gaming = true;
     };
   };
 

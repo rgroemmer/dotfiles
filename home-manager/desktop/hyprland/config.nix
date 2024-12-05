@@ -1,8 +1,4 @@
-{
-  pkgs,
-  ...
-}:
-let
+{pkgs, ...}: let
   displays = {
     left = {
       output = "HDMI-A-1";
@@ -10,17 +6,15 @@ let
     };
     primary = {
       output = "DP-2";
-      settings = "2560x1440@240, 1920x0, 1.066667";
+      settings = "2560x1440@240, 1920x0, 1";
     };
     right = {
       output = "DP-1";
-      settings = "1920x1080@144, 4320x180, 1";
+      settings = "1920x1080@144, 4480x180, 1";
     };
   };
-in
-{
+in {
   wayland.windowManager.hyprland.settings = {
-
     general = {
       gaps_in = 8;
       gaps_out = 10;

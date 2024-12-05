@@ -6,9 +6,10 @@
     dnsutils # dig, nslookup, etc.
     gnumake
     gnutar
+    gzip
+    unzip
     gnused
     gnugrep
-    unzip
 
     # Inspection
     htop
@@ -35,9 +36,6 @@
 
     # Copy tools
     rclone
-
-    # Nerdfont
-    (nerdfonts.override {fonts = ["CascadiaCode"];})
 
     # SSH / Security
     openssh
