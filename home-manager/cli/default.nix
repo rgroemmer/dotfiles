@@ -1,9 +1,8 @@
 {
   imports = [
-    ./shell
+    ./zsh
     ./k8s
     ./programs
     ./packages
-    ./work
   ];
 }

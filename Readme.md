@@ -78,14 +78,24 @@ sudo nixos-install --flake .#zion
 
 ## 📜 Style guide & rules
 
-- **`Host`**:
+- **`Host`**
   - ⚖️ Every `hosts` entrypoint is a `default.nix`.
     - ⚖️ It imports all `NixOS` modules as `path`.
     - ⚖️ Define *host specific configuration*
     - ⚖️ Imports `hardware-configuration.nix`
   - May has a `disko.nix` configuration to configure `filsystems`.
-- **`home-manager`**
+- **`Home-manager`**
   - ⚖️ Every `host` has its own entrypoint at toplevel.
   - ⚖️ Every `host` entrypoint is a file with the host name which:
     - Imports all `Home` configuration for this `host`.
     - Defines **host specific configuration**
+
+## Licenses
+
+The NixOS logo used in this repository is based on the original design available at [NixOS Artwork Repository](https://github.com/NixOS/nixos-artwork/blob/master/logo/nix-snowflake-colours.svg).  
+The original NixOS logo is licensed under the [Creative Commons Attribution-Share Alike 4.0 International License (CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/).  
+This version of the logo has been modified, including changes to the colors, for use in this project.
+
+As required by the CC BY-SA 4.0 license:
+- Proper attribution must be given for the original logo design.
+- Any further use, modification, or distribution of this logo (including the modified version) must comply with the terms of the CC BY-SA 4.0 license, including sharing derivative works under the same license.
