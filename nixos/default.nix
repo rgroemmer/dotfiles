@@ -16,8 +16,7 @@
     ./services/nh.nix
 
     # security
-    # TODO: enable sops asap!!!
-    #./security/sops.nix
+    ./security/sops.nix
 
     # modules
     ./modules/k3s

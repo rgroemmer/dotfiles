@@ -55,6 +55,12 @@
     };
   };
 
+  # INFO: For testing purposes
+  sops.secrets.zion = {
+    sopsFile = ./secrets.yaml;
+    path = "/home/rap/.testsecret";
+  };
+
   services.udev.packages = with pkgs; [
     qmk-udev-rules
     android-udev-rules
