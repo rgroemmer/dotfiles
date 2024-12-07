@@ -17,7 +17,7 @@ in {
       role = "server";
       package = pkgs.k3s_1_31;
 
-      k3s.tokenFile = config.sops.secrets.k3s_token.path;
+      tokenFile = config.sops.secrets.k3s_token.path;
       serverAddr = "https://api.k3s.rapsn.me:6443";
 
       # Configuration
