@@ -8,14 +8,16 @@ with lib; let
   cfg = config.system.modules.k3s;
 in {
   config = mkIf cfg.enable {
+    sops.secrets.k3s_token = {
+      sopsFile = ./secrets.yaml;
+    };
+
     services.k3s = {
       enable = true;
       role = "server";
       package = pkgs.k3s_1_31;
 
-      # TODO: Use sops!
-      token = "changeme!";
-
+      k3s.tokenFile = config.sops.secrets.k3s_token.path;
       serverAddr = "https://api.k3s.rapsn.me:6443";
 
       # Configuration

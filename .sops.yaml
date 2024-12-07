@@ -5,3 +5,7 @@ creation_rules:
     key_groups:
       - age:
           - *rap_zion
+  - path_regex: nixos/modules/k3s/secrets.yaml$
+    key_groups:
+      - age:
+          - *rap_zion
