@@ -20,5 +20,10 @@
     modules.k3s.enable = true;
   };
 
+  environment.variables = {
+    PROMPT = "%m@%n> ";
+    RPROMPT = "%D%T";
+  };
+
   nix.settings.trusted-users = ["@wheel"]; # need for remote build
 }

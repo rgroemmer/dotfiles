@@ -20,6 +20,8 @@
       git
       neovim
       gparted
+
+      fzf
     ];
   };
 }
