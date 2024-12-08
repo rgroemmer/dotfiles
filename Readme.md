@@ -37,6 +37,9 @@ nh home switch -c macbook
 
 # NixOS build installer iso image
 nix build .#nixosConfigurations.iso.config.system.build.isoImage
+
+# NixOS remote switch
+nixos-rebuild switch --flake .#k3s-m0 --target-host 192.168.55.50 --use-remote-sudo
 ```
 
 <details>
