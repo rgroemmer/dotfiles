@@ -2,7 +2,7 @@ keys:
   users:
     - &rap_zion age1y8vwxjyzhftr8n0mry5zkq34ra5g69z927p9s3qrj04gzqwasc8q3fqlgf
   hosts:
-    - &k3s-m0 age1stpr0c5f6qck3kldw0gl9cnun6xezdztym2ksdexpc5c5dpghvuqdzftux
+    - &k3s-m0 age18kahnvmycmw8lw0rlm0jfjlcm5gsc952emesnt9g85j9vq4uruusrd0l8s
 creation_rules:
   - path_regex: hosts/zion/secrets.yaml$
     key_groups:

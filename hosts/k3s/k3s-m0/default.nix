@@ -4,25 +4,6 @@
     ../common
   ];
 
-  # Host specific configuration
-  system = {
-    boot = {
-      systemd = true;
-    };
-    user = {
-      name = "rap";
-      initialHashedPassword = "$y$j9T$8uQSJbY6w9kjXnj74JKjA1$pWYgNf.gb497suX//oIw6aggEPoD2Xv1kvMKZfDTOU/";
-      extraGroups = [];
-      extraOptions = {};
-    };
-    services = {};
-    modules = {
-      k3s = {
-        enable = true;
-      };
-    };
-  };
-
   networking = {
     hostName = "k3s-m0";
     hostId = "5851308f";
