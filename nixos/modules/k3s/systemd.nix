@@ -10,10 +10,5 @@
       ExecStart = "${pkgs.git}/bin/git clone https://github.com/rgroemmer/dotfiles.git /home/rap";
       ExecCondition = "! [ -d /home/rap/dotfiles ]"; # Only run if the repo isn't already cloned
     };
-
-    # Ensure it only runs on fresh boots and not repeatedly
-    install = {
-      wantedBy = ["multi-user.target"];
-    };
   };
 }
