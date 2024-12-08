@@ -9,8 +9,8 @@
 
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = "${pkgs.git}/bin/git clone https://github.com/rgroemmer/dotfiles.git /home/rap";
-      ExecCondition = "${pkgs.coreutils}/bin/test ! [ -d /home/rap/dotfiles ]";
+      ExecStart = "${pkgs.git}/bin/git clone https://github.com/rgroemmer/dotfiles.git /home/rap/dotfiles";
+      ExecCondition = "${pkgs.coreutils}/bin/test -d /home/rap/dotfiles";
     };
   };
 }
