@@ -22,7 +22,7 @@
 
   environment.variables = {
     PROMPT = "%m@%n> ";
-    RPROMPT = "%D%T";
+    RPROMPT = "%D %T";
   };
 
   nix.settings.trusted-users = ["@wheel"]; # need for remote build

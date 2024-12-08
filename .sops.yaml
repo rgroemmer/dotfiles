@@ -4,6 +4,7 @@ keys:
   hosts:
     - &k3s-m0 age18kahnvmycmw8lw0rlm0jfjlcm5gsc952emesnt9g85j9vq4uruusrd0l8s
     - &k3s-m1 age122e0tknrf5hqwde0zxq2nfzzfnuawt4pdj39jrvvw42axdsudams6pejsn
+    - &k3s-m2 age1p5zuckpkjjnnv05ctw6rtudlv0e4uum452j5wunhpymkq4t0ac7s24yxhu
 creation_rules:
   - path_regex: hosts/zion/secrets.yaml$
     key_groups:
@@ -15,3 +16,4 @@ creation_rules:
           - *rap_zion
           - *k3s-m0
           - *k3s-m1
+          - *k3s-m2
