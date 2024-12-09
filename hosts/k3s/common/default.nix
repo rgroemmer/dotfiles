@@ -17,6 +17,7 @@
       extraOptions = {};
       extraGroups = [];
     };
+    modules.k3s.enable = true;
   };
   networking = {
     defaultGateway = "192.168.55.1";
