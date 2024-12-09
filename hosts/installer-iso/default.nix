@@ -30,10 +30,6 @@
   networking.hostName = "rapsn-iso-nix-installer";
   zramSwap.enable = true; # save RAM for VMs & small hosts
 
-  system.activationScripts.mybootstrap.text = ''
-    cp -r ${/tmp/nix-store} /nix/store
-  '';
-
   services = {
     getty.autologinUser = lib.mkForce "root";
   };
