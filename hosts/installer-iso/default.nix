@@ -19,15 +19,13 @@
     };
     user = {
       name = "root";
-      initialHashedPassword = "$y$j9T$EBF4XbDjYpcGfgk0M5iNU0$XBaBsfh93W0iA2L.XtNBUi8BRfWsd9NMNzL99FNs4y/";
+      initialHashedPassword = "";
       extraOptions = {};
       extraGroups = [];
       key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGqKYXW07z0llbDKRIakLD1PjHe3HxK9iu6czXs+ZU7v";
     };
     services = {};
   };
-
-  sops.age.generateKey = true;
 
   networking.hostName = "rapsn-iso-nix-installer";
   zramSwap.enable = true; # save RAM for VMs & small hosts

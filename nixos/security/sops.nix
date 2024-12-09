@@ -9,6 +9,7 @@ in {
 
   sops = {
     age = {
+      generateKeys = true;
       keyFile = "/home/${user}/.config/sops/age/keys.txt";
     };
   };
