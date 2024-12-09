@@ -18,7 +18,7 @@ in {
       package = pkgs.k3s_1_31;
 
       tokenFile = config.sops.secrets.k3s_token.path;
-      serverAddr = "https://api.k3s.rapsn.me:6443";
+      serverAddr = "https://192.168.55.50:6443";
 
       # Configuration
       configPath = builtins.toFile "config.yaml" ''

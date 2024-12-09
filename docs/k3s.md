@@ -1,33 +1,33 @@
 # K3S
 
-## Initial bootstrap
+## Sops-nix
 
-# TODO: Update new way 
+Run installer to install of a `k3s-node`.
+After it rebooted, ssh into node and copy the public `age-key` to `.sops.yaml`.
 
-- Installer sops-nix configured
-- then install host
-- copy-over key
-
-The `k3s` cluster is configured to join automaticaly any master which is accesible behind the loadbalancer.
-If the cluster is bootstraped the very first time, some manual steps are necessary.
+Then trigger remote build, this will ensure `k3s` can read the `k3s_token` secret.
 
 ```bash
-# SSH onto node & stop the k3s systemd unit -> it should fail due to inaccsassible kube-api for fetching certs.
-sudo systemctl stop k3s
 
-# Get the actual command from the systemd unit
-systemctl status k3s | grep "ExecStart=.*"
+```
 
-# Add the --cluster-init flag and remove the server address, it should look something like that:
-sudo k3s server --cluster-init  --token-file /run/secrets/k3s_token --config /nix/store/lqjydiympzbw7rfpxj2cb37algfvy171-config.yaml
+## Initial bootstrap
 
-# Wait till the clusterInit is successfully finished, then reboot node
-sudo reboot
+If the `sops-nix` is configured, the `k3s-m0` must be initialized manually by:
 
-# Verify that k3s is runnig
-journalctl -u k3s -f
+```bash
+# Stop the actual failing systemd unit
+systemctl stop k3s
 
-k get no
+# Copy k3s command from systemd unit, and add --cluster-init, looks like this:
+
+
+# Wait 5min to bootstrap the Initial etcd & node, the logs get less when its finished.
+# Check if the single master node is ready.
+k get nodes
+
+# Then C-c the k3s command & restart systemd again.
+systemctl start k3s
 ```
 
 ## Join nodes
