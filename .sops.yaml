@@ -3,8 +3,8 @@ keys:
     - &rap_zion age1y8vwxjyzhftr8n0mry5zkq34ra5g69z927p9s3qrj04gzqwasc8q3fqlgf
   hosts:
     - &k3s-m0 age1qjae2vj088l6uppvp4ulh93m6zg2vqdhz0m85h5t9qf3cru5j3pqxdkjpq
-    - &k3s-m1 age1f3qh2czkaj0hfz4gsl6velswaufc6zzs4aeu9hp3gsrnlj3w5efse70mpr
-    - &k3s-m2 age1jn898ngc23tgc7n077vv4d8m2hxkdp6n3yufq6teavefgv7t942st664rc
+    - &k3s-m1 age13vqu28lrjzluer4pujzpa3g07m0ugent6qddw4009ugz7ulpcs2sdcezea
+    - &k3s-m2 age14wgsnyhrnv0krdlfvc397lmtkfwc06wlnn453axtz7w6l39lxa3qxl4eu0
 creation_rules:
   - path_regex: hosts/zion/secrets.yaml$
     key_groups:
