@@ -2,7 +2,7 @@ keys:
   users:
     - &rap_zion age1y8vwxjyzhftr8n0mry5zkq34ra5g69z927p9s3qrj04gzqwasc8q3fqlgf
   hosts:
-    - &k3s-m0 age18kahnvmycmw8lw0rlm0jfjlcm5gsc952emesnt9g85j9vq4uruusrd0l8s
+    - &k3s-m0 age12vvjq82l6nc83yuvxj8pczeqfly77xevgrgd3rn9c2sqwg374uhqees0uv
     - &k3s-m1 age122e0tknrf5hqwde0zxq2nfzzfnuawt4pdj39jrvvw42axdsudams6pejsn
     - &k3s-m2 age1p5zuckpkjjnnv05ctw6rtudlv0e4uum452j5wunhpymkq4t0ac7s24yxhu
 creation_rules:
