@@ -30,10 +30,6 @@
   networking.hostName = "rapsn-iso-nix-installer";
   zramSwap.enable = true; # save RAM for VMs & small hosts
 
-  system.activationScripts.mybootstrap.text = ''
-    cp ${/home/rap/.ssh/k3s-age-key.txt} /root/.keys.txt
-  '';
-
   services = {
     getty.autologinUser = lib.mkForce "root";
   };
