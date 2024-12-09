@@ -18,6 +18,12 @@
       extraGroups = [];
     };
   };
+  networking = {
+    defaultGateway = "192.168.55.1";
+    nameservers = [
+      "192.168.55.1"
+    ];
+  };
 
   environment.variables = {
     PROMPT = "%m@%n> ";
