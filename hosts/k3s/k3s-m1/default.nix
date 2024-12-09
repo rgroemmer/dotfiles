@@ -4,6 +4,8 @@
     ../common
   ];
 
+  system.modules.k3s.enable = false;
+
   networking = {
     hostName = "k3s-m1";
     hostId = "a52824e8";

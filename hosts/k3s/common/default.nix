@@ -17,7 +17,6 @@
       extraOptions = {};
       extraGroups = [];
     };
-    modules.k3s.enable = false;
   };
 
   environment.variables = {
