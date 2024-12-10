@@ -6,6 +6,13 @@
 }:
 with lib; let
   cfg = config.system.modules.k3s.enable;
+  getConfig = pkgs.writeShellScriptBin "getConfig" ''
+    #!/usr/bin/env bash
+
+    mkdir -p ~/.kube/
+    sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
+    sudo chown k3s:users ~/.kube/config
+  '';
 in {
   imports = [
     ./service.nix
@@ -23,6 +30,7 @@ in {
         k = "kubectl";
       };
       systemPackages = with pkgs; [
+        getConfig
         kubectl
       ];
     };

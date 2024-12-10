@@ -4,6 +4,7 @@
     ../common
   ];
 
+  # Only used for initial bootstrap
   system.modules.k3s.clusterInit = true;
 
   networking = {

@@ -78,6 +78,10 @@
         modules = [./hosts/k3s/k3s-m2];
         specialArgs = {inherit inputs outputs;};
       };
+      minimal = lib.nixosSystem {
+        modules = [./hosts/minimal];
+        specialArgs = {inherit inputs outputs;};
+      };
       # Iso's
       installer-iso = lib.nixosSystem {
         modules = [./hosts/installer-iso];
