@@ -35,17 +35,10 @@
     gum spin --show-error -s line --title "Installing NixOS configuration for $HOST" -- \
       nixos-install --flake .#$HOST
     reboot
-
   '';
 in {
   environment.systemPackages = with pkgs; [
     installer
-
-    # Dependencies for installation
-    git
-    curl
-    gnumake
     gum
-    jq
   ];
 }
