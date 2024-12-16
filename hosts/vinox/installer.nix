@@ -1,5 +1,5 @@
 {pkgs, ...}: let
-  installer = pkgs.writeShellScriptBin "installer" ''
+  dot = pkgs.writeShellScriptBin "dot" ''
     #!/usr/bin/env bash
 
     # Cleanup
@@ -39,7 +39,8 @@
   '';
 in {
   environment.systemPackages = with pkgs; [
-    installer
+    dot # My interactive installer
     gum
+    alacritty
   ];
 }

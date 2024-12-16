@@ -1,6 +1,7 @@
 {
   lib,
   inputs,
+  pkgs,
   ...
 }: {
   imports = [
@@ -28,6 +29,10 @@
     };
     services = {};
   };
+
+  environment.systemPackages = [
+    inputs.neonix.packages.${pkgs.system}.default
+  ];
 
   networking.hostName = "vinox";
   zramSwap.enable = true; # save RAM for VMs & small hosts
