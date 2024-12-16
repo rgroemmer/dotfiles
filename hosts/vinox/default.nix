@@ -32,10 +32,5 @@
   networking.hostName = "vinox";
   zramSwap.enable = true; # save RAM for VMs & small hosts
 
-  services.displayManager.autoLogin = {
-    enable = true;
-    user = lib.mkForce "root";
-  };
-
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }

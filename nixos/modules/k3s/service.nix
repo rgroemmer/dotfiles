@@ -7,23 +7,13 @@
 with lib; let
   cfg = config.system.modules.k3s;
 in {
-  config = mkIf cfg.enable {
-    sops.secrets.k3s_token = {
-      sopsFile = ./secrets.yaml;
-    };
-
+  config = mkIf cfg {
     services.k3s = {
       enable = true;
       role = "server";
       package = pkgs.k3s_1_31;
 
-      tokenFile = config.sops.secrets.k3s_token.path;
-      inherit (cfg) clusterInit;
-
-      serverAddr =
-        if cfg.clusterInit
-        then ""
-        else "https://192.168.55.50:6443";
+      clusterInit = true; # Only for initial bootstrap
 
       # Configuration
       configPath = builtins.toFile "config.yaml" ''

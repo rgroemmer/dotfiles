@@ -5,7 +5,7 @@
   ...
 }:
 with lib; let
-  cfg = config.system.modules.k3s.enable;
+  cfg = config.system.modules.k3s;
   getConfig = pkgs.writeShellScriptBin "getConfig" ''
     #!/usr/bin/env bash
 
@@ -19,10 +19,7 @@ in {
     ./network.nix
   ];
 
-  options.system.modules.k3s = {
-    enable = mkEnableOption "Enable k3s cluster configuration.";
-    clusterInit = mkEnableOption "Enable initial cluster initialiastion";
-  };
+  options.system.modules.k3s = mkEnableOption "Enable k3s cluster configuration.";
 
   config = mkIf cfg {
     environment = {

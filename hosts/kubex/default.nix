@@ -16,9 +16,8 @@
       extraOptions = {};
       extraGroups = [];
     };
-    modules.k3s = {
-      enable = true;
-      clusterInit = true; # Only for initial bootstrap
+    modules = {
+      k3s = true;
     };
   };
 

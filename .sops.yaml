@@ -1,14 +1,8 @@
 keys:
   users:
     - &rap_zion age1y8vwxjyzhftr8n0mry5zkq34ra5g69z927p9s3qrj04gzqwasc8q3fqlgf
-    - &kubex age1needtochangewhentimehascomexdlul
 creation_rules:
   - path_regex: hosts/zion/secrets.yaml$
     key_groups:
       - age:
           - *rap_zion
-  - path_regex: nixos/modules/k3s/secrets.yaml$
-    key_groups:
-      - age:
-          - *rap_zion
-          - *kubex
