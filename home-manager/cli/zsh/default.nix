@@ -84,7 +84,7 @@
       clean = "nix-collect-garbage -d && nix-store --gc && nix-store --verify --check-contents --repair";
     };
 
-    ohMyZsh = {
+    oh-my-zsh = {
       enable = true;
       plugins = [
         "git"
