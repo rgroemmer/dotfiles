@@ -1,9 +1,10 @@
-{
+{inputs, ...}: {
   imports = [
-    ../../nixos
-
     ./hardware-configuration.nix
     ./disko.nix
+    ../../nixos
+
+    inputs.disko.nixosModules.disko
   ];
   # Host specific configuration
   system = {
