@@ -27,11 +27,11 @@
     nameservers = [
       "192.168.55.1"
     ];
-    hostName = "kubex_00";
+    hostName = "kubex";
     hostId = "5851308f";
     interfaces.ens18.ipv4.addresses = [
       {
-        address = "192.168.55.50";
+        address = "192.168.55.10";
         prefixLength = 24;
       }
     ];

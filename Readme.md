@@ -29,8 +29,8 @@ nh os switch .
 # HomeManager rebuilds (hostname & username autodetection)
 nh home switch .
 
-# NixOs build with custom hostname
-nh os build --hostname k3s-m0 .
+# NixOS build with custom hostname
+nh os build --hostname kubex .
 
 # HomeManager build with custom hostname
 nh home switch -c macbook
@@ -39,7 +39,7 @@ nh home switch -c macbook
 nix build .#nixosConfigurations.iso.config.system.build.isoImage
 
 # NixOS remote switch
-nixos-rebuild switch --flake .#k3s-m0 --target-host 192.168.55.50 --use-remote-sudo
+nixos-rebuild switch --flake .#kubex --target-host 192.168.55.10 --use-remote-sudo
 ```
 
 <details>
