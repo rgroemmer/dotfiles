@@ -34,6 +34,14 @@
     inputs.neonix.packages.${pkgs.system}.default
   ];
 
+  services.xserver.desktopManager.gnome = {
+    favoriteAppsOverride = ''
+      [org.gnome.shell]
+      favorite-apps=[ 'firefox.desktop', 'alacritty.desktop', 'org.gnome.Nautilus.desktop', 'gparted.desktop', 'wireshark.desktop' ]
+    '';
+    enable = true;
+  };
+
   networking.hostName = "vinox";
   zramSwap.enable = true; # save RAM for VMs & small hosts
 
