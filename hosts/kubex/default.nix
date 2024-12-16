@@ -1,6 +1,6 @@
 {
   imports = [
-    ../../../nixos
+    ../../nixos
 
     ./hardware-configuration.nix
     ./disko.nix
