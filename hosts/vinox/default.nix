@@ -7,8 +7,10 @@
     "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-gnome.nix"
     "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
 
-    ./installer.nix
     ../../nixos
+
+    ./installer.nix
+    ./diagnostics.nix
   ];
 
   # Host specific configuration
@@ -27,7 +29,7 @@
     services = {};
   };
 
-  networking.hostName = "rapsn-iso-nix-installer";
+  networking.hostName = "vinox";
   zramSwap.enable = true; # save RAM for VMs & small hosts
 
   services = {

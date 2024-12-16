@@ -11,7 +11,7 @@
     nwipe # Disk wiper
     gparted # Partitioning
     smartmontools # Disk health
-    gsmartmontools
+    gsmartcontrol
     iotop
     nvme-cli
     fio # I/O Benchmark
