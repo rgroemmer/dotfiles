@@ -4,11 +4,13 @@
   ...
 }: {
   imports = [
-    "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"
+    "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-gnome.nix"
     "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
 
-    ./installer.nix
     ../../nixos
+
+    ./installer.nix
+    ./diagnostics.nix
   ];
 
   # Host specific configuration
@@ -19,22 +21,16 @@
     };
     user = {
       name = "root";
-      initialHashedPassword = "$y$j9T$EBF4XbDjYpcGfgk0M5iNU0$XBaBsfh93W0iA2L.XtNBUi8BRfWsd9NMNzL99FNs4y/";
+      initialHashedPassword = "";
       extraOptions = {};
       extraGroups = [];
+      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGqKYXW07z0llbDKRIakLD1PjHe3HxK9iu6czXs+ZU7v";
     };
     services = {};
-    modules = {
-      k3s.enable = true;
-    };
   };
 
-  networking.hostName = "rapsn-iso-nix-installer";
+  networking.hostName = "vinox";
   zramSwap.enable = true; # save RAM for VMs & small hosts
-
-  services = {
-    getty.autologinUser = lib.mkForce "root";
-  };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }

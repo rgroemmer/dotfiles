@@ -66,21 +66,13 @@
         specialArgs = {inherit inputs outputs;};
       };
       # K3S home-lab
-      k3s-m0 = lib.nixosSystem {
-        modules = [./hosts/k3s/k3s-m0];
+      kubex = lib.nixosSystem {
+        modules = [./hosts/kubex];
         specialArgs = {inherit inputs outputs;};
       };
-      k3s-m1 = lib.nixosSystem {
-        modules = [./hosts/k3s/k3s-m1];
-        specialArgs = {inherit inputs outputs;};
-      };
-      k3s-m2 = lib.nixosSystem {
-        modules = [./hosts/k3s/k3s-m2];
-        specialArgs = {inherit inputs outputs;};
-      };
-      # Iso's
-      installer-iso = lib.nixosSystem {
-        modules = [./hosts/installer-iso];
+      # ISO multi-tool
+      vinox = lib.nixosSystem {
+        modules = [./hosts/vinox];
         specialArgs = {inherit inputs outputs;};
       };
     };

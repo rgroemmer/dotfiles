@@ -7,16 +7,13 @@
 with lib; let
   cfg = config.system.modules.k3s;
 in {
-  config = mkIf cfg.enable {
+  config = mkIf cfg {
     services.k3s = {
       enable = true;
       role = "server";
       package = pkgs.k3s_1_31;
 
-      # TODO: Use sops!
-      token = "changeme!";
-
-      serverAddr = "https://api.k3s.rapsn.me:6443";
+      clusterInit = true; # Only for initial bootstrap
 
       # Configuration
       configPath = builtins.toFile "config.yaml" ''

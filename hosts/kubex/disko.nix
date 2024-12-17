@@ -37,23 +37,6 @@
           };
         };
       };
-      storage = {
-        type = "disk";
-        device = "/dev/sdb";
-        content = {
-          type = "gpt";
-          partitions = {
-            root = {
-              size = "100%";
-              content = {
-                type = "filesystem";
-                format = "ext4";
-                mountpoint = "/var/lib/rancher";
-              };
-            };
-          };
-        };
-      };
     };
   };
 }
