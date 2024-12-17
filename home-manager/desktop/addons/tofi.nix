@@ -3,10 +3,13 @@
     enable = true;
     catppuccin.enable = true;
     settings = {
+      width = "30%";
+      height = "20%";
+      anchor = "top";
       font-size = 14;
       outline-color = "#1e1e2e";
-      border-color = "#cba6f7";
-      corner-radius = 25;
+      border-color = "#94e2d5";
+      corner-radius = 15;
       border-width = 4;
     };
   };

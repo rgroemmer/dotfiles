@@ -5,8 +5,6 @@
     ./system/env.nix
     ./system/user.nix
     ./system/locale.nix
-    ./system/packages.nix
-    ./system/auto-upgrade.nix
 
     # services
     ./services/sound.nix
@@ -16,8 +14,7 @@
     ./services/nh.nix
 
     # security
-    # TODO: enable sops asap!!!
-    #./security/sops.nix
+    ./security/sops.nix
 
     # modules
     ./modules/k3s

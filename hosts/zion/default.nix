@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
     ../../nixos
@@ -21,6 +25,7 @@
       extraOptions = {
         initialHashedPassword = "$y$j9T$DZQaaK3xGqarN8KE8qnw..$dvgiS7dso5LboGRRf0dcyct/LQUFp4J0LUo2ZRRdTr8";
       };
+      key = "";
     };
     services = {
       printing = true;
@@ -32,6 +37,13 @@
       desktop = true;
       gaming = true;
     };
+  };
+
+  # Secrets for host
+  sops.secrets.ssh_config = {
+    sopsFile = ./secrets.yaml;
+    path = "/home/rap/.ssh/config";
+    owner = "${config.system.user.name}";
   };
 
   security = {
