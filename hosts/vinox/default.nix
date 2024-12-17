@@ -1,7 +1,6 @@
 {
   lib,
   inputs,
-  pkgs,
   ...
 }: {
   imports = [
@@ -28,18 +27,6 @@
       key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGqKYXW07z0llbDKRIakLD1PjHe3HxK9iu6czXs+ZU7v";
     };
     services = {};
-  };
-
-  environment.systemPackages = [
-    inputs.neonix.packages.${pkgs.system}.default
-  ];
-
-  services.xserver.desktopManager.gnome = {
-    favoriteAppsOverride = ''
-      [org.gnome.shell]
-      favorite-apps=[ 'firefox.desktop', 'alacritty.desktop', 'org.gnome.Nautilus.desktop', 'gparted.desktop', 'wireshark.desktop' ]
-    '';
-    enable = true;
   };
 
   networking.hostName = "vinox";
