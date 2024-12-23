@@ -13,8 +13,6 @@ in {
       role = "server";
       package = pkgs.k3s_1_31;
 
-      clusterInit = true; # Only for initial bootstrap
-
       # Configuration
       configPath = builtins.toFile "config.yaml" ''
         node-label:
@@ -39,9 +37,5 @@ in {
           - local-storage
       '';
     };
-
-    environment.systemPackages = with pkgs; [
-      kubectl
-    ];
   };
 }
