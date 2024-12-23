@@ -672,11 +672,11 @@
         "yaml-companion": "yaml-companion"
       },
       "locked": {
-        "lastModified": 1734746210,
-        "narHash": "sha256-jbZAA3yyGvGUMsXDoB5ZlzYXlFRM6DbTtT785nEK374=",
+        "lastModified": 1734991794,
+        "narHash": "sha256-m65pz1kZgHBmWZVVLxKqK8PYhuVSUbFkpMD3vi/rXh8=",
         "owner": "rgroemmer",
         "repo": "neonix",
-        "rev": "47272d4205c81cf4c93e2059bb3d0d09050d341d",
+        "rev": "55076f36f3fc01184b5bf9455e5ba5841a329cfa",
         "type": "github"
       },
       "original": {
