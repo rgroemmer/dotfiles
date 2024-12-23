@@ -29,6 +29,9 @@ in {
       systemPackages = with pkgs; [
         getConfig
         kubectl
+
+        # Storage
+        zfs
       ];
     };
   };

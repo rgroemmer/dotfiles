@@ -8,7 +8,10 @@
   ];
   # Host specific configuration
   system = {
-    boot.systemd = true;
+    boot = {
+      systemd = true;
+      supportedFilesystems = ["zfs"];
+    };
     user = {
       name = "kubex";
       initialHashedPassword = "$y$j9T$8uQSJbY6w9kjXnj74JKjA1$pWYgNf.gb497suX//oIw6aggEPoD2Xv1kvMKZfDTOU/";
