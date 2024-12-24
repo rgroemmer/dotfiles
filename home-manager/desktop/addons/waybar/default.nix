@@ -1,7 +1,8 @@
 {
+  catppuccin.waybar.enable = true;
+
   programs.waybar = {
     enable = true;
-    catppuccin.enable = true;
     systemd.enable = true;
     settings = {
       mainBar = builtins.fromJSON "${builtins.readFile ./waybar.json} ";

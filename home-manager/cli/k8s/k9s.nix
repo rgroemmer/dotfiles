@@ -1,7 +1,7 @@
 {
+  catppuccin.k9s.enable = true;
   programs.k9s = {
     enable = true;
-    catppuccin.enable = true;
     plugin.plugins = {
       edit-secret = {
         description = "Edit Decoded Secret";

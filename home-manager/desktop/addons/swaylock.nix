@@ -1,4 +1,5 @@
 {pkgs, ...}: {
+  catppuccin.swaylock.enable = true;
   programs.swaylock = {
     enable = true;
     package = pkgs.swaylock-effects;

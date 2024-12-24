@@ -1,7 +1,10 @@
 let
-  enableWithCatppuccin = {
-    enable = true;
-    catppuccin.enable = true;
+  withTheme = {
+    bat.enable = true;
+    fzf.enable = true;
+    lazygit.enable = true;
+    btop.enable = true;
+    yazi.enable = true;
   };
 in {
   imports = [
@@ -17,12 +20,10 @@ in {
     ./atuin.nix
   ];
 
-  programs = {
-    eza.enable = true; # ls with icons
-    bat = enableWithCatppuccin;
-    fzf = enableWithCatppuccin;
-    lazygit = enableWithCatppuccin;
-    btop = enableWithCatppuccin; # better htop
-    yazi = enableWithCatppuccin; # term explorer
-  };
+  catppuccin = withTheme;
+  programs =
+    {
+      eza.enable = true;
+    }
+    // withTheme;
 }
