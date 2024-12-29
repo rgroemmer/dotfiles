@@ -1,12 +1,14 @@
 # K3S
 
-## Bootstrap
+## Prerequistes
 
-To Bootstrap initialy stop `k3s` & initialize, wait 5min.
+For initial bootstrap of the single `K3S` cluster, a `NixOS` device reachable over `SSH` is prerequiste.
+To prevent incorrect `cluster-init`, set `system.k3s.enable = false` to install the host.
+
+After reboot the server in the correct location, enable the `k3s` module and remote rebuild.
 
 ```bash
-sudo systemctl stop k3s
-sudo k3s server --cluster-init
+nixos-rebuild switch --flake .#kubex --target-host kubex@192.168.55.10 --use-remote-sudo
 ```
 
 ## ZFS Configuration
@@ -27,4 +29,18 @@ sudo zpool create -f \
     -o ashift=12 \
     kubex-main \
     raidz2 /dev/sda /dev/sdb /dev/sdc /dev/sdd
+```
+
+## Copy kubeconfig
+
+```bash
+scp kubex@192.168.55.10:.kube/config .config/kubeconfig/homelab.yaml
+sed -i s/127.0.0.1:6443/api.k3s.rapsn.me:6443/g ~/.config/kubeconfig/homelab.yaml
+```
+
+
+## Bootstrap flux
+
+```bash
+
 ```

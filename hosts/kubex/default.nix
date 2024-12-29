@@ -20,7 +20,7 @@
       extraGroups = [];
     };
     modules = {
-      k3s = false;
+      k3s = true;
     };
   };
 

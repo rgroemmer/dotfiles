@@ -34,5 +34,11 @@ in {
         zfs
       ];
     };
+
+    # TODO: verify
+    # Link zfs to be in PATH for openebs-provisioner
+    system.activationScripts.link-zsh = lib.stringAfter ["var"] ''
+      ln -s /run/current-system/sw/bin/zfs /usr/bin/zfs
+    '';
   };
 }
