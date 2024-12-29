@@ -24,6 +24,12 @@
     };
   };
 
+  # Secrets for host
+  sops.secrets.zfs-encryption-key = {
+    sopsFile = ./secrets.yaml;
+    path = "/tmp/zfs-encryption-key";
+  };
+
   networking = {
     defaultGateway = "192.168.55.1";
     nameservers = [
@@ -31,7 +37,7 @@
     ];
     hostName = "kubex";
     hostId = "5851308f";
-    interfaces.ens18.ipv4.addresses = [
+    interfaces.enp8s0.ipv4.addresses = [
       {
         address = "192.168.55.10";
         prefixLength = 24;
