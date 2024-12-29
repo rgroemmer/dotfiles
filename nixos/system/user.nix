@@ -62,5 +62,6 @@ in {
     system.userActivationScripts.zshrc = "touch .zshrc"; # Prevent new user dialog
     environment.pathsToLink = ["/share/zsh"]; # autocompletion
     services.openssh.enable = true;
+    programs.ssh.startAgent = true;
   };
 }
