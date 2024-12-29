@@ -35,10 +35,24 @@ in {
       ];
     };
 
-    # TODO: verify
     # Link zfs to be in PATH for openebs-provisioner
     system.activationScripts.link-zsh = lib.stringAfter ["var"] ''
-      ln -s /run/current-system/sw/bin/zfs /usr/bin/zfs
+      ln -sf /run/current-system/sw/bin/zfs /usr/bin/zfs
     '';
+
+    # Import encrypted ZFS-Pool at startup
+    systemd.services.zfs-import = {
+      description = "Import ZFS Pool with Encryption";
+      wants = ["zfs.target"];
+      before = ["zfs.target"];
+      after = ["local-fs.target"];
+      serviceConfig = {
+        ExecStart = "/bin/sh -c 'cat /tmp/zfs-encryption-key | /run/current-system/sw/bin/zfs load-key kubex-main'";
+        ExecStartPre = "/run/current-system/sw/bin/zpool import -a";
+        Type = "oneshot";
+        RemainAfterExit = true;
+      };
+      wantedBy = ["multi-user.target"];
+    };
   };
 }
