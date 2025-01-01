@@ -10,7 +10,7 @@ in {
   options.system.user = with types; {
     name = mkOption {type = str;};
     initialHashedPassword = mkOption {type = str;};
-    key = mkOption {type = str;};
+    keys = mkOption {type = listOf str;};
     extraGroups = mkOption {
       type = listOf str;
       default = [];
@@ -33,7 +33,7 @@ in {
         shell = pkgs.zsh;
 
         initialHashedPassword = mkForce cfg.initialHashedPassword;
-        openssh.authorizedKeys.keys = [cfg.key];
+        openssh.authorizedKeys.keys = cfg.keys;
 
         extraGroups =
           [
