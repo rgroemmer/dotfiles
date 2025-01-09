@@ -60,7 +60,10 @@ in {
       };
     };
     system.userActivationScripts.zshrc = "touch .zshrc"; # Prevent new user dialog
-    environment.pathsToLink = ["/share/zsh"]; # autocompletion
+    environment.pathsToLink = [
+      "/share/zsh" # autocompletion
+      "/share/xdg-desktop-portal"
+    ];
     services.openssh.enable = true;
     programs.ssh.startAgent = true;
   };

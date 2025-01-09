@@ -38,7 +38,14 @@
       gaming = true;
     };
   };
-
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-hyprland
+    ];
+  };
   # Secrets for host
   sops.secrets = {
     ssh_config = {
@@ -68,8 +75,13 @@
     polkit.enable = true;
     rtkit.enable = true; # realtime-kit
     sudo.wheelNeedsPassword = false;
-    pam.services.swaylock.text = "auth include login"; # enable swaylock to login
+    pam.services.swaylock = {
+      text = "auth include login"; # enable swaylock to login
+      enableGnomeKeyring = true;
+    };
   };
+
+  services.gnome.gnome-keyring.enable = true;
 
   networking = {
     hostName = "zion";
