@@ -40,6 +40,14 @@ in {
       ln -sf /run/current-system/sw/bin/zfs /usr/bin/zfs
     '';
 
+    # Enable smartmon to collect disk health data
+    services.smard = {
+      enable = true;
+      autodetect = true;
+      # SMART Automatic Offline Testing on startup, and schedules short self-tests daily, and long self-tests weekly.
+      defaults.monitored = "-a -o on -s (S/../.././02|L/../../7/04)";
+    };
+
     # Import encrypted ZFS-Pool at startup
     systemd.services.zfs-import = {
       description = "Import ZFS Pool with Encryption";
