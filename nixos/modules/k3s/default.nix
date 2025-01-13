@@ -41,7 +41,7 @@ in {
     '';
 
     # Enable smartmon to collect disk health data
-    services.smard = {
+    services.smartd = {
       enable = true;
       autodetect = true;
       # SMART Automatic Offline Testing on startup, and schedules short self-tests daily, and long self-tests weekly.
