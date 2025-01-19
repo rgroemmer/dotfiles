@@ -797,11 +797,11 @@
         "pre-commit-hooks": "pre-commit-hooks_2"
       },
       "locked": {
-        "lastModified": 1737287091,
-        "narHash": "sha256-krN8BPQUiLPeBiZgy7SUSGrRH+PdbX25XUfhvmGfxkY=",
+        "lastModified": 1737298469,
+        "narHash": "sha256-XLsl/4dHmZqoBpfQnT7BhRXRWHjd5WQnbI/8VrDwla4=",
         "owner": "rgroemmer",
         "repo": "neonix",
-        "rev": "07e58eebe5ec19ec6950fe95fe7c12376ef68ed2",
+        "rev": "b21af8ef72c8c0e4b6f36c702700c4aa17510a13",
         "type": "github"
       },
       "original": {
