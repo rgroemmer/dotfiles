@@ -5,11 +5,12 @@
 
   home.packages = [pkgs.zsh-completions];
 
+  catppuccin.zsh-syntax-highlighting.enable = true;
+
   programs.zsh = {
     enable = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
-    syntaxHighlighting.catppuccin.enable = true;
     enableCompletion = true;
     autocd = true;
     dotDir = ".config/zsh";

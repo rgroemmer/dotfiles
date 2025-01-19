@@ -21,6 +21,16 @@ in {
       border_size = 3;
     };
 
+    windowrule = [
+      "float, steam"
+      "size 70% 70%, steam"
+      "center, steam"
+
+      "float, com.nextcloud.desktopclient.nextcloud"
+      "size 20% 50%, com.nextcloud.desktopclient.nextcloud"
+      "move 79% 3%, com.nextcloud.desktopclient.nextcloud"
+    ];
+
     input = {
       kb_layout = "eu";
       repeat_rate = 35;

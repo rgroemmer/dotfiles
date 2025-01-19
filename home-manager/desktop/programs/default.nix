@@ -25,9 +25,6 @@ in {
     gparted
 
     gnome-disk-utility
-
-    #TODO: check out
-    pkgs.xdg-desktop-portal-hyprland
   ];
 
   programs = {

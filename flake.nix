@@ -70,6 +70,11 @@
         modules = [./hosts/kubex];
         specialArgs = {inherit inputs outputs;};
       };
+      # Minimal system for remote install
+      mini = lib.nixosSystem {
+        modules = [./hosts/mini];
+        specialArgs = {inherit inputs outputs;};
+      };
       # ISO multi-tool
       vinox = lib.nixosSystem {
         modules = [./hosts/vinox];

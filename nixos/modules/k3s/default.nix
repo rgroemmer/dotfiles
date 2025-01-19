@@ -34,5 +34,33 @@ in {
         zfs
       ];
     };
+
+    # Link zfs to be in PATH for openebs-provisioner
+    system.activationScripts.link-zsh = lib.stringAfter ["var"] ''
+      ln -sf /run/current-system/sw/bin/zfs /usr/bin/zfs
+    '';
+
+    # Enable smartmon to collect disk health data
+    services.smartd = {
+      enable = true;
+      autodetect = true;
+      # SMART Automatic Offline Testing on startup, and schedules short self-tests daily, and long self-tests weekly.
+      defaults.monitored = "-a -o on -s (S/../.././02|L/../../7/04)";
+    };
+
+    # Import encrypted ZFS-Pool at startup
+    systemd.services.zfs-import = {
+      description = "Import ZFS Pool with Encryption";
+      wants = ["zfs.target"];
+      before = ["zfs.target"];
+      after = ["local-fs.target"];
+      serviceConfig = {
+        ExecStart = "/bin/sh -c 'cat /tmp/zfs-encryption-key | /run/current-system/sw/bin/zfs load-key kubex-main'";
+        ExecStartPre = "/run/current-system/sw/bin/zpool import -a";
+        Type = "oneshot";
+        RemainAfterExit = true;
+      };
+      wantedBy = ["multi-user.target"];
+    };
   };
 }
