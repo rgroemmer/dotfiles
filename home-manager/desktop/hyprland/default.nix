@@ -4,9 +4,13 @@
     ./keybindings.nix
   ];
 
+  home.packages = with pkgs; [
+    hyprland-qtutils
+  ];
+
+  catppuccin.hyprland.enable = true;
   wayland.windowManager.hyprland = {
     enable = true;
-    catppuccin.enable = true;
 
     package = pkgs.hyprland;
     systemd.enable = true;

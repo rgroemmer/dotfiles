@@ -8,6 +8,7 @@
     inputs.catppuccin.homeManagerModules.catppuccin
     inputs.neonix.homeManagerModules.neonix
     inputs.krewfile.homeManagerModules.krewfile
+    inputs.sops-nix.homeManagerModules.sops
 
     # custom role definition
     ./roles.nix
@@ -19,6 +20,10 @@
   programs.home-manager.enable = true;
 
   xdg.enable = true;
+
+  sops.age = {
+    keyFile = "/home/rap/.config/sops/age/keys.txt";
+  };
 
   news = {
     display = "silent";

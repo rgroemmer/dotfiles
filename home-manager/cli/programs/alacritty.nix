@@ -1,8 +1,7 @@
 {
+  catppuccin.alacritty.enable = true;
   programs.alacritty = {
     enable = true;
-    catppuccin.enable = true;
-
     settings = {
       terminal.shell.program = "zsh";
       env.TERM = "xterm-256color";

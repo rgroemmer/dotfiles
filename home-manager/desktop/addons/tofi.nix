@@ -1,7 +1,7 @@
 {
+  catppuccin.tofi.enable = true;
   programs.tofi = {
     enable = true;
-    catppuccin.enable = true;
     settings = {
       width = "30%";
       height = "20%";

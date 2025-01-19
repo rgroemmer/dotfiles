@@ -19,9 +19,11 @@ in {
         10250 # kublet
         10257 # kube-controller-manager
         10259 # kube-scheduler
+        #53 # pi-hole-dns
       ];
       firewall.allowedUDPPorts = [
         8472 # k3s, flannel: required if using multi-node for inter-node networking
+        #53 # pi-hole-dns
       ];
     };
   };
