@@ -2,7 +2,6 @@ let
   withTheme = {
     bat.enable = true;
     fzf.enable = true;
-    lazygit.enable = true;
     btop.enable = true;
     yazi.enable = true;
   };
@@ -18,6 +17,7 @@ in {
     ./nvim.nix
     ./rust.nix
     ./atuin.nix
+    ./lazygit.nix
   ];
 
   catppuccin = withTheme;

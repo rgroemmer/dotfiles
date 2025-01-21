@@ -35,6 +35,7 @@
         commit = {
           gpgsign = false;
         };
+        fetch.prune = true;
         init = {
           defaultBranch = "main";
         };
