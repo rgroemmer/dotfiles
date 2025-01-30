@@ -44,6 +44,9 @@
           commit = false;
           rebase = true;
         };
+        url = {
+          "git@github.com:stackitcloud" = {insteadOf = "https://github.com/stackitcloud";};
+        };
         push.autoSetupRemote = true;
         delta = {
           line-numbers = true;

@@ -15,7 +15,7 @@ in {
     ./zoxide.nix
     ./git.nix
     ./nvim.nix
-    ./rust.nix
+    #./rust.nix
     ./atuin.nix
     ./lazygit.nix
   ];
