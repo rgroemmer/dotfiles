@@ -23,6 +23,7 @@
     };
     krewfile = {
       url = "github:brumhard/krewfile";
+
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

@@ -9,6 +9,10 @@
       start-at-login = true
       enable-normalization-flatten-containers = true
 
+      # Mouse follow focus
+      on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+
+
       ## Bindings
       [mode.main.binding]
       ctrl-enter = 'exec-and-forget /Users/groemmer/.nix-profile/bin/alacritty msg create-window || open -n ~/Applications/Home\ Manager\ Apps/Alacritty.app'
@@ -40,6 +44,11 @@
       ctrl-9 = 'workspace 9'
       ctrl-0 = 'workspace 10'
 
+      # Layout
+      ctrl-shift-o = 'layout floating tiling' # 'floating toggle' in i3
+      # Resize
+      ctrl-shift-r = 'mode resize'
+
       # Monitor sequence number from left to right. 1-based indexing
       [workspace-to-monitor-force-assignment]
       1 = 2
@@ -52,11 +61,6 @@
       8 = 3
       9 = 3
 
-      # Layout
-      ctrl-shift-o = 'layout floating tiling' # 'floating toggle' in i3
-
-      # Resize
-      ctrl-shift-r = 'mode resize'
       [mode.resize.binding]
       h = 'resize width -50'
       j = 'resize height +50'
@@ -103,10 +107,10 @@
       run = ['move-node-to-workspace 6']
       [[on-window-detected]]
       if.app-id = 'org.keepassxc.keepassxc'
-      run = ['move-node-to-workspace 7']
+      run = ['layout tiling', 'move-node-to-workspace 7']
       [[on-window-detected]]
       if.app-id = 'mumble-client'
-      run = ['move-node-to-workspace 7']
+      run = ['layout tiling','move-node-to-workspace 7']
       [[on-window-detected]]
       if.app-id = 'com.initex.proxifier.v3.macos'
       run = ['move-node-to-workspace 8']
