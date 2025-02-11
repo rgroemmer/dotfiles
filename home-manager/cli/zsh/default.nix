@@ -1,4 +1,9 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}: {
   imports = [
     ./binaries.nix
   ];
@@ -21,11 +26,10 @@
 
       # pinentry for sign commits with gpg
       GPG_TTY = "$(tty)";
-      # gardenctl session-id
-      GCTL_SESSION_ID = "$(uuidgen)";
 
       # disable highlight of history-substring-search
       HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND = "";
+      POWERLEVEL9K_INSTANT_PROMPT = "quiet";
     };
 
     history = {
@@ -37,30 +41,40 @@
       share = true;
     };
 
-    initExtra = ''
-      # p10k
-      POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
+    initExtraBeforeCompInit = ''
+      # p10k instant promt
+      POWERLEVEL9K_INSTANT_PROMPT=quiet
+      if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
+        source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
+      fi
       source ~/.config/zsh/plugins/p10k.zsh
-
-      #make sure brew is on the path for M1
-      if [[ $(uname -m) == 'arm64' ]]; then
-        eval "$(/opt/homebrew/bin/brew shellenv)"
-      fi
-
-      # gardenctl config
-      if command -v gardenctl &> /dev/null
-      then
-        source <(gardenctl rc zsh -p gctl)
-      fi
-
-      # helper functions
-      selc() {
-        BASE_PATH=~/.config/kubeconfig
-        YAMLS=$(find $BASE_PATH -name '*.yaml' | awk -F/ '{ print $NF }')
-        KUBECONFIG=$(echo $YAMLS | fzf)
-        export KUBECONFIG=$BASE_PATH/$KUBECONFIG
-      }
     '';
+
+    initExtra =
+      ''
+        POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
+
+        # helper functions
+        selc() {
+          BASE_PATH=~/.config/kubeconfig
+          YAMLS=$(find $BASE_PATH -name '*.yaml' | awk -F/ '{ print $NF }')
+          KUBECONFIG=$(echo $YAMLS | fzf)
+          export KUBECONFIG=$BASE_PATH/$KUBECONFIG
+        }
+      ''
+      + lib.optionalString config.roles.work ''
+        # Homebrew
+        export HOMEBREW_PREFIX="/opt/homebrew";
+        export HOMEBREW_CELLAR="/opt/homebrew/Cellar";
+        export HOMEBREW_REPOSITORY="/opt/homebrew";
+        export PATH="/opt/homebrew/bin:/opt/homebrew/sbin''${PATH+:''$PATH}";
+        export MANPATH="/opt/homebrew/share/man''${MANPATH+:''$MANPATH}:";
+        export INFOPATH="/opt/homebrew/share/info:''${INFOPATH:-}";
+
+        # Gardenctl
+        [ -n "$GCTL_SESSION_ID" ] || [ -n "$TERM_SESSION_ID" ] || export GCTL_SESSION_ID=$(uuidgen)
+        source <(gardenctl completion zsh)
+      '';
 
     shellAliases = {
       # Overwrites

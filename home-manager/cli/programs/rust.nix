@@ -4,10 +4,9 @@
   lib,
   ...
 }: {
-  config = lib.mkIf (!config.roles.work) {
-    home.packages = with pkgs; [
+  home.packages = with pkgs;
+    lib.mkIf (!config.roles.work) [
       rustup
       clang
     ];
-  };
 }
