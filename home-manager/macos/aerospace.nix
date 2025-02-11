@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: {
   config = lib.mkIf config.roles.work {
@@ -15,7 +16,7 @@
 
       ## Bindings
       [mode.main.binding]
-      ctrl-enter = 'exec-and-forget /Users/groemmer/.nix-profile/bin/alacritty msg create-window || open -n ~/Applications/Home\ Manager\ Apps/Alacritty.app'
+      ctrl-enter = 'exec-and-forget ${pkgs.alacritty}/bin/alacritty msg create-window || open -n ~/Applications/Home\ Manager\ Apps/Alacritty.app'
 
       # Movement
       ctrl-f = 'fullscreen'
@@ -89,9 +90,8 @@
       [[on-window-detected]]
       if.app-id = 'org.mozilla.firefoxdeveloperedition'
       run = ['move-node-to-workspace 4']
-
       [[on-window-detected]]
-      if.app-id = 'org.mozilla.com.zen.browser'
+      if.app-id = 'app.zen-browser.zen'
       run = ['move-node-to-workspace 4']
 
       [[on-window-detected]]
