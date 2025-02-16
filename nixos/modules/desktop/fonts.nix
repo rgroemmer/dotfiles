@@ -14,8 +14,7 @@ in {
       fontDir.enable = true;
       packages = with pkgs; [
         nerd-fonts.caskaydia-cove
-        fontconfig
-        noto-fonts-emoji
+        joypixels
       ];
 
       fontconfig = {
@@ -29,6 +28,9 @@ in {
         subpixel = {
           rgba = "rgb";
           lcdfilter = "light";
+        };
+        defaultFonts = {
+          emoji = ["Joypixels"];
         };
       };
     };
