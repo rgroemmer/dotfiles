@@ -45,7 +45,8 @@
           rebase = true;
         };
         url = {
-          "git@github.com:stackitcloud" = {insteadOf = "https://github.com/stackitcloud";};
+          # Fix for go mod tidy: use correct ssh url for azure
+          "git@ssh.dev.azure.com:v3".insteadOf = "https://dev.azure.com";
         };
         push.autoSetupRemote = true;
         delta = {
