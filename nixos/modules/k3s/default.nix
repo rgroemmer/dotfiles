@@ -48,19 +48,9 @@ in {
       defaults.monitored = "-a -o on -s (S/../.././02|L/../../7/04)";
     };
 
-    # Import encrypted ZFS-Pool at startup
-    systemd.services.zfs-import = {
-      description = "Import ZFS Pool with Encryption";
-      wants = ["zfs.target"];
-      before = ["zfs.target"];
-      after = ["local-fs.target"];
-      serviceConfig = {
-        ExecStart = "/bin/sh -c 'cat /tmp/zfs-encryption-key | /run/current-system/sw/bin/zfs load-key kubex-main'";
-        ExecStartPre = "/run/current-system/sw/bin/zpool import -a";
-        Type = "oneshot";
-        RemainAfterExit = true;
-      };
-      wantedBy = ["multi-user.target"];
+    boot.kernel.sysctl = {
+      "fs.inotify.max_user_watches" = 524288;
+      "fs.inotify.max_user_instances" = 8192;
     };
   };
 }
