@@ -12,6 +12,7 @@
     ./services/printer.nix
     ./services/opengl.nix
     ./services/nh.nix
+    ./services/podman.nix
 
     # security
     ./security/sops.nix

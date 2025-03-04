@@ -708,15 +708,16 @@
         "pre-commit-hooks": "pre-commit-hooks_2"
       },
       "locked": {
-        "lastModified": 1739977938,
-        "narHash": "sha256-SXj/EDhD18WfYfoJYyA1e9RkirscIToeUSYrqyepDoE=",
+        "lastModified": 1739993949,
+        "narHash": "sha256-0AEYz9Ep4pZggLjHMd3NrhdoxkJeyvYs3ZHyzq85uB0=",
         "owner": "rgroemmer",
         "repo": "neonix",
-        "rev": "600e4f5a912bb4bdfca44edaed20ea544063d36d",
+        "rev": "14677ded53d93927ac4c6f048b07123f86d110ec",
         "type": "github"
       },
       "original": {
         "owner": "rgroemmer",
+        "ref": "fine-tuning",
         "repo": "neonix",
         "type": "github"
       }
