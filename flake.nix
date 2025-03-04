@@ -18,7 +18,7 @@
     };
     catppuccin.url = "github:catppuccin/nix";
     neonix = {
-      url = "github:rgroemmer/neonix";
+      url = "github:rgroemmer/neonix/fine-tuning";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     krewfile = {

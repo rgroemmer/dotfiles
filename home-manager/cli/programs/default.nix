@@ -18,6 +18,7 @@ in {
     ./rust.nix
     ./atuin.nix
     ./lazygit.nix
+    ./containers.nix
   ];
 
   catppuccin = withTheme;
