@@ -44,3 +44,14 @@ sed -i s/127.0.0.1:6443/api.k3s.rapsn.me:6443/g ~/.config/kubeconfig/homelab.yam
 ```bash
 
 ```
+
+## Restart a node
+In order to restart a node successfully, after the `node` is rebooted, execute the following in order to import all encrypted zfs-pools.
+
+```bash
+# Import pool automatically
+sudo zpool import -a
+
+# Load encryption key, will promt for password
+sudo zfs load-key kubex-main
+```

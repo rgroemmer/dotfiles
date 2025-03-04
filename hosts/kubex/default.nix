@@ -27,12 +27,6 @@
     };
   };
 
-  # Secrets for host
-  sops.secrets.zfs-encryption-key = {
-    sopsFile = ./secrets.yaml;
-    path = "/tmp/zfs-encryption-key";
-  };
-
   networking = {
     hostName = "kubex";
     hostId = "5851308f"; # Required by zfs
