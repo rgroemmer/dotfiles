@@ -40,7 +40,7 @@
     # SSH / Security
     openssh
     libfido2
-    keepassxc
+    #keepassxc
     sops
 
     # Clipboard

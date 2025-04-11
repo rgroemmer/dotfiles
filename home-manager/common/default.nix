@@ -5,7 +5,7 @@
 }: {
   imports = [
     # module inputs
-    inputs.catppuccin.homeManagerModules.catppuccin
+    inputs.catppuccin.homeModules.catppuccin
     inputs.neonix.homeManagerModules.neonix
     inputs.krewfile.homeManagerModules.krewfile
     inputs.sops-nix.homeManagerModules.sops
