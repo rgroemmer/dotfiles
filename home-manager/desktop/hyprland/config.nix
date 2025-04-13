@@ -22,13 +22,13 @@ in {
     };
 
     windowrule = [
-      "float, steam"
-      "size 70% 70%, steam"
-      "center, steam"
+      "float, class:steam"
+      "size 70% 70%, class:steam"
+      "center, class:steam"
 
-      "float, com.nextcloud.desktopclient.nextcloud"
-      "size 20% 50%, com.nextcloud.desktopclient.nextcloud"
-      "move 79% 3%, com.nextcloud.desktopclient.nextcloud"
+      "float, class:com.nextcloud.desktopclient.nextcloud"
+      "size 20% 50%, class:com.nextcloud.desktopclient.nextcloud"
+      "move 79% 3%, class:com.nextcloud.desktopclient.nextcloud"
     ];
 
     input = {
