@@ -45,5 +45,8 @@
 
     # Clipboard
     wl-clipboard
+
+    # Note taking
+    obsidian
   ];
 }
