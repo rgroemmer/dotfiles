@@ -1,0 +1,41 @@
+[[Snippets]]
+  Description = "Disable flux reconciliation"
+  Output = ""
+  Tag = ["flux", "k8s"]
+  command = "kustomize.toolkit.fluxcd.io/reconcile: disabled"
+
+[[Snippets]]
+  Description = "Allow deletion of gardener resource"
+  Output = ""
+  Tag = ["gardener", "k8s"]
+  command = "confirmation.gardener.cloud/deletion: \"true\""
+
+[[Snippets]]
+  Description = "Disable shoot reconciliation"
+  Output = ""
+  Tag = ["gardener", "k8s"]
+  command = "shoot.gardener.cloud/ignore: \"true\""
+
+[[Snippets]]
+  Description = "Emphemeral debug container"
+  Output = ""
+  Tag = ["k8s", "debug"]
+  command = "kubectl debug -it pod-name --image=busybox:1.28 --target container-name"
+
+[[Snippets]]
+  Description = "View base64 cert via pipe"
+  Output = ""
+  Tag = ["cert"]
+  command = "pbpaste | base64 -d | openssl x509 -text -noout"
+
+[[Snippets]]
+  Description = "Reconcile gardener resource"
+  Output = ""
+  Tag = ["gardener", "k8s"]
+  command = "gardener.cloud/operation: reconcile"
+
+[[Snippets]]
+  Description = "Disable gardener resource manager"
+  Output = ""
+  Tag = ["gardener", "k8s"]
+  command = "resources.gardener.cloud/ignore: \"true\""
