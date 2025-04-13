@@ -19,6 +19,7 @@ in {
     ./atuin.nix
     ./lazygit.nix
     ./containers.nix
+    ./pet.nix
   ];
 
   catppuccin = withTheme;
