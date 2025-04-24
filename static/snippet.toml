@@ -1,3 +1,4 @@
+
 [[Snippets]]
   Description = "Disable flux reconciliation"
   Output = ""
@@ -39,3 +40,9 @@
   Output = ""
   Tag = ["gardener", "k8s"]
   command = "resources.gardener.cloud/ignore: \"true\""
+
+[[Snippets]]
+  Description = "Flux build recursive to dyff afterwards"
+  Output = ""
+  Tag = []
+  command = "flux build ks seed-content --path ../seed-content/base/bootstrap --kustomization-file seed-content.yaml --recursive --local-sources GitRepository/flux-system/ske-base=../../../ske-base"
