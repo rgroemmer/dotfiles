@@ -58,3 +58,9 @@
   Output = ""
   Tag = []
   command = "STAGE=ondemand flux diff ks seed-content --kustomization-file $STAGE/bootstrap/seed-content.yaml --path $STAGE/seed-content/base/bootstrap --recursive --local-sources GitRepository/flux-system/ske-base=../ske-base"
+
+[[Snippets]]
+  Description = "Shoot access alerts"
+  Output = ""
+  Tag = ["access"]
+  command = "No customer data has been accessed"
