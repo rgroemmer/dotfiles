@@ -1,4 +1,3 @@
-
 [[Snippets]]
   Description = "Disable flux reconciliation"
   Output = ""
@@ -42,22 +41,10 @@
   command = "resources.gardener.cloud/ignore: \"true\""
 
 [[Snippets]]
-  Description = "Flux build recursive to dyff afterwards"
-  Output = ""
-  Tag = []
-  command = "flux build ks seed-content --path ../seed-content/base/bootstrap --kustomization-file seed-content.yaml --recursive --local-sources GitRepository/flux-system/ske-base=../../../ske-base"
-
-[[Snippets]]
   Description = "Network trouble pod"
   Output = ""
   Tag = []
   command = "k run tester --rm -it --image=ghcr.io/dergeberl/multitool-net:v0.10.6 -- bash"
-
-[[Snippets]]
-  Description = "flux diff recursive (seed-content)"
-  Output = ""
-  Tag = []
-  command = "STAGE=ondemand flux diff ks seed-content --kustomization-file $STAGE/bootstrap/seed-content.yaml --path $STAGE/seed-content/base/bootstrap --recursive --local-sources GitRepository/flux-system/ske-base=../ske-base"
 
 [[Snippets]]
   Description = "Shoot access alerts"
