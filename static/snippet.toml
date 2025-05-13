@@ -1,37 +1,7 @@
 [[Snippets]]
-  Description = "Disable flux reconciliation"
-  Output = ""
-  Tag = ["flux", "k8s"]
-  command = "kustomize.toolkit.fluxcd.io/reconcile: disabled"
-
-[[Snippets]]
-  Description = "Allow deletion of gardener resource"
-  Output = ""
-  Tag = ["gardener", "k8s"]
-  command = "confirmation.gardener.cloud/deletion: \"true\""
-
-[[Snippets]]
-  Description = "Disable shoot reconciliation"
-  Output = ""
-  Tag = ["gardener", "k8s"]
-  command = "shoot.gardener.cloud/ignore: \"true\""
-
-[[Snippets]]
-  Description = "Emphemeral debug container"
-  Output = ""
-  Tag = ["k8s", "debug"]
-  command = "kubectl debug -it pod-name --image=busybox:1.28 --target container-name"
-
-[[Snippets]]
-  Description = "View base64 cert via pipe"
-  Output = ""
-  Tag = ["cert"]
-  command = "pbpaste | base64 -d | openssl x509 -text -noout"
-
-[[Snippets]]
   Description = "Reconcile gardener resource"
   Output = ""
-  Tag = ["gardener", "k8s"]
+  Tag = ["gardener"]
   command = "gardener.cloud/operation: reconcile"
 
 [[Snippets]]
@@ -41,13 +11,62 @@
   command = "resources.gardener.cloud/ignore: \"true\""
 
 [[Snippets]]
-  Description = "Network trouble pod"
+  Description = "Allow deletion of gardener resource"
   Output = ""
-  Tag = []
+  Tag = ["gardener"]
+  command = "confirmation.gardener.cloud/deletion: \"true\""
+
+[[Snippets]]
+  Description = "Disable shoot reconciliation"
+  Output = ""
+  Tag = ["gardener"]
+  command = "shoot.gardener.cloud/ignore: \"true\""
+
+[[Snippets]]
+  Description = "Disable gardener resource manager"
+  Output = ""
+  Tag = ["gardener"]
+  command = "resources.gardener.cloud/ignore: \"true\""
+
+[[Snippets]]
+  Description = "Disable flux reconciliation"
+  Output = ""
+  Tag = ["flux"]
+  command = "kustomize.toolkit.fluxcd.io/reconcile: disabled"
+
+[[Snippets]]
+  Description = "Emphemeral debug container"
+  Output = ""
+  Tag = ["k8s"]
+  command = "kubectl debug -it pod-name --image=busybox:1.28 --target container-name"
+
+[[Snippets]]
+  Description = "View base64 cert via pipe"
+  Output = ""
+  Tag = ["cert"]
+  command = "pbpaste | base64 -d | openssl x509 -text -noout"
+
+[[Snippets]]
+  Description = "POD: Network trouble"
+  Output = ""
+  Tag = ["k8s"]
   command = "k run tester --rm -it --image=ghcr.io/dergeberl/multitool-net:v0.10.6 -- bash"
 
 [[Snippets]]
-  Description = "Shoot access alerts"
+  Description = "Recursive search & replace go files"
   Output = ""
-  Tag = ["access"]
-  command = "No customer data has been accessed"
+  Tag = ["bash"]
+  command = "find . -type f -name \"*.go\" -exec sed -i 's/oldtext/newtext/g' {} +"
+
+[[Snippets]]
+  Description = "Create, gzip, verbose, filename"
+  Output = ""
+  Tag = ["tar"]
+  command = "tar -czvf archive-name.tar.gz /path/to/compress"
+
+[[Snippets]]
+  Description = "Extract, gzip, verbose, filename"
+  Output = ""
+  Tag = ["tar"]
+  command = "tar -xzvf archive-name.tar.gz"
+

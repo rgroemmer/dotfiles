@@ -9,4 +9,5 @@
       rustup
       clang
     ];
+  home.sessionPath = ["$HOME/.cargo/bin"];
 }
