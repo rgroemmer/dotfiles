@@ -50,7 +50,7 @@
     curl
 
     jq
-    yq
+    yq-go
     gawk
     gnused
 

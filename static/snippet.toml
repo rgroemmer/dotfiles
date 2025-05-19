@@ -70,3 +70,8 @@
   Tag = ["tar"]
   command = "tar -xzvf archive-name.tar.gz"
 
+[[Snippets]]
+  Description = "PW generation linux"
+  Output = ""
+  Tag = ["pw"]
+  command = "LC_ALL=C tr -dc '0-9a-zA-Z' </dev/urandom | head -c30"

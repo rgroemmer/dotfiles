@@ -27,7 +27,7 @@
 
     # Text processing
     jq
-    yq
+    yq-go
     gawk
 
     # Find utils

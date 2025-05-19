@@ -12,9 +12,9 @@
       enable = true;
       userEmail =
         if config.roles.work
-        then "raphael.groemmer@stackit.de"
-        else "mail@rapsn.me";
-      userName = "Raphael Groemmer";
+        then "raphael.groemmer@stackit.cloud"
+        else "github@rapsn.me";
+      userName = "rgroemmer";
 
       delta.enable = true;
       ignores = [
@@ -58,7 +58,7 @@
         {
           condition = "gitdir:~/Projects/rgroemmer/**";
           contents = {
-            user.email = "mail@rapsn.me";
+            user.email = "github@rapsn.me";
           };
         }
       ];
