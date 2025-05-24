@@ -36,7 +36,7 @@ nh os build --hostname kubex .
 nh home switch -c macbook
 
 # NixOS build installer iso image
-nix build .#nixosConfigurations.iso.config.system.build.isoImage
+nix build .#nixosConfigurations.vinox.config.system.build.isoImage
 
 # NixOS remote switch
 nixos-rebuild switch --flake .#kubex --target-host 192.168.55.10 --use-remote-sudo
