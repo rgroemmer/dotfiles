@@ -13,6 +13,7 @@
     ./services/opengl.nix
     ./services/nh.nix
     ./services/podman.nix
+    ./services/tailscale.nix
 
     # security
     ./security/sops.nix

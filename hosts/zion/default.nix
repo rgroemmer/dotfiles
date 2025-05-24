@@ -33,6 +33,7 @@
       bluetooth = true;
       opengl = true;
       podman = true;
+      tailscale = true;
     };
     modules = {
       desktop = true;
