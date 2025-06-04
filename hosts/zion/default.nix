@@ -8,13 +8,13 @@
     ../../nixos
   ];
 
-  # Host specific configuration
   system = {
     boot = {
       grub = true;
       armSupport = true;
       supportedFilesystems = ["ntfs"];
     };
+
     user = {
       name = "rap";
       extraGroups = [
@@ -27,6 +27,7 @@
       };
       keys = [];
     };
+
     services = {
       printing = true;
       sound = true;
@@ -35,11 +36,15 @@
       podman = true;
       tailscale = true;
     };
+
     modules = {
       desktop = true;
       gaming = true;
     };
   };
+
+  # Host specific configuration
+
   xdg.portal = {
     enable = true;
     wlr.enable = true;
@@ -48,6 +53,7 @@
       xdg-desktop-portal-hyprland
     ];
   };
+
   # Secrets for host
   sops.secrets = {
     ssh_config = {
@@ -88,6 +94,9 @@
   networking = {
     hostName = "zion";
     networkmanager.enable = true;
+    interfaces.enp16s0 = {
+      wakeOnLan.enable = true;
+    };
   };
 
   environment = {

@@ -39,6 +39,7 @@
       url = "github:cachix/pre-commit-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-hardware.url = "github:nixos/nixos-hardware/master";
   };
 
   outputs = inputs @ {
@@ -70,6 +71,12 @@
       kubex = lib.nixosSystem {
         modules = [./hosts/kubex];
         specialArgs = {inherit inputs outputs;};
+      };
+      # Raspberry-pi 3
+      nixberry = lib.nixosSystem {
+        system = "aarch64-linux";
+        modules = [./hosts/nixberry];
+        specialArgs = {inherit inputs;};
       };
       # Minimal system for remote install
       mini = lib.nixosSystem {
