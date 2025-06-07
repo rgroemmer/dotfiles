@@ -1,18 +1,5 @@
 {pkgs, ...}: let
-  displays = {
-    left = {
-      output = "HDMI-A-1";
-      settings = "1920x1080@144, 0x180, 1";
-    };
-    primary = {
-      output = "DP-2";
-      settings = "2560x1440@240, 1920x0, 1";
-    };
-    right = {
-      output = "DP-1";
-      settings = "1920x1080@144, 4480x180, 1";
-    };
-  };
+  displays = import ./monitors.nix;
 in {
   wayland.windowManager.hyprland.settings = {
     general = {
@@ -50,19 +37,18 @@ in {
     monitor = with displays; [
       "${left.output}, ${left.settings}"
       "${primary.output}, ${primary.settings}"
-      "${right.output}, ${right.settings}"
     ];
 
     workspace = with displays; [
       "name:1, monitor:${primary.output}"
       "name:2, monitor:${primary.output}"
       "name:3, monitor:${primary.output}"
-      "name:4, monitor:${left.output}"
+      "name:4, monitor:${primary.output}"
       "name:5, monitor:${left.output}"
-      "name:6, monitor:${right.output}"
-      "name:7, monitor:${right.output}"
-      "name:8, monitor:${right.output}"
-      "name:9, monitor:${right.output}"
+      "name:6, monitor:${left.output}"
+      "name:7, monitor:${left.output}"
+      "name:8, monitor:${left.output}"
+      "name:9, monitor:${left.output}"
     ];
 
     dwindle = {
