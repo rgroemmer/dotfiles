@@ -2,6 +2,7 @@
   imports = [
     ./config.nix
     ./keybindings.nix
+    ./hyprpaper.nix
   ];
 
   home.packages = with pkgs; [
