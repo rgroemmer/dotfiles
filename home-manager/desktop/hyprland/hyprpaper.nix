@@ -1,21 +1,24 @@
 let
   displays = import ./monitors.nix;
-  one-piece = "~/Downloads/11020521.jpg";
-  gear5-2 = "~/Downloads/11020389.jpg";
-  skyline-minimal = "~/Downloads/1303828.jpg";
+  one-piece-logo = "one-piece-logo.jpg";
+  anime-city = "anime-city.jpg";
 in {
+  home.file.".config/wallpapers" = {
+    source = ./wallpapers;
+    recursive = true;
+  };
+
   services.hyprpaper = {
     enable = true;
     settings = {
       splash = false;
       preload = [
-        one-piece
-        gear5-2
-        skyline-minimal
+        one-piece-logo
+        anime-city
       ];
       wallpaper = [
-        "${displays.primary.output},${one-piece}"
-        "${displays.left.output},${gear5-2}"
+        "${displays.primary.output},${one-piece-logo}"
+        "${displays.left.output},${anime-city}"
       ];
     };
   };
