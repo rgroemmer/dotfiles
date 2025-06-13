@@ -1,6 +1,7 @@
 {
   inputs,
   config,
+  pkgs,
   ...
 }: let
   user = config.system.user.name;
@@ -38,9 +39,12 @@ in {
     hostId = "5851308f"; # Required by zfs
   };
 
-  environment.variables = {
-    PROMPT = "%m@%n> ";
-    RPROMPT = "%D %T";
+  environment = {
+    variables = {
+      PROMPT = "%m@%n> ";
+      RPROMPT = "%D %T";
+    };
+    systemPackages = [pkgs.restic];
   };
 
   # Secrets for host
