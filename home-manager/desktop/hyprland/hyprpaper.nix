@@ -1,7 +1,7 @@
 let
   displays = import ./monitors.nix;
-  one-piece-logo = "one-piece-logo.jpg";
-  anime-city = "anime-city.jpg";
+  one-piece-logo = "~/.config/wallpapers/one-piece-logo.jpg";
+  supersaiyan = "~/.config/wallpapers/gohan-supersaiyan.png";
 in {
   home.file.".config/wallpapers" = {
     source = ./wallpapers;
@@ -14,11 +14,11 @@ in {
       splash = false;
       preload = [
         one-piece-logo
-        anime-city
+        supersaiyan
       ];
       wallpaper = [
-        "${displays.primary.output},${one-piece-logo}"
-        "${displays.left.output},${anime-city}"
+        "${displays.primary.output},contain:${one-piece-logo}"
+        "${displays.left.output},contain:${supersaiyan}"
       ];
     };
   };
