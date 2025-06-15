@@ -38,6 +38,9 @@ scp kubex@192.168.55.10:.kube/config .config/kubeconfig/homelab.yaml
 sed -i s/127.0.0.1:6443/api.k3s.rapsn.me:6443/g ~/.config/kubeconfig/homelab.yaml
 ```
 
+## Copy ssh-key to kubex for remote backup to storagebox
+
+// TODO
 
 ## Bootstrap flux
 

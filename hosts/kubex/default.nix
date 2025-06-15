@@ -1,4 +1,11 @@
-{inputs, ...}: {
+{
+  inputs,
+  config,
+  pkgs,
+  ...
+}: let
+  user = config.system.user.name;
+in {
   imports = [
     ./hardware-configuration.nix
     ./disko.nix
@@ -32,9 +39,23 @@
     hostId = "5851308f"; # Required by zfs
   };
 
-  environment.variables = {
-    PROMPT = "%m@%n> ";
-    RPROMPT = "%D %T";
+  environment = {
+    variables = {
+      PROMPT = "%m@%n> ";
+      RPROMPT = "%D %T";
+    };
+    systemPackages = [pkgs.restic];
+  };
+
+  # Secrets for host
+  sops.secrets = {
+    ssh_config = {
+      sopsFile = ./secrets.yaml;
+      path = "/home/${user}/.ssh/config";
+      owner = user;
+      group = "root";
+      mode = "600";
+    };
   };
 
   nix.settings.trusted-users = ["@wheel"]; # need for remote build
