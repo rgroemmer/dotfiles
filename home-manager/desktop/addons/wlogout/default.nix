@@ -16,7 +16,7 @@
       }
       {
         label = "logout";
-        action = "${pkgs.systemd}/bin/loginctl terminate-user $USER";
+        action = "/home/rap/.nix-profile/bin/hyprctl dispatch exit";
         text = "Logout";
         keybind = "L";
       }

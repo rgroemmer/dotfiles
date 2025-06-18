@@ -1,5 +1,5 @@
 {pkgs, ...}: let
-  displays = import ./monitors.nix;
+  displays = import ./displays.nix;
 in {
   wayland.windowManager.hyprland.settings = {
     general = {
@@ -32,6 +32,9 @@ in {
       "${pkgs.firefox-devedition}/bin/firefox-devedition"
       "${pkgs.blueman}/bin/blueman-applet"
       "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
+
+      # set wallpapers randomly
+      "sleep 1 && /home/rap/.nix-profile/bin/shuffle-wallpaper"
     ];
 
     monitor = with displays; [

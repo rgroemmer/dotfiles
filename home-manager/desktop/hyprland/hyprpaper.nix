@@ -1,25 +1,30 @@
-let
-  displays = import ./monitors.nix;
-  one-piece-logo = "~/.config/wallpapers/one-piece-logo.jpg";
-  supersaiyan = "~/.config/wallpapers/gohan-supersaiyan.png";
+{pkgs, ...}: let
+  displays = import ./displays.nix;
+
+  path = "~/.config/wallpapers";
+
+  shuffle-wallpaper = pkgs.writeShellScriptBin "shuffle-wallpaper" ''
+    #!/usr/bin/env bash
+
+    SHUFFLE1="$(ls ${path} | shuf -n1)"
+    hyprctl hyprpaper preload "${path}/$SHUFFLE1"
+    hyprctl hyprpaper wallpaper "${displays.primary.output},${path}/$SHUFFLE1"
+
+    SHUFFLE2="$(ls ${path} | grep -v "$SHUFFLE1" | shuf -n1)"
+    hyprctl hyprpaper preload "${path}/$SHUFFLE2"
+    hyprctl hyprpaper wallpaper "${displays.left.output},${path}/$SHUFFLE2"
+  '';
 in {
   home.file.".config/wallpapers" = {
     source = ./wallpapers;
     recursive = true;
   };
+  home.packages = [shuffle-wallpaper];
 
   services.hyprpaper = {
     enable = true;
     settings = {
       splash = false;
-      preload = [
-        one-piece-logo
-        supersaiyan
-      ];
-      wallpaper = [
-        "${displays.primary.output},contain:${one-piece-logo}"
-        "${displays.left.output},contain:${supersaiyan}"
-      ];
     };
   };
 }
