@@ -3,6 +3,7 @@
     ./config.nix
     ./keybindings.nix
     ./hyprpaper.nix
+    ./hyprlock.nix
   ];
 
   home.packages = with pkgs; [
