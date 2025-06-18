@@ -1,5 +1,8 @@
-{
+{inputs, ...}: {
   imports = [
+    # modules
+    inputs.catppuccin.nixosModules.catppuccin
+
     # system
     ./system/boot.nix
     ./system/env.nix
