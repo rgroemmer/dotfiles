@@ -1,7 +1,6 @@
 {
   lib,
   config,
-  pkgs,
   ...
 }:
 with lib; let
@@ -10,13 +9,15 @@ in {
   config = mkIf cfg {
     programs.hyprland.enable = true;
 
-    catppuccin.sddm = {
+    services.greetd = {
       enable = true;
-    };
-    services.displayManager.sddm = {
-      enable = true;
-      wayland.enable = true;
-      package = pkgs.kdePackages.sddm;
+      settings = rec {
+        initial_session = {
+          command = "Hyprland &> /dev/null";
+          user = config.system.user.name;
+        };
+        default_session = initial_session;
+      };
     };
   };
 }
