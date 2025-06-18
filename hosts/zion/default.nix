@@ -83,10 +83,6 @@
     polkit.enable = true;
     rtkit.enable = true; # realtime-kit
     sudo.wheelNeedsPassword = false;
-    pam.services.swaylock = {
-      text = "auth include login"; # enable swaylock to login
-      enableGnomeKeyring = true;
-    };
   };
 
   services.gnome.gnome-keyring.enable = true;
