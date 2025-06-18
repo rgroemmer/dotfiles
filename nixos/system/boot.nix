@@ -1,16 +1,9 @@
 {
   lib,
   config,
-  pkgs,
   ...
 }:
 with lib; let
-  catppuccin = pkgs.fetchFromGitHub {
-    owner = "catppuccin";
-    repo = "grub";
-    rev = "v1.0.0";
-    hash = "sha256-/bSolCta8GCZ4lP0u5NVqYQ9Y3ZooYCNdTwORNvR7M0=";
-  };
   cfg = config.system.boot;
 in {
   options.system.boot = {
@@ -24,6 +17,8 @@ in {
   };
 
   config = {
+    catppuccin.grub.enable = true;
+
     boot = {
       inherit (cfg) supportedFilesystems;
       binfmt.emulatedSystems = mkIf cfg.armSupport ["aarch64-linux"];
@@ -41,7 +36,6 @@ in {
 
         grub = mkIf cfg.grub {
           enable = true;
-          theme = "${catppuccin}/src/catppuccin-mocha-grub-theme/";
           useOSProber = true;
           configurationLimit = 15;
           efiSupport = true;
