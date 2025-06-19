@@ -1,7 +1,12 @@
 {pkgs, ...}: {
   imports = [
-    ./config.nix
-    ./keybindings.nix
+    # Config
+    ./config/config.nix
+    ./config/keybindings.nix
+
+    # Addons
+    ./addons/hyprpaper.nix
+    ./addons/hyprlock.nix
   ];
 
   home.packages = with pkgs; [

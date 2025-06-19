@@ -4,7 +4,7 @@
     layout = [
       {
         label = "lock";
-        action = "${pkgs.swaylock-effects}/bin/swaylock --screenshots --clock --indicator --effect-pixelate 4 --effect-blur 4x4";
+        action = "hyprlock";
         text = "Lock";
         keybind = "l";
       }
@@ -16,7 +16,7 @@
       }
       {
         label = "logout";
-        action = "${pkgs.systemd}/bin/loginctl terminate-user $USER";
+        action = "loginctl terminate-user $USER";
         text = "Logout";
         keybind = "L";
       }
@@ -28,7 +28,7 @@
       }
       {
         label = "suspend";
-        action = "${pkgs.systemd}/bin/systemctl suspend-then-hibernate";
+        action = "${pkgs.systemd}/bin/systemctl suspend";
         text = "Suspend";
         keybind = "s";
       }

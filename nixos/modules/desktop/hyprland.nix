@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  pkgs,
   ...
 }:
 with lib; let
@@ -11,17 +12,17 @@ in {
 
     services.greetd = {
       enable = true;
-      settings = rec {
-        initial_session = {
-          command = "Hyprland";
-          user = "rap";
+      settings = {
+        terminal.vt = 7;
+        default_session = {
+          command = "Hyprland --config /etc/greetd/hyprland.conf";
+          user = "greeter";
         };
-        default_session = initial_session;
       };
     };
 
-    environment.etc."greetd/environments".text = ''
-      Hyprland
+    environment.etc."greetd/hyprland.conf".text = ''
+      exec-once = ${pkgs.greetd.qtgreet}/bin/qtgreet; hyprctl dispatch exit
     '';
   };
 }
