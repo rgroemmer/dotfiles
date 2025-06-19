@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   environment = {
     systemPackages = with pkgs; [
       dnsutils # dig, nslookup, etc.
@@ -10,7 +14,7 @@
 
       # Programs
       git
-      neovim
+      inputs.neonix.packages.${pkgs.system}.mini
 
       fzf
     ];
