@@ -1,5 +1,5 @@
 {pkgs, ...}: let
-  displays = import ./displays.nix;
+  displays = import ../config/displays.nix;
 
   path = "~/.config/wallpapers";
 
