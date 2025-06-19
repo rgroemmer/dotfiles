@@ -65,6 +65,5 @@ in {
       "/share/xdg-desktop-portal"
     ];
     services.openssh.enable = true;
-    programs.ssh.startAgent = true;
   };
 }

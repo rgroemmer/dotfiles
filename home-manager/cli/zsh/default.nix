@@ -41,7 +41,7 @@
       share = true;
     };
 
-    initExtraBeforeCompInit = ''
+    initContent = lib.mkOrder 550 ''
       # p10k instant promt
       POWERLEVEL9K_INSTANT_PROMPT=quiet
       if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then

@@ -87,11 +87,11 @@
       };
 
       search.engines = {
-        "Google".metaData.hidden = true;
-        "Bing".metaData.hidden = true;
-        "eBay".metaData.hidden = true;
-        "Amazon.com".metaData.hidden = true;
-        "Wikipedia (en)".metaData.hidden = true;
+        "google".metaData.hidden = true;
+        "bing".metaData.hidden = true;
+        "ebay".metaData.hidden = true;
+        "amazondotcom-us".metaData.hidden = true;
+        "wikipedia".metaData.hidden = true;
       };
     };
   };
