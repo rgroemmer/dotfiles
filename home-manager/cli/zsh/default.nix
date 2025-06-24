@@ -63,14 +63,6 @@
         }
       ''
       + lib.optionalString config.roles.work ''
-        # Homebrew
-        export HOMEBREW_PREFIX="/opt/homebrew";
-        export HOMEBREW_CELLAR="/opt/homebrew/Cellar";
-        export HOMEBREW_REPOSITORY="/opt/homebrew";
-        export PATH="/opt/homebrew/bin:/opt/homebrew/sbin''${PATH+:''$PATH}";
-        export MANPATH="/opt/homebrew/share/man''${MANPATH+:''$MANPATH}:";
-        export INFOPATH="/opt/homebrew/share/info:''${INFOPATH:-}";
-
         # Gardenctl
         [ -n "$GCTL_SESSION_ID" ] || [ -n "$TERM_SESSION_ID" ] || export GCTL_SESSION_ID=$(uuidgen)
         source <(gardenctl completion zsh)
