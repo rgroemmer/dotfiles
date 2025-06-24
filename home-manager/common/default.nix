@@ -1,6 +1,7 @@
 {
   inputs,
   lib,
+  config,
   ...
 }: {
   imports = [
@@ -22,7 +23,7 @@
   xdg.enable = true;
 
   sops.age = {
-    keyFile = "/home/rap/.config/sops/age/keys.txt";
+    keyFile = "/home/${config.home.username}/.config/sops/age/keys.txt";
   };
 
   news = {
