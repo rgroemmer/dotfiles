@@ -103,6 +103,12 @@
         pkgs = pkgsFor.aarch64-darwin;
         extraSpecialArgs = {inherit self inputs outputs;};
       };
+      # Apple macbook work-device
+      "raphael.groemmer@stackit.cloud@firefly" = lib.homeManagerConfiguration {
+        modules = [./home-manager/firefly.nix];
+        pkgs = pkgsFor.x86_64-linux;
+        extraSpecialArgs = {inherit self inputs outputs;};
+      };
     };
   };
 }

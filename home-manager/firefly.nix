@@ -7,7 +7,7 @@
     ./common
 
     ./cli
-    # ./desktop
+    ./desktop
   ];
 
   config = {
@@ -17,8 +17,8 @@
     };
     # hm config
     home = {
-      username = "Raphael.Groemmer@stackit.cloud";
-      homeDirectory = lib.mkDefault "/Users/${config.home.username}";
+      username = "raphael.groemmer@stackit.cloud";
+      homeDirectory = lib.mkDefault "/home/Raphael.Groemmer@stackit.cloud";
       stateVersion = lib.mkDefault "22.05";
     };
   };
