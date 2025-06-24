@@ -1,4 +1,4 @@
-{config, ...}: {
+{
   catppuccin.alacritty.enable = true;
   programs.alacritty = {
     enable = true;
@@ -21,17 +21,11 @@
       in {
         normal = {
           family = fontname;
-          style =
-            if config.roles.work
-            then "Regular"
-            else "SemiBold";
+          style = "SemiBold";
         };
         bold = {
           family = fontname;
-          style =
-            if config.roles.work
-            then "SemiBold"
-            else "Bold";
+          style = "Bold";
         };
         italic = {
           family = fontname;
