@@ -1,8 +1,7 @@
 {pkgs, ...}: {
   imports = [
     # Config
-    ./config/config.nix
-    ./config/keybindings.nix
+    ./config
 
     # Addons
     ./addons/hyprpaper.nix
@@ -13,11 +12,14 @@
     hyprland-qtutils
   ];
 
-  catppuccin.hyprland.enable = true;
+  # catppuccin.hyprland.enable = true;
+  xdg.configFile."environment.d/envvars.conf".text = ''
+    PATH="$HOME/.nix-profile/bin:$PATH"
+  '';
+
   wayland.windowManager.hyprland = {
     enable = true;
-
-    package = pkgs.hyprland;
+    package = null;
     systemd.enable = true;
     xwayland.enable = true;
   };
