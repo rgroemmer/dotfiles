@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -10,6 +11,13 @@
     grub-theme = {
       url = "github:catppuccin/grub";
       flake = false;
+    };
+
+    # TODO: Add docs to nixGL, -> `hardware.graphics.enable = true`, configured openGL for nixOS, this is lost on
+    # ubuntu, so programs using graphics card, will not find the necessarry drivers.
+    nixGL = {
+      url = "github:nix-community/nixGL";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     hyprland-git = {
