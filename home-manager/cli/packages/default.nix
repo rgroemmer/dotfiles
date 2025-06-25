@@ -1,52 +1,65 @@
-{pkgs, ...}: {
-  home.packages = with pkgs; [
-    # Core utility
-    coreutils # cp, mv, etc.
-    moreutils # parallel, pee, etc.
-    dnsutils # dig, nslookup, etc.
-    gnumake
-    gnutar
-    gzip
-    unzip
-    gnused
-    gnugrep
+{
+  pkgs,
+  config,
+  lib,
+  outputs,
+  ...
+}: let
+  workpkgs = outputs.packages.${pkgs.system};
+in {
+  home.packages = with pkgs;
+    [
+      # Core utility
+      coreutils # cp, mv, etc.
+      moreutils # parallel, pee, etc.
+      dnsutils # dig, nslookup, etc.
+      gnumake
+      gnutar
+      gzip
+      unzip
+      gnused
+      gnugrep
 
-    # Inspection
-    htop
+      # Inspection
+      htop
 
-    # Network tools
-    inetutils
-    curl
-    wget
+      # Network tools
+      inetutils
+      curl
+      wget
 
-    # Network inspetion
-    termshark
-    nmap
-    netcat
-    tcpdump
+      # Network inspetion
+      termshark
+      nmap
+      netcat
+      tcpdump
 
-    # Text processing
-    jq
-    yq-go
-    gawk
+      # Text processing
+      jq
+      yq-go
+      gawk
 
-    # Find utils
-    fd
-    ripgrep
+      # Find utils
+      fd
+      ripgrep
 
-    # Copy tools
-    rclone
+      # Copy tools
+      rclone
 
-    # SSH / Security
-    openssh
-    libfido2
-    #keepassxc
-    sops
+      # SSH / Security
+      openssh
+      libfido2
+      #keepassxc
+      sops
 
-    # Clipboard
-    wl-clipboard
+      # Clipboard
+      wl-clipboard
 
-    # Note taking
-    obsidian
-  ];
+      # Note taking
+      obsidian
+    ]
+    ++ lib.optionals config.roles.work [
+      workpkgs.gardenctl
+      workpkgs.gardenlogin
+    ];
 }

@@ -68,6 +68,7 @@
 
     formatter = forAllSystems (pkgs: pkgs.alejandra);
     devShells = forAllSystems (pkgs: import ./shell.nix {inherit pkgs pre-commit-hooks;});
+    packages = forAllSystems (pkgs: import ./packages {inherit pkgs;});
 
     nixosConfigurations = {
       # Main workstation
