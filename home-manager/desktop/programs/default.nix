@@ -41,4 +41,9 @@ in {
   # programs = {
   #   spotify-player.enable = true;
   # };
+
+  # services = {
+  #   nextcloud-client.enable = true;
+  #   network-manager-applet.enable = true;
+  # };
 }
