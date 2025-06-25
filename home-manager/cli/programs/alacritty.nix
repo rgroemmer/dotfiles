@@ -1,7 +1,29 @@
 {
+  pkgs,
+  inputs,
+  config,
+  ...
+}: let
+  inherit (inputs) nixGL;
+in {
+  # TODO: Add docs why this is needed
+  # TODO: Add this as configurable only for home-manager only systems.
+  nixGL = {
+    inherit (nixGL) packages;
+    defaultWrapper = "mesa";
+  };
+
+  home.packages = with pkgs; [
+    nerd-fonts.caskaydia-cove
+  ];
+
+  # TODO: Move most of font config from nixOS to HM
+  fonts.fontconfig.enable = true;
+
   catppuccin.alacritty.enable = true;
   programs.alacritty = {
     enable = true;
+    package = config.lib.nixGL.wrap pkgs.alacritty;
     settings = {
       terminal.shell.program = "zsh";
       env.TERM = "xterm-256color";
