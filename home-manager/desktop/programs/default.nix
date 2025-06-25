@@ -6,8 +6,8 @@
   '';
 in {
   imports = [
-    ./audio.nix
-    ./vscode.nix
+    # TODO: make configurable
+    # ./audio.nix
     ./firefox.nix
     ./chromium.nix
     ./binaries.nix
@@ -25,14 +25,23 @@ in {
     gparted
 
     gnome-disk-utility
+
+    pciutils
+
+    mumble
+
+    stackit-cli
+    openstackclient-full
+
+    vault-bin
   ];
 
-  programs = {
-    spotify-player.enable = true;
-  };
+  # programs = {
+  #   spotify-player.enable = true;
+  # };
 
-  services = {
-    nextcloud-client.enable = true;
-    network-manager-applet.enable = true;
-  };
+  # services = {
+  #   nextcloud-client.enable = true;
+  #   network-manager-applet.enable = true;
+  # };
 }
