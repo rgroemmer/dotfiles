@@ -41,26 +41,19 @@
       share = true;
     };
 
-    initContent = lib.mkOrder 550 ''
-      # p10k instant promt
-      POWERLEVEL9K_INSTANT_PROMPT=quiet
-      if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
-        source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
-      fi
-      source ~/.config/zsh/plugins/p10k.zsh
-    '';
-
-    initExtra =
+    initContent =
       ''
-        POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
+        source ~/.config/zsh/plugins/p10k.zsh
 
-        # helper functions
-        selc() {
-          BASE_PATH=~/.config/kubeconfig
-          YAMLS=$(find $BASE_PATH -name '*.yaml' | awk -F/ '{ print $NF }')
-          KUBECONFIG=$(echo $YAMLS | fzf)
-          export KUBECONFIG=$BASE_PATH/$KUBECONFIG
-        }
+          POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
+
+          # helper functions
+          selc() {
+            BASE_PATH=~/.config/kubeconfig
+            YAMLS=$(find $BASE_PATH -name '*.yaml' | awk -F/ '{ print $NF }')
+            KUBECONFIG=$(echo $YAMLS | fzf)
+            export KUBECONFIG=$BASE_PATH/$KUBECONFIG
+          }
       ''
       + lib.optionalString config.roles.work ''
         # Gardenctl
