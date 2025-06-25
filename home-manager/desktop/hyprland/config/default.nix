@@ -1,6 +1,14 @@
-{pkgs, ...}: let
-  displays = import ./displays.nix;
+{
+  pkgs,
+  config,
+  ...
+}: let
+  displays = import ./displays.nix {inherit (config.roles) work;};
 in {
+  imports = [
+    ./keybindings.nix
+  ];
+
   wayland.windowManager.hyprland.settings = {
     general = {
       gaps_in = 8;
@@ -40,6 +48,7 @@ in {
     monitor = with displays; [
       "${left.output}, ${left.settings}"
       "${primary.output}, ${primary.settings}"
+      "${disable.output}, disable"
     ];
 
     workspace = with displays; [
