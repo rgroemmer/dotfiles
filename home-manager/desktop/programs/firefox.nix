@@ -1,7 +1,6 @@
-{pkgs, ...}: {
+{
   programs.firefox = {
     enable = true;
-    package = pkgs.firefox-devedition;
 
     policies = {
       DontCheckDefaultBrowser = true;
@@ -78,12 +77,12 @@
       "widget.use-xdg-desktop-portal.file-picker" = 0; # Use new gtk file picker instead of legacy one
     };
 
-    profiles.dev-edition-default = {
+    profiles.default = {
       isDefault = true;
 
       search = {
         force = true;
-        default = "DuckDuckGo";
+        default = "ddg";
       };
 
       search.engines = {
