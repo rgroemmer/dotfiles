@@ -1,6 +1,9 @@
-{pkgs, ...}: let
-  displays = import ../config/displays.nix;
-
+{
+  pkgs,
+  config,
+  ...
+}: let
+  displays = import ../config/displays.nix {inherit (config.roles) work;};
   path = "~/.config/wallpapers";
 
   shuffle-wallpaper = pkgs.writeShellScriptBin "shuffle-wallpaper" ''
