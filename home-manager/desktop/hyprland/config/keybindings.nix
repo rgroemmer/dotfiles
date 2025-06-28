@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   wayland.windowManager.hyprland.extraConfig = ''
     bind = SUPER SHIFT,O, movetoworkspace, special
     bind = SUPER+SHIFT,F, fullscreen
@@ -20,15 +24,16 @@
     bind = SUPER,O, togglespecialworkspace,
     bind = SUPER,Q, killactive
     bind = SUPER,R, togglesplit,
-    bind = SUPER,RETURN, exec, alacritty
+    bind = SUPER,RETURN, exec, ${(config.lib.nixGL.wrap pkgs.alacritty)}/bin/alacritty
     bind = SUPER,S, movetoworkspace, 2
     bind = SUPER,SPACE, exec, export LC_ALL=C && ${pkgs.tofi}/bin/tofi-drun | xargs hyprctl dispatch exec --
-    bind = SUPER,p, exec, ${pkgs.wlogout}/bin/wlogout
+    bind = SUPER,D, exec, export LC_ALL=C && ${pkgs.tofi}/bin/tofi-run | xargs hyprctl dispatch exec --
+    bind = SUPER,P, exec, ${pkgs.wlogout}/bin/wlogout
     bind = SUPER,T, togglefloating,
-    bind = SUPER,h, movefocus, l
-    bind = SUPER,j, movefocus, d
-    bind = SUPER,k, movefocus, u
-    bind = SUPER,l, movefocus, r
+    bind = SUPER,H, movefocus, l
+    bind = SUPER,J, movefocus, d
+    bind = SUPER,K, movefocus, u
+    bind = SUPER,L, movefocus, r
 
     bindm = SUPER, mouse:272, movewindow
     bindm = SUPER, mouse:273, resizewindow
