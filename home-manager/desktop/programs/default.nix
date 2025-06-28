@@ -6,7 +6,6 @@
   '';
 in {
   imports = [
-    # TODO: make configurable
     ./audio.nix
     ./firefox.nix
     ./chromium.nix
@@ -14,6 +13,7 @@ in {
   ];
 
   # Default desktop programs
+  # TODO: Move and cleanup
   home.packages = with pkgs; [
     # screenshoters
     grimblast

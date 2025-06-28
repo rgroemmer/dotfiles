@@ -6,8 +6,7 @@
 }: let
   inherit (inputs) nixGL;
 in {
-  # TODO: Add docs why this is needed
-  # TODO: Add this as configurable only for home-manager only systems.
+  # TODO: move to better place
   nixGL = {
     inherit (nixGL) packages;
     defaultWrapper = "mesa";
@@ -17,7 +16,7 @@ in {
     nerd-fonts.caskaydia-cove
   ];
 
-  # TODO: Move most of font config from nixOS to HM
+  # TODO: move to better place
   fonts.fontconfig.enable = true;
 
   catppuccin.alacritty.enable = true;
