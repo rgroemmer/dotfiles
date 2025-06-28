@@ -4,8 +4,8 @@
     ./config
 
     # Addons
-    ./addons/hyprpaper.nix
-    ./addons/hyprlock.nix
+    # ./addons/hyprpaper.nix
+    # ./addons/hyprlock.nix
   ];
 
   home.packages = with pkgs; [

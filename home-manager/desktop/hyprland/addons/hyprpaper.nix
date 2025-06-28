@@ -27,6 +27,7 @@ in {
 
   services.hyprpaper = {
     enable = true;
+    package = config.lib.nixGL.wrap pkgs.hyprlock;
     settings = {
       splash = false;
     };
