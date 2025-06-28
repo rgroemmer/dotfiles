@@ -36,10 +36,14 @@ in {
 
     exec-once = [
       # move alacritty to special workspace silently
-      "[ workspace special silent ] ${pkgs.alacritty}/bin/alacritty -t scratchy"
-      "${pkgs.firefox-devedition}/bin/firefox-devedition"
+      "sleep 1 && [ workspace special silent ] alacritty -t scratchy"
+      "${pkgs.firefox}/bin/firefox"
       "${pkgs.blueman}/bin/blueman-applet"
       "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
+
+      # work
+      "/opt/zscaler/scripts/zstray_desktop.sh"
+      "teams-for-linux"
 
       # set wallpapers randomly
       "sleep 1 && /home/rap/.nix-profile/bin/shuffle-wallpaper"

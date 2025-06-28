@@ -1,6 +1,16 @@
 {
+  config,
+  pkgs,
+  ...
+}: {
   programs.hyprlock = {
     enable = true;
+    package = config.lib.nixGL.wrap pkgs.hyprlock;
+    settings = {
+      general = {
+        disable_loading_bar = true;
+      };
+    };
   };
 
   services.hypridle = {
