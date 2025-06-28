@@ -9,7 +9,7 @@
           pager = "${config.programs.git.delta.package}/bin/delta --dark --paging=never";
         };
       };
-      # TODO: check if this is needed, its buggy with nvim-oil
+      # TODO: check, how to disable tabs in lazygit
       # os = {
       #   editPreset = "nvim-remote";
       #   edit = ''[ -z "$NVIM" ] && (nvim -- {{filename}}) || (nvim --server "$NVIM" --remote-send "q" && nvim --server "$NVIM" --remote {{filename}})'';
