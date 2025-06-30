@@ -24,6 +24,8 @@
 
     # Add each flake input as a registry
     # To make nix3 commands consistent with the flake
+    # TODO: To use nixpkgs-stable for kubex, need to change this function, dueto the lib.nixosSystem which already sets the registry, this will be called the secound time, which will fail.
+    # BUG: Find out if all registry are needed to be set.
     registry = lib.mapAttrs (_: value: {flake = value;}) inputs;
 
     # Add nixpkgs input to NIX_PATH
