@@ -1,5 +1,5 @@
 <div align="center">
-    <img width="128" src="./static/img/snowflake.png"></img>
+    <img width="128" src="./extra/img/snowflake.png"></img>
 
 ![NixOS](https://img.shields.io/badge/os-nixos-%2389dceb?style=for-the-badge&logo=nixos&logoColor=white)
 ![Hyprland](https://img.shields.io/badge/window_manager-hyprland-%23ffb29d?style=for-the-badge&logo=wayland&logoColor=white)

@@ -1,9 +1,13 @@
-{lib, ...}: {
+{
+  lib,
+  inputs,
+  ...
+}: {
   programs.pet = {
     enable = true;
     settings = {
       General = lib.mkForce {
-        snippetfile = "~/Projects/rgroemmer/dotfiles/static/snippet.toml";
+        snippetfile = "${inputs.self.outPath}/extra/snippet.toml";
         selectcmd = "fzf --ansi";
         color = true;
       };

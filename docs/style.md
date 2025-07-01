@@ -16,7 +16,7 @@
     - `common/` contains configuration defaults valid for all `home-configurations`.
     - `*/` contains `NixOS` modules, optional to import.
 - `isos/` Configuration for all `NixOS` configurations which build images.
-- `static/` Static files mostly not used for nix.
+- `extra/` Configuration or backup files mostly not directly related to `nix`.
 - `nix.nix` Nix & nixpkgs configuration for `NixOS` & `HomeManager`.
 
 ## 📜 Rules
