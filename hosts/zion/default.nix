@@ -37,7 +37,7 @@
       tailscale = true;
     };
 
-    modules = {
+    roles = {
       desktop = true;
       gaming = true;
     };

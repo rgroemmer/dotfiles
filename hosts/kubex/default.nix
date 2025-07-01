@@ -29,7 +29,7 @@ in {
       extraOptions = {};
       extraGroups = [];
     };
-    modules = {
+    roles = {
       k3s = true;
     };
   };

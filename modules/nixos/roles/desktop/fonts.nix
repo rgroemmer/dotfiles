@@ -5,7 +5,7 @@
   ...
 }:
 with lib; let
-  cfg = config.system.modules.desktop;
+  cfg = config.system.roles.desktop;
 in {
   config = mkIf cfg {
     nixpkgs.config.joypixels.acceptLicense = true;
