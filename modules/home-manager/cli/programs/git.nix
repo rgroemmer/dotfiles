@@ -2,7 +2,12 @@
   pkgs,
   config,
   ...
-}: {
+}: let
+  userEmail =
+    if config.roles.workdevice
+    then "raphael.groemmer@stackit.cloud"
+    else "github@rapsn.me";
+in {
   home.packages = with pkgs; [
     gh
   ];
@@ -10,10 +15,7 @@
   programs = {
     git = {
       enable = true;
-      userEmail =
-        if config.roles.work
-        then "raphael.groemmer@stackit.cloud"
-        else "github@rapsn.me";
+      inherit userEmail;
       userName = "rgroemmer";
 
       delta.enable = true;

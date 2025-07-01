@@ -8,9 +8,16 @@
     #!/usr/bin/env bash
     nix shell nixpkgs#"$@"
   '';
+  selc = pkgs.writeShellScriptBin "selc" ''
+    BASE_PATH=$HOME/.config/kubeconfig
+    YAMLS=$(find $BASE_PATH -name '*.yaml' | awk -F/ '{ print $NF }')
+    KUBECONFIG=$(echo $YAMLS | fzf)
+    export KUBECONFIG=$BASE_PATH/$KUBECONFIG
+  '';
 in {
   home.packages = [
     nix_run
     nix_shell
+    selc
   ];
 }

@@ -22,15 +22,14 @@
   ];
 
   # Default desktop programs
-  home.packages = with pkgs; let
-  in
+  home.packages = with pkgs;
     [
       xfce.thunar
       vlc
       gparted
       gnome-disk-utility
     ]
-    ++ lib.options config.roles.workdevice [
+    ++ lib.optionals config.roles.workdevice [
       mumble
       stackit-cli
       openstackclient-full

@@ -5,11 +5,9 @@
 }: let
   inherit (config.roles) useNixGL;
 in {
-  home.packages = with pkgs; [
-    nerd-fonts.caskaydia-cove
+  imports = [
+    ./addons
   ];
-
-  fonts.fontconfig.enable = true;
 
   catppuccin.alacritty.enable = true;
   programs.alacritty = {

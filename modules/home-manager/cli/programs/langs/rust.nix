@@ -4,10 +4,11 @@
   lib,
   ...
 }: {
-  home.packages = with pkgs;
-    lib.mkIf (!config.roles.work) [
+  config = lib.mkIf (!config.roles.workdevice) {
+    home.packages = with pkgs; [
       rustup
       clang
     ];
-  home.sessionPath = ["$HOME/.cargo/bin"];
+    home.sessionPath = ["$HOME/.cargo/bin"];
+  };
 }

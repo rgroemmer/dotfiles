@@ -6,7 +6,7 @@
 }:
 with lib; {
   imports = [
-    ./binaries.nix
+    ./shellScripts.nix
   ];
 
   home.packages = [pkgs.zsh-completions];
@@ -49,13 +49,6 @@ with lib; {
       '';
       zshConfig = mkOrder 1000 ''
         POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
-
-        # helper functions
-        selc() {
-          BASE_PATH=~/.config/kubeconfig
-          YAMLS=$(find $BASE_PATH -name '*.yaml' | awk -F/ '{ print $NF }')
-          KUBECONFIG=$(echo $YAMLS | fzf)
-          export KUBECONFIG=$BASE_PATH/$KUBECONFIG
         }
       '';
       zshWorkConfig = mkOrder 1001 ''
@@ -66,10 +59,15 @@ with lib; {
       '';
       cfg = config.roles;
     in
-      zshConfigEarlyInit
-      ++ zshConfig
-      ++ mkIf cfg.workdevice zshWorkConfig;
-
+      lib.mkMerge [
+        zshConfigEarlyInit
+        zshConfig
+        (
+          if cfg.workdevice
+          then zshWorkConfig
+          else ""
+        )
+      ];
     shellAliases = {
       # Overwrites
       cat = "bat";

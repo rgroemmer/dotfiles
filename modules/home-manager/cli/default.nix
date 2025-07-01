@@ -1,8 +1,8 @@
 {
   imports = [
     ./zsh
-    ./k8s
     ./programs
     ./packages
+    ./terminals/alacritty.nix
   ];
 }

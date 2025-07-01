@@ -7,19 +7,23 @@ let
   };
 in {
   imports = [
-    ./alacritty.nix
-    ./go.nix
-    ./eza.nix
-    ./gpg.nix
-    ./direnv.nix
-    ./zoxide.nix
+    # Langs
+    ./langs/go.nix
+    ./langs/rust.nix
+
+    # Git tools
     ./git.nix
-    ./nvim.nix
-    ./rust.nix
-    ./atuin.nix
     ./lazygit.nix
-    ./containers.nix
-    ./pet.nix
+
+    # Editor
+    ./nvim.nix
+
+    # Security
+    ./gpg.nix
+    ./sops.nix
+
+    # Container tools
+    ./containers
   ];
 
   catppuccin = withTheme;

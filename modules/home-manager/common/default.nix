@@ -20,10 +20,13 @@ in {
     ../../nix.nix
   ];
 
-  nixGL = lib.mkif config.roles.useNixGL {
-    inherit (nixGL) packages;
-    defaultWrapper = "mesa";
-  };
+  nixGL =
+    if config.roles.useNixGL
+    then {
+      inherit (nixGL) packages;
+      defaultWrapper = "mesa";
+    }
+    else {};
 
   programs.home-manager.enable = true;
   xdg.enable = true;

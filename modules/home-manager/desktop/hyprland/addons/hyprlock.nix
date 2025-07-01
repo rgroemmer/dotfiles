@@ -27,30 +27,17 @@ in {
         listener = [
           # autolock
           {
-            timeout = 120;
+            timeout = 1200;
             on-timeout = "hyprlock";
           }
           # display off
           {
-            timeout = 1200;
+            timeout = 9000;
             on-timeout = "hyprctl dispatch dpms off";
             on-resume = "hyprctl dispatch dpms on";
           }
         ];
       };
-      listener = [
-        # autolock
-        {
-          timeout = 1200;
-          on-timeout = "hyprlock";
-        }
-        # display off
-        {
-          timeout = 9000;
-          on-timeout = "hyprctl dispatch dpms off";
-          on-resume = "hyprctl dispatch dpms on";
-        }
-      ];
     };
   };
 }
