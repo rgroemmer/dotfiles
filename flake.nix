@@ -13,8 +13,6 @@
       flake = false;
     };
 
-    # TODO: Add docs to nixGL, -> `hardware.graphics.enable = true`, configured openGL for nixOS, this is lost on
-    # ubuntu, so programs using graphics card, will not find the necessarry drivers.
     nixGL = {
       url = "github:nix-community/nixGL";
       inputs.nixpkgs.follows = "nixpkgs";
