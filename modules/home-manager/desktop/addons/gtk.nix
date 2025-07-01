@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{
   # NOTE: Its deprecated, but as long it looks nice...
   catppuccin.gtk.enable = true;
   gtk = {
@@ -9,13 +9,13 @@
     #  package = pkgs.adw-gtk3;
     #};
 
-    iconTheme = {
-      package = pkgs.catppuccin-papirus-folders.override {
-        flavor = "mocha";
-        accent = "lavender";
-      };
-      name = "Papirus-Dark";
-    };
+    # iconTheme = {
+    #   package = pkgs.catppuccin-papirus-folders.override {
+    #     flavor = "mocha";
+    #     accent = "lavender";
+    #   };
+    #   name = "Papirus-Dark";
+    # };
 
     gtk3.extraConfig = {
       gtk-toolbar-style = "GTK_TOOLBAR_BOTH";
