@@ -1,8 +1,4 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: {
+{pkgs, ...}: {
   environment = {
     systemPackages = with pkgs; [
       dnsutils # dig, nslookup, etc.
@@ -12,9 +8,10 @@
       htop
       curl
 
+      # TODO: Add neonix mini to all non desktops
+
       # Programs
       git
-      inputs.neonix.packages.${pkgs.system}.mini
 
       fzf
     ];

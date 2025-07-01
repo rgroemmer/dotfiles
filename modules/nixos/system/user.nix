@@ -5,9 +5,9 @@
   ...
 }:
 with lib; let
-  cfg = config.system.user;
+  cfg = config.hostConfiguration.user;
 in {
-  options.system.user = with types; {
+  options.hostConfiguration.user = with types; {
     name = mkOption {type = str;};
     initialHashedPassword = mkOption {type = str;};
     keys = mkOption {type = listOf str;};

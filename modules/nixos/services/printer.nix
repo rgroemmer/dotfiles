@@ -4,9 +4,9 @@
   ...
 }:
 with lib; let
-  cfg = config.system.services.printing;
+  cfg = config.hostConfiguration.services.printing;
 in {
-  options.system.services.printing = mkEnableOption "Enable printing service.";
+  options.hostConfiguration.services.printing = mkEnableOption "Enable printing service.";
 
   config = mkIf cfg {
     services = {

@@ -5,7 +5,7 @@
   ...
 }:
 with lib; let
-  cfg = config.system.roles.k3s;
+  cfg = config.hostConfiguration.roles.k3s;
   getConfig = pkgs.writeShellScriptBin "getConfig" ''
     #!/usr/bin/env bash
 
@@ -19,7 +19,7 @@ in {
     ./network.nix
   ];
 
-  options.system.roles.k3s = mkEnableOption "Enable k3s cluster configuration.";
+  options.hostConfiguration.roles.k3s = mkEnableOption "Enable k3s cluster configuration.";
 
   config = mkIf cfg {
     environment = {

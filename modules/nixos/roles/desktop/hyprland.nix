@@ -5,7 +5,7 @@
   ...
 }:
 with lib; let
-  cfg = config.system.roles.desktop;
+  cfg = config.hostConfiguration.roles.desktop;
 in {
   config = mkIf cfg {
     programs.hyprland.enable = true;

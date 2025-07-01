@@ -10,7 +10,7 @@
   ];
 
   # Host specific configuration
-  system = {
+  hostConfiguration = {
     boot = {
       grub = false;
     };

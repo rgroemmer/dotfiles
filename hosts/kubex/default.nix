@@ -15,7 +15,7 @@ in {
   ];
 
   # Host specific configuration
-  system = {
+  hostConfiguration = {
     stable = true;
 
     boot = {

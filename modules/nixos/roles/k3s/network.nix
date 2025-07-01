@@ -4,7 +4,7 @@
   ...
 }:
 with lib; let
-  cfg = config.system.roles.k3s;
+  cfg = config.hostConfiguration.roles.k3s;
 in {
   config = mkIf cfg {
     networking = {

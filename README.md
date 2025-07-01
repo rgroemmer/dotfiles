@@ -21,25 +21,26 @@ It follows a structure to keep related configurations together, but not too much
 ### Bootstrap
 
 ```bash
+# On fresh systems
 nix develop
 
 # NixOS rebuilds (hostname autodetection)
 nh os switch .
 
-# HomeManager rebuilds (hostname & username autodetection)
-nh home switch .
-
 # NixOS build with custom hostname
 nh os build --hostname kubex .
-
-# HomeManager build with custom hostname
-nh home switch -c macbook
 
 # NixOS build installer iso image
 nix build .#nixosConfigurations.vinox.config.system.build.isoImage
 
 # NixOS remote switch
 nixos-rebuild switch --flake .#kubex --target-host 192.168.55.10 --use-remote-sudo
+
+# HomeManager rebuilds (hostname & username autodetection)
+nh home switch .
+
+# HomeManager build with custom hostname
+nh home switch -c macbook
 ```
 
 <details>

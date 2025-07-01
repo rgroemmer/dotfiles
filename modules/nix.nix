@@ -5,7 +5,7 @@
   config,
   ...
 }: {
-  options.system.stable = lib.mkEnableOption "Use stable nixpkgs";
+  options.hostConfiguration.stable = lib.mkEnableOption "Use stable nixpkgs";
 
   config = {
     nixpkgs = {

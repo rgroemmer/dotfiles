@@ -5,9 +5,9 @@
   ...
 }:
 with lib; let
-  cfg = config.system.roles.gaming;
+  cfg = config.hostConfiguration.roles.gaming;
 in {
-  options.system.roles.gaming = mkEnableOption "Enable NixOS gaming environment.";
+  options.hostConfiguration.roles.gaming = mkEnableOption "Enable NixOS gaming environment.";
 
   config = mkIf cfg {
     services.ratbagd.enable = true; # Daemon to configure gaming mice, GUI piper comes through HM.

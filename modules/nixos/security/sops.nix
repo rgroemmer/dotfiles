@@ -3,7 +3,7 @@
   config,
   ...
 }: let
-  user = config.system.user.name;
+  user = config.hostConfiguration.user.name;
 in {
   imports = [inputs.sops-nix.nixosModules.sops];
 

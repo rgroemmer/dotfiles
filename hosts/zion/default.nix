@@ -9,7 +9,7 @@
   ];
 
   # Host specific configuration
-  system = {
+  hostConfiguration = {
     boot = {
       grub = true;
       armSupport = true;
@@ -55,25 +55,28 @@
   # };
 
   # Secrets for host
-  sops.secrets = {
+  # TODO: concider to remove + docu for ssh-keygen -K (new host setup docs!)
+  sops.secrets = let
+    user = config.hostConfiguration.user.name;
+  in {
     ssh_config = {
       sopsFile = ./secrets.yaml;
       path = "/home/rap/.ssh/config";
-      owner = config.system.user.name;
+      owner = user;
       group = "root";
       mode = "600";
     };
     yubi = {
       sopsFile = ./secrets.yaml;
       path = "/home/rap/.ssh/yubi";
-      owner = config.system.user.name;
+      owner = user;
       group = "root";
       mode = "600";
     };
     swiss = {
       sopsFile = ./secrets.yaml;
       path = "/home/rap/.ssh/swiss";
-      owner = config.system.user.name;
+      owner = user;
       group = "root";
       mode = "600";
     };

@@ -4,9 +4,9 @@
   ...
 }:
 with lib; let
-  cfg = config.system.boot;
+  cfg = config.hostConfiguration.boot;
 in {
-  options.system.boot = {
+  options.hostConfiguration.boot = {
     systemd = mkEnableOption "Enable systemd-boot as lightweight bootloader";
     grub = mkEnableOption "Enable grub as beautiful bootloader";
     armSupport = mkEnableOption "Enable arm cross-compiler support";

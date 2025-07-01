@@ -4,9 +4,9 @@
   ...
 }:
 with lib; let
-  cfg = config.system.services.podman;
+  cfg = config.hostConfiguration.services.podman;
 in {
-  options.system.services.podman = mkEnableOption "Enable podman containerization engine:";
+  options.hostConfiguration.services.podman = mkEnableOption "Enable podman containerization engine:";
 
   config = mkIf cfg {
     virtualisation.containers.enable = true;

@@ -4,7 +4,7 @@
   ...
 }:
 with lib; let
-  cfg = config.system.roles.desktop;
+  cfg = config.hostConfiguration.roles.desktop;
 in {
   config = mkIf cfg {
     powerManagement.enable = false;

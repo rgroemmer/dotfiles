@@ -5,9 +5,9 @@
   ...
 }:
 with lib; let
-  cfg = config.system.services.opengl;
+  cfg = config.hostConfiguration.services.opengl;
 in {
-  options.system.services.opengl = mkEnableOption "Enable opengl features.";
+  options.hostConfiguration.services.opengl = mkEnableOption "Enable opengl features.";
 
   config = mkIf cfg {
     hardware = {

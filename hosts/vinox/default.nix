@@ -13,7 +13,7 @@
   ];
 
   # Host specific configuration
-  system = {
+  hostConfiguration = {
     boot = {
       systemd = true;
       supportedFilesystems = ["ntfs"];

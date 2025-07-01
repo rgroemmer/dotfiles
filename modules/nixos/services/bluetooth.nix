@@ -4,9 +4,9 @@
   ...
 }:
 with lib; let
-  cfg = config.system.services.bluetooth;
+  cfg = config.hostConfiguration.services.bluetooth;
 in {
-  options.system.services.bluetooth = mkEnableOption "Enable bluetooth features.";
+  options.hostConfiguration.services.bluetooth = mkEnableOption "Enable bluetooth features.";
 
   config = mkIf cfg {
     hardware.bluetooth.enable = true;

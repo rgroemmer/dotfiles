@@ -5,9 +5,9 @@
   ...
 }:
 with lib; let
-  cfg = config.system.roles.desktop;
+  cfg = config.hostConfiguration.roles.desktop;
 in {
-  options.system.roles.desktop = mkEnableOption "Enable hyprland and desktop features.";
+  options.hostConfiguration.roles.desktop = mkEnableOption "Enable hyprland and desktop features.";
 
   config = mkIf cfg {
     programs = {
