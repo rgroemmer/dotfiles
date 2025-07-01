@@ -42,19 +42,13 @@ with lib; {
       share = true;
     };
 
+    # TODO: Move helper to extra binaries
     initContent = let
       zshConfigEarlyInit = mkOrder 500 ''
         source ~/.config/zsh/plugins/p10k.zsh
       '';
       zshConfig = mkOrder 1000 ''
         POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
-      '';
-      zshWorkConfig = mkOrder 1001 ''
-
-      '';
-    in
-      ''
-
 
         # helper functions
         selc() {
@@ -63,13 +57,18 @@ with lib; {
           KUBECONFIG=$(echo $YAMLS | fzf)
           export KUBECONFIG=$BASE_PATH/$KUBECONFIG
         }
-      ''
-      + lib.optionalString config.roles.work ''
+      '';
+      zshWorkConfig = mkOrder 1001 ''
         # Gardenctl
         [ -n "$GCTL_SESSION_ID" ] || [ -n "$TERM_SESSION_ID" ] || export GCTL_SESSION_ID=$(uuidgen)
         source <(gardenctl completion zsh)
         eval $(gardenctl kubectl-env zsh)
       '';
+      cfg = config.roles;
+    in
+      zshConfigEarlyInit
+      ++ zshConfig
+      ++ mkIf cfg.workdevice zshWorkConfig;
 
     shellAliases = {
       # Overwrites
