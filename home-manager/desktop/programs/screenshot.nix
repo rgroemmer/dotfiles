@@ -5,7 +5,10 @@
     grimblast save area
   '';
 in {
-  home.packages = [
+  home.packages = with pkgs; [
+    grimblast
+    # slurp
+
     screenshoot
   ];
 }

@@ -3,7 +3,8 @@
   lib,
   config,
   ...
-}: {
+}:
+with lib; {
   imports = [
     ./binaries.nix
   ];
@@ -41,19 +42,27 @@
       share = true;
     };
 
-    initContent =
-      ''
+    initContent = let
+      zshConfigEarlyInit = mkOrder 500 ''
         source ~/.config/zsh/plugins/p10k.zsh
+      '';
+      zshConfig = mkOrder 1000 ''
+        POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
+      '';
+      zshWorkConfig = mkOrder 1001 ''
 
-          POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
+      '';
+    in
+      ''
 
-          # helper functions
-          selc() {
-            BASE_PATH=~/.config/kubeconfig
-            YAMLS=$(find $BASE_PATH -name '*.yaml' | awk -F/ '{ print $NF }')
-            KUBECONFIG=$(echo $YAMLS | fzf)
-            export KUBECONFIG=$BASE_PATH/$KUBECONFIG
-          }
+
+        # helper functions
+        selc() {
+          BASE_PATH=~/.config/kubeconfig
+          YAMLS=$(find $BASE_PATH -name '*.yaml' | awk -F/ '{ print $NF }')
+          KUBECONFIG=$(echo $YAMLS | fzf)
+          export KUBECONFIG=$BASE_PATH/$KUBECONFIG
+        }
       ''
       + lib.optionalString config.roles.work ''
         # Gardenctl

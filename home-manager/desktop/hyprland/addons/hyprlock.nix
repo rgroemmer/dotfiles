@@ -1,23 +1,42 @@
 {
-  config,
   pkgs,
+  lib,
+  config,
   ...
-}: {
-  programs.hyprlock = {
-    enable = true;
-    package = config.lib.nixGL.wrap pkgs.hyprlock;
-    settings = {
-      general = {
-        disable_loading_bar = true;
+}:
+with lib; let
+  cfg = config.roles.desktop.hyprland.hyprlock;
+in {
+  config = mkIf cfg {
+    programs.hyprlock = {
+      enable = true;
+      package = pkgs.hyprlock;
+      settings = {
+        general = {
+          disable_loading_bar = true;
+        };
       };
     };
-  };
 
-  services.hypridle = {
-    enable = true;
-    settings = {
-      general = {
-        lock_cmd = "hyprlock";
+    services.hypridle = {
+      enable = true;
+      settings = {
+        general = {
+          lock_cmd = "hyprlock";
+        };
+        listener = [
+          # autolock
+          {
+            timeout = 120;
+            on-timeout = "hyprlock";
+          }
+          # display off
+          {
+            timeout = 1200;
+            on-timeout = "hyprctl dispatch dpms off";
+            on-resume = "hyprctl dispatch dpms on";
+          }
+        ];
       };
       listener = [
         # autolock

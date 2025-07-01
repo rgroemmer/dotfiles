@@ -1,7 +1,6 @@
 {
   inputs,
   lib,
-  config,
   ...
 }: {
   imports = [
@@ -11,21 +10,15 @@
     inputs.krewfile.homeManagerModules.krewfile
     inputs.sops-nix.homeManagerModules.sops
 
-    # custom role definition
-    ./roles.nix
+    # custom module config definition
+    ./modules.nix
 
     # global nix & nixpkgs settings
     ../../nix.nix
   ];
 
   programs.home-manager.enable = true;
-
   xdg.enable = true;
-
-  sops.age = {
-    generateKey = true;
-    keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
-  };
 
   news = {
     display = "silent";

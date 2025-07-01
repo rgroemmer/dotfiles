@@ -1,8 +1,10 @@
 {
   pkgs,
   config,
+  lib,
   ...
-}: let
+}:
+with lib; let
   displays = import ../config/displays.nix {inherit (config.roles) work;};
   path = "~/.config/wallpapers";
 
@@ -17,19 +19,23 @@
     hyprctl hyprpaper wallpaper "${displays.left.output},${path}/$SHUFFLE2"
 
     hyprctl hyprpaper unload unused
-  '';
-in {
-  home.file.".config/wallpapers" = {
-    source = ./wallpapers;
-    recursive = true;
-  };
-  home.packages = [shuffle-wallpaper];
 
-  services.hyprpaper = {
-    enable = true;
-    package = config.lib.nixGL.wrap pkgs.hyprlock;
-    settings = {
-      splash = false;
+  '';
+  cfg = config.roles.desktop.hyprland.hyprlock;
+in {
+  config = mkIf cfg {
+    home.file.".config/wallpapers" = {
+      source = ./wallpapers;
+      recursive = true;
+    };
+    home.packages = [shuffle-wallpaper];
+
+    services.hyprpaper = {
+      enable = true;
+      package = pkgs.hyprlock;
+      settings = {
+        splash = false;
+      };
     };
   };
 }
