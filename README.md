@@ -34,13 +34,13 @@ nh os build --hostname kubex .
 nix build .#nixosConfigurations.vinox.config.system.build.isoImage
 
 # NixOS remote switch
-nixos-rebuild switch --flake .#kubex --target-host 192.168.55.10 --use-remote-sudo
+nixos-rebuild switch --flake .#kubex --target-host 192.168.55.10 --sudo
 
 # HomeManager rebuilds (hostname & username autodetection)
 nh home switch .
 
 # HomeManager build with custom hostname
-nh home switch -c macbook
+# TODO:!
 ```
 
 <details>
