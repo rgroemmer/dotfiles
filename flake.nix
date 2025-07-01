@@ -84,11 +84,6 @@
         modules = [./hosts/nixberry];
         specialArgs = {inherit inputs;};
       };
-      # Minimal system for remote install
-      mini = lib.nixosSystem {
-        modules = [./hosts/mini];
-        specialArgs = {inherit inputs outputs;};
-      };
       # ISO multi-tool
       vinox = lib.nixosSystem {
         modules = [./hosts/vinox];
