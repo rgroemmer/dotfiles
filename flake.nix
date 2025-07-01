@@ -12,17 +12,14 @@
       url = "github:catppuccin/grub";
       flake = false;
     };
-
     nixGL = {
       url = "github:nix-community/nixGL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     hyprland-git = {
       url = "github:hyprwm/hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    catppuccin.url = "github:catppuccin/nix";
     neonix = {
       url = "github:rgroemmer/neonix/fine-tuning";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -32,7 +29,6 @@
 
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     sops-nix = {
       url = "github:mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -46,6 +42,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
+    catppuccin.url = "github:catppuccin/nix";
   };
 
   outputs = inputs @ {
