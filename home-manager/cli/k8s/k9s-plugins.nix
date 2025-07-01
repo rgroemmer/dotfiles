@@ -4,7 +4,7 @@
   ...
 }: {
   config = lib.mkIf config.roles.work {
-    programs.k9s.plugin.plugins = {
+    programs.k9s.plugins = {
       reconcile = {
         description = "Reconcile resource";
         shortCut = "r";

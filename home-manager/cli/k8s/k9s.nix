@@ -2,7 +2,7 @@
   catppuccin.k9s.enable = true;
   programs.k9s = {
     enable = true;
-    plugin.plugins = {
+    plugins = {
       edit-secret = {
         description = "Edit Decoded Secret";
         shortCut = "Ctrl-X";
