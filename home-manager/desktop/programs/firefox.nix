@@ -75,7 +75,7 @@
       "extensions.autoDisableScopes" = 0; # Automatically enable extensions
       "extensions.update.enabled" = false;
 
-      "widget.use-xdg-desktop-portal.file-picker" = 1; # Use new gtk file picker instead of legacy one
+      "widget.use-xdg-desktop-portal.file-picker" = 0; # Use new gtk file picker instead of legacy one
     };
 
     profiles.dev-edition-default = {
