@@ -1,28 +1,23 @@
 {
   pkgs,
-  inputs,
   config,
   ...
 }: let
-  inherit (inputs) nixGL;
+  inherit (config.roles) useNixGL;
 in {
-  # TODO: move to better place
-  nixGL = {
-    inherit (nixGL) packages;
-    defaultWrapper = "mesa";
-  };
-
   home.packages = with pkgs; [
     nerd-fonts.caskaydia-cove
   ];
 
-  # TODO: move to better place
   fonts.fontconfig.enable = true;
 
   catppuccin.alacritty.enable = true;
   programs.alacritty = {
     enable = true;
-    package = config.lib.nixGL.wrap pkgs.alacritty;
+    package =
+      if useNixGL
+      then config.lib.nixGL.wrap pkgs.alacritty
+      else pkgs.alacritty;
     settings = {
       terminal.shell.program = "zsh";
       env.TERM = "xterm-256color";

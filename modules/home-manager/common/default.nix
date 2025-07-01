@@ -1,8 +1,11 @@
 {
   inputs,
   lib,
+  config,
   ...
-}: {
+}: let
+  inherit (inputs) nixGL;
+in {
   imports = [
     # module inputs
     inputs.catppuccin.homeModules.catppuccin
@@ -16,6 +19,11 @@
     # global nix & nixpkgs settings
     ../../nix.nix
   ];
+
+  nixGL = lib.mkif config.roles.useNixGL {
+    inherit (nixGL) packages;
+    defaultWrapper = "mesa";
+  };
 
   programs.home-manager.enable = true;
   xdg.enable = true;

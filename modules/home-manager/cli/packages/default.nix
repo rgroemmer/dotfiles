@@ -20,6 +20,8 @@ in {
       gnused
       gnugrep
 
+      pciutils
+
       # Inspection
       htop
 
@@ -58,7 +60,7 @@ in {
       # Note taking
       obsidian
     ]
-    ++ lib.optionals config.roles.work [
+    ++ lib.optionals config.roles.workdevice [
       workpkgs.gardenctl
       workpkgs.gardenlogin
     ];
