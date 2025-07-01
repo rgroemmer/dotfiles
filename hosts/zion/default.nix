@@ -45,14 +45,15 @@
 
   # Host specific configuration
 
-  xdg.portal = {
-    enable = true;
-    wlr.enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-gtk
-      xdg-desktop-portal-hyprland
-    ];
-  };
+  # FIXME: Remove when move to HM is fine
+  # xdg.portal = {
+  #   enable = true;
+  #   wlr.enable = true;
+  #   extraPortals = with pkgs; [
+  #     xdg-desktop-portal-gtk
+  #     xdg-desktop-portal-hyprland
+  #   ];
+  # };
 
   # Secrets for host
   sops.secrets = {
