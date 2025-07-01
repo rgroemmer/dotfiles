@@ -11,9 +11,12 @@
 
   # Host specific configuration
   hostConfiguration = {
+    stable = true;
+
     boot = {
       grub = false;
     };
+
     user = {
       name = "rap";
       initialHashedPassword = "$y$j9T$8uQSJbY6w9kjXnj74JKjA1$pWYgNf.gb497suX//oIw6aggEPoD2Xv1kvMKZfDTOU/";
@@ -21,6 +24,7 @@
       extraOptions = {};
       extraGroups = [];
     };
+
     services = {
       tailscale = true;
     };

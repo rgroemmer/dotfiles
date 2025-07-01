@@ -27,10 +27,12 @@
       };
 
       # Add nixpkgs flake input as a registry to make nix3 commands consistent with the flake.
-      registry = {
+      registry = let
+        inherit (config.hostConfiguration) stable;
+      in {
         nixpkgs = {
           flake =
-            if config.system.stable
+            if stable
             then inputs.nixpkgs-stable
             else inputs.nixpkgs;
         };
