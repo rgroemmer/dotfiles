@@ -21,10 +21,10 @@
     # security
     ./security/sops.nix
 
-    # modules
-    ./modules/k3s
-    ./modules/desktop
-    ./modules/gaming
+    # roles
+    ./roles/k3s
+    ./roles/desktop
+    ./roles/gaming
 
     # global nix config
     ../nix.nix

@@ -58,7 +58,7 @@
     inherit (self) outputs;
     lib = nixpkgs.lib // home-manager.lib;
 
-    systems = ["aarch64-darwin" "x86_64-linux"];
+    systems = ["aarch64-linux" "x86_64-linux"];
     pkgsFor = lib.genAttrs systems (system: import nixpkgs {inherit system;});
     forAllSystems = f: lib.genAttrs systems (system: f pkgsFor.${system});
   in {
@@ -81,7 +81,6 @@
       };
       # Raspberry-pi 3
       nixberry = lib.nixosSystem {
-        system = "aarch64-linux";
         modules = [./hosts/nixberry];
         specialArgs = {inherit inputs;};
       };
@@ -100,19 +99,13 @@
     homeConfigurations = {
       # Main workstation
       "rap@zion" = lib.homeManagerConfiguration {
-        modules = [./home-manager/zion.nix];
+        modules = [./modules/home-manager/zion.nix];
         pkgs = pkgsFor.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
       };
       # Apple macbook work-device
-      "groemmer@intoshi" = lib.homeManagerConfiguration {
-        modules = [./home-manager/intoshi.nix];
-        pkgs = pkgsFor.aarch64-darwin;
-        extraSpecialArgs = {inherit self inputs outputs;};
-      };
-      # Apple macbook work-device
       "raphael.groemmer@stackit.cloud@firefly" = lib.homeManagerConfiguration {
-        modules = [./home-manager/firefly.nix];
+        modules = [./modules/home-manager/firefly.nix];
         pkgs = pkgsFor.x86_64-linux;
         extraSpecialArgs = {inherit self inputs outputs;};
       };

@@ -1,15 +1,16 @@
 {inputs, ...}: {
   imports = [
+    inputs.disko.nixosModules.disko
+
     ./hardware-configuration.nix
     ./disko.nix
-    ../../nixos
-
-    inputs.disko.nixosModules.disko
+    ../../modules/nixos
   ];
 
   # Host specific configuration
   system = {
     boot.systemd = true;
+
     user = {
       name = "mini";
       initialHashedPassword = "$y$j9T$8uQSJbY6w9kjXnj74JKjA1$pWYgNf.gb497suX//oIw6aggEPoD2Xv1kvMKZfDTOU/";

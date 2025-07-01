@@ -4,20 +4,12 @@
   ...
 }: {
   imports = [
-    ../../nixos
-
     inputs.nixos-hardware.nixosModules.raspberry-pi-3
+
+    ../../modules/nixos
   ];
 
   # Host specific configuration
-  fileSystems = {
-    "/" = {
-      device = "/dev/disk/by-label/NIXOS_SD";
-      fsType = "ext4";
-      options = ["noatime"];
-    };
-  };
-
   system = {
     boot = {
       grub = false;
@@ -31,6 +23,14 @@
     };
     services = {
       tailscale = true;
+    };
+  };
+
+  fileSystems = {
+    "/" = {
+      device = "/dev/disk/by-label/NIXOS_SD";
+      fsType = "ext4";
+      options = ["noatime"];
     };
   };
 

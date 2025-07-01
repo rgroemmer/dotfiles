@@ -7,18 +7,22 @@
   user = config.system.user.name;
 in {
   imports = [
+    inputs.disko.nixosModules.disko
+
     ./hardware-configuration.nix
     ./disko.nix
-    ../../nixos
-
-    inputs.disko.nixosModules.disko
+    ../../modules/nixos
   ];
+
   # Host specific configuration
   system = {
+    stable = true;
+
     boot = {
       systemd = true;
       supportedFilesystems = ["zfs"];
     };
+
     user = {
       name = "kubex";
       initialHashedPassword = "$y$j9T$8uQSJbY6w9kjXnj74JKjA1$pWYgNf.gb497suX//oIw6aggEPoD2Xv1kvMKZfDTOU/";
@@ -29,6 +33,7 @@ in {
       extraOptions = {};
       extraGroups = [];
     };
+
     roles = {
       k3s = true;
     };

@@ -5,9 +5,10 @@
 }: {
   imports = [
     ./hardware-configuration.nix
-    ../../nixos
+    ../../modules/nixos
   ];
 
+  # Host specific configuration
   system = {
     boot = {
       grub = true;
@@ -42,8 +43,6 @@
       gaming = true;
     };
   };
-
-  # Host specific configuration
 
   # FIXME: Remove when move to HM is fine
   # xdg.portal = {
@@ -80,6 +79,7 @@
     };
   };
 
+  # TODO: move to security module
   security = {
     polkit.enable = true;
     rtkit.enable = true; # realtime-kit
