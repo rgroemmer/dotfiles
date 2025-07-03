@@ -17,6 +17,16 @@
           enable = true;
           hyprlock = true;
           hyprpaper = true;
+          monitors = [
+            {
+              ID = "DP-2";
+              settings = "highres, 0x0, 1";
+            }
+            {
+              ID = "DP-1";
+              settings = "highres, 2560x0, 1.5";
+            }
+          ];
         };
       };
     };

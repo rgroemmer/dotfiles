@@ -5,7 +5,11 @@
   ...
 }:
 with lib; let
-  displays = import ../config/displays.nix {inherit (config.roles) work;};
+  cfg = config.roles.desktop.hyprland;
+
+  primary = (elemAt cfg.monitors 1).ID;
+  secondary = (elemAt cfg.monitors 0).ID;
+
   path = "~/.config/wallpapers";
 
   shuffle-wallpaper = pkgs.writeShellScriptBin "shuffle-wallpaper" ''
@@ -13,17 +17,16 @@ with lib; let
 
     SHUFFLE1="$(ls ${path} | shuf -n1)"
     hyprctl hyprpaper preload "${path}/$SHUFFLE1"
-    hyprctl hyprpaper wallpaper "${displays.primary.output},${path}/$SHUFFLE1"
+    hyprctl hyprpaper wallpaper "${primary},${path}/$SHUFFLE1"
     SHUFFLE2="$(ls ${path} | grep -v "$SHUFFLE1" | shuf -n1)"
     hyprctl hyprpaper preload "${path}/$SHUFFLE2"
-    hyprctl hyprpaper wallpaper "${displays.left.output},${path}/$SHUFFLE2"
+    hyprctl hyprpaper wallpaper "${secondary},${path}/$SHUFFLE2"
 
     hyprctl hyprpaper unload unused
 
   '';
-  cfg = config.roles.desktop.hyprland.hyprlock;
 in {
-  config = mkIf cfg {
+  config = mkIf cfg.hyprpaper {
     home.file.".config/wallpapers" = {
       source = ./wallpapers;
       recursive = true;
@@ -32,7 +35,6 @@ in {
 
     services.hyprpaper = {
       enable = true;
-      package = pkgs.hyprlock;
       settings = {
         splash = false;
       };

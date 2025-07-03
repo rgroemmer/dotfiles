@@ -1,12 +1,14 @@
 {
   pkgs,
+  lib,
   config,
   ...
 }: let
-  displays = import ./displays.nix {inherit (config.roles) work;};
+  cfg = config.roles.desktop.hyprland;
 in {
   imports = [
     ./keybindings.nix
+    # ./windowrules.nix
   ];
 
   wayland.windowManager.hyprland.settings = {
@@ -49,22 +51,25 @@ in {
       "sleep 1 && /home/rap/.nix-profile/bin/shuffle-wallpaper"
     ];
 
-    monitor = with displays; [
-      "${left.output}, ${left.settings}"
-      "${primary.output}, ${primary.settings}"
-      "${disable.output}, disable"
-    ];
+    monitors =
+      lib.map
+      (m: "${m.ID}, ${m.settings}")
+      cfg.monitors;
 
-    workspace = with displays; [
-      "name:1, monitor:${primary.output}"
-      "name:2, monitor:${primary.output}"
-      "name:3, monitor:${primary.output}"
-      "name:4, monitor:${primary.output}"
-      "name:5, monitor:${left.output}"
-      "name:6, monitor:${left.output}"
-      "name:7, monitor:${left.output}"
-      "name:8, monitor:${left.output}"
-      "name:9, monitor:${left.output}"
+    workspace = with lib; let
+      # NOTE: Possible nil-pointer if elemAt access null object
+      primary = (elemAt cfg.monitors 1).ID;
+      secondary = (elemAt cfg.monitors 0).ID;
+    in [
+      "name:1, monitor:${primary}"
+      "name:2, monitor:${primary}"
+      "name:3, monitor:${primary}"
+      "name:4, monitor:${primary}"
+      "name:5, monitor:${secondary}"
+      "name:6, monitor:${secondary}"
+      "name:7, monitor:${secondary}"
+      "name:8, monitor:${secondary}"
+      "name:9, monitor:${secondary}"
     ];
 
     dwindle = {
