@@ -51,7 +51,7 @@ in {
       "sleep 1 && /home/rap/.nix-profile/bin/shuffle-wallpaper"
     ];
 
-    monitors =
+    monitor =
       lib.map
       (m: "${m.ID}, ${m.settings}")
       cfg.monitors;
