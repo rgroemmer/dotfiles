@@ -11,8 +11,15 @@
   ];
 
   config = {
-    # my hm-modules config
-    roles = {};
+    roles = {
+      desktop = {
+        hyprland = {
+          enable = true;
+          hyprlock = true;
+          hyprpaper = true;
+        };
+      };
+    };
     # hm config
     home = {
       username = "rap";

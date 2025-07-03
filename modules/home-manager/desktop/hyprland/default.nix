@@ -5,13 +5,7 @@
   ...
 }:
 with lib; let
-  cfg = config.roles.desktop;
-
-  configOnly = {
-    package = null;
-    systemd.enable = false;
-    xwayland.enable = false;
-  };
+  cfg = config.roles.desktop.hyprland;
 in {
   imports = [
     # Config
@@ -23,20 +17,33 @@ in {
   ];
 
   options.roles.desktop.hyprland = {
+    enable = mkEnableOption "Enable hyprland";
     hyprlock = mkEnableOption "Enable hyprlock & hypridle";
     hyprpaper = mkEnableOption "Enable hyprpaper desktop wallpaper manager";
     configOnly = mkEnableOption "Only write hyprland config with home-manager";
   };
 
-  config = {
-    # TODO: Make this conditional?
-    home.packages = with pkgs; [
-      hyprland-qtutils
+  config = mkIf cfg.enable {
+    catppuccin.hyprland.enable = true;
+
+    wayland.windowManager.hyprland = mkMerge [
+      {enable = true;}
+
+      (mkIf cfg.configOnly {
+        package = null;
+        systemd.enable = false;
+        xwayland.enable = false;
+        portalPackage = null;
+      })
     ];
 
-    # TODO: Make this conditional, when portals installed via PPA
+    home.packages = with pkgs;
+      mkif (!cfg.configOnly) [
+        hyprland-qtutils
+      ];
+
     xdg.portal = {
-      enable = true;
+      enable = !cfg.configOnly;
       config = {
         common = {
           default = ["hyprland" "gtk"];
@@ -47,19 +54,6 @@ in {
         xdg-desktop-portal-gtk
       ];
     };
-
-    catppuccin.hyprland.enable = true;
-    wayland.windowManager.hyprland =
-      {
-        enable = true;
-        package =
-          if cfg.hyprland.configOnly
-          then null
-          else pkgs.hyprland;
-        systemd.enable = true;
-        xwayland.enable = true;
-      }
-      // mkIf cfg.hyprland.configOnly configOnly;
 
     # Make nix-path available for all tools
     xdg.configFile."environment.d/envvars.conf".text = ''

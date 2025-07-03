@@ -28,9 +28,10 @@
 
       desktop = {
         hyprland = {
+          enable = true;
           configOnly = true;
           hyprlock = false;
-          hyprpaper = true;
+          hyprpaper = false;
         };
       };
     };
