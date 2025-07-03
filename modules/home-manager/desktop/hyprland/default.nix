@@ -42,7 +42,7 @@ in {
     ];
 
     home.packages = with pkgs;
-      mkif (!cfg.configOnly) [
+      mkIf (!cfg.configOnly) [
         hyprland-qtutils
       ];
 
