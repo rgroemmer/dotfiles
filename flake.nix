@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -11,12 +12,14 @@
       url = "github:catppuccin/grub";
       flake = false;
     };
-
+    nixGL = {
+      url = "github:nix-community/nixGL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     hyprland-git = {
       url = "github:hyprwm/hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    catppuccin.url = "github:catppuccin/nix";
     neonix = {
       url = "github:rgroemmer/neonix/fine-tuning";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -26,7 +29,6 @@
 
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     sops-nix = {
       url = "github:mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -40,6 +42,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
+    catppuccin.url = "github:catppuccin/nix";
   };
 
   outputs = inputs @ {
@@ -52,14 +55,15 @@
     inherit (self) outputs;
     lib = nixpkgs.lib // home-manager.lib;
 
-    systems = ["aarch64-darwin" "x86_64-linux"];
+    systems = ["aarch64-linux" "x86_64-linux"];
     pkgsFor = lib.genAttrs systems (system: import nixpkgs {inherit system;});
     forAllSystems = f: lib.genAttrs systems (system: f pkgsFor.${system});
   in {
     inherit lib;
 
     formatter = forAllSystems (pkgs: pkgs.alejandra);
-    devShells = forAllSystems (pkgs: import ./shell.nix {inherit pkgs pre-commit-hooks;});
+    devShells = forAllSystems (pkgs: import ./dev-shells.nix {inherit pkgs pre-commit-hooks;});
+    packages = forAllSystems (pkgs: import ./packages {inherit pkgs;});
 
     nixosConfigurations = {
       # Main workstation
@@ -74,14 +78,8 @@
       };
       # Raspberry-pi 3
       nixberry = lib.nixosSystem {
-        system = "aarch64-linux";
         modules = [./hosts/nixberry];
         specialArgs = {inherit inputs;};
-      };
-      # Minimal system for remote install
-      mini = lib.nixosSystem {
-        modules = [./hosts/mini];
-        specialArgs = {inherit inputs outputs;};
       };
       # ISO multi-tool
       vinox = lib.nixosSystem {
@@ -93,14 +91,14 @@
     homeConfigurations = {
       # Main workstation
       "rap@zion" = lib.homeManagerConfiguration {
-        modules = [./home-manager/zion.nix];
+        modules = [./modules/home-manager/zion.nix];
         pkgs = pkgsFor.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
       };
       # Apple macbook work-device
-      "groemmer@intoshi" = lib.homeManagerConfiguration {
-        modules = [./home-manager/intoshi.nix];
-        pkgs = pkgsFor.aarch64-darwin;
+      "raphael.groemmer@stackit.cloud@firefly" = lib.homeManagerConfiguration {
+        modules = [./modules/home-manager/firefly.nix];
+        pkgs = pkgsFor.x86_64-linux;
         extraSpecialArgs = {inherit self inputs outputs;};
       };
     };
