@@ -20,6 +20,7 @@ in {
     enable = mkEnableOption "Enable hyprland";
     hyprlock = mkEnableOption "Enable hyprlock & hypridle";
     hyprpaper = mkEnableOption "Enable hyprpaper desktop wallpaper manager";
+    hyprcursor = mkEnableOption "Enable hyprcursor theme";
     configOnly = mkEnableOption "Only write hyprland config with home-manager";
     monitors = mkOption {
       type = with types; listOf attrs;

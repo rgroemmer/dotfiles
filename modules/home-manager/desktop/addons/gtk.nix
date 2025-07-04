@@ -1,21 +1,23 @@
 {
-  # NOTE: Its deprecated, but as long it looks nice...
-  catppuccin.gtk.enable = true;
-  gtk = {
+  pkgs,
+  lib,
+  ...
+}: {
+  gtk = lib.mkForce {
     enable = true;
 
-    #theme = {
-    #  name = "adw-gtk3-dark";
-    #  package = pkgs.adw-gtk3;
-    #};
+    theme = {
+      name = "Catppuccin-GTK-Dark";
+      package = pkgs.magnetic-catppuccin-gtk;
+    };
 
-    # iconTheme = {
-    #   package = pkgs.catppuccin-papirus-folders.override {
-    #     flavor = "mocha";
-    #     accent = "lavender";
-    #   };
-    #   name = "Papirus-Dark";
-    # };
+    iconTheme = {
+      package = pkgs.catppuccin-papirus-folders.override {
+        flavor = "mocha";
+        accent = "lavender";
+      };
+      name = "Papirus-Dark";
+    };
 
     gtk3.extraConfig = {
       gtk-toolbar-style = "GTK_TOOLBAR_BOTH";
@@ -47,12 +49,22 @@
     };
   };
 
-  home.sessionVariables.GTK_THEME = "Tokyonight-Storm-B";
-  # home.pointerCursor = {
-  #   name = "hyprcursor";
-  #   package = pkgs.hyprcursor;
-  #   hyprcursor = {
-  #     enable = true;
-  #   };
-  # };
+  home = let
+    name = "catppuccin-mocha-mauve-cursors";
+    size = 28;
+  in {
+    pointerCursor = lib.mkForce {
+      enable = true;
+      inherit name size;
+      package = pkgs.catppuccin-cursors.mochaMauve;
+      gtk.enable = true;
+    };
+
+    sessionVariables = {
+      XCURSOR_THEME = name;
+      XCURSOR_SIZE = toString size;
+      XCURSOR_PATH = "${pkgs.catppuccin-cursors.mochaMauve}/share/icons";
+      HYPRCURSOR_THEME = name;
+    };
+  };
 }

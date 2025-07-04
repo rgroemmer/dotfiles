@@ -39,7 +39,7 @@ in {
     exec-once = [
       # move alacritty to special workspace silently
       "sleep 1 && [ workspace special silent ] alacritty -t scratchy"
-      "${pkgs.firefox}/bin/firefox"
+      "${pkgs.firefox-devedition}/bin/firefox-devedition"
       "${pkgs.blueman}/bin/blueman-applet"
       "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
 

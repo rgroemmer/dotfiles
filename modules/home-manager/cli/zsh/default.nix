@@ -44,12 +44,11 @@ with lib; {
 
     # TODO: Move helper to extra binaries
     initContent = let
-      zshConfigEarlyInit = mkOrder 500 ''
+      zshConfigEarlyInit = mkOrder 550 ''
         source ~/.config/zsh/plugins/p10k.zsh
       '';
       zshConfig = mkOrder 1000 ''
         POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
-        }
       '';
       zshWorkConfig = mkOrder 1001 ''
         # Gardenctl
