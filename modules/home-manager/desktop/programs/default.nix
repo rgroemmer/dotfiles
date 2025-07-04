@@ -26,8 +26,8 @@
     [
       xfce.thunar
       vlc
-      gparted
-      gnome-disk-utility
+      # gparted
+      # gnome-disk-utility
     ]
     ++ lib.optionals config.roles.workdevice [
       mumble
