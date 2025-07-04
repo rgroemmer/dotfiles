@@ -6,6 +6,11 @@
     ./desktop
   ];
 
+  # TODO:
+  # - Check and diff work <-> private
+  # - Switch on workdevice
+  # - Tofi-drun should work...
+
   # NOTE: Additionally
   # - Create window-rules
   # - Check dotfiles structure
